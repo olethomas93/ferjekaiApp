@@ -2,7 +2,7 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "ferjekai20",
+  "projectName": "ferjekai",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
