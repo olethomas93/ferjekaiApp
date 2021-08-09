@@ -1,0 +1,12 @@
+<div class="fs-container">
+
+  <!-- <form class="form">
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Søk veireferanse</mat-label>
+      <input (keydown.enter)="onEnter($event)" type="search"  matInput placeholder="62.5027 , 7.6972" [value]="coord">
+    </mat-form-field>
+  </form> -->
+  
+  <app-map (map$)="receiveMap($event)" (zoom$)="receiveZoom($event)" (coord$)="recieveCoord($event)"></app-map>
+</div>

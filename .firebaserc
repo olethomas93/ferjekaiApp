@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ferjekai": {
+      "hosting": {
+        "ferjekai": [
+          "ferjekai"
+        ]
+      }
+    }
+  }
+}

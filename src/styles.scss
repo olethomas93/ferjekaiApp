@@ -1,0 +1,55 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  color: var(--text-color-hard);
+  font-weight: 400;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.leaflet-control-container .leaflet-routing-container-hide {
+  display: none;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+$inside-primary: mat-palette($mat-light-blue);
+$inside-accent: mat-palette($mat-light-blue);
+$inside-warn: mat-palette($mat-red);
+$inside-theme-dark: mat-dark-theme(
+  $inside-primary,
+  $inside-accent,
+  $inside-warn
+);
+$inside-theme-light: mat-light-theme(
+  $inside-primary,
+  $inside-accent,
+  $inside-warn
+);
+
+.color-scheme-dark {
+  @include angular-material-theme($inside-theme-dark);
+  // Example how you can easy add own custom styles
+  .card-wrapper {
+    color: #1c6785;
+  }
+}
+
+.color-scheme-light {
+  @include angular-material-theme($inside-theme-light);
+  // Example how you can easy add own custom styles
+  .card-wrapper {
+    color: #2d2d2d;
+  }
+}

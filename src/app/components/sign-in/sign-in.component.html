@@ -1,0 +1,52 @@
+
+
+<div class="login-wrapper"  >
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form class="form" (ngSubmit)="signIn()">
+
+      <mat-card-content>
+      <mat-form-field [formGroup]="loginForm" appearance="fill">
+        <mat-label>Email</mat-label>
+          <input matInput
+            formControlName="email"
+            [(ngModel)]="email"
+            placeholder="john.doe@email.com"
+          >
+          <span
+            class="error ion-padding"
+            *ngIf="isSubmitted && errorControl.email.errors?.required"
+          ></span>
+          <span
+            class="error ion-padding"
+            *ngIf="isSubmitted && errorControl.email.errors?.pattern"
+          ></span>
+        
+      </mat-form-field>
+
+      <mat-form-field [formGroup]="loginForm" appearance="fill">
+        <mat-label>Password</mat-label>
+          <input matInput
+            placeholder="Password"
+            formControlName="password"
+            type="password"
+            [(ngModel)]="password"
+          >
+          
+       
+      </mat-form-field>
+    </mat-card-content>
+
+      <button mat-raised-button color="primary" (click)="signIn()" size="default"  type="submit"
+        >Logg inn</button
+      >
+    </form>
+
+    <!-- <p class="text-dark mb-0">Ikke bruker?<a href="/sign-up" class="text-primary ml-1">Sign Up now</a></p> -->
+  </mat-card>
+  
+</div>
+

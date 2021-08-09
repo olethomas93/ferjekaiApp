@@ -1,0 +1,81 @@
+.mat-typography {
+    background: lawngreen;
+  }
+  
+  .mat-sidenav-container {
+    height: 100%;
+  }
+  
+  .mat-sidenav {
+    width: 20%;
+  }
+  .toolbar {
+    position: inherit;
+    z-index: 2;
+  }
+  mat-toolbar {
+    position: inherit;
+    z-index: 2;
+  }
+  .home {
+    
+    right: 45%;
+    cursor: pointer;
+    position: absolute;
+    
+  }
+  
+  .logo{
+    max-width: 80%;
+    
+    height: auto;
+  }
+  @media only screen and (max-width: 600px) {
+  
+    .mat-sidenav {
+      width: 50%;
+  
+      
+    }
+  
+    .logo{
+  
+      max-width: 50%;
+      height: auto;
+  
+    }
+  
+  
+  }
+  
+  
+  
+  .content {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .homeicon{
+    font-size: 140%;
+  }
+  
+  .connection {
+    
+  }
+  .cameraicon{
+  
+    margin-right: 1em;
+  }
+  .connectionicon{
+  
+    margin-right: 1em;
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  

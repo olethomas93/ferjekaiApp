@@ -1,0 +1,31 @@
+p {
+  font-family: Lato;
+}
+
+.fs-container {
+  width: 100vw;
+  height: 75vh;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.leaflet-control-container .leaflet-routing-container-hide {
+  display: none;
+}
+
+.form{
+ 
+  z-index: 9999999999;
+  margin: auto;
+  text-align: center;
+  position: fixed;
+  left:75%;
+  font-weight: 700;
+  
+
+}
+.mat-form-field{
+
+  font-weight: 900;
+}
