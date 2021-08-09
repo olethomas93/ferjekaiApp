@@ -29,6 +29,12 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {AuthGuard} from './guards/auth.guard'
 
 
+import { AWSIoTProvider } from '@aws-amplify/pubsub';
+import awsconfig from 'src/aws-exports'
+
+
+Amplify.configure(awsconfig);
+
 
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
