@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ColormodeService } from './services/colormode.service';
 import { routeTransitionAnimations } from './route-transition-animations';
 import { Subscription } from 'rxjs';
@@ -7,6 +8,8 @@ import { AwsiotService } from './services/awsiot.service';
 import { IMqttMessage } from "ngx-mqtt";
 import { AuthService } from './services/auth.service';
 import { PubSub } from 'aws-amplify';
+import { APIService } from './API.service';
+import { Restaurant } from '../types/resturant';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,6 +23,7 @@ export class AppComponent {
   subscription_Mqtt!: Subscription;
   subscription_login!: Subscription;
   public loggedIn!: boolean;
+  public createForm: FormGroup | undefined;
 
 
    /**
@@ -39,7 +43,8 @@ export class AppComponent {
     constructor(
       private colormode: ColormodeService,
       private readonly eventMqtt: AwsiotService,
-      public auth: AuthService
+      public auth: AuthService,
+      private api: APIService, private fb: FormBuilder
       
     ){
 
@@ -61,6 +66,15 @@ export class AppComponent {
         error: error => console.error(error)
         
     });
+
+    this.createForm = this.fb.group({
+      'name': ['', Validators.required],
+      'description': ['', Validators.required],
+      'city': ['', Validators.required]
+    });
+
+
+
   }
 
   ngOnDestroy(): void {
@@ -78,4 +92,6 @@ export class AppComponent {
             this.events.push(item);
         });
 }
+
+
 }

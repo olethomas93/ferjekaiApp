@@ -6,6 +6,7 @@ import { environment } from './environments/environment';
 import Amplify,{PubSub} from "aws-amplify";
 import { AWSIoTProvider } from '@aws-amplify/pubsub';
 
+
 Amplify.configure(environment.awsmobile);
 Amplify.addPluggable(new AWSIoTProvider({
 
