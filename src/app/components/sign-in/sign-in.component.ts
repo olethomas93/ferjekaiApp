@@ -49,7 +49,7 @@ export class SignInComponent implements OnInit {
 
   
     
-  async signIn(){
+   signIn(){
     this.isSubmitted = true;
 
     if (!this.loginForm.valid) {
@@ -59,7 +59,7 @@ export class SignInComponent implements OnInit {
       return false;
     } else {
      
-     await this.authService.signIn(this.email, this.password)
+      this.authService.signIn(this.email, this.password)
       .subscribe(
         result => {
           this.router.navigate(['/']);
