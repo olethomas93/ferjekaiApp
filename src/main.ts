@@ -8,6 +8,7 @@ import { AWSIoTProvider } from '@aws-amplify/pubsub';
 
 
 Amplify.configure(environment.awsmobile);
+PubSub.configure(environment.awsmobile);
 Amplify.addPluggable(new AWSIoTProvider({
 
 aws_pubsub_region:'us-west-2',
