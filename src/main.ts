@@ -3,11 +3,12 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import Amplify,{PubSub,API} from "aws-amplify";
+import Amplify,{Auth} from "aws-amplify";
 import { AWSIoTProvider } from '@aws-amplify/pubsub';
+import awsconfig from 'src/aws-exports'
 
 
-Amplify.configure(environment.awsmobile);
+Amplify.configure(awsconfig);
 // PubSub.configure(environment.awsmobile);
 // API.configure(environment.awsmobile)
 // Amplify.addPluggable(new AWSIoTProvider({
