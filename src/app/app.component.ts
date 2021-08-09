@@ -8,8 +8,7 @@ import { AwsiotService } from './services/awsiot.service';
 import { IMqttMessage } from "ngx-mqtt";
 import { AuthService } from './services/auth.service';
 import { PubSub } from 'aws-amplify';
-import { APIService } from './API.service';
-import { Restaurant } from '../types/resturant';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -44,7 +43,7 @@ export class AppComponent {
       private colormode: ColormodeService,
       private readonly eventMqtt: AwsiotService,
       public auth: AuthService,
-      private api: APIService, private fb: FormBuilder
+     
       
     ){
 
@@ -67,11 +66,7 @@ export class AppComponent {
         
     });
 
-    this.createForm = this.fb.group({
-      'name': ['', Validators.required],
-      'description': ['', Validators.required],
-      'city': ['', Validators.required]
-    });
+ 
 
 
 
