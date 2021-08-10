@@ -26,11 +26,7 @@ export class MapPageComponent implements OnInit {
     // private _formBuilder: FormBuilder,
   ) {
 
-  this.subscription =  PubSub.subscribe('1.5.0/Sulesund/TagValues').subscribe({
-      next: data =>this.updateData(data.value.TagData[0]),
-      error: error => console.error(error)
-      
-  });
+ 
 
   this.connected =  PubSub.subscribe('$aws/events/presence/+/Sulesund').subscribe({
     next: data =>

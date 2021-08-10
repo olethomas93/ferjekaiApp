@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-
+import { PubSub } from 'aws-amplify';
+import { title } from 'process';
 @Component({
   selector: 'app-tiles',
   templateUrl: './tiles.component.html',
   styleUrls: ['./tiles.component.css']
 })
 export class TilesComponent {
-
+  subscription: any;
 
   cardData =[
     {title:"Wind",value:5,color:"green",icon:"air"},
@@ -35,5 +36,32 @@ export class TilesComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.subscription =  PubSub.subscribe('1.5.0/Sulesund/TagValues').subscribe({
+      next: data =>this.updateData(data.value.TagData[0].Values),
+      error: error => console.error(error)
+      
+  });
+  }
+
+
+
+  updateData(data:any){
+
+    console.log(data)
+    this.cardData[0].value = data.Vindhastighet
+    this.cardData[1].value = data.Temperatur
+    this.cardData[2].value = data.Luft_Trykk
+
+
+  }
+
+  
+  ngOnDestroy():void{
+
+    this.subscription.unsubscribe()
+
+
+
+  }
 }
