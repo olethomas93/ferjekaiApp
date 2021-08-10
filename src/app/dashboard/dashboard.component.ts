@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     async getCred(){
       this.auth.getCred()
     }
-    signout(){
+    signOut(){
 
       this.auth.signOut()
     }

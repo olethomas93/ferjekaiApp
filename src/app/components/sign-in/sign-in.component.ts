@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from "../../services/auth.service";
-
+import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -14,12 +14,15 @@ export class SignInComponent implements OnInit {
   password!: string;
   loginForm!: FormGroup;
   isSubmitted = false;
+  user: CognitoUserInterface | undefined;
+  authState!: AuthState;
   
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private ref: ChangeDetectorRef
   ) {
 
   
@@ -38,7 +41,20 @@ export class SignInComponent implements OnInit {
         ],
       ],
     });
+
+
+    onAuthUIStateChange((authState, authData) => {
+      this.authState = authState;
+      this.user = authData as CognitoUserInterface;
+      this.ref.detectChanges();
+    })
   }
+
+  ngOnDestroy() {
+    return onAuthUIStateChange;
+  }
+
+  
 
   /**
    * Gets error control
@@ -79,5 +95,8 @@ export class SignInComponent implements OnInit {
   signOut() {
     this.authService.signOut();
   }
+
+
+  
 
 }

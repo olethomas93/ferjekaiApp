@@ -1,0 +1,11 @@
+.reading-block { overflow: visible !important;font-size: 20px; }
+
+.test {
+
+    overflow: inherit;
+}
+
+mat-card-title{
+
+    text-align: center;
+}

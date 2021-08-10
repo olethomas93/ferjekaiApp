@@ -24,17 +24,28 @@ import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
 import { environment as env } from '../environments/environment';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {AuthGuard} from './guards/auth.guard'
 
 
 import { AWSIoTProvider } from '@aws-amplify/pubsub';
-import awsconfig from 'src/aws-exports'
+import awsconfig from 'src/aws-exports';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { LayoutModule } from '@angular/cdk/layout';
+
+
+
 
 
 Amplify.configure(awsconfig);
+// Apply plugin with configuration
 
+Amplify.addPluggable(new AWSIoTProvider({
+  aws_pubsub_region: 'eu-central-1',
+  aws_pubsub_endpoint: 'wss://a3vwh5519vcrt0-ats.iot.eu-central-1.amazonaws.com/mqtt',
+}));
 
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
@@ -50,11 +61,14 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   declarations: [
     AppComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+ 
+    
     
  
   ],
   imports: [
+    AmplifyUIAngularModule,
     BrowserModule,
     DashboardModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -73,7 +87,10 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    AmplifyUIAngularModule
+   
+    MatGridListModule,
+    MatMenuModule,
+    LayoutModule
   ],
   providers: [AuthService,AngularFirestoreModule],
   bootstrap: [AppComponent]

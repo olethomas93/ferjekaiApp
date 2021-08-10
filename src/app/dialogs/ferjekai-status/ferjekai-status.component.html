@@ -1,0 +1,39 @@
+
+
+
+
+
+<mat-card>
+    <mat-card-title>Overview</mat-card-title>
+
+    <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile class="test">
+
+                <ngx-gauge 
+                type="semi" 
+                [value]="gaugeValue" 
+                [label]="gaugeLabel"  
+                [append]="gaugeAppendText"
+                [min]="min"
+                [max] ="max"
+                >
+                
+            </ngx-gauge>
+            </mat-grid-tile>
+            <mat-grid-tile>2</mat-grid-tile>
+            <mat-grid-tile>3</mat-grid-tile>
+            <mat-grid-tile>4</mat-grid-tile>
+          </mat-grid-list>
+
+       
+      
+
+    </mat-card-content>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Close</button>
+        
+      </div>
+
+</mat-card>

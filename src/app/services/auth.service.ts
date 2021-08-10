@@ -1,9 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User1 } from "../shared/services/user";
 import  auth  from 'firebase';
-import { Auth } from 'aws-amplify';
-import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import Auth from "@aws-amplify/auth";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, of} from 'rxjs';
 import { from } from 'rxjs';
@@ -16,9 +14,7 @@ import { catchError ,map, tap} from 'rxjs/operators';
 export class AuthService {
   userData: any; // Save logged in user data
   public loggedIn!: BehaviorSubject<boolean>;
-  constructor(
-    public afs: AngularFirestore,   // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+  constructor( // Inject Firebase auth service
     public router: Router,  
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {    

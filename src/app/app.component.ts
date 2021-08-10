@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { AwsiotService } from './services/awsiot.service';
 import { IMqttMessage } from "ngx-mqtt";
 import { AuthService } from './services/auth.service';
-import { PubSub } from 'aws-amplify';
+
 
 @Component({
   selector: 'app-root',
@@ -52,19 +52,13 @@ export class AppComponent {
 
 
     ngOnInit() {
-      this.subscribeToTopic();
+      //this.subscribeToTopic();
       this.subscription_login = this.auth.isAuthenticated()
       .subscribe(result => {
         console.log(result)
         this.loggedIn = result;
       });
 
-
-      PubSub.subscribe('1.5.0/Ferjekai/TagValues').subscribe({
-        next: data => console.log('Message received', data),
-        error: error => console.error(error)
-        
-    });
 
  
 

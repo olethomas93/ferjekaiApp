@@ -33,9 +33,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { ChangeModeComponent } from '../components/change-mode/change-mode.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-
-
-
+import { FerjekaiStatusComponent } from '../dialogs/ferjekai-status/ferjekai-status.component';
+import { NgxGaugeModule } from 'ngx-gauge';
+import {TilesComponent} from '../dialogs/tiles/tiles.component'
+import {MinicardComponent} from '../components/minicard/minicard.component'
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -45,7 +47,7 @@ import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent, ChangeModeComponent,
-    MapPageComponent,
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent
     ],
   imports: [
     CommonModule,
@@ -66,6 +68,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatInputModule,
     MatSlideToggleModule,
     FormsModule,
+   MatMenuModule,
     MatListModule,
     MatProgressBarModule,
     MatDividerModule,
@@ -75,7 +78,9 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
     MatGridListModule,
     LeafletModule,
-    MatFormFieldModule
+    MatIconModule,
+    MatFormFieldModule,
+    NgxGaugeModule,
 ],
 
 

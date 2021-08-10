@@ -1,4 +1,4 @@
-
+<!-- 
 
 <div class="login-wrapper"  >
   <mat-card class="box">
@@ -43,10 +43,18 @@
       <button mat-raised-button color="primary" (click)="signIn()" size="default"  type="submit"
         >Logg inn</button
       >
+
+    
     </form>
 
-    <!-- <p class="text-dark mb-0">Ikke bruker?<a href="/sign-up" class="text-primary ml-1">Sign Up now</a></p> -->
+  
   </mat-card>
   
-</div>
+</div> -->
+<amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
 
+<div *ngIf="authState === 'signedin' && user" class="App">
+    <amplify-sign-out></amplify-sign-out>
+    <div>Hello, {{user.username}}</div>
+    <!-- This is where you application template code goes -->  
+</div>
