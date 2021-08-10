@@ -33,7 +33,6 @@
     "aws-sdk": "^2.964.0",
     "bootstrap": "^5.1.0",
     "client-oauth2": "^4.3.3",
-    "crypto-js": "^4.1.1",
     "firebase": "^8.9.0",
     "graphql": "^15.5.1",
     "jquery": "^3.6.0",
