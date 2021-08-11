@@ -42,7 +42,7 @@ export class MapPageComponent implements OnInit {
 
   ngOnDestroy():void{
 
-    this.subscription.unsubscribe()
+   
 
 
 

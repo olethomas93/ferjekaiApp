@@ -1,56 +1,64 @@
+<div class="main">
+  <div class="d1"></div>
+  <div class="d2"></div>
+  <div class="d3"></div>
+  <div class="d4"></div>
 
 
-<div class="login-wrapper"  >
-  <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title>Log in</mat-card-title>
-    </mat-card-header>
-
-    <form class="form" (ngSubmit)="signIn()">
-
-      <mat-card-content>
-      <mat-form-field [formGroup]="loginForm" appearance="fill">
-        <mat-label>Email</mat-label>
-          <input matInput
-            formControlName="email"
-            [(ngModel)]="email"
-            placeholder="john.doe@email.com"
-          >
-          <span
-            class="error ion-padding"
-            *ngIf="isSubmitted && errorControl.email.errors?.required"
-          ></span>
-          <span
-            class="error ion-padding"
-            *ngIf="isSubmitted && errorControl.email.errors?.pattern"
-          ></span>
-        
-      </mat-form-field>
-
-      <mat-form-field [formGroup]="loginForm" appearance="fill">
-        <mat-label>Password</mat-label>
-          <input matInput
-            placeholder="Password"
-            formControlName="password"
-            type="password"
-            [(ngModel)]="password"
-          >
+<div class="wrapper">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title class="title">Log in</mat-card-title>
+      </mat-card-header>
+  
+      <form class="form" (ngSubmit)="signIn()">
+  
+        <mat-card-content>
+        <mat-form-field [formGroup]="loginForm" appearance="fill">
+          <mat-label>Email</mat-label>
+            <input matInput
+              formControlName="email"
+              [(ngModel)]="email"
+              placeholder="john.doe@email.com"
+            >
+            <span
+              class="error ion-padding"
+              *ngIf="isSubmitted && errorControl.email.errors?.required"
+            ></span>
+            <span
+              class="error ion-padding"
+              *ngIf="isSubmitted && errorControl.email.errors?.pattern"
+            ></span>
           
-       
-      </mat-form-field>
-    </mat-card-content>
-
-      <button mat-raised-button color="primary" (click)="signIn()" size="default"  type="submit"
-        >Logg inn</button
-      >
-
+        </mat-form-field>
+  
+        <mat-form-field [formGroup]="loginForm" appearance="fill">
+          <mat-label>Password</mat-label>
+            <input matInput
+              placeholder="Password"
+              formControlName="password"
+              type="password"
+              [(ngModel)]="password"
+            >
+            
+         
+        </mat-form-field>
+      </mat-card-content>
+  
+        <button mat-raised-button color="primary" (click)="signIn()" size="default"  type="submit"
+          >Logg inn</button
+        >
+  
+      
+      </form>
+  
     
-    </form>
-
-  
-  </mat-card>
-  
+    </mat-card>
+  </div>
+ 
 </div>
+
+
 <!-- <amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
 
 <div *ngIf="authState === 'signedin' && user" class="App">

@@ -76,7 +76,7 @@ export class AuthService {
       .subscribe(
         result => {
           this.loggedIn.next(false);
-          this.router.navigate(['login']);
+          this.router.navigate(['/login']);
         },
         error => console.log(error)
       );
