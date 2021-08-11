@@ -86,9 +86,9 @@ export class MapPageComponent implements OnInit {
       width: '80vw',
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log(`Dialog result: ${result}`);
-    });
+    // dialogRef.afterClosed().subscribe((result: any) => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
   }
 
   test(e:any){

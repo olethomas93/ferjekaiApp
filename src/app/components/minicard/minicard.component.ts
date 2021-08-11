@@ -13,7 +13,7 @@ export class MinicardComponent implements OnInit {
   @Input() isIncrease!: boolean;
   @Input() isCurrency!: boolean;
   @Input() duration!: string;
-  @Input() percentValue!: number;
+  @Input() unit!: string;
 
   constructor() { }
 

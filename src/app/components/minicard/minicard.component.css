@@ -10,6 +10,7 @@
 
 .value-text {
     margin: 0;
+    float:left
 }
 
 .title-text {
@@ -23,6 +24,17 @@
     margin: 15px;
     transform: scale(2);
 }
+.value{
+
+float:left
+}
+
+.unit{
+    float: right;
+    margin: -15px;
+    padding: 20px;
+}
+
 
 .duration {
     color: grey;
