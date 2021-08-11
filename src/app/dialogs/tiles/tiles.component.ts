@@ -13,14 +13,14 @@ export class TilesComponent {
   subscription: any;
 
   cardData =[
-    {title:"Wind speed",value:5,color:"green",icon:"air",unit:"m/s"},
-    {title:"Temperature",value:12,color:"green",icon:"thermostat",unit:"°C"},
+    {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
+    {title:"Temperature",value:-999,color:"green",icon:"thermostat",unit:"°C"},
     {title:"Air pressure",
-  value:1013,color:"green",icon:"storm",unit:"hPa"},
+  value:-999,color:"green",icon:"storm",unit:"hPa"},
     {title:"Wind Direction",
-  value :2,color:"green",icon:"explore",unit:"°"},
+  value :-999,color:"green",icon:"explore",unit:"°"},
   {title:"Air Density",
-  value :2,color:"green",icon:"reorder",unit:"kg/m^3"}
+  value :-999,color:"green",icon:"reorder",unit:"kg/m^3"}
   ]
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -46,7 +46,7 @@ export class TilesComponent {
   ngOnInit(){
 
     this.subscription =  PubSub.subscribe('1.5.0/Sulesund/TagValues').subscribe({
-      next: data =>this.updateData(data.value.TagData[0].Values),
+      next: data =>this.updateData(data.value),
       error: error => console.error(error)
       
   });
@@ -55,12 +55,16 @@ export class TilesComponent {
 
 
   updateData(data:any){
-    console.log(data)
-    this.cardData[0].value = Math.round(data.Vindhastighet) 
-    this.cardData[1].value = Math.round(data.Temperatur)
-    this.cardData[2].value = Math.round(data.Luft_Trykk)
-    this.cardData[3].value =Math.round(data.Vindretning)
-    this.cardData[4].value =Math.round(data.Luft_Tetthet)
+    if (data.CollectionId ==1){
+      data = data.TagData[0].Values
+      this.cardData[0].value = Math.round(data.Vindhastighet) 
+      this.cardData[1].value = Math.round(data.Temperatur)
+      this.cardData[2].value = Math.round(data.Luft_Trykk)
+      this.cardData[3].value =Math.round(data.Vindretning)
+      this.cardData[4].value =Math.round(data.Luft_Tetthet)
+
+    }
+  
 
 
   }
