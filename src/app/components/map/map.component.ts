@@ -32,7 +32,7 @@ export class MapComponent implements OnInit {
   @Output() coord$: EventEmitter<any> = new EventEmitter();
  public options = {
     layers: [
-      tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         opacity: 0.7,
         maxZoom: 19,
         detectRetina: true,
