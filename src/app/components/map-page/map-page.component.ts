@@ -63,13 +63,14 @@ export class MapPageComponent implements OnInit {
   receiveMap(map: Map) {
     this.map = map;
 
-     this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red"})
-
+     this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red"}).bindTooltip('Sulesund',
+     {offset:[0, 0]}).openTooltip()
+    
     //  this.sulesund.bindPopup(`` +
     // `<h1>Kai: Sulesund </h1>` +
     // `<h2>AlarmStatus: God </h2>` +
     // `<h2> annet: Annet</h2>`)
-
+   
 
     this.sulesund.addTo(this.map).on('click',(e:any)=>{
 

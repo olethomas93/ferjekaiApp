@@ -29,3 +29,8 @@ p {
 
   font-weight: 900;
 }
+.label {
+  position: absolute;
+  width:1000px;
+  font-size:20px;
+}
