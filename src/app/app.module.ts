@@ -34,6 +34,10 @@ import awsconfig from 'src/aws-exports';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
+import { NavComponent } from './components/nav/nav.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 
 
@@ -60,6 +64,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     AppComponent,
     SignInComponent,
     SignUpComponent,
+    NavComponent,
  
     
     
@@ -88,7 +93,10 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
    
     MatGridListModule,
     MatMenuModule,
-    LayoutModule
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [AuthService,AngularFirestoreModule],
   bootstrap: [AppComponent]

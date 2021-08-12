@@ -4,6 +4,15 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PubSub } from 'aws-amplify';
 import { title } from 'process';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Json } from 'aws-sdk/clients/robomaker';
+
+export interface Alarm {
+  name: string;
+  status:string
+}
+
+
+
 @Component({
   selector: 'app-tiles',
   templateUrl: './tiles.component.html',
@@ -11,6 +20,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class TilesComponent {
   subscription: any;
+  displayedColumns: string[] = ['name', 'status'];
+  dataSource = [{}]
 
   cardData =[
     {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
@@ -56,20 +67,45 @@ export class TilesComponent {
 
   updateData(data:any){
     if (data.CollectionId ==1){
+      
       data = data.TagData[0].Values
-      this.cardData[0].value = Math.round(data.Vindhastighet) 
-      this.cardData[1].value = Math.round(data.Temperatur)
-      this.cardData[2].value = Math.round(data.Luft_Trykk)
-      this.cardData[3].value =Math.round(data.Vindretning)
-      this.cardData[4].value =Math.round(data.Luft_Tetthet)
+      this.updateWeatherData(data)
+      
 
+    }
+    else if(data.CollectionId==0){
+      data = data.TagData[0].Values
+      this.updateAlarmData(data)
     }
   
 
 
   }
 
+
+  updateAlarmData(data:any){
+    this.dataSource =[]
+    for(let i in data){
+      this.dataSource.push({name:i,status:data[i]})
+      
+    }
+    
+    
+
+  }
+
+  updateWeatherData(data:any){
+
+    this.cardData[0].value = Math.round(data.Vindhastighet) 
+    this.cardData[1].value = Math.round(data.Temperatur)
+    this.cardData[2].value = Math.round(data.Luft_Trykk)
+    this.cardData[3].value =Math.round(data.Vindretning)
+    this.cardData[4].value =Math.round(data.Luft_Tetthet)
+
+  }
+
   onNoClick(): void {
+    this.dialogRef.close();
     this.dialogRef.close();
   }
   ngOnDestroy():void{
@@ -80,3 +116,5 @@ export class TilesComponent {
 
   }
 }
+
+

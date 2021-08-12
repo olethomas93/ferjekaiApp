@@ -38,6 +38,7 @@ import { NgxGaugeModule } from 'ngx-gauge';
 import {TilesComponent} from '../dialogs/tiles/tiles.component'
 import {MinicardComponent} from '../components/minicard/minicard.component'
 import { MatMenuModule } from '@angular/material/menu';
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -62,6 +63,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTabsModule,
     MatSidenavModule,
     MatButtonModule,
+    MatTableModule,
     MatRippleModule,
     MatSnackBarModule,
     MatTooltipModule,
