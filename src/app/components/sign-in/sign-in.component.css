@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  background-color: #2f2f2f;
+ 
  
 }
 .main {
@@ -121,7 +121,7 @@
 
 
 .box {
-  background-color:  #2f2f2f;
+  
     
     z-index: 9999;
    position: absolute;
@@ -132,7 +132,7 @@
       text-align: center;
   }
   .title{
-    color: cornsilk;
+    color:#2f2f2f;
     
   }
 
@@ -148,9 +148,7 @@
 
  .box .form{
 
-    min-width: 100%;
-    max-width: 300px;
-    width: 100%;
+   
   }
 
  
