@@ -1,27 +1,30 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateTodo {
-  onCreateTodo {
+subscription OnCreateFerjeData {
+  onCreateFerjeData {
     id
-    name
-    description
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateTodo {
-  onUpdateTodo {
+subscription OnUpdateFerjeData {
+  onUpdateFerjeData {
     id
-    name
-    description
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteTodo {
-  onDeleteTodo {
+subscription OnDeleteFerjeData {
+  onDeleteFerjeData {
     id
-    name
-    description
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }

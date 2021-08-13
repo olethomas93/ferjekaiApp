@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "ferjekaiAPI",
+  "AppSyncApiName": "ferjekai",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }

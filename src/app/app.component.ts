@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ColormodeService } from './services/colormode.service';
@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { AwsiotService } from './services/awsiot.service';
 import { IMqttMessage } from "ngx-mqtt";
 import { AuthService } from './services/auth.service';
+import { APIService } from './API.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css'],
   animations:[routeTransitionAnimations]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ferjekai';
   events!: any[];
   private deviceId!: string;
@@ -23,7 +24,7 @@ export class AppComponent {
   subscription_login!: Subscription;
   public loggedIn!: boolean;
   public createForm: FormGroup | undefined;
-
+  data!:Array<any>
 
    /**
    * Prepares route
@@ -43,6 +44,8 @@ export class AppComponent {
       private colormode: ColormodeService,
       private readonly eventMqtt: AwsiotService,
       public auth: AuthService,
+      private api: APIService
+      
      
       
     ){
@@ -59,10 +62,13 @@ export class AppComponent {
         this.loggedIn = result;
       });
 
+        
+
+
+      
+
 
  
-
-
 
   }
 

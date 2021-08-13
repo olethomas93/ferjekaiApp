@@ -1,36 +1,39 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+mutation CreateFerjeData(
+  $input: CreateFerjeDataInput!
+  $condition: ModelferjeDataConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createFerjeData(input: $input, condition: $condition) {
     id
-    name
-    description
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }
 }
-mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+mutation UpdateFerjeData(
+  $input: UpdateFerjeDataInput!
+  $condition: ModelferjeDataConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updateFerjeData(input: $input, condition: $condition) {
     id
-    name
-    description
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }
 }
-mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+mutation DeleteFerjeData(
+  $input: DeleteFerjeDataInput!
+  $condition: ModelferjeDataConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deleteFerjeData(input: $input, condition: $condition) {
     id
-    name
-    description
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }

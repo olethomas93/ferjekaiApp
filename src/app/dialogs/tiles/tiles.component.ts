@@ -31,7 +31,7 @@ export class TilesComponent {
     {title:"Wind Direction",
   value :-999,color:"green",icon:"explore",unit:"°"},
   {title:"Air Density",
-  value :-999,color:"green",icon:"reorder",unit:"kg/m^3"}
+  value :-999,color:"green",icon:"reorder",unit:"kg/m³"}
   ]
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -66,6 +66,7 @@ export class TilesComponent {
 
 
   updateData(data:any){
+    console.log(data)
     if (data.CollectionId ==1){
       
       data = data.TagData[0].Values

@@ -9,18 +9,20 @@ export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
 
-export type CreateTodoInput = {
+export type CreateFerjeDataInput = {
   id?: string | null;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
 };
 
-export type ModelTodoConditionInput = {
-  name?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  and?: Array<ModelTodoConditionInput | null> | null;
-  or?: Array<ModelTodoConditionInput | null> | null;
-  not?: ModelTodoConditionInput | null;
+export type ModelferjeDataConditionInput = {
+  topic?: ModelStringInput | null;
+  GMT?: ModelIntInput | null;
+  ID?: ModelIntInput | null;
+  and?: Array<ModelferjeDataConditionInput | null> | null;
+  or?: Array<ModelferjeDataConditionInput | null> | null;
+  not?: ModelferjeDataConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -62,32 +64,47 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type Todo = {
-  __typename: "Todo";
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
+export type ferjeData = {
+  __typename: "ferjeData";
   id: string;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type UpdateTodoInput = {
+export type UpdateFerjeDataInput = {
   id: string;
-  name?: string | null;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
 };
 
-export type DeleteTodoInput = {
+export type DeleteFerjeDataInput = {
   id: string;
 };
 
-export type ModelTodoFilterInput = {
+export type ModelferjeDataFilterInput = {
   id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  and?: Array<ModelTodoFilterInput | null> | null;
-  or?: Array<ModelTodoFilterInput | null> | null;
-  not?: ModelTodoFilterInput | null;
+  topic?: ModelStringInput | null;
+  GMT?: ModelIntInput | null;
+  ID?: ModelIntInput | null;
+  and?: Array<ModelferjeDataFilterInput | null> | null;
+  or?: Array<ModelferjeDataFilterInput | null> | null;
+  not?: ModelferjeDataFilterInput | null;
 };
 
 export type ModelIDInput = {
@@ -106,84 +123,92 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null;
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection";
-  items?: Array<Todo | null> | null;
+export type ModelferjeDataConnection = {
+  __typename: "ModelferjeDataConnection";
+  items?: Array<ferjeData | null> | null;
   nextToken?: string | null;
 };
 
-export type CreateTodoMutation = {
-  __typename: "Todo";
+export type CreateFerjeDataMutation = {
+  __typename: "ferjeData";
   id: string;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type UpdateTodoMutation = {
-  __typename: "Todo";
+export type UpdateFerjeDataMutation = {
+  __typename: "ferjeData";
   id: string;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type DeleteTodoMutation = {
-  __typename: "Todo";
+export type DeleteFerjeDataMutation = {
+  __typename: "ferjeData";
   id: string;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type GetTodoQuery = {
-  __typename: "Todo";
+export type GetFerjeDataQuery = {
+  __typename: "ferjeData";
   id: string;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type ListTodosQuery = {
-  __typename: "ModelTodoConnection";
+export type ListFerjeDataQuery = {
+  __typename: "ModelferjeDataConnection";
   items?: Array<{
-    __typename: "Todo";
+    __typename: "ferjeData";
     id: string;
-    name: string;
-    description?: string | null;
+    topic?: string | null;
+    GMT?: number | null;
+    ID?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   nextToken?: string | null;
 };
 
-export type OnCreateTodoSubscription = {
-  __typename: "Todo";
+export type OnCreateFerjeDataSubscription = {
+  __typename: "ferjeData";
   id: string;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type OnUpdateTodoSubscription = {
-  __typename: "Todo";
+export type OnUpdateFerjeDataSubscription = {
+  __typename: "ferjeData";
   id: string;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type OnDeleteTodoSubscription = {
-  __typename: "Todo";
+export type OnDeleteFerjeDataSubscription = {
+  __typename: "ferjeData";
   id: string;
-  name: string;
-  description?: string | null;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -192,16 +217,17 @@ export type OnDeleteTodoSubscription = {
   providedIn: "root"
 })
 export class APIService {
-  async CreateTodo(
-    input: CreateTodoInput,
-    condition?: ModelTodoConditionInput
-  ): Promise<CreateTodoMutation> {
-    const statement = `mutation CreateTodo($input: CreateTodoInput!, $condition: ModelTodoConditionInput) {
-        createTodo(input: $input, condition: $condition) {
+  async CreateFerjeData(
+    input: CreateFerjeDataInput,
+    condition?: ModelferjeDataConditionInput
+  ): Promise<CreateFerjeDataMutation> {
+    const statement = `mutation CreateFerjeData($input: CreateFerjeDataInput!, $condition: ModelferjeDataConditionInput) {
+        createFerjeData(input: $input, condition: $condition) {
           __typename
           id
-          name
-          description
+          topic
+          GMT
+          ID
           createdAt
           updatedAt
         }
@@ -215,18 +241,19 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <CreateTodoMutation>response.data.createTodo;
+    return <CreateFerjeDataMutation>response.data.createFerjeData;
   }
-  async UpdateTodo(
-    input: UpdateTodoInput,
-    condition?: ModelTodoConditionInput
-  ): Promise<UpdateTodoMutation> {
-    const statement = `mutation UpdateTodo($input: UpdateTodoInput!, $condition: ModelTodoConditionInput) {
-        updateTodo(input: $input, condition: $condition) {
+  async UpdateFerjeData(
+    input: UpdateFerjeDataInput,
+    condition?: ModelferjeDataConditionInput
+  ): Promise<UpdateFerjeDataMutation> {
+    const statement = `mutation UpdateFerjeData($input: UpdateFerjeDataInput!, $condition: ModelferjeDataConditionInput) {
+        updateFerjeData(input: $input, condition: $condition) {
           __typename
           id
-          name
-          description
+          topic
+          GMT
+          ID
           createdAt
           updatedAt
         }
@@ -240,18 +267,19 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <UpdateTodoMutation>response.data.updateTodo;
+    return <UpdateFerjeDataMutation>response.data.updateFerjeData;
   }
-  async DeleteTodo(
-    input: DeleteTodoInput,
-    condition?: ModelTodoConditionInput
-  ): Promise<DeleteTodoMutation> {
-    const statement = `mutation DeleteTodo($input: DeleteTodoInput!, $condition: ModelTodoConditionInput) {
-        deleteTodo(input: $input, condition: $condition) {
+  async DeleteFerjeData(
+    input: DeleteFerjeDataInput,
+    condition?: ModelferjeDataConditionInput
+  ): Promise<DeleteFerjeDataMutation> {
+    const statement = `mutation DeleteFerjeData($input: DeleteFerjeDataInput!, $condition: ModelferjeDataConditionInput) {
+        deleteFerjeData(input: $input, condition: $condition) {
           __typename
           id
-          name
-          description
+          topic
+          GMT
+          ID
           createdAt
           updatedAt
         }
@@ -265,15 +293,16 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <DeleteTodoMutation>response.data.deleteTodo;
+    return <DeleteFerjeDataMutation>response.data.deleteFerjeData;
   }
-  async GetTodo(id: string): Promise<GetTodoQuery> {
-    const statement = `query GetTodo($id: ID!) {
-        getTodo(id: $id) {
+  async GetFerjeData(id: string): Promise<GetFerjeDataQuery> {
+    const statement = `query GetFerjeData($id: ID!) {
+        getFerjeData(id: $id) {
           __typename
           id
-          name
-          description
+          topic
+          GMT
+          ID
           createdAt
           updatedAt
         }
@@ -284,21 +313,22 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetTodoQuery>response.data.getTodo;
+    return <GetFerjeDataQuery>response.data.getFerjeData;
   }
-  async ListTodos(
-    filter?: ModelTodoFilterInput,
+  async ListFerjeData(
+    filter?: ModelferjeDataFilterInput,
     limit?: number,
     nextToken?: string
-  ): Promise<ListTodosQuery> {
-    const statement = `query ListTodos($filter: ModelTodoFilterInput, $limit: Int, $nextToken: String) {
-        listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  ): Promise<ListFerjeDataQuery> {
+    const statement = `query ListFerjeData($filter: ModelferjeDataFilterInput, $limit: Int, $nextToken: String) {
+        listFerjeData(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
           items {
             __typename
             id
-            name
-            description
+            topic
+            GMT
+            ID
             createdAt
             updatedAt
           }
@@ -318,56 +348,59 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListTodosQuery>response.data.listTodos;
+    return <ListFerjeDataQuery>response.data.listFerjeData;
   }
-  OnCreateTodoListener: Observable<
-    SubscriptionResponse<OnCreateTodoSubscription>
+  OnCreateFerjeDataListener: Observable<
+    SubscriptionResponse<OnCreateFerjeDataSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnCreateTodo {
-        onCreateTodo {
+      `subscription OnCreateFerjeData {
+        onCreateFerjeData {
           __typename
           id
-          name
-          description
+          topic
+          GMT
+          ID
           createdAt
           updatedAt
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateTodoSubscription>>;
+  ) as Observable<SubscriptionResponse<OnCreateFerjeDataSubscription>>;
 
-  OnUpdateTodoListener: Observable<
-    SubscriptionResponse<OnUpdateTodoSubscription>
+  OnUpdateFerjeDataListener: Observable<
+    SubscriptionResponse<OnUpdateFerjeDataSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnUpdateTodo {
-        onUpdateTodo {
+      `subscription OnUpdateFerjeData {
+        onUpdateFerjeData {
           __typename
           id
-          name
-          description
+          topic
+          GMT
+          ID
           createdAt
           updatedAt
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateTodoSubscription>>;
+  ) as Observable<SubscriptionResponse<OnUpdateFerjeDataSubscription>>;
 
-  OnDeleteTodoListener: Observable<
-    SubscriptionResponse<OnDeleteTodoSubscription>
+  OnDeleteFerjeDataListener: Observable<
+    SubscriptionResponse<OnDeleteFerjeDataSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnDeleteTodo {
-        onDeleteTodo {
+      `subscription OnDeleteFerjeData {
+        onDeleteFerjeData {
           __typename
           id
-          name
-          description
+          topic
+          GMT
+          ID
           createdAt
           updatedAt
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteTodoSubscription>>;
+  ) as Observable<SubscriptionResponse<OnDeleteFerjeDataSubscription>>;
 }
