@@ -14,12 +14,16 @@ export type CreateFerjeDataInput = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type ModelferjeDataConditionInput = {
   topic?: ModelStringInput | null;
   GMT?: ModelIntInput | null;
   ID?: ModelIntInput | null;
+  createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
   and?: Array<ModelferjeDataConditionInput | null> | null;
   or?: Array<ModelferjeDataConditionInput | null> | null;
   not?: ModelferjeDataConditionInput | null;
@@ -82,8 +86,8 @@ export type ferjeData = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type UpdateFerjeDataInput = {
@@ -91,6 +95,8 @@ export type UpdateFerjeDataInput = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type DeleteFerjeDataInput = {
@@ -102,6 +108,8 @@ export type ModelferjeDataFilterInput = {
   topic?: ModelStringInput | null;
   GMT?: ModelIntInput | null;
   ID?: ModelIntInput | null;
+  createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
   and?: Array<ModelferjeDataFilterInput | null> | null;
   or?: Array<ModelferjeDataFilterInput | null> | null;
   not?: ModelferjeDataFilterInput | null;
@@ -135,8 +143,8 @@ export type CreateFerjeDataMutation = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type UpdateFerjeDataMutation = {
@@ -145,8 +153,8 @@ export type UpdateFerjeDataMutation = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type DeleteFerjeDataMutation = {
@@ -155,8 +163,8 @@ export type DeleteFerjeDataMutation = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type GetFerjeDataQuery = {
@@ -165,8 +173,8 @@ export type GetFerjeDataQuery = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type ListFerjeDataQuery = {
@@ -177,8 +185,8 @@ export type ListFerjeDataQuery = {
     topic?: string | null;
     GMT?: number | null;
     ID?: number | null;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string | null;
+    updatedAt?: string | null;
   } | null> | null;
   nextToken?: string | null;
 };
@@ -189,8 +197,8 @@ export type OnUpdateByIdSubscription = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type OnCreateFerjeDataSubscription = {
@@ -199,8 +207,8 @@ export type OnCreateFerjeDataSubscription = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type OnUpdateFerjeDataSubscription = {
@@ -209,8 +217,8 @@ export type OnUpdateFerjeDataSubscription = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type OnDeleteFerjeDataSubscription = {
@@ -219,8 +227,8 @@ export type OnDeleteFerjeDataSubscription = {
   topic?: string | null;
   GMT?: number | null;
   ID?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 @Injectable({
