@@ -12,6 +12,8 @@ query MyQuery {
       GMT
       ID
       topic
+      createdAt
+      updatedAt
     }
   }
 }`
@@ -23,6 +25,8 @@ mutation MyMutation($input:UpdateFerjeDataInput!) {
     id
     ID
     topic
+    createdAt
+    updatedAt
   }
 }
 `
@@ -61,7 +65,9 @@ var item ={
             id: ID,
             GMT: Date.now(),
             ID:event.CollectionId,
-            topic:JSON.stringify(event.TagData[0])
+            topic:JSON.stringify(event.TagData[0]),
+            createdAt: new Date().toISOString(),
+            updatedAt:new Date().toISOString()
            
           }
         }
