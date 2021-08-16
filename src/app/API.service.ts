@@ -183,6 +183,16 @@ export type ListFerjeDataQuery = {
   nextToken?: string | null;
 };
 
+export type OnUpdateByIdSubscription = {
+  __typename: "ferjeData";
+  id: string;
+  topic?: string | null;
+  GMT?: number | null;
+  ID?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type OnCreateFerjeDataSubscription = {
   __typename: "ferjeData";
   id: string;
@@ -350,6 +360,28 @@ export class APIService {
     )) as any;
     return <ListFerjeDataQuery>response.data.listFerjeData;
   }
+  OnUpdateByIdListener(
+    id: string
+  ): Observable<SubscriptionResponse<OnUpdateByIdSubscription>> {
+    const statement = `subscription OnUpdateById($id: ID!) {
+        onUpdateById(id: $id) {
+          __typename
+          id
+          topic
+          GMT
+          ID
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<SubscriptionResponse<OnUpdateByIdSubscription>>;
+  }
+
   OnCreateFerjeDataListener: Observable<
     SubscriptionResponse<OnCreateFerjeDataSubscription>
   > = API.graphql(

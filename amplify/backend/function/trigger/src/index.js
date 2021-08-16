@@ -1,55 +1,84 @@
-const redis = require('redis');
-const { promisify } = require('util');
-const timeout = parseInt(process.env.TIMEOUT);
-const graphqlEndpoint = process.env.GRAPHQL_ENDPOINT;
-
-
-
-// Initialize GraphQL client
-const AWS = require('aws-sdk/global');
-const AUTH_TYPE = require('aws-appsync').AUTH_TYPE;
-const AWSAppSyncClient = require('aws-appsync').default;
+const axios = require('axios');
 const gql = require('graphql-tag');
-const config = {
-  url: graphqlEndpoint,
-  region: process.env.AWS_REGION,
-  auth: {
-    type: AUTH_TYPE.AWS_IAM,
-    credentials: AWS.config.credentials,
-  },
-  disableOffline: true
-};
-const gqlClient = new AWSAppSyncClient(config);
-// The mutation query
-const mutation = gql`
-  mutation expired($id: ID!) {
-    expired(id: $id)
-  }
-`;
+const graphql = require('graphql');
+const { print } = graphql;
 
-// generic mutation function.  A way to quickly reuse mutation statements
-async function executeMutation(mutation, operationName, variables) {
-  if (!client) {
-    initializeClient();
-  }
 
-  try {
-    const response = await client.mutate({
-      mutation: gql(mutation),
-      variables,
-      fetchPolicy: "network-only"
-    });
-    return parseResults(operationName, response.data);
-  } catch (err) {
-    console.log("Error while trying to mutate data");
-    throw JSON.stringify(err);
+
+const listFerjedata =gql`
+query MyQuery {
+  listFerjeData {
+    items {
+      GMT
+      ID
+      topic
+    }
+  }
+}`
+
+const update =gql`
+mutation MyMutation($input:UpdateFerjeDataInput!) {
+  updateFerjeData(input: $input) {
+    GMT
+    id
+    ID
+    topic
   }
 }
+`
 
-exports.handler =  async function(event,contex) {
+exports.handler = async (event) => {
+var TagValues ={};
+var ID = "alarms" ;
+if(event.CollectionId== 1){
+    
+    ID = "weather";
+}
+else if(event.CollectionId==2){
 
-console.log(event)
+  ID="DriftsData"
+}
 
+var item ={
+  id:ID,
+  GMT:Date.now(),
+  ID:event.CollectionId,
+  topic:event.TagData[0]
+};
 
-
+  console.log(process.env.API_URL)
+  try {
+    const graphqlData = await axios({
+      url: "https://syhhaeb4hfaqheleomqe6oogvy.appsync-api.eu-central-1.amazonaws.com/graphql",
+      method: 'post',
+      headers: {
+        'x-api-key': "da2-jrffhimvmjf4zj5lmwnqq6cef4"
+      },
+      data: {
+        query: print(update),
+        variables: {
+          input: {
+            id: ID,
+            GMT: Date.now(),
+            ID:event.CollectionId,
+            topic:JSON.stringify(event.TagData[0])
+           
+          }
+        }
+        
+      }
+    });
+    const body = {
+      message: "successfully created todo!"
+    }
+    return {
+        statusCode: 200,
+        body: JSON.stringify(body),
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+        }
+    }
+  } catch (err) {
+    console.log('error posting to appsync: ', err);
+  } 
 }

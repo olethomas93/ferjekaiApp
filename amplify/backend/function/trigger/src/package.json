@@ -7,6 +7,7 @@
   "dependencies": {
     "aws-appsync": "^4.1.1",
     "aws-sdk": "^2.967.0",
+    "axios": "^0.21.1",
     "es6-promise": "^4.2.8",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5",

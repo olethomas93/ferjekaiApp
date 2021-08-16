@@ -1,4 +1,14 @@
 # this is an auto generated file. This will be overwritten
+subscription OnUpdateById($id: ID!) {
+  onUpdateById(id: $id) {
+    id
+    topic
+    GMT
+    ID
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateFerjeData {
   onCreateFerjeData {
     id
