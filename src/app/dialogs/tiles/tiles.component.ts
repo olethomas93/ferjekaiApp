@@ -67,25 +67,39 @@ export class TilesComponent {
   //     error: error => console.error(error)
       
   // });
-  this.api.GetFerjeData("weather").then((data:any)=>{
 
-    this.updateData(data)
-  })
-  this.api.GetFerjeData("alarms").then((data:any)=>{
+  }
 
-    this.updateData(data)
-  })
+  ngAfterViewInit(){
+    this.api.GetFerjeData("weather").then((data:any)=>{
 
- this.subscription= this.api.OnUpdateFerjeDataListener.subscribe((data:any)=>{
+      this.updateData(data)
+    }).catch((e)=>{
 
-    if(data){
-     
-      let topic = data.value.data.onUpdateFerjeData
-      this.updateData(topic)
-      
-    }
+      console.log(e)
+    })
+    this.api.GetFerjeData("alarms").then((data:any)=>{
+  
+      this.updateData(data)
+    }).catch((e)=>{
 
-  })
+      console.log(e)
+    })
+  
+   this.subscription= this.api.OnUpdateFerjeDataListener.subscribe((data:any)=>{
+  
+
+    
+      if(data){
+       
+        let topic = data.value.data.onUpdateFerjeData
+        this.updateData(topic)
+        
+      }
+  
+    })
+
+
   }
 
 
