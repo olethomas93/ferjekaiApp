@@ -5,7 +5,7 @@ import { PubSub } from 'aws-amplify';
 import { title } from 'process';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Json } from 'aws-sdk/clients/robomaker';
-
+import { APIService } from '../../API.service';
 export interface Alarm {
   name: string;
   status:string
@@ -22,6 +22,8 @@ export class TilesComponent {
   subscription: any;
   displayedColumns: string[] = ['name', 'status'];
   dataSource = [{}]
+  alarmsUpdated!: Date
+  weatherUpdated!: string
 
   cardData =[
     {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
@@ -31,7 +33,7 @@ export class TilesComponent {
     {title:"Wind Direction",
   value :-999,color:"green",icon:"explore",unit:"°"},
   {title:"Air Density",
-  value :-999,color:"green",icon:"reorder",unit:"kg/m^3"}
+  value :-999,color:"green",icon:"reorder",unit:"kg/m³"}
   ]
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -50,31 +52,71 @@ export class TilesComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, public dialogRef: MatDialogRef<TilesComponent>) {
+  constructor(private breakpointObserver: BreakpointObserver, 
+    public dialogRef: MatDialogRef<TilesComponent>,
+    private api: APIService
+    
+    ) {
   
   }
 
   ngOnInit(){
-
-    this.subscription =  PubSub.subscribe('1.5.0/Sulesund/TagValues').subscribe({
-      next: data =>this.updateData(data.value),
-      error: error => console.error(error)
+    //MQTT subscription
+  //   this.subscription =  PubSub.subscribe('1.5.0/Sulesund/TagValues').subscribe({
+  //     next: data =>this.updateData(data.value),
+  //     error: error => console.error(error)
       
-  });
+  // });
+
+  }
+
+  ngAfterViewInit(){
+    this.api.GetFerjeData("weather").then((data:any)=>{
+
+      this.updateData(data)
+    }).catch((e)=>{
+
+      console.log(e)
+    })
+    this.api.GetFerjeData("alarms").then((data:any)=>{
+  
+      this.updateData(data)
+    }).catch((e)=>{
+
+      console.log(e)
+    })
+  
+   this.subscription= this.api.OnUpdateFerjeDataListener.subscribe((data:any)=>{
+  
+
+    
+      if(data){
+       
+        let topic = data.value.data.onUpdateFerjeData
+        this.updateData(topic)
+        
+      }
+  
+    })
+
+
   }
 
 
 
   updateData(data:any){
-    if (data.CollectionId ==1){
+    
+    this.weatherUpdated = new Date(data['GMT']).toString()
+    if (data.ID ==1){
       
-      data = data.TagData[0].Values
+      data = JSON.parse(data.topic)
+      
       this.updateWeatherData(data)
       
 
     }
-    else if(data.CollectionId==0){
-      data = data.TagData[0].Values
+    else if(data.ID==0){
+      data = JSON.parse(data.topic)
       this.updateAlarmData(data)
     }
   
@@ -84,9 +126,14 @@ export class TilesComponent {
 
 
   updateAlarmData(data:any){
+
+    
+   
+
     this.dataSource =[]
-    for(let i in data){
-      this.dataSource.push({name:i,status:data[i]})
+    for(let i in data.Values){
+      
+      this.dataSource.push({name:i,status:data.Values[i]})
       
     }
     
@@ -95,12 +142,12 @@ export class TilesComponent {
   }
 
   updateWeatherData(data:any){
-
-    this.cardData[0].value = Math.round(data.Vindhastighet) 
-    this.cardData[1].value = Math.round(data.Temperatur)
-    this.cardData[2].value = Math.round(data.Luft_Trykk)
-    this.cardData[3].value =Math.round(data.Vindretning)
-    this.cardData[4].value =Math.round(data.Luft_Tetthet)
+    
+    this.cardData[0].value = Math.round(data.Values.Vindhastighet) 
+    this.cardData[1].value = Math.round(data.Values.Temperatur)
+    this.cardData[2].value = Math.round(data.Values.Luft_Trykk)
+    this.cardData[3].value =Math.round(data.Values.Vindretning)
+    this.cardData[4].value =Math.round(data.Values.Luft_Tetthet)
 
   }
 

@@ -1,27 +1,40 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateTodo {
-  onCreateTodo {
+subscription OnUpdateById($id: ID!) {
+  onUpdateById(id: $id) {
     id
-    name
-    description
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateTodo {
-  onUpdateTodo {
+subscription OnCreateFerjeData {
+  onCreateFerjeData {
     id
-    name
-    description
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteTodo {
-  onDeleteTodo {
+subscription OnUpdateFerjeData {
+  onUpdateFerjeData {
     id
-    name
-    description
+    topic
+    GMT
+    ID
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteFerjeData {
+  onDeleteFerjeData {
+    id
+    topic
+    GMT
+    ID
     createdAt
     updatedAt
   }

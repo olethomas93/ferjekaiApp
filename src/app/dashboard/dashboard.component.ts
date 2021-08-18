@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ColormodeService } from '../services/colormode.service';
 import { routeTransitionAnimations } from '../route-transition-animations';
 import { AuthService } from "../services/auth.service";
+import Amplify, { API } from 'aws-amplify';
 
 @Component({
   selector: 'app-dashboard',

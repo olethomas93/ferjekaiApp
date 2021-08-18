@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "ferjekai": {}
+      },
+      "function": {
+        "trigger": {
+          "deploymentBucketName": "amplify-ferjekai-staging-101604-deployment",
+          "s3Key": "amplify-builds/trigger-42716169615459456d68-build.zip"
+        }
       }
     }
   }

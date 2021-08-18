@@ -44,10 +44,6 @@ import { MatListModule } from '@angular/material/list';
 
 
 
-Amplify.addPluggable(new AWSIoTProvider({
-  aws_pubsub_region: 'eu-central-1',
-  aws_pubsub_endpoint: 'wss://a3vwh5519vcrt0-ats.iot.eu-central-1.amazonaws.com/mqtt',
-}));
 
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {

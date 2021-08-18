@@ -27,7 +27,7 @@
     }
   },
   "api": {
-    "ferjekaiAPI": {
+    "ferjekai": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -36,12 +36,35 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 7,
-              "description": "demo"
+              "description": ""
             }
           },
           "additionalAuthenticationProviders": []
         }
       }
+    }
+  },
+  "storage": {
+    "ferjekai": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "function": {
+    "trigger": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "ferjekai",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
     }
   }
 }

@@ -6,6 +6,7 @@ import { PubSub } from 'aws-amplify';
 import { MatDialog } from '@angular/material/dialog';
 import {FerjekaiStatusComponent} from '../../dialogs/ferjekai-status/ferjekai-status.component'
 import {TilesComponent} from '../../dialogs/tiles/tiles.component'
+import { APIService } from '../../API.service';
 @Component({
   selector: 'app-map-page',
   templateUrl: './map-page.component.html',
@@ -23,17 +24,18 @@ export class MapPageComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private http: HttpService,
+    private api: APIService
     // private _formBuilder: FormBuilder,
   ) {
 
  
-
-  this.connected =  PubSub.subscribe('$aws/events/presence/+/Sulesund').subscribe({
-    next: data =>
-    this.updateData(data),
-    error: error => console.error(error)
+//MQTT pubsub
+//   this.connected =  PubSub.subscribe('$aws/events/presence/+/Sulesund').subscribe({
+//     next: data =>
+//     this.updateData(data),
+//     error: error => console.error(error)
     
-});
+// });
   
 
 
@@ -58,7 +60,19 @@ export class MapPageComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    
+    this.api.OnUpdateByIdListener("weather").subscribe((data:any)=>{
+
+      console.log(data)
+
+    })
+
+   
+
+
+  }
 
   receiveMap(map: Map) {
     this.map = map;

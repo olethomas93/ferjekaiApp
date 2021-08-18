@@ -1,6 +1,6 @@
 projects:
-  ferjekaiAPI:
-    schemaPath: src/graphql/schema.json
+  ferjekai:
+    schemaPath: amplify/backend/api/ferjekai/build/schema.graphql
     includes:
       - src/graphql/**/*.graphql
     excludes:
@@ -10,6 +10,9 @@ projects:
         codeGenTarget: angular
         generatedFileName: src/app/API.service.ts
         docsFilePath: src/graphql
+        region: eu-central-1
+        apiId: null
+        maxDepth: 2
 extensions:
   amplify:
     version: 3

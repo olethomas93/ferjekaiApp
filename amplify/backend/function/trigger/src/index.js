@@ -12,7 +12,8 @@ query MyQuery {
       GMT
       ID
       topic
-   
+      createdAt
+      updatedAt
     }
   }
 }`
@@ -24,7 +25,8 @@ mutation MyMutation($input:UpdateFerjeDataInput!) {
     id
     ID
     topic
-   
+    createdAt
+    updatedAt
   }
 }
 `

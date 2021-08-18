@@ -2,6 +2,7 @@
 
  <mat-tab-group>
   <mat-tab label="Værdata"> 
+    <h3>Updated:{{weatherUpdated}} </h3> 
     <div class="grid-container">
       <!-- <h1 class="mat-h1">VærData</h1> -->
       <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
@@ -18,7 +19,8 @@
   
   
   </mat-tab>
-  <mat-tab label="Alarmer"> 
+  <mat-tab label="Alarmer">
+    <h3>Updated: {{weatherUpdated}} </h3> 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <!--- Note that these columns can be defined in any order.
