@@ -1,0 +1,14 @@
+type ferjeData @model {
+  id: ID!
+  topic: AWSJSON
+  GMT : AWSTimestamp
+  ID:Int
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+
+type Subscription {
+  onUpdateById(id: ID!): ferjeData
+    @aws_subscribe(mutations: ["updateFerjeData"])
+}
