@@ -53,10 +53,10 @@ var item ={
   console.log(process.env.API_URL)
   try {
     const graphqlData = await axios({
-      url: "https://syhhaeb4hfaqheleomqe6oogvy.appsync-api.eu-central-1.amazonaws.com/graphql",
+      url: "https://cwv5hklocvelle3dgk6iho6ake.appsync-api.eu-central-1.amazonaws.com/graphql",
       method: 'post',
       headers: {
-        'x-api-key': "da2-jrffhimvmjf4zj5lmwnqq6cef4"
+        'x-api-key': "da2-gki4ztnd2zgvjegn2aqfs7hsci"
       },
       data: {
         query: print(update),
