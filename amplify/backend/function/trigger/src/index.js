@@ -31,6 +31,19 @@ mutation MyMutation($input:UpdateFerjeDataInput!) {
 }
 `
 
+const create =gql`
+mutation MyMutation1($input:CreateFerjeDataInput!) {
+  createFerjeData(input: $input) {
+    GMT
+    id
+    ID
+    topic
+    createdAt
+    updatedAt
+  }
+}
+`
+
 exports.handler = async (event) => {
 var TagValues ={};
 var ID = "alarms" ;
@@ -38,10 +51,7 @@ if(event.CollectionId== 1){
     
     ID = "weather";
 }
-else if(event.CollectionId==2){
 
-  ID="DriftsData"
-}
 
 var item ={
   id:ID,

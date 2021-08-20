@@ -69,6 +69,10 @@ export class MapPageComponent implements OnInit {
 
     })
 
+    this.api.ListFerjeData().then((data:any)=>{
+      console.log(data)
+    })
+
    
 
 
