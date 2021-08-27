@@ -4,7 +4,7 @@
 
 <mat-toolbar class="toolbar" color="dark">
     <div style="flex: 1 1 auto">
-      <app-change-mode></app-change-mode>
+      <!-- <app-change-mode></app-change-mode> -->
     </div>
     <div matRipple class="home"
     matTooltip = "Dashboard"
@@ -42,7 +42,7 @@
       <div class="items">
         <mat-nav-list>
           <mat-list-item
-          routerLink="/dash" routerLinkActive="activebutton">
+          routerLink="/landing" routerLinkActive="activebutton">
             <!-- <button mat-button routerLink="/dash" routerLinkActive="activebutton">
               Dashboard
             </button> -->
@@ -58,11 +58,7 @@
             Log ut
            
           </mat-list-item>
-          <mat-list-item (click)="getCred()">
-          
-           credentials
-           
-          </mat-list-item>
+        
        
         </mat-nav-list>
       </div>

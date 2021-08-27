@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MapPageComponent } from '../components/map-page/map-page.component';
 import { DashboardComponent } from './dashboard.component';
 import {AuthGuard} from '../guards/auth.guard'
+import { LandingComponent } from '../components/landing/landing.component';
 const routes: Routes = [
   { 
     path: '', 
@@ -17,7 +18,10 @@ const routes: Routes = [
 
       data: { animationState: "One" }},
 
-      {path:"",redirectTo:"map",pathMatch:"full"},
+      {path:'landing',component:LandingComponent,
+    data:{animationState:'Two'}},
+
+      {path:"",redirectTo:"landing",pathMatch:"full"},
 
      
 

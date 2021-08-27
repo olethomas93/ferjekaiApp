@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LatLngExpression,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle} from 'leaflet';
+import { LatLngExpression,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon} from 'leaflet';
 import { HttpService } from 'src/app/services/http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { PubSub } from 'aws-amplify';
@@ -63,14 +63,21 @@ export class MapPageComponent implements OnInit {
   ngOnInit(): void {
 
     
-    this.api.OnUpdateByIdListener("weather").subscribe((data:any)=>{
+    this.api.OnUpdateByIdListener("alarms").subscribe((data:any)=>{
 
-      console.log(data)
+      let res =JSON.parse(data.value.data.onUpdateById.topic)
+
+      if (res.Values.alarm_frekvensomformer_1 == false){
+
+
+        this.sulesund.setStyle({color:"green",className:"pulse"})
+        
+      }
 
     })
 
-    this.api.ListFerjeData().then((data:any)=>{
-      console.log(data)
+    this.api.GetFerjeData("alarms").then((data:any)=>{
+      
     })
 
    
@@ -81,24 +88,55 @@ export class MapPageComponent implements OnInit {
   receiveMap(map: Map) {
     this.map = map;
 
-     this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red"}).bindTooltip('Sulesund',
-     {offset:[0, 0]}).openTooltip()
+
+   
+// you can set .my-div-icon styles in CSS
+  
+    this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red",className:"pulse"}).bindTooltip('Sulesund',
+    {offset:[0, 0]}).openTooltip()
     
     //  this.sulesund.bindPopup(`` +
     // `<h1>Kai: Sulesund </h1>` +
     // `<h2>AlarmStatus: God </h2>` +
     // `<h2> annet: Annet</h2>`)
    
+    
+    this.sulesund.addTo(this.map)
 
-    this.sulesund.addTo(this.map).on('click',(e:any)=>{
+    this.sulesund.setStyle({className:"pulse"})
+
+    
+    this.sulesund.on('click',(e:any)=>{
 
       this.openStatusDialog()
 
     })
+
+  
+    
+   
+
+      
+    
+
+
     
 
 
   }
+
+  
+
+  
+ 
+   
+
+    
+ 
+ 
+ 
+ 
+ 
   openStatusDialog() {
     const dialogRef = this.dialog.open(TilesComponent,{
       height: '80vh',

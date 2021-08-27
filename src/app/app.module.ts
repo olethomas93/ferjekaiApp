@@ -46,6 +46,7 @@ import { MatListModule } from '@angular/material/list';
 
 
 
+
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: env.mqtt.server,
   port: env.mqtt.port,
@@ -60,7 +61,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    NavComponent,
+    NavComponent
  
     
     

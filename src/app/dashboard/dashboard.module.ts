@@ -39,6 +39,7 @@ import {TilesComponent} from '../dialogs/tiles/tiles.component'
 import {MinicardComponent} from '../components/minicard/minicard.component'
 import { MatMenuModule } from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
+import { LandingComponent } from '../components/landing/landing.component';
 
 
 
@@ -48,7 +49,7 @@ import {MatTableModule} from '@angular/material/table';
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent, ChangeModeComponent,
-    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent
     ],
   imports: [
     CommonModule,
