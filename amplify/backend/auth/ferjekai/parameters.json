@@ -1,6 +1,4 @@
 {
-    "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "ferjekce2549f8",
     "userPoolName": "ferjekai",
     "autoVerifiedAttributes": [
@@ -27,14 +25,14 @@
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientRefreshTokenValidity": "1",
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
     "userpoolClientLambdaRole": "ferjekce2549f8_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "sharedId": "ce2549f8",
     "resourceName": "ferjekai",
-    "authSelections": "identityPoolAndUserPool",
+    "authSelections": "userPoolOnly",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -52,11 +50,11 @@
         "email"
     ],
     "useDefault": "manual",
-    "userPoolGroups": false,
-    "userPoolGroupList": [],
+    "userPoolGroups": true,
+    "userPoolGroupList": [
+        "admins"
+    ],
     "adminQueries": false,
-    "thirdPartyAuth": false,
-    "authProviders": [],
     "usernameCaseSensitive": false,
     "dependsOn": [],
     "triggers": "{}",
@@ -65,5 +63,6 @@
         "Ref": "AWS::StackId"
     },
     "breakCircularDependency": true,
-    "permissions": []
+    "permissions": [],
+    "authProviders": []
 }

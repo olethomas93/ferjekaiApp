@@ -38,6 +38,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { LoginformComponent } from './components/loginform/loginform.component';
+import { ConfirmFormComponent } from './components/confirm-form/confirm-form.component';
 
 
 
@@ -61,7 +63,9 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    NavComponent
+    NavComponent,
+    LoginformComponent,
+    ConfirmFormComponent
  
     
     

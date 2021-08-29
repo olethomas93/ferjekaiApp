@@ -143,6 +143,12 @@ export class MapPageComponent implements OnInit {
       width: '80vw',
     });
 
+    dialogRef.backdropClick().subscribe((data)=>{
+
+      this.dialog.closeAll()
+
+    })
+
     // dialogRef.afterClosed().subscribe((result: any) => {
     //   console.log(`Dialog result: ${result}`);
     // });

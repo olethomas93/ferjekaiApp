@@ -15,6 +15,10 @@
   top: 5px;
   right: 10px;
 }
+
+.tabgroup{
+  background-color: black;
+}
 table {
   width: 100%;
 }

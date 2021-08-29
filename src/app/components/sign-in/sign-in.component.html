@@ -1,68 +1,49 @@
-<div class="main">
-  <div class="d1"></div>
-  <div class="d2"></div>
-  <div class="d3"></div>
-  <div class="d4"></div>
 
 
-<div class="wrapper">
-    <mat-card class="box">
-      <mat-card-header>
-        <mat-card-title class="title">Logg inn</mat-card-title>
-      </mat-card-header>
-  
-      <form class="form" (ngSubmit)="signIn()">
-  
-        <mat-card-content>
-        <mat-form-field [formGroup]="loginForm" appearance="fill">
-          <mat-label>Email</mat-label>
-            <input matInput
-              formControlName="email"
-              [(ngModel)]="email"
-              placeholder="john.doe@email.com"
-            >
-            <span
-              class="error ion-padding"
-              *ngIf="isSubmitted && errorControl.email.errors?.required"
-            ></span>
-            <span
-              class="error ion-padding"
-              *ngIf="isSubmitted && errorControl.email.errors?.pattern"
-            ></span>
+<!-- <header> -->
+
+  <!-- This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS -->
+  <!-- <div class="overlay"></div> -->
+
+  <!-- The HTML5 video element that will create the background video on the header -->
+      <!-- The header content -->
+    
+        <div class="title">
+            <h1 >Ferjekai App</h1>
           
-        </mat-form-field>
-  
-        <mat-form-field [formGroup]="loginForm" appearance="fill">
-          <mat-label>Password</mat-label>
-            <input matInput
-              placeholder="Password"
-              formControlName="password"
-              type="password"
-              [(ngModel)]="password"
-            >
-            
-         
-        </mat-form-field>
+          </div>
+   
+  <div class="hero-wrapper">
+    <div class="hero">
+        <figure><video loop="loop" muted="muted" autoplay="autoplay">
+                <source src="https://cdn.videvo.net/videvo_files/video/free/2013-09/large_watermarked/FerryComingtoDock1_1_preview.mp4" />
+            </video>
+            <figcaption>
+                <h1>Really cool video parallax</h1>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+<div class="stretch">
+
+  <div class="main">
+
+    <div class='content'>
+    <mat-card class="example-card">
+     
+     
+      <mat-card-content>
+        <app-loginform (cognitoUser)='onRegister($event)' *ngIf="!cognitoUser"></app-loginform>
+        <app-confirm-form [email]="cognitoUser" *ngIf="cognitoUser && !cognitoUser.userConfirmed"></app-confirm-form>
       </mat-card-content>
   
-        <button mat-raised-button color="primary" (click)="signIn()" size="default"  type="submit"
-          >Logg inn</button
-        >
-  
-      
-      </form>
-  
-    
     </mat-card>
   </div>
- 
+  </div>
 </div>
 
 
-<!-- <amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
 
-<div *ngIf="authState === 'signedin' && user" class="App">
-    <amplify-sign-out></amplify-sign-out>
-    <div>Hello, {{user.username}}</div>
-  
-</div> -->
+
+
+

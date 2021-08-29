@@ -5,27 +5,25 @@ import { AuthService } from "../../services/auth.service";
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  selector: 'app-loginform',
+  templateUrl: './loginform.component.html',
+  styleUrls: ['./loginform.component.css']
 })
-
-export class SignInComponent implements OnInit {
+export class LoginformComponent implements OnInit {
   email: string | undefined;
   password!: string;
   loginForm!: FormGroup;
   submitted = false;
   user: CognitoUserInterface | undefined;
   authState!: AuthState;
-  cognitoUser: any;
-  
-
+  @Output() cognitoUser = new EventEmitter();
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
     private ref: ChangeDetectorRef
+    
   ) {
 
   
@@ -47,10 +45,6 @@ export class SignInComponent implements OnInit {
     })
   }
 
-  onRegister(cognitoUser: any) {
-    this.cognitoUser = cognitoUser;
-    }
-
   get f() { return this.loginForm.controls; }
 
   ngOnDestroy() {
@@ -68,7 +62,36 @@ export class SignInComponent implements OnInit {
   get username () {
     return this.loginForm.get('userName') as FormControl
   }
- 
+  onSubmit() {
+    this.submitted = true;
+    
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+    return;
+    }
+
+   
+    
+    this.authService.signIn(this.email, this.password)
+    .subscribe(
+            user => {
+
+              console.log(user)
+              if(user.challengeName==='NEW_PASSWORD_REQUIRED'){
+
+                
+                this.cognitoUser.emit(user)
+
+               
+              }
+              this.router.navigate(['/landing']);
+            },
+            error => {
+              console.log(error);
+            });
+    
+            return true
+        }
   //  signIn(){
   //   this.isSubmitted = true;
 
@@ -99,8 +122,5 @@ export class SignInComponent implements OnInit {
   signOut() {
     this.authService.signOut();
   }
-
-
-  
 
 }

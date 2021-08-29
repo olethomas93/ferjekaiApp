@@ -27,6 +27,8 @@ export class AuthService {
       return from(Auth.currentAuthenticatedUser())
         .pipe(
           map(result => {
+
+            console.log(result)
            
             this.loggedIn.next(true);
             return true;
@@ -50,6 +52,16 @@ export class AuthService {
 
     }
 
+    completeNewPassword(user:any,newPassword:any){
+      const { requiredAttributes } = user.challengeParam;
+      Auth.completeNewPassword(user,newPassword,requiredAttributes).then((data)=>{
+        console.log(data)
+        this.router.navigate(['/landing'])
+      }).catch(e=>{
+        console.log(e)
+      })
+    }
+
  
     /** signin */
     public signIn(email:any, password:any): Observable<any> {
@@ -61,7 +73,7 @@ export class AuthService {
 
  
 
-
+    
 
 
 
@@ -72,7 +84,7 @@ export class AuthService {
  
 
   public signOut() {
-    from(Auth.signOut())
+    from(Auth.signOut({global:true}))
       .subscribe(
         result => {
           this.loggedIn.next(false);
