@@ -47,6 +47,11 @@ export class SignInComponent implements OnInit {
     })
   }
 
+  scroll(){
+
+    window.scrollTo(0,1200);
+
+  }
   onRegister(cognitoUser: any) {
     this.cognitoUser = cognitoUser;
     }
