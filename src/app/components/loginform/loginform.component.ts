@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from "../../services/auth.service";
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-loginform',
   templateUrl: './loginform.component.html',
@@ -22,7 +22,8 @@ export class LoginformComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private _snackBar: MatSnackBar
     
   ) {
 
@@ -76,17 +77,22 @@ export class LoginformComponent implements OnInit {
     .subscribe(
             user => {
 
-              console.log(user)
+              
               if(user.challengeName==='NEW_PASSWORD_REQUIRED'){
 
                 
                 this.cognitoUser.emit(user)
 
                
+              }else{
+
+                this.openSnackBar("Successfull login","ok","green")
+                this.router.navigate(['/landing']);
               }
-              this.router.navigate(['/landing']);
+              
             },
             error => {
+              this.openSnackBar(error.message,"close","red")
               console.log(error);
             });
     
@@ -121,6 +127,10 @@ export class LoginformComponent implements OnInit {
 
   signOut() {
     this.authService.signOut();
+  }
+
+  openSnackBar(message: string, action: string,color:string) {
+    this._snackBar.open(message, action,{duration:3000,panelClass:[color]});
   }
 
 }

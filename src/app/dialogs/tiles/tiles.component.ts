@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PubSub } from 'aws-amplify';
@@ -18,7 +18,7 @@ export interface Alarm {
   templateUrl: './tiles.component.html',
   styleUrls: ['./tiles.component.css']
 })
-export class TilesComponent {
+export class TilesComponent implements OnInit,OnDestroy {
   subscription: any;
   displayedColumns: string[] = ['name', 'status'];
   dataSource = [{}]
@@ -54,7 +54,8 @@ export class TilesComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, 
     public dialogRef: MatDialogRef<TilesComponent>,
-    private api: APIService
+    private api: APIService,
+    private ref: ChangeDetectorRef
     
     ) {
   
@@ -67,42 +68,46 @@ export class TilesComponent {
   //     error: error => console.error(error)
       
   // });
+  this.api.GetFerjeData("weather").then((data:any)=>{
+
+    this.updateData(data)
+  }).catch((e)=>{
+
+    console.log(e)
+  })
+  this.api.GetFerjeData("alarms").then((data:any)=>{
+
+    this.updateData(data)
+  }).catch((e)=>{
+
+    console.log(e)
+  })
+
+ this.subscription= this.api.OnUpdateFerjeDataListener.subscribe((data:any)=>{
+
+
+  
+    if(data){
+     
+      let topic = data.value.data.onUpdateFerjeData
+      this.updateData(topic)
+      
+    }
+
+  })
 
   }
 
   ngAfterViewInit(){
-    this.api.GetFerjeData("weather").then((data:any)=>{
-
-      this.updateData(data)
-    }).catch((e)=>{
-
-      console.log(e)
-    })
-    this.api.GetFerjeData("alarms").then((data:any)=>{
-  
-      this.updateData(data)
-    }).catch((e)=>{
-
-      console.log(e)
-    })
-  
-   this.subscription= this.api.OnUpdateFerjeDataListener.subscribe((data:any)=>{
-  
-
-    
-      if(data){
-       
-        let topic = data.value.data.onUpdateFerjeData
-        this.updateData(topic)
-        
-      }
-  
-    })
+ 
 
 
   }
 
-
+close(){
+  this.dialogRef.close()
+  this.ref.detectChanges()
+}
 
   updateData(data:any){
     

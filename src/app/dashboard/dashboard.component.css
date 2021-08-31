@@ -9,19 +9,19 @@
   .mat-sidenav {
     width: 20%;
   }
-  .toolbar {
-    position: inherit;
-    z-index: 2;
+
+  .toolbar{
+    
   }
-  mat-toolbar {
-    position: inherit;
-    z-index: 2;
-  }
+  
+
   .home {
     
-    right: 45%;
+    
     cursor: pointer;
-    position: absolute;
+    text-align: center;
+    
+    
     
   }
   
@@ -47,8 +47,19 @@
   
   
   }
+
+  .menu{
+    left: 0px;
+    position: absolute;
+  }
   
-  
+  mat-toolbar-row{
+    
+    flex-direction: column;
+  }
+  .sidenav{
+    overflow: hidden;
+  }
   
   .content {
     width: 100%;
@@ -61,6 +72,9 @@
   
   .connection {
     
+  }
+  .items{
+    margin-top: 15%;
   }
   .cameraicon{
   

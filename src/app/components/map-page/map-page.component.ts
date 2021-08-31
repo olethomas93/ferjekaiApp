@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LatLngExpression,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon} from 'leaflet';
 import { HttpService } from 'src/app/services/http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -21,6 +21,8 @@ export class MapPageComponent implements OnInit {
   livedata =[]
   subscription: any;
   connected :any;
+  @Output() activate = new EventEmitter();
+  
   constructor(
     public dialog: MatDialog,
     private http: HttpService,
@@ -107,8 +109,10 @@ export class MapPageComponent implements OnInit {
 
     
     this.sulesund.on('click',(e:any)=>{
-
-      this.openStatusDialog()
+      console.log("click")
+      
+      this.activate.emit(e)
+      //this.openStatusDialog()
 
     })
 
@@ -140,14 +144,18 @@ export class MapPageComponent implements OnInit {
   openStatusDialog() {
     const dialogRef = this.dialog.open(TilesComponent,{
       height: '80vh',
-      width: '80vw',
+      width: '80vw'
     });
 
-    dialogRef.backdropClick().subscribe((data)=>{
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
 
-      this.dialog.closeAll()
+    // dialogRef.backdropClick().subscribe((data)=>{
 
-    })
+    //   this.dialog.closeAll()
+
+    // })
 
     // dialogRef.afterClosed().subscribe((result: any) => {
     //   console.log(`Dialog result: ${result}`);

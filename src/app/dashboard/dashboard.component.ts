@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ColormodeService } from '../services/colormode.service';
 import { routeTransitionAnimations } from '../route-transition-animations';
 import { AuthService } from "../services/auth.service";
 import Amplify, { API } from 'aws-amplify';
-
+import {TilesComponent} from '../dialogs/tiles/tiles.component'
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -33,7 +34,9 @@ export class DashboardComponent implements OnInit {
 
     constructor(
       private colormode: ColormodeService,
-      private auth : AuthService
+      private auth : AuthService,
+      public dialog: MatDialog,
+     
     ){
 
       this.colormode.load();
@@ -46,6 +49,38 @@ export class DashboardComponent implements OnInit {
     signOut(){
 
       this.auth.signOut()
+    }
+
+    onActivate(e:any){
+
+      
+      e.activate.subscribe((data:any)=>{
+
+        this.openStatusDialog()
+
+      })
+
+    }
+
+    openStatusDialog() {
+      const dialogRef = this.dialog.open(TilesComponent,{
+        height: '80vh',
+        width: '80vw'
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+  
+      // dialogRef.backdropClick().subscribe((data)=>{
+  
+      //   this.dialog.closeAll()
+  
+      // })
+  
+      // dialogRef.afterClosed().subscribe((result: any) => {
+      //   console.log(`Dialog result: ${result}`);
+      // });
     }
 
 }

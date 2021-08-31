@@ -7,9 +7,8 @@ body, html {
     background-image: url('https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?cs=srgb&dl=pexels-c%C3%A1tia-matos-1072179.jpg&fm=jpg');
     height: 100%;
  
- 
-    font-family: "Courier New", Courier, monospace;
-    font-size: 25px;
+  
+  
   }
   
   .topleft {
@@ -24,11 +23,11 @@ body, html {
     left: 16px;
   }
   .middle h1{
-font-size: 5em;
+font-size: 10vw;
   }
 
   .middle p{
-      margin-top: 10%;
+      margin-top: 15%;
   }
   
   .middle {
@@ -38,8 +37,19 @@ font-size: 5em;
     transform: translate(-50%, -50%);
     text-align: center;
   }
+
+
   
   hr {
     margin: auto;
     width: 40%;
+  }
+  .icons{
+    margin-top: 20%;
+    cursor: pointer;
+  }
+
+  .icons h2{
+
+    font-size: 80%;
   }

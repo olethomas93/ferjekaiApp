@@ -23,7 +23,7 @@ import {MatButtonModule} from '@angular/material/button'
 import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
 import { environment as env } from '../environments/environment';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import Amplify from 'aws-amplify';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {AuthGuard} from './guards/auth.guard'
@@ -97,7 +97,8 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatSnackBarModule
   ],
   providers: [AuthService,AngularFirestoreModule],
   bootstrap: [AppComponent]

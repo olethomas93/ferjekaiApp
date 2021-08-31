@@ -68,9 +68,7 @@ export class MapComponent implements OnInit {
 
   onClick(e:any){
 
-    let latlng = e.latlng
-    
-    this.coord$.emit(latlng)
+   
 
 
   }
