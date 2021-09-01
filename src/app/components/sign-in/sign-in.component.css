@@ -33,7 +33,7 @@ body {
 
 h1 {
   font-weight: 700;
-  font-size: 20vw;
+  font-size: 16vw;
 }
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600,700);
 * {
@@ -104,7 +104,7 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 25em;
+    height: 30em;
    top: 50%;
    margin-top: 20%;
    background: linear-gradient(to right, #30CFD0 0%, #0a5cd6 100%);
