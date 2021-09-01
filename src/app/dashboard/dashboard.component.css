@@ -8,13 +8,17 @@
   
   .mat-sidenav {
     width: 20%;
-  }
-
-  .toolbar{
     
   }
-  
 
+.menu{
+  position: absolute;
+  left: 0;
+}
+mat-toolbar{
+  flex-direction: column;
+  z-index: 999999999999;
+}
   .home {
     
     
@@ -32,11 +36,7 @@
   }
   @media only screen and (max-width: 600px) {
   
-    .mat-sidenav {
-      width: 50%;
   
-      
-    }
   
     .logo{
   
@@ -48,15 +48,9 @@
   
   }
 
-  .menu{
-    left: 0px;
-    position: absolute;
-  }
+ 
   
-  mat-toolbar-row{
-    
-    flex-direction: column;
-  }
+
   .sidenav{
     overflow: hidden;
   }
@@ -70,23 +64,12 @@
     font-size: 140%;
   }
   
-  .connection {
-    
-  }
+
   .items{
     margin-top: 15%;
   }
-  .cameraicon{
-  
-    margin-right: 1em;
-  }
-  .connectionicon{
-  
-    margin-right: 1em;
-  
-  }
-  
-  
+
+
   
   
   

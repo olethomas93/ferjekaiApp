@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from "../../services/auth.service";
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-loginform',
   templateUrl: './loginform.component.html',
@@ -17,6 +17,8 @@ export class LoginformComponent implements OnInit {
   user: CognitoUserInterface | undefined;
   authState!: AuthState;
   @Output() cognitoUser = new EventEmitter();
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -130,7 +132,7 @@ export class LoginformComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string,color:string) {
-    this._snackBar.open(message, action,{duration:3000,panelClass:[color]});
+    this._snackBar.open(message, action,{duration:3000,panelClass:[color],verticalPosition:this.verticalPosition,horizontalPosition:this.horizontalPosition});
   }
 
 }

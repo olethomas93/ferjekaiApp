@@ -68,12 +68,15 @@ export class MapPageComponent implements OnInit {
     this.api.OnUpdateByIdListener("alarms").subscribe((data:any)=>{
 
       let res =JSON.parse(data.value.data.onUpdateById.topic)
+      console.log(res.Values)
+      if (res.Values.LED_Radio_Aktiv == true){
 
-      if (res.Values.alarm_frekvensomformer_1 == false){
-
-
-        this.sulesund.setStyle({color:"green",className:"pulse"})
         
+        this.sulesund.setStyle({color:"red",className:"pulse"})
+        
+      }else{
+        this.sulesund.setStyle({color:"green",className:"pulse"})
+
       }
 
     })
@@ -94,7 +97,7 @@ export class MapPageComponent implements OnInit {
    
 // you can set .my-div-icon styles in CSS
   
-    this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red",className:"pulse"}).bindTooltip('Sulesund',
+    this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red"}).bindTooltip('Sulesund',
     {offset:[0, 0]}).openTooltip()
     
     //  this.sulesund.bindPopup(`` +
@@ -105,7 +108,7 @@ export class MapPageComponent implements OnInit {
     
     this.sulesund.addTo(this.map)
 
-    this.sulesund.setStyle({className:"pulse"})
+    
 
     
     this.sulesund.on('click',(e:any)=>{
