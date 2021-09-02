@@ -49,7 +49,9 @@ export class SignInComponent implements OnInit {
 
   scroll(){
 
-    window.scrollTo(0,1200);
+    console.log(window.innerHeight)
+
+    window.scrollTo(0,1250);
 
   }
   onRegister(cognitoUser: any) {
