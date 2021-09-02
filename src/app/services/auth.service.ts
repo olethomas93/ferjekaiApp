@@ -90,7 +90,11 @@ export class AuthService {
           this.loggedIn.next(false);
           this.router.navigate(['/login']);
         },
-        error => console.log(error)
+        (error)=> {
+          console.log(error)
+          Auth.signOut()
+          this.router.navigate(['/login'])
+        }
       );
   }
 }
