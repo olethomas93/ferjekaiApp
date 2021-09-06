@@ -18,7 +18,7 @@
       "function": {
         "trigger": {
           "deploymentBucketName": "amplify-ferjekai-staging-101604-deployment",
-          "s3Key": "amplify-builds/trigger-626d354971467156674f-build.zip"
+          "s3Key": "amplify-builds/trigger-2b5432397a534b473041-build.zip"
         }
       }
     }

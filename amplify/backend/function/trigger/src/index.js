@@ -46,7 +46,10 @@ mutation MyMutation1($input:CreateFerjeDataInput!) {
 
 exports.handler = async (event) => {
 var TagValues ={};
-var ID = "alarms" ;
+var ID = "ferrydata" ;
+if(event.CollectionId ==0){
+  ID="alarms"
+}
 if(event.CollectionId== 1){
     
     ID = "weather";
