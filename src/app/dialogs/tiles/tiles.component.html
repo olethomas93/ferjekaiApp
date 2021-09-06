@@ -8,7 +8,7 @@
       <!-- <h1 class="mat-h1">VærData</h1> -->
       <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
         <!--Mini Cards-->
-        <mat-grid-tile *ngFor="let i of cardData" [colspan]="( cardLayout | async )?.miniCard?.cols"
+        <mat-grid-tile *ngFor="let i of weatherData" [colspan]="( cardLayout | async )?.miniCard?.cols"
           [rowspan]="( cardLayout | async )?.miniCard?.rows">
           <app-minicard [unit]="i.unit" [icon]="i.icon" [title]="i.title" [color]="i.color" [value]=i.value><div>Mini Card Content Here</div></app-minicard>
         </mat-grid-tile>
@@ -54,6 +54,20 @@
   </mat-tab>
 
   <mat-tab label="Data">
+    <h3>Updated:{{weatherUpdated}} </h3> 
+    <div class="grid-container">
+      <!-- <h1 class="mat-h1">VærData</h1> -->
+      <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+        <!--Mini Cards-->
+        <mat-grid-tile *ngFor="let i of data" [colspan]="( cardLayout | async )?.miniCard?.cols"
+          [rowspan]="( cardLayout | async )?.miniCard?.rows">
+          <app-minicard [unit]="i.unit" [icon]="i.icon" [title]="i.title" [color]="i.color" [value]=i.value><div>Mini Card Content Here</div></app-minicard>
+        </mat-grid-tile>
+      
+       
+      </mat-grid-list>
+    
+     </div>  
 
 
 

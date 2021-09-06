@@ -30,17 +30,28 @@
    
       <div class="items">
         <mat-nav-list>
+          <div mat-subheader>Meny</div>
+          <mat-list-item routerLink="/dash" routerLinkActive="activebutton">
+            Home
+
+          </mat-list-item>
+          <mat-list-item routerLink="/map" routerLinkActive="activebutton">
+            Map
+
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+          <div mat-subheader>Ferjekaier</div>
           <mat-list-item
            (click)="openStatusDialog()">
-            <!-- <button mat-button routerLink="/dash" routerLinkActive="activebutton">
-              Dashboard
-            </button> -->
+          
             Sulesund
           </mat-list-item>
-        
-          <mat-list-item (click)="signOut()">
-          
+          <mat-divider></mat-divider>
+          <mat-list-item (click)="signOut()" class="logout">
             Log ut
+            <mat-icon style="margin-left: 11%;">logout</mat-icon>
+           
            
           </mat-list-item>
         

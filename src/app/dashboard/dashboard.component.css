@@ -8,7 +8,7 @@
   }
   
   .mat-sidenav {
-    width: 30%;
+    width: 10%;
     
   }
 
@@ -21,7 +21,11 @@
     left: 0;
     right: 0;
   }
-  
+  .logout{
+    position: absolute;
+    top: 90%;
+
+  }
 
 .menu{
   position: absolute;
@@ -56,6 +60,11 @@ mat-toolbar{
       height: auto;
   
     }
+
+    .mat-sidenav{
+
+      width: 50%;
+    }
   
   
   }
@@ -63,9 +72,6 @@ mat-toolbar{
  
   
 
-  .sidenav{
-    overflow: hidden;
-  }
   
   .content {
     width: 100%;

@@ -25,7 +25,7 @@ export class TilesComponent implements OnInit,OnDestroy {
   alarmsUpdated!: Date
   weatherUpdated!: string
 
-  cardData =[
+  weatherData =[
     {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
     {title:"Temperature",value:-999,color:"green",icon:"thermostat",unit:"°C"},
     {title:"Air pressure",
@@ -34,6 +34,29 @@ export class TilesComponent implements OnInit,OnDestroy {
   value :-999,color:"green",icon:"explore",unit:"°"},
   {title:"Air Density",
   value :-999,color:"green",icon:"reorder",unit:"kg/m³"}
+  ]
+
+  data =[
+    {title:"Belastning omformer 1",value:-999,color:"green",icon:"bolt",unit:"A"},
+    {title:"Belastning omformer 2",value:-999,color:"green",icon:"bolt",unit:"A"},
+    {title:"Driftstid motor 1",
+  value:-999,color:"green",icon:"schedule",unit:"min"},
+    {title:"DriftsTid motor 2",
+  value :-999,color:"green",icon:"schedule",unit:"min"},
+  {title:"DriftsTid Timer Motor 1",
+  value :-999,color:"green",icon:"schedule",unit:"min"},
+  {title:"DriftsTid Timer Motor 2",
+  value :-999,color:"green",icon:"schedule",unit:"min"},
+  {title:"Hastighet Omformer 1",
+  value :-999,color:"green",icon:"sports_motorsports",unit:"rpm"},
+  {title:"Hastighet Omformer 2",
+  value :-999,color:"green",icon:"sports_motorsports",unit:"rpm"},
+  {title:"Oljenivå",
+  value :-999,color:"green",icon:"opacity",unit:"l"},
+  {title:"OljeTemperatur",
+  value :-999,color:"green",icon:"thermostat",unit:"°C"},
+  {title:"Sylinder Hengetrykk",
+  value :-999,color:"green",icon:"expand",unit:"N"}
   ]
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -124,10 +147,34 @@ close(){
       data = JSON.parse(data.topic)
       this.updateAlarmData(data)
     }
+
+    else if(data.ID ==2){
+      data=JSON.parse(data.topic)
+      this.updateFerryData(data)
+    }
+
   
 
 
   }
+
+  updateFerryData(data:any){
+    this.data[0].value = Math.round(data.Values.Belastning_Omformer1) 
+    this.data[1].value = Math.round(data.Values.Belastning_Omformer2)
+    this.data[2].value = Math.round(data.Values.Driftstid_Minutt_Motor1)
+    this.data[3].value =Math.round(data.Values.Driftstid_Minutt_Motor2)
+    this.data[4].value =Math.round(data.Values.Driftstid_Timer_Motor1)
+    this.data[5].value =Math.round(data.Values.Driftstid_Timer_Motor2)
+    this.data[6].value =Math.round(data.Values.Hastighet_Omformer1)
+    this.data[7].value =Math.round(data.Values.Hastighet_Omformer2)
+    this.data[8].value =Math.round(data.Values.Olje_Nivaa)
+    this.data[9].value =Math.round(data.Values.Olje_Temperatur)
+    this.data[10].value =Math.round(data.Values.Sylinder_Hengetrykk)
+
+
+
+  }
+
 
 
   updateAlarmData(data:any){
@@ -148,11 +195,11 @@ close(){
 
   updateWeatherData(data:any){
     
-    this.cardData[0].value = Math.round(data.Values.Vindhastighet) 
-    this.cardData[1].value = Math.round(data.Values.Temperatur)
-    this.cardData[2].value = Math.round(data.Values.Luft_Trykk)
-    this.cardData[3].value =Math.round(data.Values.Vindretning)
-    this.cardData[4].value =Math.round(data.Values.Luft_Tetthet)
+    this.weatherData[0].value = Math.round(data.Values.Vindhastighet) 
+    this.weatherData[1].value = Math.round(data.Values.Temperatur)
+    this.weatherData[2].value = Math.round(data.Values.Luft_Trykk)
+    this.weatherData[3].value =Math.round(data.Values.Vindretning)
+    this.weatherData[4].value =Math.round(data.Values.Luft_Tetthet)
 
   }
 
