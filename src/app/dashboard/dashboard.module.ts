@@ -30,7 +30,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatProgressBarModule} from '@angular/material/progress-bar'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { ChangeModeComponent } from '../components/change-mode/change-mode.component';
+
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FerjekaiStatusComponent } from '../dialogs/ferjekai-status/ferjekai-status.component';
@@ -48,7 +48,7 @@ import { LandingComponent } from '../components/landing/landing.component';
 
 @NgModule({
   
-  declarations: [DashboardComponent, MapComponent, ChangeModeComponent,
+  declarations: [DashboardComponent, MapComponent,
     MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent
     ],
   imports: [

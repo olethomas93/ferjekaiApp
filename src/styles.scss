@@ -1,20 +1,10 @@
-@import "~@angular/material/theming";
-@include mat-core();
 
 html {
   height: 100%;
   box-sizing: border-box;
 }
 
-body {
-  height: 100%;
-  margin: 0;
-  color: var(--text-color-hard);
-  font-weight: 400;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  
 
-}
 
 .leaflet-control-container .leaflet-routing-container-hide {
   display: none;
