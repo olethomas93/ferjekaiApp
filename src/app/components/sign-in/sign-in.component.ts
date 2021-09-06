@@ -49,7 +49,15 @@ export class SignInComponent implements OnInit {
 
   scroll(){
 
-    window.scrollTo(0,1200);
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+      // true for mobile device
+      window.scrollTo(0,1300);
+    }else{
+      // false for not mobile device
+      window.scrollTo(0,1450);
+    }
+
+   
 
   }
   onRegister(cognitoUser: any) {
