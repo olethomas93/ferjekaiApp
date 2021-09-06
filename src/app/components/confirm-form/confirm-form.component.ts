@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
 import { AuthService } from "../../services/auth.service";
-
+import { MustMatch } from './comfirmed.validator';
 @Component({
   selector: 'app-confirm-form',
   templateUrl: './confirm-form.component.html',
@@ -26,9 +26,15 @@ export class ConfirmFormComponent implements OnInit {
   ngOnInit() {
   this.registerForm = this.formBuilder.group({
   password: ['', [Validators.required, Validators.minLength(6)]],
-  confirmPassword: ['', Validators.required],
-  });
-  }
+  confirmPassword: ['', Validators.required]
+},{
+  validator:MustMatch('password','confirmPassword')
+
+})
+  
+
+
+}
   
   // Convenient getter for easy access to form fields
   get f() { return this.registerForm.controls; }
