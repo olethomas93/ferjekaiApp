@@ -56,16 +56,19 @@ export class DashboardComponent implements OnInit {
       
       e.activate.subscribe((data:any)=>{
 
-        this.openStatusDialog()
+        this.openStatusDialog(data)
 
       })
 
     }
 
-    openStatusDialog() {
+    openStatusDialog(ferrydock:any) {
       const dialogRef = this.dialog.open(TilesComponent,{
         height: '80vh',
-        width: '80vw'
+        width: '80vw',
+        data:{
+          name:ferrydock
+        }
       });
   
       dialogRef.afterClosed().subscribe(result => {

@@ -68,7 +68,6 @@ export class MapPageComponent implements OnInit {
     this.api.OnUpdateByIdListener("alarms").subscribe((data:any)=>{
 
       let res =JSON.parse(data.value.data.onUpdateById.topic)
-      console.log(res.Values)
       if (res.Values.LED_Radio_Aktiv == true){
 
         
@@ -114,7 +113,7 @@ export class MapPageComponent implements OnInit {
     this.sulesund.on('click',(e:any)=>{
       console.log("click")
       
-      this.activate.emit(e)
+      this.activate.emit("sulesund")
       //this.openStatusDialog()
 
     })

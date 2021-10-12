@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PubSub } from 'aws-amplify';
@@ -6,11 +6,24 @@ import { title } from 'process';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Json } from 'aws-sdk/clients/robomaker';
 import { APIService } from '../../API.service';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { String } from 'aws-sdk/clients/acm';
 export interface Alarm {
   name: string;
   status:string
 }
 
+export interface ferrydata {
+
+
+title:string
+value:any
+color:string
+icon:string
+unit:String
+
+
+}
 
 
 @Component({
@@ -25,6 +38,7 @@ export class TilesComponent implements OnInit,OnDestroy {
   alarmsUpdated!: Date
   weatherUpdated!: string
 
+
   weatherData =[
     {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
     {title:"Temperature",value:-999,color:"green",icon:"thermostat",unit:"°C"},
@@ -36,28 +50,29 @@ export class TilesComponent implements OnInit,OnDestroy {
   value :-999,color:"green",icon:"reorder",unit:"kg/m³"}
   ]
 
-  data =[
-    {title:"Belastning omformer 1",value:-999,color:"green",icon:"bolt",unit:"A"},
-    {title:"Belastning omformer 2",value:-999,color:"green",icon:"bolt",unit:"A"},
-    {title:"Driftstid motor 1",
-  value:-999,color:"green",icon:"schedule",unit:"min"},
-    {title:"DriftsTid motor 2",
-  value :-999,color:"green",icon:"schedule",unit:"min"},
-  {title:"DriftsTid Timer Motor 1",
-  value :-999,color:"green",icon:"schedule",unit:"min"},
-  {title:"DriftsTid Timer Motor 2",
-  value :-999,color:"green",icon:"schedule",unit:"min"},
-  {title:"Hastighet Omformer 1",
-  value :-999,color:"green",icon:"sports_motorsports",unit:"rpm"},
-  {title:"Hastighet Omformer 2",
-  value :-999,color:"green",icon:"sports_motorsports",unit:"rpm"},
-  {title:"Oljenivå",
-  value :-999,color:"green",icon:"opacity",unit:"l"},
-  {title:"OljeTemperatur",
-  value :-999,color:"green",icon:"thermostat",unit:"°C"},
-  {title:"Sylinder Hengetrykk",
-  value :-999,color:"green",icon:"expand",unit:"N"}
-  ]
+  data!:Array<ferrydata>
+  // data =[
+  //   {title:"Belastning omformer 1",value:-999,color:"green",icon:"bolt",unit:"A"},
+  //   {title:"Belastning omformer 2",value:-999,color:"green",icon:"bolt",unit:"A"},
+  //   {title:"Driftstid motor 1",
+  // value:-999,color:"green",icon:"schedule",unit:"min"},
+  //   {title:"DriftsTid motor 2",
+  // value :-999,color:"green",icon:"schedule",unit:"min"},
+  // {title:"DriftsTid Timer Motor 1",
+  // value :-999,color:"green",icon:"schedule",unit:"min"},
+  // {title:"DriftsTid Timer Motor 2",
+  // value :-999,color:"green",icon:"schedule",unit:"min"},
+  // {title:"Hastighet Omformer 1",
+  // value :-999,color:"green",icon:"sports_motorsports",unit:"rpm"},
+  // {title:"Hastighet Omformer 2",
+  // value :-999,color:"green",icon:"sports_motorsports",unit:"rpm"},
+  // {title:"Oljenivå",
+  // value :-999,color:"green",icon:"opacity",unit:"l"},
+  // {title:"OljeTemperatur",
+  // value :-999,color:"green",icon:"thermostat",unit:"°C"},
+  // {title:"Sylinder Hengetrykk",
+  // value :-999,color:"green",icon:"expand",unit:"N"}
+  // ]
   /** Based on the screen size, switch from standard to one column per row */
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -74,23 +89,27 @@ export class TilesComponent implements OnInit,OnDestroy {
       }
     })
   );
+  name: any;
 
-  constructor(private breakpointObserver: BreakpointObserver, 
+  constructor(private breakpointObserver: BreakpointObserver,   
+    @Inject(MAT_DIALOG_DATA) public ferrydockName: any,
+
     public dialogRef: MatDialogRef<TilesComponent>,
     private api: APIService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+   
+    
     
     ) {
   
+      this.name = this.ferrydockName;
   }
 
   ngOnInit(){
-    //MQTT subscription
-  //   this.subscription =  PubSub.subscribe('1.5.0/Sulesund/TagValues').subscribe({
-  //     next: data =>this.updateData(data.value),
-  //     error: error => console.error(error)
-      
-  // });
+ 
+
+    console.log(this.ferrydockName)
+
   this.api.GetFerjeData("weather").then((data:any)=>{
 
     this.updateData(data)
@@ -105,6 +124,15 @@ export class TilesComponent implements OnInit,OnDestroy {
 
     console.log(e)
   })
+
+  this.api.GetFerjeData("ferrydata").then((data:any)=>{
+
+    this.updateData(data)
+  }).catch((e)=>{
+
+    console.log(e)
+  })
+
 
  this.subscription= this.api.OnUpdateFerjeDataListener.subscribe((data:any)=>{
 
@@ -159,17 +187,43 @@ close(){
   }
 
   updateFerryData(data:any){
-    this.data[0].value = Math.round(data.Values.Belastning_Omformer1) 
-    this.data[1].value = Math.round(data.Values.Belastning_Omformer2)
-    this.data[2].value = Math.round(data.Values.Driftstid_Minutt_Motor1)
-    this.data[3].value =Math.round(data.Values.Driftstid_Minutt_Motor2)
-    this.data[4].value =Math.round(data.Values.Driftstid_Timer_Motor1)
-    this.data[5].value =Math.round(data.Values.Driftstid_Timer_Motor2)
-    this.data[6].value =Math.round(data.Values.Hastighet_Omformer1)
-    this.data[7].value =Math.round(data.Values.Hastighet_Omformer2)
-    this.data[8].value =Math.round(data.Values.Olje_Nivaa)
-    this.data[9].value =Math.round(data.Values.Olje_Temperatur)
-    this.data[10].value =Math.round(data.Values.Sylinder_Hengetrykk)
+    console.log(Object.keys(data.Values).length)
+
+    this.data = [];
+
+    for(let i=0; i <Object.keys(data.Values).length-1;i++){
+      console.log(Object.keys(data.Values)[i])
+
+      this.data.push({
+        
+        value:Math.round(data.Values[Object.keys(data.Values)[i]]),
+        title:Object.keys(data.Values)[i],
+        icon:"schedule",
+        color:"green",
+        unit:"mA"
+      
+      
+      
+      })
+      
+      // this.data[i].value = Math.round(data.Values[Object.keys(data.Values)[i]])
+      // this.data[i].title = Object.keys(data.values)[i]
+
+
+
+
+    }
+    // this.data[0].value = Math.round(data.Values.Belastning_Omformer1) 
+    // this.data[1].value = Math.round(data.Values.Belastning_Omformer2)
+    // this.data[2].value = Math.round(data.Values.Driftstid_Minutt_Motor1)
+    // this.data[3].value =Math.round(data.Values.Driftstid_Minutt_Motor2)
+    // this.data[4].value =Math.round(data.Values.Driftstid_Timer_Motor1)
+    // this.data[5].value =Math.round(data.Values.Driftstid_Timer_Motor2)
+    // this.data[6].value =Math.round(data.Values.Hastighet_Omformer1)
+    // this.data[7].value =Math.round(data.Values.Hastighet_Omformer2)
+    // this.data[8].value =Math.round(data.Values.Olje_Nivaa)
+    // this.data[9].value =Math.round(data.Values.Olje_Temperatur)
+    // this.data[10].value =Math.round(data.Values.Sylinder_Hengetrykk)
 
 
 
@@ -215,5 +269,7 @@ close(){
 
   }
 }
+
+
 
 
