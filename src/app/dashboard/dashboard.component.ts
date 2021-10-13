@@ -142,7 +142,7 @@ export class DashboardComponent implements OnInit {
     }
 
     flyToDock(location:any){
-      this.map.flyTo(latLng(location[0],location[1],10))
+      this.map.flyTo(latLng(location[0],location[1],14))
 
     }
 
