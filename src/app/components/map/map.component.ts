@@ -32,12 +32,13 @@ export class MapComponent implements OnInit {
   @Output() coord$: EventEmitter<any> = new EventEmitter();
  public options = {
     layers: [
-      tileLayer('https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
-	attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	minZoom: 0,
-	maxZoom: 22,
-	subdomains: 'abcd',
-	accessToken: '9LqlmfDSOumrgpXSMmlID0SSkehdUKj2ePARzmTJHd5ZGNKGrQCLt0VvWxFZxthG'})
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        opacity: 0.7,
+        maxZoom: 19,
+        detectRetina: true,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }),
     ],
     zoom: 12,
     center: latLng(62.395288667847396, 6.166532305211625),
