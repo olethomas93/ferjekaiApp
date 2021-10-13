@@ -21,6 +21,7 @@ export class MapPageComponent implements OnInit {
   livedata =[]
   subscription: any;
   connected :any;
+  ferrydocks :any;
   @Output() activate = new EventEmitter();
   
   constructor(
@@ -29,6 +30,8 @@ export class MapPageComponent implements OnInit {
     private api: APIService
     // private _formBuilder: FormBuilder,
   ) {
+
+
 
  
 //MQTT pubsub
@@ -40,6 +43,7 @@ export class MapPageComponent implements OnInit {
 // });
   
 
+//this.ferrydocks =[{location:[62.39530111176861, 6.166541253181221],name:"Sulesund"},{location:[62.69530111176861, 6.166541253181221],name:"lyngen"}]
 
 
   }
@@ -68,7 +72,6 @@ export class MapPageComponent implements OnInit {
     this.api.OnUpdateByIdListener("alarms").subscribe((data:any)=>{
 
       let res =JSON.parse(data.value.data.onUpdateById.topic)
-      console.log(res.Values)
       if (res.Values.LED_Radio_Aktiv == true){
 
         
@@ -81,8 +84,9 @@ export class MapPageComponent implements OnInit {
 
     })
 
-    this.api.GetFerjeData("alarms").then((data:any)=>{
+    this.api.GetFerjeData("ferrydocks").then((data:any)=>{
       
+      this.ferrydocks =JSON.parse(data.topic);
     })
 
    
@@ -96,41 +100,70 @@ export class MapPageComponent implements OnInit {
 
    
 // you can set .my-div-icon styles in CSS
-  
-    this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red"}).bindTooltip('Sulesund',
+
+this.api.GetFerjeData("ferrydocks").then((data:any)=>{
+      
+  this.ferrydocks =JSON.parse(data.topic);
+
+  for( let i in this.ferrydocks){
+
+    let ferry = circle(this.ferrydocks[i].location,{radius:500,color:"red"}).bindTooltip(this.ferrydocks[i].name,
     {offset:[0, 0]}).openTooltip()
-    
-    //  this.sulesund.bindPopup(`` +
-    // `<h1>Kai: Sulesund </h1>` +
-    // `<h2>AlarmStatus: God </h2>` +
-    // `<h2> annet: Annet</h2>`)
-   
-    
-    this.sulesund.addTo(this.map)
 
-    
-
-    
-    this.sulesund.on('click',(e:any)=>{
-      console.log("click")
-      
-      this.activate.emit(e)
-      //this.openStatusDialog()
-
-    })
+       
+  ferry.addTo(this.map)
 
   
+
+  
+  ferry.on('click',(e:any)=>{
+    console.log("click")
     
+    this.activate.emit(this.ferrydocks[i].name)
+    //this.openStatusDialog()
+
+  })
+  }
+})
+
    
-
-      
-    
-
-
-    
-
 
   }
+  
+    // this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red"}).bindTooltip('Sulesund',
+    // {offset:[0, 0]}).openTooltip()
+    
+    // //  this.sulesund.bindPopup(`` +
+    // // `<h1>Kai: Sulesund </h1>` +
+    // // `<h2>AlarmStatus: God </h2>` +
+    // // `<h2> annet: Annet</h2>`)
+   
+    
+    // this.sulesund.addTo(this.map)
+
+    
+
+    
+    // this.sulesund.on('click',(e:any)=>{
+    //   console.log("click")
+      
+    //   this.activate.emit("sulesund")
+    //   //this.openStatusDialog()
+
+    // })
+
+  
+    
+   
+
+      
+    
+
+
+    
+
+
+  
 
   
 

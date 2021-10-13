@@ -1,0 +1,36 @@
+<form>
+    
+    <div>
+ 
+        <h1 >Legg til ny fergekai</h1>
+ 
+    </div>
+ 
+    <div>
+ 
+        <label for="name">First Name</label>
+ 
+        <input type="text" name="name" [(ngModel)]="name" required placeholder="Navn på fergekai">
+ 
+    </div>
+ 
+    <div>
+ 
+       <label for="location">Last Name</label>
+ 
+       <input type="text" name="location" [(ngModel)]="location" required placeholder="Legg til gps lokasjon">
+ 
+   </div>
+ 
+
+ 
+ 
+   <div>
+ 
+       <br />
+ 
+       <button (click)="register()" class="btn btn-primary btn-block" type="button"> Register </button>
+        </div>
+
+ </form>
+

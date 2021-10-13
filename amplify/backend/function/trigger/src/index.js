@@ -46,13 +46,14 @@ mutation MyMutation1($input:CreateFerjeDataInput!) {
 
 exports.handler = async (event) => {
 var TagValues ={};
-var ID = "ferrydata" ;
+var ID = event.id
+var data = "ferrydata" ;
 if(event.CollectionId ==0){
-  ID="alarms"
+  data="alarms"
 }
 if(event.CollectionId== 1){
     
-    ID = "weather";
+    data = "weather";
 }
 
 
@@ -60,10 +61,12 @@ var item ={
   id:ID,
   GMT:Date.now(),
   ID:event.CollectionId,
-  topic:event.TagData[0]
+  topic:{[data]:JSON.stringify(event.TagData[0].Values)},
+  createdAt: new Date().toISOString(),
+  updatedAt:new Date().toISOString()
 };
 
-  console.log(process.env.API_URL)
+  
   try {
     const graphqlData = await axios({
       url: "https://cwv5hklocvelle3dgk6iho6ake.appsync-api.eu-central-1.amazonaws.com/graphql",
@@ -75,12 +78,7 @@ var item ={
         query: print(update),
         variables: {
           input: {
-            id: ID,
-            GMT: Date.now(),
-            ID:event.CollectionId,
-            topic:JSON.stringify(event.TagData[0]),
-            createdAt: new Date().toISOString(),
-            updatedAt:new Date().toISOString()
+            item
            
           }
         }

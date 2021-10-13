@@ -41,11 +41,14 @@
           </mat-list-item>
 
           <mat-divider></mat-divider>
-          <div mat-subheader>Ferjekaier</div>
-          <mat-list-item
-           (click)="openStatusDialog()">
+          <div mat-subheader>Fergekaier</div>
+
           
-            Sulesund
+          <mat-list-item 
+          *ngFor="let docks of ferrydocks "
+           (click)="openStatusDialog(docks.name)">
+          
+            {{docks.name}}
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item (click)="signOut()" class="logout">
