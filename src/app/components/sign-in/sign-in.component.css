@@ -100,7 +100,7 @@ video {
       text-align: center;
   }
   .title{
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     display: flex;
     justify-content: center;
     align-items: center;

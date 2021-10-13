@@ -6,6 +6,7 @@ import { AuthService } from "../services/auth.service";
 import Amplify, { API } from 'aws-amplify';
 import {TilesComponent} from '../dialogs/tiles/tiles.component'
 import { MatDialog } from '@angular/material/dialog';
+import { APIService } from '../API.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -13,11 +14,11 @@ import { MatDialog } from '@angular/material/dialog';
   animations:[routeTransitionAnimations]
 })
 export class DashboardComponent implements OnInit {
+  ferrydocks: any;
 
   
 
-  ngOnInit(): void {
-  }
+  
     /**
    * Prepares route
    * @param outlet will emit an activate event any time a new component is being instantiated,
@@ -36,13 +37,22 @@ export class DashboardComponent implements OnInit {
       private colormode: ColormodeService,
       private auth : AuthService,
       public dialog: MatDialog,
+      private api: APIService
      
     ){
 
       this.colormode.load();
     }
 
+  
+    ngOnInit(): void {
 
+      this.api.GetFerjeData("ferrydocks").then((data:any)=>{
+      
+        this.ferrydocks =JSON.parse(data.topic);
+      })
+
+    }
     async getCred(){
       this.auth.getCred()
     }
