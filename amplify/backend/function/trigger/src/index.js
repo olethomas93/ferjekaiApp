@@ -46,22 +46,14 @@ mutation MyMutation1($input:CreateFerjeDataInput!) {
 
 exports.handler = async (event) => {
 var TagValues ={};
-var ID = event.id
+var ferry = Object.keys(event)[0]
 var data = "ferrydata" ;
-if(event.CollectionId ==0){
-  data="alarms"
-}
-if(event.CollectionId== 1){
-    
-    data = "weather";
-}
 
 
 var item ={
-  id:ID,
+  id:ferry,
   GMT:Date.now(),
-  ID:event.CollectionId,
-  topic:{[data]:JSON.stringify(event.TagData[0].Values)},
+  topic:event[ferry],
   createdAt: new Date().toISOString(),
   updatedAt:new Date().toISOString()
 };
@@ -86,7 +78,7 @@ var item ={
       }
     });
     const body = {
-      message: "successfully created todo!"
+      message: "successfully created item!"
     }
     return {
         statusCode: 200,
