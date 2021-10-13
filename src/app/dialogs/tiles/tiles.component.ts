@@ -110,38 +110,27 @@ export class TilesComponent implements OnInit,OnDestroy {
 
     console.log(this.ferrydockName)
 
-  this.api.GetFerjeData("weather").then((data:any)=>{
-
-    this.updateData(data)
-  }).catch((e)=>{
-
-    console.log(e)
-  })
-  this.api.GetFerjeData("alarms").then((data:any)=>{
-
-    this.updateData(data)
-  }).catch((e)=>{
-
-    console.log(e)
-  })
-
-  this.api.GetFerjeData("ferrydata").then((data:any)=>{
-
-    this.updateData(data)
+  this.api.GetFerjeData(this.ferrydockName.name).then((data:any)=>{
+   
+    this.weatherUpdated = new Date(data['GMT']).toString()
+    this.updateData(JSON.parse(data.topic))
   }).catch((e)=>{
 
     console.log(e)
   })
 
 
- this.subscription= this.api.OnUpdateFerjeDataListener.subscribe((data:any)=>{
+
+ this.subscription= this.api.OnUpdateByIdListener(this.ferrydockName.name).subscribe((data:any)=>{
 
 
   
     if(data){
-     
-      let topic = data.value.data.onUpdateFerjeData
-      this.updateData(topic)
+
+      console.log(data)
+      this.weatherUpdated = new Date(data.value.data.onUpdateById['GMT']).toString()
+      let topic = data.value.data.onUpdateById.topic
+      this.updateData(JSON.parse(topic))
       
     }
 
@@ -162,24 +151,23 @@ close(){
 
   updateData(data:any){
     
-    this.weatherUpdated = new Date(data['GMT']).toString()
-    if (data.ID ==1){
+    
+   
       
-      data = JSON.parse(data.topic)
+     
       
-      this.updateWeatherData(data)
+      this.updateWeatherData(data.weather)
       
 
-    }
-    else if(data.ID==0){
-      data = JSON.parse(data.topic)
-      this.updateAlarmData(data)
-    }
+ 
+   
+      this.updateAlarmData(data.alarms)
+   
 
-    else if(data.ID ==2){
-      data=JSON.parse(data.topic)
-      this.updateFerryData(data)
-    }
+   
+    
+      this.updateFerryData(data.drift)
+
 
   
 
@@ -187,17 +175,17 @@ close(){
   }
 
   updateFerryData(data:any){
-    console.log(Object.keys(data.Values).length)
+    console.log(Object.keys(data).length)
 
     this.data = [];
 
-    for(let i=0; i <Object.keys(data.Values).length-1;i++){
-      console.log(Object.keys(data.Values)[i])
+    for(let i=0; i <Object.keys(data).length-1;i++){
+      
 
       this.data.push({
         
-        value:Math.round(data.Values[Object.keys(data.Values)[i]]),
-        title:Object.keys(data.Values)[i],
+        value:Math.round(data[Object.keys(data)[i]]),
+        title:Object.keys(data)[i],
         icon:"schedule",
         color:"green",
         unit:"mA"
@@ -234,12 +222,13 @@ close(){
   updateAlarmData(data:any){
 
     
-   
+  
 
     this.dataSource =[]
-    for(let i in data.Values){
-      
-      this.dataSource.push({name:i,status:data.Values[i]})
+    for(let i in data){
+      let status = (data[i].toLowerCase() === "true")
+     
+      this.dataSource.push({name:i,status:status})
       
     }
     
@@ -248,12 +237,12 @@ close(){
   }
 
   updateWeatherData(data:any){
-    
-    this.weatherData[0].value = Math.round(data.Values.Vindhastighet) 
-    this.weatherData[1].value = Math.round(data.Values.Temperatur)
-    this.weatherData[2].value = Math.round(data.Values.Luft_Trykk)
-    this.weatherData[3].value =Math.round(data.Values.Vindretning)
-    this.weatherData[4].value =Math.round(data.Values.Luft_Tetthet)
+    console.log(data)
+    this.weatherData[0].value = Math.round(data.Temperatur) 
+    this.weatherData[1].value = Math.round(data.lufttrykk)
+    this.weatherData[2].value = Math.round(data.Vindmalingskvalitet)
+    this.weatherData[3].value =Math.round(data.Vindhastighet)
+    this.weatherData[4].value =Math.round(data.Vindretning)
 
   }
 

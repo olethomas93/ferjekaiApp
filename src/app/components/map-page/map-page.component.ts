@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LatLngExpression,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon} from 'leaflet';
+import { LatLngExpression,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon,Control} from 'leaflet';
 import { HttpService } from 'src/app/services/http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { PubSub } from 'aws-amplify';
@@ -7,13 +7,17 @@ import { MatDialog } from '@angular/material/dialog';
 import {FerjekaiStatusComponent} from '../../dialogs/ferjekai-status/ferjekai-status.component'
 import {TilesComponent} from '../../dialogs/tiles/tiles.component'
 import { APIService } from '../../API.service';
+
+declare let L:any
 @Component({
   selector: 'app-map-page',
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css'],
 })
 export class MapPageComponent implements OnInit {
-  private map!: Map;
+  @Output() activate = new EventEmitter();
+  @Output() maps =new EventEmitter();
+  public map!: Map;
   private zoom!: number;
   private latlng!:any
   sulesund :any
@@ -22,7 +26,7 @@ export class MapPageComponent implements OnInit {
   subscription: any;
   connected :any;
   ferrydocks :any;
-  @Output() activate = new EventEmitter();
+ 
   
   constructor(
     public dialog: MatDialog,
@@ -95,9 +99,12 @@ export class MapPageComponent implements OnInit {
   }
 
   receiveMap(map: Map) {
+    console.log(map)
     this.map = map;
+    this.activate.emit({theMap:this.map})
+   
 
-
+  
    
 // you can set .my-div-icon styles in CSS
 
@@ -119,14 +126,16 @@ this.api.GetFerjeData("ferrydocks").then((data:any)=>{
   ferry.on('click',(e:any)=>{
     console.log("click")
     
-    this.activate.emit(this.ferrydocks[i].name)
-    //this.openStatusDialog()
+    this.activate.emit({name:this.ferrydocks[i].name,location:this.ferrydocks[i].location,theMap:this.map})
+    
+    
+    
 
   })
   }
 })
 
-   
+
 
   }
   
