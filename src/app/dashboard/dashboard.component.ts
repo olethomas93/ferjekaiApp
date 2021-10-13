@@ -7,6 +7,24 @@ import Amplify, { API } from 'aws-amplify';
 import {TilesComponent} from '../dialogs/tiles/tiles.component'
 import { MatDialog } from '@angular/material/dialog';
 import { APIService } from '../API.service';
+
+import {
+  Map,
+  Control,
+  DomUtil,
+  ZoomAnimEvent,
+  Layer,
+  MapOptions,
+  tileLayer,
+  latLng,
+  popup,
+  LatLng,
+  LatLngExpression,
+  circle
+  
+  
+} from 'leaflet';
+declare let L:any
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,6 +33,8 @@ import { APIService } from '../API.service';
 })
 export class DashboardComponent implements OnInit {
   ferrydocks: any;
+  map!: Map;
+  location:any;
 
   
 
@@ -62,22 +82,47 @@ export class DashboardComponent implements OnInit {
     }
 
     onActivate(e:any){
-
+      console.log(e)
+     
+     
       
       e.activate.subscribe((data:any)=>{
+      
+       this.map = data.theMap;
 
-        this.openStatusDialog(data)
+        if (data.name){
+
+          this.openStatusDialog(data.name,data.location)
+        }
+        
+        
 
       })
 
     }
 
-    openStatusDialog(ferrydock:any) {
+    onReceiveMap(e:any){
+      e.maps.subscribe((data:any)=>{
+
+        
+
+        console.log(data)
+
+      })
+      
+    }
+
+    openStatusDialog(ferrydock:any,location:any) {
+      
+
+      // this.map.flyTo(latLng(location[0],location[1],10))
+      
       const dialogRef = this.dialog.open(TilesComponent,{
         height: '80vh',
         width: '80vw',
         data:{
-          name:ferrydock
+          name:ferrydock,
+          location:location
         }
       });
   
@@ -94,6 +139,11 @@ export class DashboardComponent implements OnInit {
       // dialogRef.afterClosed().subscribe((result: any) => {
       //   console.log(`Dialog result: ${result}`);
       // });
+    }
+
+    flyToDock(location:any){
+      this.map.flyTo(latLng(location[0],location[1],10))
+
     }
 
 }
