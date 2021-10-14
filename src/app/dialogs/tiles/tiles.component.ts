@@ -236,13 +236,14 @@ close(){
 
   }
 
+
   updateWeatherData(data:any){
     console.log(data)
-    this.weatherData[0].value = Math.round(data.Temperatur) 
-    this.weatherData[1].value = Math.round(data.lufttrykk)
-    this.weatherData[2].value = Math.round(data.Vindmalingskvalitet)
-    this.weatherData[3].value =Math.round(data.Vindhastighet)
-    this.weatherData[4].value =Math.round(data.Vindretning)
+    this.weatherData[0].value = Math.round(data.Vindhastighet) 
+    this.weatherData[1].value = Math.round(data.Temperatur)
+    this.weatherData[2].value = Math.round(data.lufttrykk)
+    this.weatherData[3].value =Math.round(data.Vindretning)
+    this.weatherData[4].value =Math.round(data.lufttetthet)
 
   }
 
