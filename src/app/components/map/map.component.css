@@ -4,3 +4,14 @@
   position: inherit;
 }
 
+@media only screen and (max-width: 768px) {
+
+.map-container{
+
+  height: 100%;
+  width: 100%;
+}
+
+
+}
+
