@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {ScrollingModule} from '@angular/cdk/scrolling';
 import { DashRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -40,7 +40,7 @@ import {MinicardComponent} from '../components/minicard/minicard.component'
 import { MatMenuModule } from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import { LandingComponent } from '../components/landing/landing.component';
-
+import { ScrollbarComponent } from '../components/scrollbar/scrollbar.component';
 
 
 
@@ -49,7 +49,7 @@ import { LandingComponent } from '../components/landing/landing.component';
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent,
-    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent
     ],
   imports: [
     CommonModule,
@@ -84,6 +84,7 @@ import { LandingComponent } from '../components/landing/landing.component';
     MatIconModule,
     MatFormFieldModule,
     NgxGaugeModule,
+    ScrollingModule
 ],
 
 

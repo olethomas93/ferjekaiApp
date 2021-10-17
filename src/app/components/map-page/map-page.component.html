@@ -8,5 +8,10 @@
     </mat-form-field>
   </form> -->
   
-  <app-map (map$)="receiveMap($event)" (zoom$)="receiveZoom($event)" ></app-map>
+  <app-map (map$)="receiveMap($event)" (zoom$)="receiveZoom($event)" >
+
+    
+  </app-map>
+  
 </div>
+<app-scrollbar [docks] ="ferrydocks" [map]="map"></app-scrollbar>

@@ -1,0 +1,12 @@
+
+
+        <div class="scroll-container hide-scrollbar" >
+            <div *ngFor="let item of docks"
+            (click)="flyToDock(item.location)">
+                
+              {{ item.name }}
+            </div>
+          </div>
+ 
+
+
