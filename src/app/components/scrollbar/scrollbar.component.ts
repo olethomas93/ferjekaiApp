@@ -57,7 +57,7 @@ this.scrollLeft;
     const x = e.pageX - slider.offsetLeft;
     const walk = (x - this.startX) * 1; //scroll-fast
     slider.scrollLeft = this.scrollLeft - walk;
-    console.log(walk);
+    
 
 
   }

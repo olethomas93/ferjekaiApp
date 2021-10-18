@@ -30,8 +30,17 @@
       width: 50vh;
       height: 10%;
     display: flex;
-    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+ 
+    mask-image: linear-gradient(to right, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,1) 15%, 
+    rgba(255,255,255,1) 25%, 
+    rgba(255,255,255,1) 35%, 
+    rgba(255,255,255,1) 50%, 
+    rgba(255,255,255,1) 65%, 
+    rgba(255,255,255,1) 75%, 
+    rgba(255,255,255,1) 85%, 
+    rgba(255,255,255,0) 100%);
   
     align-items: center;
     
@@ -62,7 +71,7 @@
       margin: .1rem;
       padding: .2rem .7rem;
       transition: all 0.2s;
-      will-change: transform;
+      
       user-select: none;
       
     
