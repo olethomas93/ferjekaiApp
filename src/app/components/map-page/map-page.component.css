@@ -5,7 +5,7 @@ p {
 .fs-container {
   width: 100vw;
   height: 75vh;
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
 }

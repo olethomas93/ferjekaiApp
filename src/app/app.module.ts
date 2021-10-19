@@ -50,6 +50,7 @@ import { CreateDockComponent } from './components/create-dock/create-dock.compon
 
 
 
+
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: env.mqtt.server,
   port: env.mqtt.port,
@@ -68,6 +69,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     LoginformComponent,
     ConfirmFormComponent,
     CreateDockComponent
+    
  
     
     

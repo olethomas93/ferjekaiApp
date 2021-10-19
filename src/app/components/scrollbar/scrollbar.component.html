@@ -1,0 +1,25 @@
+
+
+        <div #container class="scroll-container hide-scrollbar"
+        (mousedown)="onMouseDown($event)"
+        (mouseleave)="onMouseLeave($event)"
+        (mousemove)="onMouseMove($event)"
+        (mouseup)="onMouseUp($event)">
+            <div  class="items" *ngFor="let item of docks"
+            #item
+            (click)="flyToDock(item.location)"
+            (mousedown)="onMouseDown($event)"
+            (mouseleave)="onMouseLeave($event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseup)="onMouseUp($event)"
+           >
+
+                
+              {{ item.name }}
+            </div>
+
+           
+          </div>
+ 
+
+
