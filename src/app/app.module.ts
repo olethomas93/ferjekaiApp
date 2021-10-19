@@ -20,7 +20,6 @@ import {MatCardModule} from '@angular/material/card'
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button'
-import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
 import { environment as env } from '../environments/environment';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -50,13 +49,6 @@ import { CreateDockComponent } from './components/create-dock/create-dock.compon
 
 
 
-
-const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: env.mqtt.server,
-  port: env.mqtt.port,
-  protocol: (env.mqtt.protocol === "wss") ? "wss" : "ws",
-  path: '',
-};
 
 
 
@@ -88,7 +80,6 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatIconModule,
     MatFormFieldModule,
     AngularFireDatabaseModule,
-    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
     AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,

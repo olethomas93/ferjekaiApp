@@ -59,7 +59,7 @@ this.scrollLeft;
     slider.scrollLeft = this.scrollLeft - walk;
     
 
-
+    console.log(walk)
   }
   onMouseUp(e:any){
     let slider =this.el.nativeElement

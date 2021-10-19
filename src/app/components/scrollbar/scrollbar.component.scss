@@ -26,6 +26,7 @@
     background-color: #777;
   }
   .scroll-container {
+    scroll-snap-type: y mandatory;
       z-index: 99999999999999999;
       width: 50vh;
       height: 10%;
@@ -46,7 +47,7 @@
     
     position: absolute;
     overflow-x: scroll;
-    top: 85vh;
+    top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -64,6 +65,7 @@
     }
   
     .items {
+      scroll-snap-align: start;
       white-space: nowrap;
       background: black;
       border: 1px solid #efefef;
