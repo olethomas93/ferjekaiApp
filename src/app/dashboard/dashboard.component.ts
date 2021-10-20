@@ -73,6 +73,8 @@ export class DashboardComponent implements OnInit {
       })
 
     }
+
+
     async getCred(){
       this.auth.getCred()
     }
@@ -126,19 +128,8 @@ export class DashboardComponent implements OnInit {
         }
       });
   
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
-      });
+    
   
-      // dialogRef.backdropClick().subscribe((data)=>{
-  
-      //   this.dialog.closeAll()
-  
-      // })
-  
-      // dialogRef.afterClosed().subscribe((result: any) => {
-      //   console.log(`Dialog result: ${result}`);
-      // });
     }
 
     flyToDock(location:any){
