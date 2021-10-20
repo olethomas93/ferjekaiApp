@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ColormodeService } from './services/colormode.service';
 import { routeTransitionAnimations } from './route-transition-animations';
 import { Subscription } from 'rxjs';
-import { AwsiotService } from './services/awsiot.service';
-import { IMqttMessage } from "ngx-mqtt";
 import { AuthService } from './services/auth.service';
 import { APIService } from './API.service';
 
@@ -20,7 +18,6 @@ export class AppComponent implements OnInit {
   title = 'ferjekai';
   events!: any[];
   private deviceId!: string;
-  subscription_Mqtt!: Subscription;
   subscription_login!: Subscription;
   public loggedIn!: boolean;
   public createForm: FormGroup | undefined;
@@ -42,7 +39,6 @@ export class AppComponent implements OnInit {
 
     constructor(
       private colormode: ColormodeService,
-      private readonly eventMqtt: AwsiotService,
       public auth: AuthService,
       private api: APIService
       
@@ -77,19 +73,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription_Mqtt) {
-        this.subscription_Mqtt.unsubscribe();
-    }
-
-    this.subscription_login.unsubscribe();
-}
-
-  private subscribeToTopic() {
-    this.subscription_Mqtt = this.eventMqtt.topic(this.deviceId)
-        .subscribe((data: IMqttMessage) => {
-            let item = JSON.parse(data.payload.toString());
-            this.events.push(item);
-        });
+    
 }
 
 

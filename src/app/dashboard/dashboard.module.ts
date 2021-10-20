@@ -30,7 +30,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatProgressBarModule} from '@angular/material/progress-bar'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FerjekaiStatusComponent } from '../dialogs/ferjekai-status/ferjekai-status.component';
@@ -41,7 +41,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import { LandingComponent } from '../components/landing/landing.component';
 import { ScrollbarComponent } from '../components/scrollbar/scrollbar.component';
-
+import {NavComponent} from '../components/nav/nav.component'
+import {MatSelectModule} from '@angular/material/select';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -49,7 +51,7 @@ import { ScrollbarComponent } from '../components/scrollbar/scrollbar.component'
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent,
-    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent
     ],
   imports: [
     CommonModule,
@@ -84,7 +86,10 @@ import { ScrollbarComponent } from '../components/scrollbar/scrollbar.component'
     MatIconModule,
     MatFormFieldModule,
     NgxGaugeModule,
-    ScrollingModule
+    ScrollingModule,
+    MatSelectModule,
+    InfiniteScrollModule,
+    MatChipsModule
 ],
 
 

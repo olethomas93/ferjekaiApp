@@ -4,23 +4,31 @@
 
 <mat-toolbar >
 
-
-   
-    <div matRipple 
-    matTooltip = "Dashboard"
-    routerLink="landing"
-    routerLinkActive="activebutton"
-    >
-      <img src="../assets/logo.png" class="logo">
-    </div>
-  
-    <div class="menu">
+  <div class="menu">
     <button  mat-icon-button (click)="sideNav.toggle()">
       <mat-icon>
        menu
       </mat-icon>
     </button>
   </div>
+   
+    
+   
+ 
+      <img src="../assets/logo.png" class="logo">
+    
+
+      <div></div>
+    <!-- <mat-chip-list  aria-label="Fish selection">
+      <mat-chip class="chip" color="warning"  selected>
+<mat-icon class="icon" >person</mat-icon>
+<h3 style="font-size: small;">Ole</h3>
+
+      </mat-chip>
+      
+    </mat-chip-list> -->
+  
+ 
 
   
   </mat-toolbar>
@@ -43,13 +51,7 @@
           <mat-divider></mat-divider>
           <div mat-subheader>Info</div>
 
-          
-          <!-- <mat-list-item 
-          *ngFor="let docks of ferrydocks "
-           (click)="flyToDock(docks.location)">
-          
-            {{docks.name}}
-          </mat-list-item> -->
+      
           <mat-divider></mat-divider>
           <mat-list-item (click)="signOut()" class="logout">
             Log ut

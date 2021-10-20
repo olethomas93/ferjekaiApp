@@ -184,7 +184,10 @@ this.api.GetFerjeData("ferrydocks").then((data:any)=>{
  
  
  
- 
+ closeDialog(){
+
+  this.dialog.closeAll
+ }
  
   openStatusDialog() {
     const dialogRef = this.dialog.open(TilesComponent,{

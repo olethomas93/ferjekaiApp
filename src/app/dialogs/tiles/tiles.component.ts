@@ -101,8 +101,23 @@ export class TilesComponent implements OnInit,OnDestroy {
     
     
     ) {
+
+      this.dialogRef.backdropClick().subscribe((data)=>{
+
+        this.dialogRef.close()
+
+
+      })
   
       this.name = this.ferrydockName;
+  }
+
+  ngOnDestroy():void{
+
+    this.subscription.unsubscribe()
+
+    
+
   }
 
   ngOnInit(){
@@ -144,7 +159,9 @@ export class TilesComponent implements OnInit,OnDestroy {
 
   }
 
-close(){
+
+close(e:any){
+  
   this.dialogRef.close()
   this.ref.detectChanges()
 }
@@ -251,13 +268,7 @@ close(){
     this.dialogRef.close();
     this.dialogRef.close();
   }
-  ngOnDestroy():void{
 
-    this.subscription.unsubscribe()
-
-
-
-  }
 }
 
 

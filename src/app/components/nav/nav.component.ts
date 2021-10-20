@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { latLng, Map} from 'leaflet';
 
 @Component({
   selector: 'app-nav',
@@ -9,13 +10,15 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
+  @Input() docks!: Array<any>
+  @Input() map!:Map
+  scrollItems!: string[];
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  constructor() {}
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
 
+  flyToDock(location:any){
+    this.map.flyTo(latLng(location[0],location[1],14))
+
+  }
 }
