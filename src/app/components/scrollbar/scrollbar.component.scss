@@ -28,7 +28,7 @@
   .scroll-container {
     scroll-snap-type: y mandatory;
       z-index: 99999999999999999;
-      width: 50vh;
+      width: 25vh;
       height: 15%;
     display: flex;
  
@@ -81,12 +81,13 @@
       &:hover {
         cursor: pointer;
         background: #ccc;
+        transform: scale(1);
       }
     }
     .items.active {
       cursor: grab;
       cursor: -webkit-grabbing;
-      transform: scale(1);
+      
     }
   
   }

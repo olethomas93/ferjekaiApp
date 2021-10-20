@@ -4,7 +4,9 @@
         (mousedown)="onMouseDown($event)"
         (mouseleave)="onMouseLeave($event)"
         (mousemove)="onMouseMove($event)"
-        (mouseup)="onMouseUp($event)">
+        (mouseup)="onMouseUp($event)"
+        >
+        
             <div  class="items" *ngFor="let item of docks"
             #item
             (click)="flyToDock(item.location)"
