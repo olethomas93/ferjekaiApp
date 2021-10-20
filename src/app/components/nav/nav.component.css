@@ -1,17 +1,41 @@
-.sidenav-container {
-  height: 100%;
+.example-container {
+  width: 400px;
+  height: 200px;
+  margin: 12px;
+ z-index: 9999999999;
 }
 
-.sidenav {
-  width: 200px;
+.button{
+  position: absolute;
+  left: 80%;
+  top:90%;
+  z-index: 9999999999999;
+}
+.drawer{
+  height: 50vh;
+  width: 10%;
+  z-index: 99999999999;
+  position: fixed;
+  top: 25%;
+  
+}
+h1{
+
+  
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
+@media only screen and (max-width: 768px) {
+
+
+  .drawer{
+    height: 50vh;
+    width: 50%;
+    z-index: 99999999999;
+    
+    top: 25%;
+    
+  }
+
+
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}

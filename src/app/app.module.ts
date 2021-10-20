@@ -33,13 +33,13 @@ import awsconfig from 'src/aws-exports';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
-import { NavComponent } from './components/nav/nav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { LoginformComponent } from './components/loginform/loginform.component';
 import { ConfirmFormComponent } from './components/confirm-form/confirm-form.component';
 import { CreateDockComponent } from './components/create-dock/create-dock.component';
+import { SidescrollComponent } from './components/sidescroll/sidescroll.component';
 
 
 
@@ -57,10 +57,10 @@ import { CreateDockComponent } from './components/create-dock/create-dock.compon
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    NavComponent,
     LoginformComponent,
     ConfirmFormComponent,
-    CreateDockComponent
+    CreateDockComponent,
+    SidescrollComponent
     
  
     

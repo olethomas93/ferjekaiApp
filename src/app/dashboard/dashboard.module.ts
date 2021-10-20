@@ -41,7 +41,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import { LandingComponent } from '../components/landing/landing.component';
 import { ScrollbarComponent } from '../components/scrollbar/scrollbar.component';
-
+import {NavComponent} from '../components/nav/nav.component'
+import {MatSelectModule} from '@angular/material/select';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -49,7 +51,7 @@ import { ScrollbarComponent } from '../components/scrollbar/scrollbar.component'
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent,
-    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent
     ],
   imports: [
     CommonModule,
@@ -85,7 +87,9 @@ import { ScrollbarComponent } from '../components/scrollbar/scrollbar.component'
     MatFormFieldModule,
     NgxGaugeModule,
     ScrollingModule,
-    InfiniteScrollModule
+    MatSelectModule,
+    InfiniteScrollModule,
+    MatChipsModule
 ],
 
 
