@@ -40,6 +40,7 @@ import { LoginformComponent } from './components/loginform/loginform.component';
 import { ConfirmFormComponent } from './components/confirm-form/confirm-form.component';
 import { CreateDockComponent } from './components/create-dock/create-dock.component';
 import { SidescrollComponent } from './components/sidescroll/sidescroll.component';
+import { AlarmconfComponent } from './components/alarmconf/alarmconf.component';
 
 
 
@@ -60,7 +61,8 @@ import { SidescrollComponent } from './components/sidescroll/sidescroll.componen
     LoginformComponent,
     ConfirmFormComponent,
     CreateDockComponent,
-    SidescrollComponent
+    SidescrollComponent,
+    AlarmconfComponent
     
  
     
