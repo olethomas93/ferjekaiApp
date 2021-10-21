@@ -13,12 +13,13 @@
     },
     "categories": {
       "auth": {
-        "ferjekai": {}
+        "ferjekai": {},
+        "userPoolGroups": {}
       },
       "function": {
         "trigger": {
           "deploymentBucketName": "amplify-ferjekai-staging-101604-deployment",
-          "s3Key": "amplify-builds/trigger-2b5432397a534b473041-build.zip"
+          "s3Key": "amplify-builds/trigger-507767686d4245677775-build.zip"
         }
       }
     }

@@ -211,24 +211,13 @@ close(e:any){
       
       })
       
-      // this.data[i].value = Math.round(data.Values[Object.keys(data.Values)[i]])
-      // this.data[i].title = Object.keys(data.values)[i]
+
 
 
 
 
     }
-    // this.data[0].value = Math.round(data.Values.Belastning_Omformer1) 
-    // this.data[1].value = Math.round(data.Values.Belastning_Omformer2)
-    // this.data[2].value = Math.round(data.Values.Driftstid_Minutt_Motor1)
-    // this.data[3].value =Math.round(data.Values.Driftstid_Minutt_Motor2)
-    // this.data[4].value =Math.round(data.Values.Driftstid_Timer_Motor1)
-    // this.data[5].value =Math.round(data.Values.Driftstid_Timer_Motor2)
-    // this.data[6].value =Math.round(data.Values.Hastighet_Omformer1)
-    // this.data[7].value =Math.round(data.Values.Hastighet_Omformer2)
-    // this.data[8].value =Math.round(data.Values.Olje_Nivaa)
-    // this.data[9].value =Math.round(data.Values.Olje_Temperatur)
-    // this.data[10].value =Math.round(data.Values.Sylinder_Hengetrykk)
+   
 
 
 
