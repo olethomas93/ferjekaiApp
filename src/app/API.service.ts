@@ -12,6 +12,7 @@ export interface SubscriptionResponse<T> {
 export type CreateFerjeDataInput = {
   id?: string | null;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -20,6 +21,7 @@ export type CreateFerjeDataInput = {
 
 export type ModelferjeDataConditionInput = {
   topic?: ModelStringInput | null;
+  config?: ModelStringInput | null;
   GMT?: ModelIntInput | null;
   ID?: ModelIntInput | null;
   createdAt?: ModelStringInput | null;
@@ -84,6 +86,7 @@ export type ferjeData = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -93,6 +96,7 @@ export type ferjeData = {
 export type UpdateFerjeDataInput = {
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -106,6 +110,7 @@ export type DeleteFerjeDataInput = {
 export type ModelferjeDataFilterInput = {
   id?: ModelIDInput | null;
   topic?: ModelStringInput | null;
+  config?: ModelStringInput | null;
   GMT?: ModelIntInput | null;
   ID?: ModelIntInput | null;
   createdAt?: ModelStringInput | null;
@@ -141,6 +146,7 @@ export type CreateFerjeDataMutation = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -151,6 +157,7 @@ export type UpdateFerjeDataMutation = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -161,6 +168,7 @@ export type DeleteFerjeDataMutation = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -171,6 +179,7 @@ export type GetFerjeDataQuery = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -183,6 +192,7 @@ export type ListFerjeDataQuery = {
     __typename: "ferjeData";
     id: string;
     topic?: string | null;
+    config?: string | null;
     GMT?: number | null;
     ID?: number | null;
     createdAt?: string | null;
@@ -195,6 +205,7 @@ export type OnUpdateByIdSubscription = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -205,6 +216,7 @@ export type OnCreateFerjeDataSubscription = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -215,6 +227,7 @@ export type OnUpdateFerjeDataSubscription = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -225,6 +238,7 @@ export type OnDeleteFerjeDataSubscription = {
   __typename: "ferjeData";
   id: string;
   topic?: string | null;
+  config?: string | null;
   GMT?: number | null;
   ID?: number | null;
   createdAt?: string | null;
@@ -244,6 +258,7 @@ export class APIService {
           __typename
           id
           topic
+          config
           GMT
           ID
           createdAt
@@ -270,6 +285,7 @@ export class APIService {
           __typename
           id
           topic
+          config
           GMT
           ID
           createdAt
@@ -296,6 +312,7 @@ export class APIService {
           __typename
           id
           topic
+          config
           GMT
           ID
           createdAt
@@ -319,6 +336,7 @@ export class APIService {
           __typename
           id
           topic
+          config
           GMT
           ID
           createdAt
@@ -345,6 +363,7 @@ export class APIService {
             __typename
             id
             topic
+            config
             GMT
             ID
             createdAt
@@ -376,6 +395,7 @@ export class APIService {
           __typename
           id
           topic
+          config
           GMT
           ID
           createdAt
@@ -399,6 +419,7 @@ export class APIService {
           __typename
           id
           topic
+          config
           GMT
           ID
           createdAt
@@ -417,6 +438,7 @@ export class APIService {
           __typename
           id
           topic
+          config
           GMT
           ID
           createdAt
@@ -435,6 +457,7 @@ export class APIService {
           __typename
           id
           topic
+          config
           GMT
           ID
           createdAt

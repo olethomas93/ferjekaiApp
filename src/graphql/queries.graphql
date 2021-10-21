@@ -3,6 +3,7 @@ query GetFerjeData($id: ID!) {
   getFerjeData(id: $id) {
     id
     topic
+    config
     GMT
     ID
     createdAt
@@ -18,6 +19,7 @@ query ListFerjeData(
     items {
       id
       topic
+      config
       GMT
       ID
       createdAt
