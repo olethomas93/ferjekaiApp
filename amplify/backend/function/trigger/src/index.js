@@ -45,28 +45,23 @@ mutation MyMutation1($input:CreateFerjeDataInput!) {
 `
 
 exports.handler = async (event) => {
+
+  
 var TagValues ={};
-var ID = event.id
+var ferry = Object.keys(event)[0]
 var data = "ferrydata" ;
-if(event.CollectionId ==0){
-  data="alarms"
-}
-if(event.CollectionId== 1){
-    
-    data = "weather";
-}
 
 
 var item ={
-  id:ID,
+  id:ferry,
+  ID:0,
   GMT:Date.now(),
-  ID:event.CollectionId,
-  topic:{[data]:JSON.stringify(event.TagData[0].Values)},
+  topic:JSON.stringify(event[ferry]),
   createdAt: new Date().toISOString(),
   updatedAt:new Date().toISOString()
 };
 
-  
+  console.log(item)
   try {
     const graphqlData = await axios({
       url: "https://cwv5hklocvelle3dgk6iho6ake.appsync-api.eu-central-1.amazonaws.com/graphql",
@@ -78,7 +73,12 @@ var item ={
         query: print(update),
         variables: {
           input: {
-            item
+            id:ferry,
+            ID:0,
+            GMT:Date.now(),
+            topic:JSON.stringify(event[ferry]),
+            createdAt: new Date().toISOString(),
+            updatedAt:new Date().toISOString()
            
           }
         }
@@ -86,7 +86,8 @@ var item ={
       }
     });
     const body = {
-      message: "successfully created todo!"
+      message: "successfully created item!",
+      data :item
     }
     return {
         statusCode: 200,
