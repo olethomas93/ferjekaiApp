@@ -44,7 +44,7 @@ import { ScrollbarComponent } from '../components/scrollbar/scrollbar.component'
 import {NavComponent} from '../components/nav/nav.component'
 import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
-
+import { SatPopoverModule } from '@ncstate/sat-popover';
 
 
 
@@ -89,7 +89,8 @@ import {MatChipsModule} from '@angular/material/chips';
     ScrollingModule,
     MatSelectModule,
     InfiniteScrollModule,
-    MatChipsModule
+    MatChipsModule,
+    SatPopoverModule
 ],
 
 

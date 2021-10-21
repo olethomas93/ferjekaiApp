@@ -8,12 +8,13 @@ import { Json } from 'aws-sdk/clients/robomaker';
 import { APIService } from '../../API.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { String } from 'aws-sdk/clients/acm';
+import { bool } from 'aws-sdk/clients/signer';
 export interface Alarm {
   name: string;
   status:string
 }
 
-export interface ferrydata {
+export interface tile {
 
 
 title:string
@@ -37,43 +38,27 @@ export class TilesComponent implements OnInit,OnDestroy {
   dataSource = [{}]
   alarmsUpdated!: Date
   weatherUpdated!: string
-
+  editable!:bool;
 
   weatherData =[
-    {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
     {title:"Temperature",value:-999,color:"green",icon:"thermostat",unit:"°C"},
     {title:"Air pressure",
-  value:-999,color:"green",icon:"storm",unit:"hPa"},
-    {title:"Wind Direction",
+    value:-999,color:"green",icon:"storm",unit:"hPa"},
+   
+    {title:"Air Density",
+  value :-999,color:"green",icon:"reorder",unit:"kg/m³"},
+    {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
+    
+   
+ 
+   
+ 
+  {title:"Wind Direction",
   value :-999,color:"green",icon:"explore",unit:"°"},
-  {title:"Air Density",
-  value :-999,color:"green",icon:"reorder",unit:"kg/m³"}
   ]
 
-  data!:Array<ferrydata>
-  // data =[
-  //   {title:"Belastning omformer 1",value:-999,color:"green",icon:"bolt",unit:"A"},
-  //   {title:"Belastning omformer 2",value:-999,color:"green",icon:"bolt",unit:"A"},
-  //   {title:"Driftstid motor 1",
-  // value:-999,color:"green",icon:"schedule",unit:"min"},
-  //   {title:"DriftsTid motor 2",
-  // value :-999,color:"green",icon:"schedule",unit:"min"},
-  // {title:"DriftsTid Timer Motor 1",
-  // value :-999,color:"green",icon:"schedule",unit:"min"},
-  // {title:"DriftsTid Timer Motor 2",
-  // value :-999,color:"green",icon:"schedule",unit:"min"},
-  // {title:"Hastighet Omformer 1",
-  // value :-999,color:"green",icon:"sports_motorsports",unit:"rpm"},
-  // {title:"Hastighet Omformer 2",
-  // value :-999,color:"green",icon:"sports_motorsports",unit:"rpm"},
-  // {title:"Oljenivå",
-  // value :-999,color:"green",icon:"opacity",unit:"l"},
-  // {title:"OljeTemperatur",
-  // value :-999,color:"green",icon:"thermostat",unit:"°C"},
-  // {title:"Sylinder Hengetrykk",
-  // value :-999,color:"green",icon:"expand",unit:"N"}
-  // ]
-  /** Based on the screen size, switch from standard to one column per row */
+  data!:tile[]
+
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
@@ -116,7 +101,7 @@ export class TilesComponent implements OnInit,OnDestroy {
 
     this.subscription.unsubscribe()
 
-    
+    console.log(this.data)
 
   }
 
@@ -142,7 +127,7 @@ export class TilesComponent implements OnInit,OnDestroy {
   
     if(data){
 
-      console.log(data)
+      
       this.weatherUpdated = new Date(data.value.data.onUpdateById['GMT']).toString()
       let topic = data.value.data.onUpdateById.topic
       this.updateData(JSON.parse(topic))
@@ -199,13 +184,13 @@ close(e:any){
     for(let i=0; i <Object.keys(data).length-1;i++){
       
 
-      this.data.push({
+      this.data.push({ 
         
         value:Math.round(data[Object.keys(data)[i]]),
         title:Object.keys(data)[i],
         icon:"schedule",
         color:"green",
-        unit:"mA"
+        unit:""
       
       
       

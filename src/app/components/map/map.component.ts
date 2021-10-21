@@ -15,7 +15,8 @@ import {
   MapOptions,
   tileLayer,
   latLng,
-  popup
+  popup,
+  svg
   
   
 } from 'leaflet';
@@ -41,7 +42,9 @@ export class MapComponent implements OnInit {
       }),
     ],
     zoom: 12,
-    center: latLng(62.395288667847396, 6.166532305211625),
+    renderer:svg(),
+    
+    center: latLng(62.395288667847396, 6.166532305211625)
   };
 
   public map!: Map;

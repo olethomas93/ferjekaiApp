@@ -14,6 +14,7 @@ export class MinicardComponent implements OnInit {
   @Input() isCurrency!: boolean;
   @Input() duration!: string;
   @Input() unit!: string;
+  @Input() edit!: boolean;
 
   constructor() { }
 
