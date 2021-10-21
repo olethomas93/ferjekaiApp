@@ -6,6 +6,7 @@ mutation CreateFerjeData(
   createFerjeData(input: $input, condition: $condition) {
     id
     topic
+    config
     GMT
     ID
     createdAt
@@ -19,6 +20,7 @@ mutation UpdateFerjeData(
   updateFerjeData(input: $input, condition: $condition) {
     id
     topic
+    config
     GMT
     ID
     createdAt
@@ -32,6 +34,7 @@ mutation DeleteFerjeData(
   deleteFerjeData(input: $input, condition: $condition) {
     id
     topic
+    config
     GMT
     ID
     createdAt

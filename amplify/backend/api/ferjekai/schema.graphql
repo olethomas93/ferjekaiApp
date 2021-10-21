@@ -1,6 +1,7 @@
 type ferjeData @model {
   id: ID!
   topic: AWSJSON
+  config:AWSJSON
   GMT : AWSTimestamp
   ID:Int
   createdAt: AWSDateTime

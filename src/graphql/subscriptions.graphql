@@ -3,6 +3,7 @@ subscription OnUpdateById($id: ID!) {
   onUpdateById(id: $id) {
     id
     topic
+    config
     GMT
     ID
     createdAt
@@ -13,6 +14,7 @@ subscription OnCreateFerjeData {
   onCreateFerjeData {
     id
     topic
+    config
     GMT
     ID
     createdAt
@@ -23,6 +25,7 @@ subscription OnUpdateFerjeData {
   onUpdateFerjeData {
     id
     topic
+    config
     GMT
     ID
     createdAt
@@ -33,6 +36,7 @@ subscription OnDeleteFerjeData {
   onDeleteFerjeData {
     id
     topic
+    config
     GMT
     ID
     createdAt
