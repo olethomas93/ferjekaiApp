@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LatLngExpression,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon,Control} from 'leaflet';
+import { LatLngExpression,svg,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon,Control} from 'leaflet';
 import { HttpService } from 'src/app/services/http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { PubSub } from 'aws-amplify';
@@ -72,17 +72,21 @@ export class MapPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+   
     
-    this.api.OnUpdateByIdListener("alarms").subscribe((data:any)=>{
+    this.api.OnUpdateByIdListener("sulesund").subscribe((data:any)=>{
 
       let res =JSON.parse(data.value.data.onUpdateById.topic)
-      if (res.Values.LED_Radio_Aktiv == true){
+
+        
+
+      if (res.alarms['led alarm'].toLowerCase() === "true"){
 
         
         this.sulesund.setStyle({color:"red",className:"pulse"})
         
       }else{
-        this.sulesund.setStyle({color:"green",className:"pulse"})
+        this.sulesund.setStyle({color:"green",className:""})
 
       }
 
@@ -132,9 +136,34 @@ this.api.GetFerjeData("ferrydocks").then((data:any)=>{
     
 
   })
+
+  this.api.GetFerjeData(this.ferrydocks[i].name).then((data:any)=>{
+
+    if(data){
+    let res =JSON.parse(data.topic)
+
+   
+  
+      
+  
+    if (res.alarms['endebryter bom 2 oppe'].toLowerCase() === "true" ||
+    res.alarms['Motorvern sperrebomb'].toLowerCase() === "true"){
+  
+      ferry.getElement()?.classList.add("pulse")
+      ferry.setStyle({color:"red",className:''})
+      
+    }else{
+      ferry.getElement()?.classList.remove("pulse")
+      ferry.setStyle({color:"green"})
+      
+      
+  
+    }
+    }
+  })
+  
   }
 })
-
 
 
   }
