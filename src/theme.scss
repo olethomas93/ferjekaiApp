@@ -65,3 +65,21 @@ $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
   $alternate-accent:  mat-palette($mat-yellow, 400);
   $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
 }
+
+.pulse {
+  animation: pulsate 2s ease-out;
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite; 
+  opacity: 0.0
+}
+
+
+@keyframes pulsate {
+  0% {
+     opacity: 0;
+  }
+  50% {
+    opacity: 1;}
+
+  100% {  opacity: 0;}
+}
