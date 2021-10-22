@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ColormodeService } from '../services/colormode.service';
 import { routeTransitionAnimations } from '../route-transition-animations';
 import { AuthService } from "../services/auth.service";
-import Amplify, { API } from 'aws-amplify';
+import Amplify, { API,PubSub } from 'aws-amplify';
 import {TilesComponent} from '../dialogs/tiles/tiles.component'
 import { MatDialog } from '@angular/material/dialog';
 import { APIService } from '../API.service';
@@ -76,7 +76,9 @@ export class DashboardComponent implements OnInit {
 
 
     async getCred(){
+      
       this.auth.getCred()
+      await PubSub.publish('var1', { msg: 'Hello to all subscribers!' });
     }
     signOut(){
 

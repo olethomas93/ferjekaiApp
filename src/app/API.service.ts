@@ -9,6 +9,13 @@ export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
 
+export type __SubscriptionContainer = {
+  onUpdateById: OnUpdateByIdSubscription;
+  onCreateFerjeData: OnCreateFerjeDataSubscription;
+  onUpdateFerjeData: OnUpdateFerjeDataSubscription;
+  onDeleteFerjeData: OnDeleteFerjeDataSubscription;
+};
+
 export type CreateFerjeDataInput = {
   id?: string | null;
   topic?: string | null;
@@ -389,7 +396,9 @@ export class APIService {
   }
   OnUpdateByIdListener(
     id: string
-  ): Observable<SubscriptionResponse<OnUpdateByIdSubscription>> {
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateById">>
+  > {
     const statement = `subscription OnUpdateById($id: ID!) {
         onUpdateById(id: $id) {
           __typename
@@ -407,11 +416,13 @@ export class APIService {
     };
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<SubscriptionResponse<OnUpdateByIdSubscription>>;
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateById">>
+    >;
   }
 
   OnCreateFerjeDataListener: Observable<
-    SubscriptionResponse<OnCreateFerjeDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateFerjeData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateFerjeData {
@@ -427,10 +438,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateFerjeDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateFerjeData">>
+  >;
 
   OnUpdateFerjeDataListener: Observable<
-    SubscriptionResponse<OnUpdateFerjeDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateFerjeData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateFerjeData {
@@ -446,10 +459,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateFerjeDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateFerjeData">>
+  >;
 
   OnDeleteFerjeDataListener: Observable<
-    SubscriptionResponse<OnDeleteFerjeDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteFerjeData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteFerjeData {
@@ -465,5 +480,7 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteFerjeDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteFerjeData">>
+  >;
 }
