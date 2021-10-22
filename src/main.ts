@@ -16,8 +16,6 @@ import { AWSIoTProvider } from '@aws-amplify/pubsub';
 // aws_pubsub_endpoint:'wss://a3vwh5519vcrt0-ats.iot.us-west-2.amazonaws.com/mqtt'
 
 
-// }))
-
 
 Amplify.configure(awsconfig);
 Amplify.addPluggable(new AWSIoTProvider({
