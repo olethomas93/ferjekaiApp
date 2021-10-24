@@ -45,13 +45,14 @@ import {NavComponent} from '../components/nav/nav.component'
 import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
 import { SatPopoverModule } from '@ncstate/sat-popover';
+import {AddDockComponent} from '../dialogs/add-dock/add-dock.component'
 
 
 
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent,
-    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent,AddDockComponent
     ],
   imports: [
     CommonModule,

@@ -2,43 +2,103 @@
 subscription OnUpdateById($id: ID!) {
   onUpdateById(id: $id) {
     id
-    topic
-    config
-    GMT
-    ID
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
     createdAt
     updatedAt
   }
 }
-subscription OnCreateFerjeData {
-  onCreateFerjeData {
+subscription OnCreateDockData {
+  onCreateDockData {
     id
-    topic
-    config
-    GMT
-    ID
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateFerjeData {
-  onUpdateFerjeData {
+subscription OnUpdateDockData {
+  onUpdateDockData {
     id
-    topic
-    config
-    GMT
-    ID
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteFerjeData {
-  onDeleteFerjeData {
+subscription OnDeleteDockData {
+  onDeleteDockData {
     id
-    topic
-    config
-    GMT
-    ID
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateDock {
+  onCreateDock {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateDock {
+  onUpdateDock {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteDock {
+  onDeleteDock {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }

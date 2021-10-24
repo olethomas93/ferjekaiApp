@@ -11,31 +11,37 @@ export interface SubscriptionResponse<T> {
 
 export type __SubscriptionContainer = {
   onUpdateById: OnUpdateByIdSubscription;
-  onCreateFerjeData: OnCreateFerjeDataSubscription;
-  onUpdateFerjeData: OnUpdateFerjeDataSubscription;
-  onDeleteFerjeData: OnDeleteFerjeDataSubscription;
+  onCreateDockData: OnCreateDockDataSubscription;
+  onUpdateDockData: OnUpdateDockDataSubscription;
+  onDeleteDockData: OnDeleteDockDataSubscription;
+  onCreateDock: OnCreateDockSubscription;
+  onUpdateDock: OnUpdateDockSubscription;
+  onDeleteDock: OnDeleteDockSubscription;
 };
 
-export type CreateFerjeDataInput = {
+export type CreateDockDataInput = {
   id?: string | null;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<AlarmObjInput | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
-export type ModelferjeDataConditionInput = {
-  topic?: ModelStringInput | null;
-  config?: ModelStringInput | null;
-  GMT?: ModelIntInput | null;
-  ID?: ModelIntInput | null;
+export type AlarmObjInput = {
+  id?: string | null;
+  value?: string | null;
+  message?: string | null;
+};
+
+export type ModeldockDataConditionInput = {
+  drift?: ModelStringInput | null;
+  weather?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
-  and?: Array<ModelferjeDataConditionInput | null> | null;
-  or?: Array<ModelferjeDataConditionInput | null> | null;
-  not?: ModelferjeDataConditionInput | null;
+  and?: Array<ModeldockDataConditionInput | null> | null;
+  or?: Array<ModeldockDataConditionInput | null> | null;
+  not?: ModeldockDataConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -77,7 +83,51 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type ModelIntInput = {
+export type dockData = {
+  __typename: "dockData";
+  id: string;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<AlarmObj | null> | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+};
+
+export type AlarmObj = {
+  __typename: "AlarmObj";
+  id?: string | null;
+  value?: string | null;
+  message?: string | null;
+};
+
+export type UpdateDockDataInput = {
+  id: string;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<AlarmObjInput | null> | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+};
+
+export type DeleteDockDataInput = {
+  id: string;
+};
+
+export type CreateDockInput = {
+  id?: string | null;
+  name?: string | null;
+  location?: Array<number | null> | null;
+};
+
+export type ModeldockConditionInput = {
+  name?: ModelStringInput | null;
+  location?: ModelFloatInput | null;
+  and?: Array<ModeldockConditionInput | null> | null;
+  or?: Array<ModeldockConditionInput | null> | null;
+  not?: ModeldockConditionInput | null;
+};
+
+export type ModelFloatInput = {
   ne?: number | null;
   eq?: number | null;
   le?: number | null;
@@ -89,42 +139,35 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null;
 };
 
-export type ferjeData = {
-  __typename: "ferjeData";
+export type dock = {
+  __typename: "dock";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  name?: string | null;
+  location?: Array<number | null> | null;
+  data?: dockData | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
-export type UpdateFerjeDataInput = {
+export type UpdateDockInput = {
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  name?: string | null;
+  location?: Array<number | null> | null;
 };
 
-export type DeleteFerjeDataInput = {
+export type DeleteDockInput = {
   id: string;
 };
 
-export type ModelferjeDataFilterInput = {
+export type ModeldockDataFilterInput = {
   id?: ModelIDInput | null;
-  topic?: ModelStringInput | null;
-  config?: ModelStringInput | null;
-  GMT?: ModelIntInput | null;
-  ID?: ModelIntInput | null;
+  drift?: ModelStringInput | null;
+  weather?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
-  and?: Array<ModelferjeDataFilterInput | null> | null;
-  or?: Array<ModelferjeDataFilterInput | null> | null;
-  not?: ModelferjeDataFilterInput | null;
+  and?: Array<ModeldockDataFilterInput | null> | null;
+  or?: Array<ModeldockDataFilterInput | null> | null;
+  not?: ModeldockDataFilterInput | null;
 };
 
 export type ModelIDInput = {
@@ -143,131 +186,312 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null;
 };
 
-export type ModelferjeDataConnection = {
-  __typename: "ModelferjeDataConnection";
-  items?: Array<ferjeData | null> | null;
+export type ModeldockDataConnection = {
+  __typename: "ModeldockDataConnection";
+  items?: Array<dockData | null> | null;
   nextToken?: string | null;
 };
 
-export type CreateFerjeDataMutation = {
-  __typename: "ferjeData";
+export type ModeldockFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  location?: ModelFloatInput | null;
+  and?: Array<ModeldockFilterInput | null> | null;
+  or?: Array<ModeldockFilterInput | null> | null;
+  not?: ModeldockFilterInput | null;
+};
+
+export type ModeldockConnection = {
+  __typename: "ModeldockConnection";
+  items?: Array<dock | null> | null;
+  nextToken?: string | null;
+};
+
+export type CreateDockDataMutation = {
+  __typename: "dockData";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<{
+    __typename: "AlarmObj";
+    id?: string | null;
+    value?: string | null;
+    message?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
-export type UpdateFerjeDataMutation = {
-  __typename: "ferjeData";
+export type UpdateDockDataMutation = {
+  __typename: "dockData";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<{
+    __typename: "AlarmObj";
+    id?: string | null;
+    value?: string | null;
+    message?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
-export type DeleteFerjeDataMutation = {
-  __typename: "ferjeData";
+export type DeleteDockDataMutation = {
+  __typename: "dockData";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<{
+    __typename: "AlarmObj";
+    id?: string | null;
+    value?: string | null;
+    message?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
-export type GetFerjeDataQuery = {
-  __typename: "ferjeData";
+export type CreateDockMutation = {
+  __typename: "dock";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-};
-
-export type ListFerjeDataQuery = {
-  __typename: "ModelferjeDataConnection";
-  items?: Array<{
-    __typename: "ferjeData";
+  name?: string | null;
+  location?: Array<number | null> | null;
+  data?: {
+    __typename: "dockData";
     id: string;
-    topic?: string | null;
-    config?: string | null;
-    GMT?: number | null;
-    ID?: number | null;
+    drift?: string | null;
+    weather?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateDockMutation = {
+  __typename: "dock";
+  id: string;
+  name?: string | null;
+  location?: Array<number | null> | null;
+  data?: {
+    __typename: "dockData";
+    id: string;
+    drift?: string | null;
+    weather?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteDockMutation = {
+  __typename: "dock";
+  id: string;
+  name?: string | null;
+  location?: Array<number | null> | null;
+  data?: {
+    __typename: "dockData";
+    id: string;
+    drift?: string | null;
+    weather?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GetDockDataQuery = {
+  __typename: "dockData";
+  id: string;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<{
+    __typename: "AlarmObj";
+    id?: string | null;
+    value?: string | null;
+    message?: string | null;
+  } | null> | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+};
+
+export type ListDockDataQuery = {
+  __typename: "ModeldockDataConnection";
+  items?: Array<{
+    __typename: "dockData";
+    id: string;
+    drift?: string | null;
+    weather?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null> | null;
   nextToken?: string | null;
 };
 
+export type GetDockQuery = {
+  __typename: "dock";
+  id: string;
+  name?: string | null;
+  location?: Array<number | null> | null;
+  data?: {
+    __typename: "dockData";
+    id: string;
+    drift?: string | null;
+    weather?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListDocksQuery = {
+  __typename: "ModeldockConnection";
+  items?: Array<{
+    __typename: "dock";
+    id: string;
+    name?: string | null;
+    location?: Array<number | null> | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken?: string | null;
+};
+
 export type OnUpdateByIdSubscription = {
-  __typename: "ferjeData";
+  __typename: "dockData";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<{
+    __typename: "AlarmObj";
+    id?: string | null;
+    value?: string | null;
+    message?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
-export type OnCreateFerjeDataSubscription = {
-  __typename: "ferjeData";
+export type OnCreateDockDataSubscription = {
+  __typename: "dockData";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<{
+    __typename: "AlarmObj";
+    id?: string | null;
+    value?: string | null;
+    message?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
-export type OnUpdateFerjeDataSubscription = {
-  __typename: "ferjeData";
+export type OnUpdateDockDataSubscription = {
+  __typename: "dockData";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<{
+    __typename: "AlarmObj";
+    id?: string | null;
+    value?: string | null;
+    message?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
-export type OnDeleteFerjeDataSubscription = {
-  __typename: "ferjeData";
+export type OnDeleteDockDataSubscription = {
+  __typename: "dockData";
   id: string;
-  topic?: string | null;
-  config?: string | null;
-  GMT?: number | null;
-  ID?: number | null;
+  drift?: string | null;
+  weather?: string | null;
+  alarms?: Array<{
+    __typename: "AlarmObj";
+    id?: string | null;
+    value?: string | null;
+    message?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
+};
+
+export type OnCreateDockSubscription = {
+  __typename: "dock";
+  id: string;
+  name?: string | null;
+  location?: Array<number | null> | null;
+  data?: {
+    __typename: "dockData";
+    id: string;
+    drift?: string | null;
+    weather?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateDockSubscription = {
+  __typename: "dock";
+  id: string;
+  name?: string | null;
+  location?: Array<number | null> | null;
+  data?: {
+    __typename: "dockData";
+    id: string;
+    drift?: string | null;
+    weather?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteDockSubscription = {
+  __typename: "dock";
+  id: string;
+  name?: string | null;
+  location?: Array<number | null> | null;
+  data?: {
+    __typename: "dockData";
+    id: string;
+    drift?: string | null;
+    weather?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 @Injectable({
   providedIn: "root"
 })
 export class APIService {
-  async CreateFerjeData(
-    input: CreateFerjeDataInput,
-    condition?: ModelferjeDataConditionInput
-  ): Promise<CreateFerjeDataMutation> {
-    const statement = `mutation CreateFerjeData($input: CreateFerjeDataInput!, $condition: ModelferjeDataConditionInput) {
-        createFerjeData(input: $input, condition: $condition) {
+  async CreateDockData(
+    input: CreateDockDataInput,
+    condition?: ModeldockDataConditionInput
+  ): Promise<CreateDockDataMutation> {
+    const statement = `mutation CreateDockData($input: CreateDockDataInput!, $condition: ModeldockDataConditionInput) {
+        createDockData(input: $input, condition: $condition) {
           __typename
           id
-          topic
-          config
-          GMT
-          ID
+          drift
+          weather
+          alarms {
+            __typename
+            id
+            value
+            message
+          }
           createdAt
           updatedAt
         }
@@ -281,20 +505,24 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <CreateFerjeDataMutation>response.data.createFerjeData;
+    return <CreateDockDataMutation>response.data.createDockData;
   }
-  async UpdateFerjeData(
-    input: UpdateFerjeDataInput,
-    condition?: ModelferjeDataConditionInput
-  ): Promise<UpdateFerjeDataMutation> {
-    const statement = `mutation UpdateFerjeData($input: UpdateFerjeDataInput!, $condition: ModelferjeDataConditionInput) {
-        updateFerjeData(input: $input, condition: $condition) {
+  async UpdateDockData(
+    input: UpdateDockDataInput,
+    condition?: ModeldockDataConditionInput
+  ): Promise<UpdateDockDataMutation> {
+    const statement = `mutation UpdateDockData($input: UpdateDockDataInput!, $condition: ModeldockDataConditionInput) {
+        updateDockData(input: $input, condition: $condition) {
           __typename
           id
-          topic
-          config
-          GMT
-          ID
+          drift
+          weather
+          alarms {
+            __typename
+            id
+            value
+            message
+          }
           createdAt
           updatedAt
         }
@@ -308,20 +536,24 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <UpdateFerjeDataMutation>response.data.updateFerjeData;
+    return <UpdateDockDataMutation>response.data.updateDockData;
   }
-  async DeleteFerjeData(
-    input: DeleteFerjeDataInput,
-    condition?: ModelferjeDataConditionInput
-  ): Promise<DeleteFerjeDataMutation> {
-    const statement = `mutation DeleteFerjeData($input: DeleteFerjeDataInput!, $condition: ModelferjeDataConditionInput) {
-        deleteFerjeData(input: $input, condition: $condition) {
+  async DeleteDockData(
+    input: DeleteDockDataInput,
+    condition?: ModeldockDataConditionInput
+  ): Promise<DeleteDockDataMutation> {
+    const statement = `mutation DeleteDockData($input: DeleteDockDataInput!, $condition: ModeldockDataConditionInput) {
+        deleteDockData(input: $input, condition: $condition) {
           __typename
           id
-          topic
-          config
-          GMT
-          ID
+          drift
+          weather
+          alarms {
+            __typename
+            id
+            value
+            message
+          }
           createdAt
           updatedAt
         }
@@ -335,17 +567,120 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <DeleteFerjeDataMutation>response.data.deleteFerjeData;
+    return <DeleteDockDataMutation>response.data.deleteDockData;
   }
-  async GetFerjeData(id: string): Promise<GetFerjeDataQuery> {
-    const statement = `query GetFerjeData($id: ID!) {
-        getFerjeData(id: $id) {
+  async CreateDock(
+    input: CreateDockInput,
+    condition?: ModeldockConditionInput
+  ): Promise<CreateDockMutation> {
+    const statement = `mutation CreateDock($input: CreateDockInput!, $condition: ModeldockConditionInput) {
+        createDock(input: $input, condition: $condition) {
           __typename
           id
-          topic
-          config
-          GMT
-          ID
+          name
+          location
+          data {
+            __typename
+            id
+            drift
+            weather
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateDockMutation>response.data.createDock;
+  }
+  async UpdateDock(
+    input: UpdateDockInput,
+    condition?: ModeldockConditionInput
+  ): Promise<UpdateDockMutation> {
+    const statement = `mutation UpdateDock($input: UpdateDockInput!, $condition: ModeldockConditionInput) {
+        updateDock(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          location
+          data {
+            __typename
+            id
+            drift
+            weather
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateDockMutation>response.data.updateDock;
+  }
+  async DeleteDock(
+    input: DeleteDockInput,
+    condition?: ModeldockConditionInput
+  ): Promise<DeleteDockMutation> {
+    const statement = `mutation DeleteDock($input: DeleteDockInput!, $condition: ModeldockConditionInput) {
+        deleteDock(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          location
+          data {
+            __typename
+            id
+            drift
+            weather
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteDockMutation>response.data.deleteDock;
+  }
+  async GetDockData(id: string): Promise<GetDockDataQuery> {
+    const statement = `query GetDockData($id: ID!) {
+        getDockData(id: $id) {
+          __typename
+          id
+          drift
+          weather
+          alarms {
+            __typename
+            id
+            value
+            message
+          }
           createdAt
           updatedAt
         }
@@ -356,23 +691,21 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetFerjeDataQuery>response.data.getFerjeData;
+    return <GetDockDataQuery>response.data.getDockData;
   }
-  async ListFerjeData(
-    filter?: ModelferjeDataFilterInput,
+  async ListDockData(
+    filter?: ModeldockDataFilterInput,
     limit?: number,
     nextToken?: string
-  ): Promise<ListFerjeDataQuery> {
-    const statement = `query ListFerjeData($filter: ModelferjeDataFilterInput, $limit: Int, $nextToken: String) {
-        listFerjeData(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  ): Promise<ListDockDataQuery> {
+    const statement = `query ListDockData($filter: ModeldockDataFilterInput, $limit: Int, $nextToken: String) {
+        listDockData(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
           items {
             __typename
             id
-            topic
-            config
-            GMT
-            ID
+            drift
+            weather
             createdAt
             updatedAt
           }
@@ -392,7 +725,68 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListFerjeDataQuery>response.data.listFerjeData;
+    return <ListDockDataQuery>response.data.listDockData;
+  }
+  async GetDock(id: string): Promise<GetDockQuery> {
+    const statement = `query GetDock($id: ID!) {
+        getDock(id: $id) {
+          __typename
+          id
+          name
+          location
+          data {
+            __typename
+            id
+            drift
+            weather
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetDockQuery>response.data.getDock;
+  }
+  async ListDocks(
+    filter?: ModeldockFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListDocksQuery> {
+    const statement = `query ListDocks($filter: ModeldockFilterInput, $limit: Int, $nextToken: String) {
+        listDocks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            location
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListDocksQuery>response.data.listDocks;
   }
   OnUpdateByIdListener(
     id: string
@@ -403,10 +797,14 @@ export class APIService {
         onUpdateById(id: $id) {
           __typename
           id
-          topic
-          config
-          GMT
-          ID
+          drift
+          weather
+          alarms {
+            __typename
+            id
+            value
+            message
+          }
           createdAt
           updatedAt
         }
@@ -421,66 +819,159 @@ export class APIService {
     >;
   }
 
-  OnCreateFerjeDataListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateFerjeData">>
+  OnCreateDockDataListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDockData">>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnCreateFerjeData {
-        onCreateFerjeData {
+      `subscription OnCreateDockData {
+        onCreateDockData {
           __typename
           id
-          topic
-          config
-          GMT
-          ID
+          drift
+          weather
+          alarms {
+            __typename
+            id
+            value
+            message
+          }
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateFerjeData">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDockData">>
   >;
 
-  OnUpdateFerjeDataListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateFerjeData">>
+  OnUpdateDockDataListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDockData">>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnUpdateFerjeData {
-        onUpdateFerjeData {
+      `subscription OnUpdateDockData {
+        onUpdateDockData {
           __typename
           id
-          topic
-          config
-          GMT
-          ID
+          drift
+          weather
+          alarms {
+            __typename
+            id
+            value
+            message
+          }
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateFerjeData">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDockData">>
   >;
 
-  OnDeleteFerjeDataListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteFerjeData">>
+  OnDeleteDockDataListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDockData">>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnDeleteFerjeData {
-        onDeleteFerjeData {
+      `subscription OnDeleteDockData {
+        onDeleteDockData {
           __typename
           id
-          topic
-          config
-          GMT
-          ID
+          drift
+          weather
+          alarms {
+            __typename
+            id
+            value
+            message
+          }
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteFerjeData">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDockData">>
+  >;
+
+  OnCreateDockListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDock">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateDock {
+        onCreateDock {
+          __typename
+          id
+          name
+          location
+          data {
+            __typename
+            id
+            drift
+            weather
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDock">>
+  >;
+
+  OnUpdateDockListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDock">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateDock {
+        onUpdateDock {
+          __typename
+          id
+          name
+          location
+          data {
+            __typename
+            id
+            drift
+            weather
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDock">>
+  >;
+
+  OnDeleteDockListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteDock {
+        onDeleteDock {
+          __typename
+          id
+          name
+          location
+          data {
+            __typename
+            id
+            drift
+            weather
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
   >;
 }

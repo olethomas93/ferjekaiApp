@@ -5,6 +5,7 @@ import { routeTransitionAnimations } from '../route-transition-animations';
 import { AuthService } from "../services/auth.service";
 import Amplify, { API,PubSub } from 'aws-amplify';
 import {TilesComponent} from '../dialogs/tiles/tiles.component'
+import {AddDockComponent} from '../dialogs/add-dock/add-dock.component'
 import { MatDialog } from '@angular/material/dialog';
 import { APIService } from '../API.service';
 
@@ -67,12 +68,14 @@ export class DashboardComponent implements OnInit {
   
     ngOnInit(): void {
 
-      this.api.GetFerjeData("ferrydocks").then((data:any)=>{
+      this.api.ListDocks().then((data:any)=>{
       
-        this.ferrydocks =JSON.parse(data.topic);
+        this.ferrydocks =data.items;
+        console.log(this.ferrydocks)
       })
 
     }
+
 
 
     async getCred(){
@@ -116,6 +119,10 @@ export class DashboardComponent implements OnInit {
       
     }
 
+    addDock(){
+      const dialogRef = this.dialog.open(AddDockComponent,{})
+
+    }
     openStatusDialog(ferrydock:any,location:any) {
       
 

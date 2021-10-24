@@ -1,15 +1,31 @@
-type ferjeData @model {
+type dockData @model {
   id: ID!
-  topic: AWSJSON
-  config:AWSJSON
-  GMT : AWSTimestamp
-  ID:Int
+  drift: AWSJSON
+  weather:AWSJSON
+  alarms:[AlarmObj]
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
 }
 
+type dock @model {
+id:ID!
+name:String
+location:[Float]
+data:dockData @connection(fields:["id"])
 
-type Subscription {
-  onUpdateById(id: ID!): ferjeData
-    @aws_subscribe(mutations: ["updateFerjeData"])
 }
+
+
+type AlarmObj {
+ 
+  id:String
+  value:String
+  message:String
+  
+
+}
+ type Subscription {
+   onUpdateById(id: ID!): dockData
+     @aws_subscribe(mutations: ["updateDockData"])
+ }
+

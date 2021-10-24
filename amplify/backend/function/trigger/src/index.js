@@ -19,12 +19,16 @@ query MyQuery {
 }`
 
 const update =gql`
-mutation MyMutation($input:UpdateFerjeDataInput!) {
-  updateFerjeData(input: $input) {
-    GMT
+mutation MyMutation($input:UpdateDockDataInput!) {
+  updateDockData(input: $input) {
     id
-    ID
-    topic
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
     createdAt
     updatedAt
   }
@@ -32,12 +36,19 @@ mutation MyMutation($input:UpdateFerjeDataInput!) {
 `
 
 const create =gql`
-mutation MyMutation1($input:CreateFerjeDataInput!) {
-  createFerjeData(input: $input) {
-    GMT
+mutation CreateDockData(
+  $input: CreateDockDataInput!
+  $condition: ModeldockDataConditionInput
+) {
+  createDockData(input: $input, condition: $condition) {
     id
-    ID
-    topic
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
     createdAt
     updatedAt
   }
@@ -49,19 +60,13 @@ exports.handler = async (event) => {
   
 var TagValues ={};
 var ferry = Object.keys(event)[0]
-var data = "ferrydata" ;
+var data = event[ferry];
 
 
-var item ={
-  id:ferry,
-  ID:0,
-  GMT:Date.now(),
-  topic:JSON.stringify(event[ferry]),
-  createdAt: new Date().toISOString(),
-  updatedAt:new Date().toISOString()
-};
 
-  console.log(item)
+
+ console.log(ferry)
+ console.log(data.alarms)
   try {
     const graphqlData = await axios({
       url: "https://cwv5hklocvelle3dgk6iho6ake.appsync-api.eu-central-1.amazonaws.com/graphql",
@@ -74,11 +79,12 @@ var item ={
         variables: {
           input: {
             id:ferry,
-            ID:0,
-            GMT:Date.now(),
-            topic:JSON.stringify(event[ferry]),
+            weather:JSON.stringify(data.weather),
+          drift:JSON.stringify(data.drift),
+          alarms:data.alarms,
             createdAt: new Date().toISOString(),
             updatedAt:new Date().toISOString()
+            
            
           }
         }
@@ -87,7 +93,6 @@ var item ={
     });
     const body = {
       message: "successfully created item!",
-      data :item
     }
     return {
         statusCode: 200,

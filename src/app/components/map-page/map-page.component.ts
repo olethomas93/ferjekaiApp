@@ -74,27 +74,27 @@ export class MapPageComponent implements OnInit {
 
    
     
-    this.api.OnUpdateByIdListener("sulesund").subscribe((data:any)=>{
+    // this.api.OnUpdateByIdListener("sulesund").subscribe((data:any)=>{
 
-      let res =JSON.parse(data.value.data.onUpdateById.topic)
-
-        
-
-      if (res.alarms['led alarm'].toLowerCase() === "true"){
+    //   let res =JSON.parse(data.value.data.onUpdateById.data)
 
         
-        this.sulesund.setStyle({color:"red",className:"pulse"})
+
+    //   if (res.alarms['led alarm'].toLowerCase() === "true"){
+
         
-      }else{
-        this.sulesund.setStyle({color:"green",className:""})
+    //     this.sulesund.setStyle({color:"red",className:"pulse"})
+        
+    //   }else{
+    //     this.sulesund.setStyle({color:"green",className:""})
 
-      }
+    //   }
 
-    })
+    // })
 
-    this.api.GetFerjeData("ferrydocks").then((data:any)=>{
-      
-      this.ferrydocks =JSON.parse(data.topic);
+    this.api.ListDocks().then((data:any)=>{
+      console.log(data)
+      this.ferrydocks =(data.items);
     })
 
    
@@ -112,9 +112,9 @@ export class MapPageComponent implements OnInit {
    
 // you can set .my-div-icon styles in CSS
 
-this.api.GetFerjeData("ferrydocks").then((data:any)=>{
+this.api.ListDocks().then((data:any)=>{
       
-  this.ferrydocks =JSON.parse(data.topic);
+  this.ferrydocks =data.items;
 
   for( let i in this.ferrydocks){
 
@@ -137,17 +137,14 @@ this.api.GetFerjeData("ferrydocks").then((data:any)=>{
 
   })
 
-  this.api.GetFerjeData(this.ferrydocks[i].name).then((data:any)=>{
+  this.api.GetDockData(this.ferrydocks[i].name).then((data:any)=>{
 
     if(data){
-    let res =JSON.parse(data.topic)
+    let res =JSON.parse(data.alarms)
+      console.log(res)
+    for( let i in res){
 
-   
-  
-      
-  
-    if (res.alarms['endebryter bom 2 oppe'].toLowerCase() === "true" ||
-    res.alarms['Motorvern sperrebomb'].toLowerCase() === "true"){
+      if (res[i].value.toLowerCase() === "true"){
   
       ferry.getElement()?.classList.add("pulse")
       ferry.setStyle({color:"red",className:''})
@@ -159,6 +156,12 @@ this.api.GetFerjeData("ferrydocks").then((data:any)=>{
       
   
     }
+
+    }
+  
+      
+  
+    
     }
   })
   
