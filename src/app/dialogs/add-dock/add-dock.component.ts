@@ -34,10 +34,10 @@ export class AddDockComponent implements OnInit {
 
     console.log(formValue);
 
-    this.api.CreateDock({id:formValue.name,location:[formValue.lat,formValue.lon],name:formValue.name}).then(()=>{
+    this.api.CreateDock({id:formValue.name.toLowerCase(),location:[formValue.lat,formValue.lon],name:formValue.name}).then(()=>{
 
 
-      this.api.CreateDockData({id:formValue.name})
+      this.api.CreateDockData({id:formValue.name.toLowerCase()})
     }).catch((e:any)=>{
       console.log(e)
 
