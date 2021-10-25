@@ -1,0 +1,40 @@
+<div class="box-body">
+	<form novalidate #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+		<div class="row">
+			<div class="col-sm-6 form-group">
+				<label>Navn på fergekai</label>
+				<input type="text" class="form-control" name="name" ngModel #firstNameRef="ngModel" required [class.ctrl-error] = "firstNameRef.touched &&
+firstNameRef?.errors?.required" minlength="3"> 
+        <div *ngIf="firstNameRef.touched &&
+firstNameRef?.errors?.required" class="error-message">
+The name is required.
+</div>
+<div class="error-message" *ngIf="firstNameRef.touched &&
+firstNameRef?.errors?.minlength">
+You should enter minimum
+{{firstNameRef?.errors?.minlength.requiredLength}}
+characters into first name, but you entered only
+{{firstNameRef?.errors?.minlength.actualLength}} character(s).
+</div>
+			</div>
+		
+		</div>
+		
+	
+		<div class="row">
+			<div class="col-sm-6 form-group">
+				<label>Lat</label>
+				<input type="number" class="form-control" name="lat" ngModel required #streetRef="ngModel">
+			</div>
+			<div class="col-sm-6 form-group">
+				<label>Lon</label>
+				<input type="number" class="form-control" name="lon" ngModel required #cityRef="ngModel">
+			</div>
+		</div>
+	
+
+
+
+		<button type="submit" class="btn btn-secondary" [disabled]="formRef.invalid">Legg til</button>
+	</form>
+</div>

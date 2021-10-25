@@ -15,14 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "apiferjekaiGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apiferjekaiGraphQLAPIIdOutput"
-    },
-    "apiferjekaiGraphQLAPIEndpointOutput": {
-      "Type": "String",
-      "Default": "apiferjekaiGraphQLAPIEndpointOutput"
     }
   },
   "Conditions": {
@@ -55,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "trigger",
+            "iotDB",
             {
               "Fn::Join": [
                 "",
                 [
-                  "trigger",
+                  "iotDB",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ferjekaiLambdaRoled09c344f",
+            "ferrydockLambdaRolea4a7407b",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ferjekaiLambdaRoled09c344f",
+                  "ferrydockLambdaRolea4a7407b",
                   "-",
                   {
                     "Ref": "env"
@@ -171,62 +163,6 @@
             }
           ]
         }
-      }
-    },
-    "LambdaTriggerPolicyferjeData": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy-ferjeData",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:DescribeStream",
-                "dynamodb:GetRecords",
-                "dynamodb:GetShardIterator",
-                "dynamodb:ListStreams"
-              ],
-              "Resource": {
-                "Fn::ImportValue": {
-                  "Fn::Sub": "${apiferjekaiGraphQLAPIIdOutput}:GetAtt:ferjeDataTable:StreamArn"
-                }
-              }
-            }
-          ]
-        }
-      }
-    },
-    "LambdaEventSourceMappingferjeData": {
-      "Type": "AWS::Lambda::EventSourceMapping",
-      "DependsOn": [
-        "LambdaTriggerPolicyferjeData",
-        "LambdaExecutionRole"
-      ],
-      "Properties": {
-        "BatchSize": 100,
-        "Enabled": true,
-        "EventSourceArn": {
-          "Fn::ImportValue": {
-            "Fn::Sub": "${apiferjekaiGraphQLAPIIdOutput}:GetAtt:ferjeDataTable:StreamArn"
-          }
-        },
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "LambdaFunction",
-            "Arn"
-          ]
-        },
-        "StartingPosition": "LATEST"
       }
     }
   },

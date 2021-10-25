@@ -1,6 +1,8 @@
 {
-    "resourceNameTruncated": "ferjekce2549f8",
-    "userPoolName": "ferjekai",
+    "identityPoolName": "testAuthIdentityPool",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "ferryd9663b373",
+    "userPoolName": "ferryDock",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -10,8 +12,8 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Subject {####}",
-    "emailVerificationMessage": "Body {####}",
+    "emailVerificationSubject": "Forgot password code: {####}",
+    "emailVerificationMessage": "Forgot password code: {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [
@@ -25,14 +27,14 @@
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": "1",
+    "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "ferjekce2549f8_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "ferryD9663b373_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "ce2549f8",
-    "resourceName": "ferjekai",
-    "authSelections": "userPoolOnly",
+    "sharedId": "9663b373",
+    "resourceName": "ferryDock",
+    "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -50,19 +52,11 @@
         "email"
     ],
     "useDefault": "manual",
-    "userPoolGroups": true,
-    "userPoolGroupList": [
-        "admins"
-    ],
+    "userPoolGroups": false,
+    "userPoolGroupList": [],
     "adminQueries": false,
+    "thirdPartyAuth": false,
+    "authProviders": [],
     "usernameCaseSensitive": false,
-    "dependsOn": [],
-    "triggers": "{}",
-    "hostedUI": false,
-    "parentStack": {
-        "Ref": "AWS::StackId"
-    },
-    "breakCircularDependency": true,
-    "permissions": [],
-    "authProviders": []
+    "dependsOn": []
 }

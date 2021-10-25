@@ -15,7 +15,7 @@
     
    
  
-      <img src="../assets/logo.png" class="logo">
+      <img src="../assets/logo.png" (click)="getCred()" class="logo">
     
 
       <div></div>
@@ -50,6 +50,10 @@
 
           <mat-divider></mat-divider>
           <div mat-subheader>Info</div>
+
+          <mat-list-item *ngIf="checkGroup()" (click)="addDock()">
+            +
+          </mat-list-item>
 
       
           <mat-divider></mat-divider>

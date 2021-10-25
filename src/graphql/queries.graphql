@@ -1,27 +1,77 @@
 # this is an auto generated file. This will be overwritten
-query GetFerjeData($id: ID!) {
-  getFerjeData(id: $id) {
+query GetDockData($id: ID!) {
+  getDockData(id: $id) {
     id
-    topic
-    config
-    GMT
-    ID
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
     createdAt
     updatedAt
   }
 }
-query ListFerjeData(
-  $filter: ModelferjeDataFilterInput
+query ListDockData(
+  $filter: ModeldockDataFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listFerjeData(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listDockData(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      topic
-      config
-      GMT
-      ID
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetDock($id: ID!) {
+  getDock(id: $id) {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListDocks(
+  $filter: ModeldockFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDocks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      location
+      data {
+        id
+        drift
+        weather
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

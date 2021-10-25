@@ -53,6 +53,7 @@ import { AlarmconfComponent } from './components/alarmconf/alarmconf.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,7 @@ import { AlarmconfComponent } from './components/alarmconf/alarmconf.component';
     ConfirmFormComponent,
     CreateDockComponent,
     SidescrollComponent,
-    AlarmconfComponent
+    AlarmconfComponent,
     
  
     

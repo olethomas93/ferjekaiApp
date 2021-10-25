@@ -1,42 +1,123 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateFerjeData(
-  $input: CreateFerjeDataInput!
-  $condition: ModelferjeDataConditionInput
+mutation CreateDockData(
+  $input: CreateDockDataInput!
+  $condition: ModeldockDataConditionInput
 ) {
-  createFerjeData(input: $input, condition: $condition) {
+  createDockData(input: $input, condition: $condition) {
     id
-    topic
-    config
-    GMT
-    ID
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
     createdAt
     updatedAt
   }
 }
-mutation UpdateFerjeData(
-  $input: UpdateFerjeDataInput!
-  $condition: ModelferjeDataConditionInput
+mutation UpdateDockData(
+  $input: UpdateDockDataInput!
+  $condition: ModeldockDataConditionInput
 ) {
-  updateFerjeData(input: $input, condition: $condition) {
+  updateDockData(input: $input, condition: $condition) {
     id
-    topic
-    config
-    GMT
-    ID
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
     createdAt
     updatedAt
   }
 }
-mutation DeleteFerjeData(
-  $input: DeleteFerjeDataInput!
-  $condition: ModelferjeDataConditionInput
+mutation DeleteDockData(
+  $input: DeleteDockDataInput!
+  $condition: ModeldockDataConditionInput
 ) {
-  deleteFerjeData(input: $input, condition: $condition) {
+  deleteDockData(input: $input, condition: $condition) {
     id
-    topic
-    config
-    GMT
-    ID
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateDock(
+  $input: CreateDockInput!
+  $condition: ModeldockConditionInput
+) {
+  createDock(input: $input, condition: $condition) {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateDock(
+  $input: UpdateDockInput!
+  $condition: ModeldockConditionInput
+) {
+  updateDock(input: $input, condition: $condition) {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteDock(
+  $input: DeleteDockInput!
+  $condition: ModeldockConditionInput
+) {
+  deleteDock(input: $input, condition: $condition) {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }

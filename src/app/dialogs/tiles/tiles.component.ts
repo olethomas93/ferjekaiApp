@@ -110,10 +110,10 @@ export class TilesComponent implements OnInit,OnDestroy {
 
     console.log(this.ferrydockName)
 
-  this.api.GetFerjeData(this.ferrydockName.name).then((data:any)=>{
-   
-    this.weatherUpdated = new Date(data['GMT']).toString()
-    this.updateData(JSON.parse(data.topic))
+  this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
+   console.log(data)
+    this.weatherUpdated = new Date(data['updatedAt']).toString()
+    this.updateData(data)
   }).catch((e)=>{
 
     console.log(e)
@@ -121,16 +121,16 @@ export class TilesComponent implements OnInit,OnDestroy {
 
 
 
- this.subscription= this.api.OnUpdateByIdListener(this.ferrydockName.name).subscribe((data:any)=>{
+ this.subscription= this.api.OnUpdateByIdListener(this.ferrydockName.name.toLowerCase()).subscribe((data:any)=>{
 
 
   
     if(data){
 
-      
-      this.weatherUpdated = new Date(data.value.data.onUpdateById['GMT']).toString()
-      let topic = data.value.data.onUpdateById.topic
-      this.updateData(JSON.parse(topic))
+      console.log(data)
+      this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toString()
+      let topic = data.value.data.onUpdateById
+      this.updateData(topic)
       
     }
 
@@ -154,11 +154,11 @@ close(e:any){
   updateData(data:any){
     
     
-   
+   console.log(data)
       
      
       
-      this.updateWeatherData(data.weather)
+      this.updateWeatherData(JSON.parse(data.weather))
       
 
  
@@ -168,7 +168,7 @@ close(e:any){
 
    
     
-      this.updateFerryData(data.drift)
+      this.updateFerryData(JSON.parse(data.drift))
 
 
   
@@ -217,9 +217,9 @@ close(e:any){
 
     this.dataSource =[]
     for(let i in data){
-      let status = (data[i].toLowerCase() === "true")
+      let status = (data[i].value.toLowerCase() === "true")
      
-      this.dataSource.push({name:i,status:status})
+      this.dataSource.push({name:data[i].message,status:status})
       
     }
     
