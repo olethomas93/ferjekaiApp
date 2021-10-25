@@ -10,6 +10,18 @@
       "StackName": "amplify-ferrydock-dev-90239",
       "StackId": "arn:aws:cloudformation:eu-central-1:212085892153:stack/amplify-ferrydock-dev-90239/8c5fa120-3561-11ec-b3f7-0af77f3743f2",
       "AmplifyAppId": "d2g9q3dap8dv4g"
+    },
+    "categories": {
+      "auth": {
+        "ferrydockbf6575df": {},
+        "ferryDock": {}
+      },
+      "function": {
+        "iotDB": {
+          "deploymentBucketName": "amplify-ferrydock-dev-90239-deployment",
+          "s3Key": "amplify-builds/iotDB-61484a33466158793554-build.zip"
+        }
+      }
     }
   }
 }

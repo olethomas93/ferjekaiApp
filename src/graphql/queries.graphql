@@ -1,0 +1,80 @@
+# this is an auto generated file. This will be overwritten
+query GetDockData($id: ID!) {
+  getDockData(id: $id) {
+    id
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListDockData(
+  $filter: ModeldockDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDockData(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetDock($id: ID!) {
+  getDock(id: $id) {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListDocks(
+  $filter: ModeldockFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDocks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      location
+      data {
+        id
+        drift
+        weather
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

@@ -1,6 +1,6 @@
 projects:
   ferjekai:
-    schemaPath: amplify/backend/api/ferjekai/build/schema.graphql
+    schemaPath: amplify/backend/api/ferrydock/build/schema.graphql
     includes:
       - src/graphql/**/*.graphql
     excludes:

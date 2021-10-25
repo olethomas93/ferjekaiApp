@@ -1,0 +1,120 @@
+# this is an auto generated file. This will be overwritten
+subscription OnUpdateById($id: ID!) {
+  onUpdateById(id: $id) {
+    id
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateDockData {
+  onCreateDockData {
+    id
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateDockData {
+  onUpdateDockData {
+    id
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteDockData {
+  onDeleteDockData {
+    id
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateDock {
+  onCreateDock {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateDock {
+  onUpdateDock {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteDock {
+  onDeleteDock {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

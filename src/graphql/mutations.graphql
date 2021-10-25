@@ -1,0 +1,124 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateDockData(
+  $input: CreateDockDataInput!
+  $condition: ModeldockDataConditionInput
+) {
+  createDockData(input: $input, condition: $condition) {
+    id
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateDockData(
+  $input: UpdateDockDataInput!
+  $condition: ModeldockDataConditionInput
+) {
+  updateDockData(input: $input, condition: $condition) {
+    id
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteDockData(
+  $input: DeleteDockDataInput!
+  $condition: ModeldockDataConditionInput
+) {
+  deleteDockData(input: $input, condition: $condition) {
+    id
+    drift
+    weather
+    alarms {
+      id
+      value
+      message
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateDock(
+  $input: CreateDockInput!
+  $condition: ModeldockConditionInput
+) {
+  createDock(input: $input, condition: $condition) {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateDock(
+  $input: UpdateDockInput!
+  $condition: ModeldockConditionInput
+) {
+  updateDock(input: $input, condition: $condition) {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteDock(
+  $input: DeleteDockInput!
+  $condition: ModeldockConditionInput
+) {
+  deleteDock(input: $input, condition: $condition) {
+    id
+    name
+    location
+    data {
+      id
+      drift
+      weather
+      alarms {
+        id
+        value
+        message
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

@@ -1,5 +1,31 @@
-type Todo @model {
+type dockData @model {
   id: ID!
-  name: String!
-  description: String
+  drift: AWSJSON
+  weather:AWSJSON
+  alarms:[AlarmObj]
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
+
+type dock @model {
+id:ID!
+name:String
+location:[Float]
+data:dockData @connection(fields:["id"])
+
+}
+
+
+type AlarmObj {
+ 
+  id:String
+  value:String
+  message:String
+  
+
+}
+ type Subscription {
+   onUpdateById(id: ID!): dockData
+     @aws_subscribe(mutations: ["updateDockData"])
+ }
+

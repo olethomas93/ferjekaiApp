@@ -9,16 +9,6 @@ export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
 
-export type __SubscriptionContainer = {
-  onUpdateById: OnUpdateByIdSubscription;
-  onCreateDockData: OnCreateDockDataSubscription;
-  onUpdateDockData: OnUpdateDockDataSubscription;
-  onDeleteDockData: OnDeleteDockDataSubscription;
-  onCreateDock: OnCreateDockSubscription;
-  onUpdateDock: OnUpdateDockSubscription;
-  onDeleteDock: OnDeleteDockSubscription;
-};
-
 export type CreateDockDataInput = {
   id?: string | null;
   drift?: string | null;
@@ -262,6 +252,12 @@ export type CreateDockMutation = {
     id: string;
     drift?: string | null;
     weather?: string | null;
+    alarms?: Array<{
+      __typename: "AlarmObj";
+      id?: string | null;
+      value?: string | null;
+      message?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -279,6 +275,12 @@ export type UpdateDockMutation = {
     id: string;
     drift?: string | null;
     weather?: string | null;
+    alarms?: Array<{
+      __typename: "AlarmObj";
+      id?: string | null;
+      value?: string | null;
+      message?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -296,6 +298,12 @@ export type DeleteDockMutation = {
     id: string;
     drift?: string | null;
     weather?: string | null;
+    alarms?: Array<{
+      __typename: "AlarmObj";
+      id?: string | null;
+      value?: string | null;
+      message?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -325,6 +333,12 @@ export type ListDockDataQuery = {
     id: string;
     drift?: string | null;
     weather?: string | null;
+    alarms?: Array<{
+      __typename: "AlarmObj";
+      id?: string | null;
+      value?: string | null;
+      message?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null> | null;
@@ -341,6 +355,12 @@ export type GetDockQuery = {
     id: string;
     drift?: string | null;
     weather?: string | null;
+    alarms?: Array<{
+      __typename: "AlarmObj";
+      id?: string | null;
+      value?: string | null;
+      message?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -355,6 +375,14 @@ export type ListDocksQuery = {
     id: string;
     name?: string | null;
     location?: Array<number | null> | null;
+    data?: {
+      __typename: "dockData";
+      id: string;
+      drift?: string | null;
+      weather?: string | null;
+      createdAt?: string | null;
+      updatedAt?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -431,6 +459,12 @@ export type OnCreateDockSubscription = {
     id: string;
     drift?: string | null;
     weather?: string | null;
+    alarms?: Array<{
+      __typename: "AlarmObj";
+      id?: string | null;
+      value?: string | null;
+      message?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -448,6 +482,12 @@ export type OnUpdateDockSubscription = {
     id: string;
     drift?: string | null;
     weather?: string | null;
+    alarms?: Array<{
+      __typename: "AlarmObj";
+      id?: string | null;
+      value?: string | null;
+      message?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -465,6 +505,12 @@ export type OnDeleteDockSubscription = {
     id: string;
     drift?: string | null;
     weather?: string | null;
+    alarms?: Array<{
+      __typename: "AlarmObj";
+      id?: string | null;
+      value?: string | null;
+      message?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -584,6 +630,12 @@ export class APIService {
             id
             drift
             weather
+            alarms {
+              __typename
+              id
+              value
+              message
+            }
             createdAt
             updatedAt
           }
@@ -617,6 +669,12 @@ export class APIService {
             id
             drift
             weather
+            alarms {
+              __typename
+              id
+              value
+              message
+            }
             createdAt
             updatedAt
           }
@@ -650,6 +708,12 @@ export class APIService {
             id
             drift
             weather
+            alarms {
+              __typename
+              id
+              value
+              message
+            }
             createdAt
             updatedAt
           }
@@ -706,6 +770,12 @@ export class APIService {
             id
             drift
             weather
+            alarms {
+              __typename
+              id
+              value
+              message
+            }
             createdAt
             updatedAt
           }
@@ -739,6 +809,12 @@ export class APIService {
             id
             drift
             weather
+            alarms {
+              __typename
+              id
+              value
+              message
+            }
             createdAt
             updatedAt
           }
@@ -767,6 +843,14 @@ export class APIService {
             id
             name
             location
+            data {
+              __typename
+              id
+              drift
+              weather
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -790,9 +874,7 @@ export class APIService {
   }
   OnUpdateByIdListener(
     id: string
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateById">>
-  > {
+  ): Observable<SubscriptionResponse<OnUpdateByIdSubscription>> {
     const statement = `subscription OnUpdateById($id: ID!) {
         onUpdateById(id: $id) {
           __typename
@@ -814,13 +896,11 @@ export class APIService {
     };
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateById">>
-    >;
+    ) as Observable<SubscriptionResponse<OnUpdateByIdSubscription>>;
   }
 
   OnCreateDockDataListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDockData">>
+    SubscriptionResponse<OnCreateDockDataSubscription>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateDockData {
@@ -840,12 +920,10 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDockData">>
-  >;
+  ) as Observable<SubscriptionResponse<OnCreateDockDataSubscription>>;
 
   OnUpdateDockDataListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDockData">>
+    SubscriptionResponse<OnUpdateDockDataSubscription>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateDockData {
@@ -865,12 +943,10 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDockData">>
-  >;
+  ) as Observable<SubscriptionResponse<OnUpdateDockDataSubscription>>;
 
   OnDeleteDockDataListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDockData">>
+    SubscriptionResponse<OnDeleteDockDataSubscription>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteDockData {
@@ -890,12 +966,10 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDockData">>
-  >;
+  ) as Observable<SubscriptionResponse<OnDeleteDockDataSubscription>>;
 
   OnCreateDockListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDock">>
+    SubscriptionResponse<OnCreateDockSubscription>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateDock {
@@ -909,6 +983,12 @@ export class APIService {
             id
             drift
             weather
+            alarms {
+              __typename
+              id
+              value
+              message
+            }
             createdAt
             updatedAt
           }
@@ -917,12 +997,10 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDock">>
-  >;
+  ) as Observable<SubscriptionResponse<OnCreateDockSubscription>>;
 
   OnUpdateDockListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDock">>
+    SubscriptionResponse<OnUpdateDockSubscription>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateDock {
@@ -936,6 +1014,12 @@ export class APIService {
             id
             drift
             weather
+            alarms {
+              __typename
+              id
+              value
+              message
+            }
             createdAt
             updatedAt
           }
@@ -944,12 +1028,10 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDock">>
-  >;
+  ) as Observable<SubscriptionResponse<OnUpdateDockSubscription>>;
 
   OnDeleteDockListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
+    SubscriptionResponse<OnDeleteDockSubscription>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteDock {
@@ -963,6 +1045,12 @@ export class APIService {
             id
             drift
             weather
+            alarms {
+              __typename
+              id
+              value
+              message
+            }
             createdAt
             updatedAt
           }
@@ -971,7 +1059,5 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
-  >;
+  ) as Observable<SubscriptionResponse<OnDeleteDockSubscription>>;
 }
