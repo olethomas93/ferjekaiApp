@@ -1,27 +1,15 @@
 {
-  "staging": {
+  "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ferjekai-staging-101604-authRole",
-      "UnauthRoleArn": "arn:aws:iam::212085892153:role/amplify-ferjekai-staging-101604-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::212085892153:role/amplify-ferjekai-staging-101604-authRole",
+      "AuthRoleName": "amplify-ferrydock-dev-90239-authRole",
+      "UnauthRoleArn": "arn:aws:iam::212085892153:role/amplify-ferrydock-dev-90239-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::212085892153:role/amplify-ferrydock-dev-90239-authRole",
       "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-ferjekai-staging-101604-deployment",
-      "UnauthRoleName": "amplify-ferjekai-staging-101604-unauthRole",
-      "StackName": "amplify-ferjekai-staging-101604",
-      "StackId": "arn:aws:cloudformation:eu-central-1:212085892153:stack/amplify-ferjekai-staging-101604/ce436d90-f8fa-11eb-abe8-06ed8e72d03e",
-      "AmplifyAppId": "d2thhvavqar59b"
-    },
-    "categories": {
-      "auth": {
-        "ferjekai": {},
-        "userPoolGroups": {}
-      },
-      "function": {
-        "trigger": {
-          "deploymentBucketName": "amplify-ferjekai-staging-101604-deployment",
-          "s3Key": "amplify-builds/trigger-6b30433363724f506148-build.zip"
-        }
-      }
+      "DeploymentBucketName": "amplify-ferrydock-dev-90239-deployment",
+      "UnauthRoleName": "amplify-ferrydock-dev-90239-unauthRole",
+      "StackName": "amplify-ferrydock-dev-90239",
+      "StackId": "arn:aws:cloudformation:eu-central-1:212085892153:stack/amplify-ferrydock-dev-90239/8c5fa120-3561-11ec-b3f7-0af77f3743f2",
+      "AmplifyAppId": "d2g9q3dap8dv4g"
     }
   }
 }
