@@ -76,7 +76,16 @@ export class DashboardComponent implements OnInit {
 
     }
 
+    checkGroup(){
+      let temp =false;
+     if(localStorage.getItem('group') == "admin" ){
 
+      temp = true;
+
+     }
+
+     return temp
+    }
 
     async getCred(){
       

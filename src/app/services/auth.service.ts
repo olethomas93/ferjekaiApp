@@ -28,12 +28,15 @@ export class AuthService {
         .pipe(
           map(result => {
 
-            console.log(result)
+            
+
+            localStorage.setItem('group',result.signInUserSession.idToken.payload['cognito:groups'][0])
            
             this.loggedIn.next(true);
             return true;
           }),
           catchError(error => {
+            localStorage.setItem('group','')
             this.loggedIn.next(false);
             return of(false);
           })
