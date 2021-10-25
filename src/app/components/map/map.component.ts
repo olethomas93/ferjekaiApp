@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import {
   Map,
-  Control,
+  control,
   DomUtil,
   ZoomAnimEvent,
   Layer,
@@ -16,7 +16,8 @@ import {
   tileLayer,
   latLng,
   popup,
-  svg
+  svg,
+  
   
   
 } from 'leaflet';
@@ -31,15 +32,30 @@ export class MapComponent implements OnInit {
   @Output() map$: EventEmitter<Map> = new EventEmitter();
   @Output() zoom$: EventEmitter<number> = new EventEmitter();
   @Output() coord$: EventEmitter<any> = new EventEmitter();
+
+  private light = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    opacity: 0.7,
+    maxZoom: 19,
+    detectRetina: true,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  })
+
+  private dark = tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+    opacity: 0.7,
+    maxZoom: 19,
+    detectRetina: true,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  })
+
  public options = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        opacity: 0.7,
-        maxZoom: 19,
-        detectRetina: true,
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }),
+     this.light,
+    
+      
+
+
     ],
     zoom: 12,
     renderer:svg(),
@@ -60,6 +76,7 @@ export class MapComponent implements OnInit {
   onMapReady(map: Map) {
     console.log('map ready');
     this.map = map;
+    control.layers({"light":this.light,"dark":this.dark}).addTo(this.map)
     this.map$.emit(map);
     //this.map.locate({ setView: true, maxZoom: 16 });
     this.zoom = map.getZoom();
