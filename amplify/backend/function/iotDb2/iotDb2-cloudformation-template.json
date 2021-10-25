@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "iotDB",
+            "iotDb2",
             {
               "Fn::Join": [
                 "",
                 [
-                  "iotDB",
+                  "iotDb2",
                   "-",
                   {
                     "Ref": "env"
@@ -103,12 +103,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ferrydockLambdaRolea4a7407b",
+            "ferrydockLambdaRole43475bfc",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ferrydockLambdaRolea4a7407b",
+                  "ferrydockLambdaRole43475bfc",
                   "-",
                   {
                     "Ref": "env"
@@ -197,7 +197,13 @@
             {
               "Effect": "Allow",
               "Action": [
-                "appsync:GraphQL"
+                "appsync:Create*",
+                "appsync:StartSchemaCreation",
+                "appsync:GraphQL",
+                "appsync:Get*",
+                "appsync:List*",
+                "appsync:Update*",
+                "appsync:Delete*"
               ],
               "Resource": [
                 {
@@ -216,7 +222,7 @@
                       {
                         "Ref": "apiferrydockGraphQLAPIIdOutput"
                       },
-                      "/types/Query/*"
+                      "/*"
                     ]
                   ]
                 },

@@ -6,10 +6,9 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": ""
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authferryDock"
             }
           },
           "additionalAuthenticationProviders": []
@@ -53,7 +52,32 @@
     "iotDB": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "ferrydock",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
+    },
+    "iotDb2": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "ferrydock",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
     }
   }
 }

@@ -1,4 +1,4 @@
-type dockData @model {
+type dockData @model @aws_iam {
   id: ID!
   drift: AWSJSON
   weather:AWSJSON
@@ -7,7 +7,7 @@ type dockData @model {
   updatedAt: AWSDateTime
 }
 
-type dock @model {
+type dock @model @aws_iam {
 id:ID!
 name:String
 location:[Float]
