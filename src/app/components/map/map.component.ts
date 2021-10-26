@@ -77,11 +77,10 @@ export class MapComponent implements OnInit {
     this.map = map;
     control.layers({"light":this.light,"dark":this.dark}).addTo(this.map)
     this.map$.emit(map);
-    //this.map.locate({ setView: true, maxZoom: 16 });
+    this.map.locate({ setView: true, maxZoom: 10 });
     this.zoom = map.getZoom();
     this.zoom$.emit(this.zoom);
     
-
   }
 
 

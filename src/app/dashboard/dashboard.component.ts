@@ -6,6 +6,7 @@ import { AuthService } from "../services/auth.service";
 import Amplify, { API,PubSub } from 'aws-amplify';
 import {TilesComponent} from '../dialogs/tiles/tiles.component'
 import {AddDockComponent} from '../dialogs/add-dock/add-dock.component'
+import {DeleteDockComponent} from '../dialogs/delete-dock/delete-dock.component'
 import { MatDialog } from '@angular/material/dialog';
 import { APIService } from '../API.service';
 
@@ -130,6 +131,11 @@ export class DashboardComponent implements OnInit {
 
     addDock(){
       const dialogRef = this.dialog.open(AddDockComponent,{})
+
+    }
+    deleteDock(){
+
+      const dialogRef = this.dialog.open(DeleteDockComponent,{})
 
     }
     openStatusDialog(ferrydock:any,location:any) {

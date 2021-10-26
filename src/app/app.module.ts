@@ -41,6 +41,7 @@ import { ConfirmFormComponent } from './components/confirm-form/confirm-form.com
 import { CreateDockComponent } from './components/create-dock/create-dock.component';
 import { SidescrollComponent } from './components/sidescroll/sidescroll.component';
 import { AlarmconfComponent } from './components/alarmconf/alarmconf.component';
+import { DeleteDockComponent } from './dialogs/delete-dock/delete-dock.component';
 
 
 
@@ -64,6 +65,7 @@ import { AlarmconfComponent } from './components/alarmconf/alarmconf.component';
     CreateDockComponent,
     SidescrollComponent,
     AlarmconfComponent,
+    DeleteDockComponent,
     
  
     
