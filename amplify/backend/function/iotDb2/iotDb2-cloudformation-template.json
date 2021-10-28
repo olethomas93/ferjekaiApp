@@ -197,13 +197,7 @@
             {
               "Effect": "Allow",
               "Action": [
-                "appsync:Create*",
-                "appsync:StartSchemaCreation",
-                "appsync:GraphQL",
-                "appsync:Get*",
-                "appsync:List*",
-                "appsync:Update*",
-                "appsync:Delete*"
+                "appsync:GraphQL"
               ],
               "Resource": [
                 {
@@ -222,7 +216,7 @@
                       {
                         "Ref": "apiferrydockGraphQLAPIIdOutput"
                       },
-                      "/*"
+                      "/types/Query/*"
                     ]
                   ]
                 },

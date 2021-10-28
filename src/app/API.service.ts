@@ -9,6 +9,16 @@ export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
 
+export type __SubscriptionContainer = {
+  onUpdateById: OnUpdateByIdSubscription;
+  onCreateDockData: OnCreateDockDataSubscription;
+  onUpdateDockData: OnUpdateDockDataSubscription;
+  onDeleteDockData: OnDeleteDockDataSubscription;
+  onCreateDock: OnCreateDockSubscription;
+  onUpdateDock: OnUpdateDockSubscription;
+  onDeleteDock: OnDeleteDockSubscription;
+};
+
 export type CreateDockDataInput = {
   id?: string | null;
   drift?: string | null;
@@ -874,7 +884,9 @@ export class APIService {
   }
   OnUpdateByIdListener(
     id: string
-  ): Observable<SubscriptionResponse<OnUpdateByIdSubscription>> {
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateById">>
+  > {
     const statement = `subscription OnUpdateById($id: ID!) {
         onUpdateById(id: $id) {
           __typename
@@ -896,11 +908,13 @@ export class APIService {
     };
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<SubscriptionResponse<OnUpdateByIdSubscription>>;
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateById">>
+    >;
   }
 
   OnCreateDockDataListener: Observable<
-    SubscriptionResponse<OnCreateDockDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDockData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateDockData {
@@ -920,10 +934,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateDockDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDockData">>
+  >;
 
   OnUpdateDockDataListener: Observable<
-    SubscriptionResponse<OnUpdateDockDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDockData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateDockData {
@@ -943,10 +959,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateDockDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDockData">>
+  >;
 
   OnDeleteDockDataListener: Observable<
-    SubscriptionResponse<OnDeleteDockDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDockData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteDockData {
@@ -966,10 +984,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteDockDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDockData">>
+  >;
 
   OnCreateDockListener: Observable<
-    SubscriptionResponse<OnCreateDockSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDock">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateDock {
@@ -997,10 +1017,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateDockSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDock">>
+  >;
 
   OnUpdateDockListener: Observable<
-    SubscriptionResponse<OnUpdateDockSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDock">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateDock {
@@ -1028,10 +1050,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateDockSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDock">>
+  >;
 
   OnDeleteDockListener: Observable<
-    SubscriptionResponse<OnDeleteDockSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteDock {
@@ -1059,5 +1083,7 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteDockSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
+  >;
 }

@@ -11,7 +11,7 @@ const AUTH_TYPE = require('aws-appsync').AUTH_TYPE;
 const AWSAppSyncClient = require('aws-appsync').default;
 const gql = require('graphql-tag');
 
-
+const region = process.env.REGION;
 const config = {
     url: "https://m44yw2z75bhzxk6psdgb5tuhqe.appsync-api.eu-central-1.amazonaws.com/graphql",
     region: "eu-central-1",
@@ -25,7 +25,14 @@ const config = {
   console.log(config)
 
 
-
+  AWS.config.update({
+    region,
+    credentials: new AWS.Credentials(
+      process.env.AWS_ACCESS_KEY_ID,
+      process.env.AWS_SECRET_ACCESS_KEY,
+      process.env.AWS_SESSION_TOKEN
+    ),
+  });
 
 
   
