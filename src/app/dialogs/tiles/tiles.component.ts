@@ -48,11 +48,6 @@ export class TilesComponent implements OnInit,OnDestroy {
     {title:"Air Density",
   value :-999,color:"green",icon:"reorder",unit:"kg/m³"},
     {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
-    
-   
- 
-   
- 
   {title:"Wind Direction",
   value :-999,color:"green",icon:"explore",unit:"°"},
   ]
@@ -230,11 +225,11 @@ close(e:any){
 
   updateWeatherData(data:any){
     console.log(data)
-    this.weatherData[0].value = Math.round(data.Vindhastighet) 
-    this.weatherData[1].value = Math.round(data.Temperatur)
-    this.weatherData[2].value = Math.round(data.lufttrykk)
-    this.weatherData[3].value =Math.round(data.Vindretning)
-    this.weatherData[4].value =Math.round(data.lufttetthet)
+    this.weatherData[0].value = Math.round(data.Temperatur) 
+    this.weatherData[1].value = Math.round(data.lufttrykk)
+    this.weatherData[2].value = Math.round(data.lufttetthet)
+    this.weatherData[3].value =Math.round(data.Vindhastighet)
+    this.weatherData[4].value =Math.round(data.Vindretning)
 
   }
 

@@ -54,7 +54,9 @@
           <mat-list-item *ngIf="checkGroup()" (click)="addDock()">
             +
           </mat-list-item>
-
+          <mat-list-item *ngIf="checkGroup()" (click)="deleteDock()">
+            -
+          </mat-list-item>
       
           <mat-divider></mat-divider>
           <mat-list-item (click)="signOut()" class="logout">
