@@ -1,11 +1,12 @@
 {
-  "lambdaLayers": [],
   "permissions": {
     "api": {
       "ferrydock": [
         "Query",
-        "Mutation"
+        "Mutation",
+        "Subscription"
       ]
     }
-  }
+  },
+  "lambdaLayers": []
 }

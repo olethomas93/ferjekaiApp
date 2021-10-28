@@ -64,22 +64,7 @@
         }
       ]
     },
-    "iotDb2": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "ferrydock",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        }
-      ]
-    },
-    "iotdb3": {
+    "iotdb": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

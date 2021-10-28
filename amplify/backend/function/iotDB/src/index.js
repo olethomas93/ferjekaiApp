@@ -5,6 +5,8 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
+
+
 require('isomorphic-fetch');
 const AWS = require('aws-sdk/global');
 const AUTH_TYPE = require('aws-appsync').AUTH_TYPE;
@@ -12,7 +14,21 @@ const AWSAppSyncClient = require('aws-appsync').default;
 const gql = require('graphql-tag');
 require('cross-fetch/polyfill');
 
-const region = process.env.REGION;
+const config ={
+  url: 'https://m44yw2z75bhzxk6psdgb5tuhqe.appsync-api.eu-central-1.amazonaws.com/graphql',
+  region: process.env.AWS_REGION,
+  auth: {
+    type: AUTH_TYPE.AWS_IAM,
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      sessionToken: process.env.AWS_SESSION_TOKEN
+    }
+  },
+  disableOffline: true
+
+
+}
 const graphqlClient = new AWSAppSyncClient({
   url: 'https://m44yw2z75bhzxk6psdgb5tuhqe.appsync-api.eu-central-1.amazonaws.com/graphql',
   region: process.env.AWS_REGION,
@@ -28,7 +44,7 @@ const graphqlClient = new AWSAppSyncClient({
 });
  
 
-
+console.log(config)
 
 
   
@@ -50,7 +66,7 @@ query MyQuery {
   }
 }`
 
-const update =`
+const update =gql(`
 mutation updateDockData($input:UpdateDockDataInput!) {
   updateDockData(input: $input) {
     id
@@ -65,7 +81,7 @@ mutation updateDockData($input:UpdateDockDataInput!) {
     updatedAt
   }
 }
-`
+`)
 
 const create =gql`
 mutation CreateDockData(
@@ -89,7 +105,7 @@ mutation CreateDockData(
 
 
 
-exports.handler = (event, context, callback) => {
+exports.handler = async function(event, context,callback) {
     var ferry = Object.keys(event)[0]
     var data = event[ferry];
 
@@ -105,22 +121,24 @@ const item = {
   }
 };
 
-(async () => { 
+
+
   try{
   const result = await graphqlClient.mutate({
-  mutation:gql(update),
+    mutation:update,
   variables: item
   
 })
 
-console.log(result.data);
+      console.log(result.data);
       callback(null, result.data);
 
   }catch(e){
 
+    console.log(e)
     console.warn('Error sending mutation: ',  e);
     callback(Error(e))
   }
-})
 
+return context.logStreamName
 }

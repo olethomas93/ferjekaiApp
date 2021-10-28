@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "iotDB",
+            "iotdb",
             {
               "Fn::Join": [
                 "",
                 [
-                  "iotDB",
+                  "iotdb",
                   "-",
                   {
                     "Ref": "env"
@@ -103,12 +103,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ferrydockLambdaRolea4a7407b",
+            "ferrydockLambdaRole047ddd8e",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ferrydockLambdaRolea4a7407b",
+                  "ferrydockLambdaRole047ddd8e",
                   "-",
                   {
                     "Ref": "env"
@@ -237,6 +237,26 @@
                         "Ref": "apiferrydockGraphQLAPIIdOutput"
                       },
                       "/types/Mutation/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apiferrydockGraphQLAPIIdOutput"
+                      },
+                      "/types/Subscription/*"
                     ]
                   ]
                 }
