@@ -64,7 +64,7 @@
         }
       ]
     },
-    "iotDb2": {
+    "iotdb": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

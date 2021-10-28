@@ -1,5 +1,4 @@
 {
-  "lambdaLayers": [],
   "permissions": {
     "api": {
       "ferrydock": [
@@ -8,5 +7,6 @@
         "Subscription"
       ]
     }
-  }
+  },
+  "lambdaLayers": []
 }
