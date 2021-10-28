@@ -18,11 +18,15 @@
       "function": {
         "iotDB": {
           "deploymentBucketName": "amplify-ferrydock-dev-90239-deployment",
-          "s3Key": "amplify-builds/iotDB-30345a5536624b327678-build.zip"
+          "s3Key": "amplify-builds/iotDB-4f693738636e692f7262-build.zip"
         },
         "iotDb2": {
           "deploymentBucketName": "amplify-ferrydock-dev-90239-deployment",
           "s3Key": "amplify-builds/iotDb2-304f32544164695a714b-build.zip"
+        },
+        "iotdb3": {
+          "deploymentBucketName": "amplify-ferrydock-dev-90239-deployment",
+          "s3Key": "amplify-builds/iotdb3-6a6a5059484455766c78-build.zip"
         }
       }
     }

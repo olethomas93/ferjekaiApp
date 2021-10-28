@@ -10,30 +10,25 @@ const AWS = require('aws-sdk/global');
 const AUTH_TYPE = require('aws-appsync').AUTH_TYPE;
 const AWSAppSyncClient = require('aws-appsync').default;
 const gql = require('graphql-tag');
+require('cross-fetch/polyfill');
 
 const region = process.env.REGION;
-const config = {
-    url: "https://m44yw2z75bhzxk6psdgb5tuhqe.appsync-api.eu-central-1.amazonaws.com/graphql",
-    region: "eu-central-1",
-    auth: {
-      type: AUTH_TYPE.AWS_IAM,
-      credentials: AWS.config.credentials,
-    },
-    disableOffline: true
-  };
+const graphqlClient = new AWSAppSyncClient({
+  url: 'https://m44yw2z75bhzxk6psdgb5tuhqe.appsync-api.eu-central-1.amazonaws.com/graphql',
+  region: process.env.AWS_REGION,
+  auth: {
+    type: AUTH_TYPE.AWS_IAM,
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      sessionToken: process.env.AWS_SESSION_TOKEN
+    }
+  },
+  disableOffline: true
+});
+ 
 
-  console.log(config)
-  
 
-
-  AWS.config.update({
-    region,
-    credentials: new AWS.Credentials(
-      process.env.AWS_ACCESS_KEY_ID,
-      process.env.AWS_SECRET_ACCESS_KEY,
-      process.env.AWS_SESSION_TOKEN
-    ),
-  });
 
 
   
@@ -91,8 +86,7 @@ mutation CreateDockData(
   }
 }
 `
-// Set up Apollo client
-const client = new AWSAppSyncClient(config);
+
 
 
 exports.handler = (event, context, callback) => {
@@ -111,61 +105,22 @@ const item = {
   }
 };
 
-(async () => {
-    try {
+(async () => { 
+  try{
+  const result = await graphqlClient.mutate({
+  mutation:gql(update),
+  variables: item
+  
+})
 
-      const result = await client.mutate({
-        mutation: gql(update),
-        variables: item
-      });
-      console.log(result.data);
+console.log(result.data);
       callback(null, result.data);
-    } catch (e) {
-      console.warn('Error sending mutation: ',  e);
-      callback(Error(e));
-    }
-  })();
 
+  }catch(e){
 
+    console.warn('Error sending mutation: ',  e);
+    callback(Error(e))
+  }
+})
 
-
-
-
-  // try {
-  //   const graphqlData = await axios({
-  //     url: "https://cwv5hklocvelle3dgk6iho6ake.appsync-api.eu-central-1.amazonaws.com/graphql",
-  //     method: 'post',
-  //     headers: {
-  //       'x-api-key': "da2-gki4ztnd2zgvjegn2aqfs7hsci"
-  //     },
-  //     data: {
-  //       query: print(update),
-  //       variables: {
-  //         input: {
-  //           id:ferry,
-  //           weather:JSON.stringify(data.weather),
-  //         drift:JSON.stringify(data.drift),
-  //         alarms:data.alarms,
-  //           createdAt: new Date().toISOString(),
-  //           updatedAt:new Date().toISOString()
-            
-           
-  //         }
-  //       }
-        
-  //     }
-  //   });
-  //   const body = {
-  //     message: "successfully created item!",
-  //   }
-  //   return {
-  //       statusCode: 200,
-  //       body: JSON.stringify(body),
-  //       headers: {
-  //           "Access-Control-Allow-Origin": "*",
-  //       }
-  //   }
-  // } catch (err) {
-  //   console.log('error posting to appsync: ', err);
-  // } 
 }
