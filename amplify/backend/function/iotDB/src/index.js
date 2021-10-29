@@ -55,11 +55,7 @@ query MyQuery {
       id
       drift
       weather
-      alarms {
-        id
-        value
-        message
-      }
+      alarms 
       createdAt
       updatedAt
     }
@@ -72,11 +68,7 @@ mutation updateDockData($input:UpdateDockDataInput!) {
     id
     drift
     weather
-    alarms {
-      id
-      value
-      message
-    }
+    alarms 
     createdAt
     updatedAt
   }
@@ -92,11 +84,7 @@ mutation CreateDockData(
     id
     drift
     weather
-    alarms {
-      id
-      value
-      message
-    }
+    alarms
     createdAt
     updatedAt
   }
@@ -115,7 +103,7 @@ const item = {
     id:ferry,
     weather:JSON.stringify(data.weather),
   drift:JSON.stringify(data.drift),
-  alarms:data.alarms,
+  alarms:JSON.stringify(data.alarms),
     createdAt: new Date().toISOString(),
     updatedAt:new Date().toISOString()
   }

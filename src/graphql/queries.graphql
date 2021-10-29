@@ -4,11 +4,7 @@ query GetDockData($id: ID!) {
     id
     drift
     weather
-    alarms {
-      id
-      value
-      message
-    }
+    alarms
     createdAt
     updatedAt
   }
@@ -23,11 +19,7 @@ query ListDockData(
       id
       drift
       weather
-      alarms {
-        id
-        value
-        message
-      }
+      alarms
       createdAt
       updatedAt
     }
@@ -43,11 +35,7 @@ query GetDock($id: ID!) {
       id
       drift
       weather
-      alarms {
-        id
-        value
-        message
-      }
+      alarms
       createdAt
       updatedAt
     }
@@ -69,6 +57,7 @@ query ListDocks(
         id
         drift
         weather
+        alarms
         createdAt
         updatedAt
       }

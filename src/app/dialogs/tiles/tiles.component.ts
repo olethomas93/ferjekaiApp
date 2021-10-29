@@ -212,9 +212,9 @@ close(e:any){
 
     this.dataSource =[]
     for(let i in data){
-      let status = (data[i].value.toLowerCase() === "true")
-     
-      this.dataSource.push({name:data[i].message,status:status})
+      let status = (data[i].toLowerCase() === "true")
+      let  name = Object.keys(data[i])
+      this.dataSource.push({name:name,status:status})
       
     }
     

@@ -7,11 +7,7 @@ mutation CreateDockData(
     id
     drift
     weather
-    alarms {
-      id
-      value
-      message
-    }
+    alarms
     createdAt
     updatedAt
   }
@@ -24,11 +20,7 @@ mutation UpdateDockData(
     id
     drift
     weather
-    alarms {
-      id
-      value
-      message
-    }
+    alarms
     createdAt
     updatedAt
   }
@@ -41,11 +33,7 @@ mutation DeleteDockData(
     id
     drift
     weather
-    alarms {
-      id
-      value
-      message
-    }
+    alarms
     createdAt
     updatedAt
   }
@@ -62,11 +50,7 @@ mutation CreateDock(
       id
       drift
       weather
-      alarms {
-        id
-        value
-        message
-      }
+      alarms
       createdAt
       updatedAt
     }
@@ -86,11 +70,7 @@ mutation UpdateDock(
       id
       drift
       weather
-      alarms {
-        id
-        value
-        message
-      }
+      alarms
       createdAt
       updatedAt
     }
@@ -110,11 +90,7 @@ mutation DeleteDock(
       id
       drift
       weather
-      alarms {
-        id
-        value
-        message
-      }
+      alarms
       createdAt
       updatedAt
     }
