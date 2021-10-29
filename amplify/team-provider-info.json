@@ -16,11 +16,11 @@
         "ferryDock": {}
       },
       "function": {
-        "iotdb": {
+        "iotDB": {},
+        "dockToDb": {
           "deploymentBucketName": "amplify-ferrydock-dev-90239-deployment",
-          "s3Key": "amplify-builds/iotdb-37637665473948654936-build.zip"
-        },
-        "iotDB": {}
+          "s3Key": "amplify-builds/dockToDb-764f30445a2b7662336a-build.zip"
+        }
       }
     }
   }
