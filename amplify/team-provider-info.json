@@ -18,7 +18,7 @@
       "function": {
         "iotdb": {
           "deploymentBucketName": "amplify-ferrydock-dev-90239-deployment",
-          "s3Key": "amplify-builds/iotdb-31695a79712b68663378-build.zip"
+          "s3Key": "amplify-builds/iotdb-37637665473948654936-build.zip"
         },
         "iotDB": {}
       }

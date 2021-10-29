@@ -1,7 +1,7 @@
 type dockData @model @aws_iam @aws_cognito_user_pools {
   id: ID!
   drift: AWSJSON
-  weather:AWSJSON
+  weather:[Weather]
   alarms:AWSJSON
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
@@ -24,6 +24,13 @@ data:dockData @connection(fields:["id"])
   
 
 # }
+
+type Weather {
+  name:String
+  value:String
+  icon:String
+  unit:String
+}
  type Subscription @aws_iam  @aws_cognito_user_pools{
    onUpdateById(id: ID!): dockData
      @aws_subscribe(mutations: ["updateDockData"])

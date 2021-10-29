@@ -26,6 +26,14 @@ unit:String
 
 }
 
+export interface weather{
+  icon:string
+  unit:string
+  value:number
+  name:string
+
+
+}
 
 @Component({
   selector: 'app-tiles',
@@ -40,17 +48,7 @@ export class TilesComponent implements OnInit,OnDestroy {
   weatherUpdated!: string
   editable!:bool;
 
-  weatherData =[
-    {title:"Temperature",value:-999,color:"green",icon:"thermostat",unit:"°C"},
-    {title:"Air pressure",
-    value:-999,color:"green",icon:"storm",unit:"hPa"},
-   
-    {title:"Air Density",
-  value :-999,color:"green",icon:"reorder",unit:"kg/m³"},
-    {title:"Wind speed",value:-999,color:"green",icon:"air",unit:"m/s"},
-  {title:"Wind Direction",
-  value :-999,color:"green",icon:"explore",unit:"°"},
-  ]
+  weatherData!:weather[];
 
   data!:tile[]
 
@@ -153,12 +151,12 @@ close(e:any){
       
      
       
-      this.updateWeatherData(JSON.parse(data.weather))
+      this.updateWeatherData(data.weather)
       
 
  
    
-      this.updateAlarmData(data.alarms)
+      this.updateAlarmData(JSON.parse(data.alarms))
    
 
    
@@ -213,8 +211,9 @@ close(e:any){
     this.dataSource =[]
     for(let i in data){
       let status = (data[i].toLowerCase() === "true")
-      let  name = Object.keys(data[i])
-      this.dataSource.push({name:name,status:status})
+     console.log(data[i])
+   
+      this.dataSource.push({name:i,status:status})
       
     }
     
@@ -224,12 +223,7 @@ close(e:any){
 
 
   updateWeatherData(data:any){
-    console.log(data)
-    this.weatherData[0].value = Math.round(data.Temperatur) 
-    this.weatherData[1].value = Math.round(data.lufttrykk)
-    this.weatherData[2].value = Math.round(data.lufttetthet)
-    this.weatherData[3].value =Math.round(data.Vindhastighet)
-    this.weatherData[4].value =Math.round(data.Vindretning)
+   this.weatherData = data
 
   }
 

@@ -3,7 +3,12 @@ query GetDockData($id: ID!) {
   getDockData(id: $id) {
     id
     drift
-    weather
+    weather {
+      name
+      value
+      icon
+      unit
+    }
     alarms
     createdAt
     updatedAt
@@ -18,7 +23,12 @@ query ListDockData(
     items {
       id
       drift
-      weather
+      weather {
+        name
+        value
+        icon
+        unit
+      }
       alarms
       createdAt
       updatedAt
@@ -34,7 +44,12 @@ query GetDock($id: ID!) {
     data {
       id
       drift
-      weather
+      weather {
+        name
+        value
+        icon
+        unit
+      }
       alarms
       createdAt
       updatedAt
@@ -56,7 +71,6 @@ query ListDocks(
       data {
         id
         drift
-        weather
         alarms
         createdAt
         updatedAt

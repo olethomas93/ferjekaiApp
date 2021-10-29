@@ -6,7 +6,12 @@ mutation CreateDockData(
   createDockData(input: $input, condition: $condition) {
     id
     drift
-    weather
+    weather {
+      name
+      value
+      icon
+      unit
+    }
     alarms
     createdAt
     updatedAt
@@ -19,7 +24,12 @@ mutation UpdateDockData(
   updateDockData(input: $input, condition: $condition) {
     id
     drift
-    weather
+    weather {
+      name
+      value
+      icon
+      unit
+    }
     alarms
     createdAt
     updatedAt
@@ -32,7 +42,12 @@ mutation DeleteDockData(
   deleteDockData(input: $input, condition: $condition) {
     id
     drift
-    weather
+    weather {
+      name
+      value
+      icon
+      unit
+    }
     alarms
     createdAt
     updatedAt
@@ -49,7 +64,12 @@ mutation CreateDock(
     data {
       id
       drift
-      weather
+      weather {
+        name
+        value
+        icon
+        unit
+      }
       alarms
       createdAt
       updatedAt
@@ -69,7 +89,12 @@ mutation UpdateDock(
     data {
       id
       drift
-      weather
+      weather {
+        name
+        value
+        icon
+        unit
+      }
       alarms
       createdAt
       updatedAt
@@ -89,7 +114,12 @@ mutation DeleteDock(
     data {
       id
       drift
-      weather
+      weather {
+        name
+        value
+        icon
+        unit
+      }
       alarms
       createdAt
       updatedAt

@@ -12,15 +12,21 @@ export interface SubscriptionResponse<T> {
 export type CreateDockDataInput = {
   id?: string | null;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<WeatherInput | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
+export type WeatherInput = {
+  name?: string | null;
+  value?: string | null;
+  icon?: string | null;
+  unit?: string | null;
+};
+
 export type ModeldockDataConditionInput = {
   drift?: ModelStringInput | null;
-  weather?: ModelStringInput | null;
   alarms?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
@@ -72,16 +78,24 @@ export type dockData = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<Weather | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
 
+export type Weather = {
+  __typename: "Weather";
+  name?: string | null;
+  value?: string | null;
+  icon?: string | null;
+  unit?: string | null;
+};
+
 export type UpdateDockDataInput = {
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<WeatherInput | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -140,7 +154,6 @@ export type DeleteDockInput = {
 export type ModeldockDataFilterInput = {
   id?: ModelIDInput | null;
   drift?: ModelStringInput | null;
-  weather?: ModelStringInput | null;
   alarms?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
@@ -190,7 +203,13 @@ export type CreateDockDataMutation = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -200,7 +219,13 @@ export type UpdateDockDataMutation = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -210,7 +235,13 @@ export type DeleteDockDataMutation = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -225,7 +256,13 @@ export type CreateDockMutation = {
     __typename: "dockData";
     id: string;
     drift?: string | null;
-    weather?: string | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -243,7 +280,13 @@ export type UpdateDockMutation = {
     __typename: "dockData";
     id: string;
     drift?: string | null;
-    weather?: string | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -261,7 +304,13 @@ export type DeleteDockMutation = {
     __typename: "dockData";
     id: string;
     drift?: string | null;
-    weather?: string | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -274,7 +323,13 @@ export type GetDockDataQuery = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -286,7 +341,13 @@ export type ListDockDataQuery = {
     __typename: "dockData";
     id: string;
     drift?: string | null;
-    weather?: string | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -303,7 +364,13 @@ export type GetDockQuery = {
     __typename: "dockData";
     id: string;
     drift?: string | null;
-    weather?: string | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -323,7 +390,6 @@ export type ListDocksQuery = {
       __typename: "dockData";
       id: string;
       drift?: string | null;
-      weather?: string | null;
       alarms?: string | null;
       createdAt?: string | null;
       updatedAt?: string | null;
@@ -338,7 +404,13 @@ export type OnUpdateByIdSubscription = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -348,7 +420,13 @@ export type OnCreateDockDataSubscription = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -358,7 +436,13 @@ export type OnUpdateDockDataSubscription = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -368,7 +452,13 @@ export type OnDeleteDockDataSubscription = {
   __typename: "dockData";
   id: string;
   drift?: string | null;
-  weather?: string | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -383,7 +473,13 @@ export type OnCreateDockSubscription = {
     __typename: "dockData";
     id: string;
     drift?: string | null;
-    weather?: string | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -401,7 +497,13 @@ export type OnUpdateDockSubscription = {
     __typename: "dockData";
     id: string;
     drift?: string | null;
-    weather?: string | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -419,7 +521,13 @@ export type OnDeleteDockSubscription = {
     __typename: "dockData";
     id: string;
     drift?: string | null;
-    weather?: string | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -441,7 +549,13 @@ export class APIService {
           __typename
           id
           drift
-          weather
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           alarms
           createdAt
           updatedAt
@@ -467,7 +581,13 @@ export class APIService {
           __typename
           id
           drift
-          weather
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           alarms
           createdAt
           updatedAt
@@ -493,7 +613,13 @@ export class APIService {
           __typename
           id
           drift
-          weather
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           alarms
           createdAt
           updatedAt
@@ -524,7 +650,13 @@ export class APIService {
             __typename
             id
             drift
-            weather
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             alarms
             createdAt
             updatedAt
@@ -558,7 +690,13 @@ export class APIService {
             __typename
             id
             drift
-            weather
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             alarms
             createdAt
             updatedAt
@@ -592,7 +730,13 @@ export class APIService {
             __typename
             id
             drift
-            weather
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             alarms
             createdAt
             updatedAt
@@ -618,7 +762,13 @@ export class APIService {
           __typename
           id
           drift
-          weather
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           alarms
           createdAt
           updatedAt
@@ -644,7 +794,13 @@ export class APIService {
             __typename
             id
             drift
-            weather
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             alarms
             createdAt
             updatedAt
@@ -678,7 +834,13 @@ export class APIService {
             __typename
             id
             drift
-            weather
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             alarms
             createdAt
             updatedAt
@@ -712,7 +874,6 @@ export class APIService {
               __typename
               id
               drift
-              weather
               alarms
               createdAt
               updatedAt
@@ -746,7 +907,13 @@ export class APIService {
           __typename
           id
           drift
-          weather
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           alarms
           createdAt
           updatedAt
@@ -769,7 +936,13 @@ export class APIService {
           __typename
           id
           drift
-          weather
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           alarms
           createdAt
           updatedAt
@@ -787,7 +960,13 @@ export class APIService {
           __typename
           id
           drift
-          weather
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           alarms
           createdAt
           updatedAt
@@ -805,7 +984,13 @@ export class APIService {
           __typename
           id
           drift
-          weather
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           alarms
           createdAt
           updatedAt
@@ -828,7 +1013,13 @@ export class APIService {
             __typename
             id
             drift
-            weather
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             alarms
             createdAt
             updatedAt
@@ -854,7 +1045,13 @@ export class APIService {
             __typename
             id
             drift
-            weather
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             alarms
             createdAt
             updatedAt
@@ -880,7 +1077,13 @@ export class APIService {
             __typename
             id
             drift
-            weather
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             alarms
             createdAt
             updatedAt

@@ -54,7 +54,12 @@ query MyQuery {
    items {
       id
       drift
-      weather
+      weather {
+        name
+        value
+        icon
+        unit
+      }
       alarms 
       createdAt
       updatedAt
@@ -67,7 +72,12 @@ mutation updateDockData($input:UpdateDockDataInput!) {
   updateDockData(input: $input) {
     id
     drift
-    weather
+    weather {
+      name
+      value
+      icon
+      unit
+    }
     alarms 
     createdAt
     updatedAt
@@ -83,7 +93,12 @@ mutation CreateDockData(
   createDockData(input: $input, condition: $condition) {
     id
     drift
-    weather
+    weather {
+      name
+      value
+      icon
+      unit
+    }
     alarms
     createdAt
     updatedAt
@@ -101,7 +116,7 @@ exports.handler = async function(event, context,callback) {
 const item = {
   input: {
     id:ferry,
-    weather:JSON.stringify(data.weather),
+    weather:data.weather,
   drift:JSON.stringify(data.drift),
   alarms:JSON.stringify(data.alarms),
     createdAt: new Date().toISOString(),
