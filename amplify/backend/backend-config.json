@@ -49,22 +49,8 @@
     }
   },
   "function": {
-    "iotDB": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "ferrydock",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        }
-      ]
-    },
-    "iotdb": {
+   
+    "dockToDb": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

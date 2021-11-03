@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "iotdb",
+            "dockToDb",
             {
               "Fn::Join": [
                 "",
                 [
-                  "iotdb",
+                  "dockToDb",
                   "-",
                   {
                     "Ref": "env"
@@ -103,12 +103,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ferrydockLambdaRole047ddd8e",
+            "ferrydockLambdaRoleb48c101a",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ferrydockLambdaRole047ddd8e",
+                  "ferrydockLambdaRoleb48c101a",
                   "-",
                   {
                     "Ref": "env"
