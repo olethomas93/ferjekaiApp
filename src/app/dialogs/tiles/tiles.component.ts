@@ -211,7 +211,7 @@ close(e:any){
     this.dataSource =[]
     for(let i in data){
       let status = (data[i].toLowerCase() === "true")
-     console.log(data[i])
+    
    
       this.dataSource.push({name:i,status:status})
       
