@@ -137,14 +137,22 @@ this.api.ListDocks().then((data:any)=>{
 
   })
 
-  this.api.GetDockData(this.ferrydocks[i].name).then((data:any)=>{
-
+  this.api.GetDockData(this.ferrydocks[i].id).then((data:any)=>{
+    
     if(data){
     let res =JSON.parse(data.alarms)
-      console.log(res)
+      let temp = false;
     for( let i in res){
+      let status = (res[i].toLowerCase() === "true")
+      
+      if (status){
 
-      if (res[i].value.toLowerCase() === "true"){
+        temp = true;
+      }
+
+
+    }
+      if (temp){
   
       ferry.getElement()?.classList.add("pulse")
       ferry.setStyle({color:"red",className:''})
@@ -157,7 +165,7 @@ this.api.ListDocks().then((data:any)=>{
   
     }
 
-    }
+    
   
       
   
