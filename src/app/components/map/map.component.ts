@@ -21,7 +21,7 @@ import {
   
   
 } from 'leaflet';
-
+//'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 declare let L:any
 @Component({
   selector: 'app-map',
@@ -33,7 +33,7 @@ export class MapComponent implements OnInit {
   @Output() zoom$: EventEmitter<number> = new EventEmitter();
   @Output() coord$: EventEmitter<any> = new EventEmitter();
 
-  private light = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  private light = tileLayer("http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=kartdata3&zoom={z}&x={x}&y={y}", {
     opacity: 0.7,
     maxZoom: 19,
     detectRetina: true,

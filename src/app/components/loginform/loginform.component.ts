@@ -89,7 +89,7 @@ export class LoginformComponent implements OnInit {
               }else{
 
                 this.openSnackBar("Successfull login","ok","green")
-                this.router.navigate(['/landing']);
+                this.router.navigate(['landing']);
               }
               
             },
