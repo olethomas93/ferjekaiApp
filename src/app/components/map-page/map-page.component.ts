@@ -118,7 +118,7 @@ this.api.ListDocks().then((data:any)=>{
 
   for( let i in this.ferrydocks){
 
-    let ferry = circle(this.ferrydocks[i].location,{radius:500,color:"red"}).bindTooltip(this.ferrydocks[i].name,
+    let ferry = circle(this.ferrydocks[i].location,{radius:700,color:"red"}).bindTooltip(this.ferrydocks[i].name,
     {offset:[0, 0]}).openTooltip()
 
        
