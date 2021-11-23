@@ -22,6 +22,7 @@ import {
   
 } from 'leaflet';
 //'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+//'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 declare let L:any
 @Component({
   selector: 'app-map',
@@ -38,7 +39,7 @@ export class MapComponent implements OnInit {
     maxZoom: 19,
     detectRetina: true,
     attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    '&copy; <a href="http://www.kartverket.no/">Kartverket</a>',
   })
 
   private dark = tileLayer('https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
