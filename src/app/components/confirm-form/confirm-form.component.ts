@@ -47,9 +47,16 @@ export class ConfirmFormComponent implements OnInit {
   return;
   }
 
-  console.log("hei")
 
-  this.authService.completeNewPassword(this.email,this.password)
+  try {
+    this.authService.completeNewPassword(this.email,this.password)
+
+    this._router.navigate(['/landing'])
+    
+  } catch (error) {
+    
+  }
+ 
 
   
   
