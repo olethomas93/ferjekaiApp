@@ -223,6 +223,18 @@ close(e:any){
 
 
   updateWeatherData(data:any){
+    for (let i in data){
+
+      if(data[i].unit =="oC"){
+        data[i].unit = "°C"
+      }
+
+      if(data[i].unit =="o") {
+        data[i].unit ="°"
+      }
+     
+
+    }
    this.weatherData = data
 
   }
