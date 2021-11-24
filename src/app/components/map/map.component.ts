@@ -17,6 +17,8 @@ import {
   latLng,
   popup,
   svg,
+  marker,
+  circle
   
   
   
@@ -33,7 +35,8 @@ export class MapComponent implements OnInit {
   @Output() map$: EventEmitter<Map> = new EventEmitter();
   @Output() zoom$: EventEmitter<number> = new EventEmitter();
   @Output() coord$: EventEmitter<any> = new EventEmitter();
-
+  current_position :any 
+  current_accuracy:any;
   private light = tileLayer("http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=kartdata3&zoom={z}&x={x}&y={y}", {
     opacity: 0.7,
     maxZoom: 19,
@@ -69,7 +72,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+  
 
   }
 
@@ -81,7 +84,12 @@ export class MapComponent implements OnInit {
     this.map.locate({ setView: true, maxZoom: 10 });
     this.zoom = map.getZoom();
     this.zoom$.emit(this.zoom);
-    
+
+    this.map.on('locationfound',e=>this.onLocationFound(e))
+
+    setInterval(()=>{
+      this.map.locate({setView: false, maxZoom: 16});
+    },5000)
   }
 
 
@@ -93,7 +101,29 @@ export class MapComponent implements OnInit {
 
   }
 
-  
+   onLocationFound(e:any) {
+     console.log(e)
+    // if position defined, then remove the existing position marker and accuracy circle from the map
+    if (this.current_position) {
+        this.map.removeLayer(this.current_position);
+        this.map.removeLayer(this.current_accuracy);
+    }
+
+    var radius = e.accuracy / 2;
+
+    this.current_position = marker(e.latlng).addTo(this.map)
+      .bindPopup("Du er her!");
+
+    this.current_accuracy = circle(e.latlng, radius).addTo(this.map);
+  }
+
+   onLocationError(e:any) {
+    alert(e.message);
+  }
+
+   
+   
+
   onMapZoomEnd(e: any) {
     console.log(e.target.getZoom());
     this.zoom = e.target.getZoom();
