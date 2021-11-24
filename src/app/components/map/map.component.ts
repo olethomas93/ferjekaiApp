@@ -18,7 +18,8 @@ import {
   popup,
   svg,
   marker,
-  circle
+  circle,
+  icon
   
   
   
@@ -37,6 +38,23 @@ export class MapComponent implements OnInit {
   @Output() coord$: EventEmitter<any> = new EventEmitter();
   current_position :any 
   current_accuracy:any;
+   myIcon = icon({
+    iconUrl: 'assets/compass.jpg',
+    iconSize: [30, 30],
+    iconAnchor: [0, 0],
+    popupAnchor: [-3, -76],
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+});
+
+
+  private streetMap= tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    opacity: 0.7,
+    maxZoom: 19,
+    detectRetina: true,
+    attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  })
   private light = tileLayer("http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=kartdata3&zoom={z}&x={x}&y={y}", {
     opacity: 0.7,
     maxZoom: 19,
@@ -54,7 +72,7 @@ export class MapComponent implements OnInit {
   });
  public options = {
     layers: [
-     this.light,
+     this.streetMap
     
       
 
@@ -79,7 +97,7 @@ export class MapComponent implements OnInit {
   onMapReady(map: Map) {
     console.log('map ready');
     this.map = map;
-    control.layers({"light":this.light,"dark":this.dark}).addTo(this.map)
+    control.layers({"Norgeskart":this.light,"Dark":this.dark,"OpenStreetmap":this.streetMap}).addTo(this.map)
     this.map$.emit(map);
     this.map.locate({ setView: true, maxZoom: 10 });
     this.zoom = map.getZoom();
@@ -111,10 +129,11 @@ export class MapComponent implements OnInit {
 
     var radius = e.accuracy / 2;
 
-    this.current_position = marker(e.latlng).addTo(this.map)
-      .bindPopup("Du er her!");
+    // this.current_position = marker(e.latlng).addTo(this.map)
+    //   .bindPopup("Du er her!");
+    // marker(e.latlng, {icon: this.myIcon}).addTo(this.map);
+    this.current_accuracy = circle(e.latlng, 100).addTo(this.map).bindPopup("Du er her!");
 
-    this.current_accuracy = circle(e.latlng, radius).addTo(this.map);
   }
 
    onLocationError(e:any) {
