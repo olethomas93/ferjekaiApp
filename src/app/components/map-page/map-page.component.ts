@@ -18,6 +18,8 @@ export class MapPageComponent implements OnInit {
   @Output() activate = new EventEmitter();
   @Output() maps =new EventEmitter();
   public map!: Map;
+
+
   private zoom!: number;
   private latlng!:any
   sulesund :any
@@ -26,6 +28,8 @@ export class MapPageComponent implements OnInit {
   subscription: any;
   connected :any;
   ferrydocks :any;
+  subscriptions:any[] =[]
+  MapObjects :any
  
   
   constructor(
@@ -54,7 +58,10 @@ export class MapPageComponent implements OnInit {
 
   ngOnDestroy():void{
 
-   
+   for(let i in this.subscriptions){
+
+    this.subscriptions[i].unsubscribe()
+   }
 
 
 
@@ -107,6 +114,7 @@ export class MapPageComponent implements OnInit {
     this.map = map;
     this.activate.emit({theMap:this.map})
    
+    this.MapObjects = {}
 
   
    
@@ -118,6 +126,7 @@ this.api.ListDocks().then((data:any)=>{
 
   for( let i in this.ferrydocks){
 
+    let sub:any
     let ferry = circle(this.ferrydocks[i].location,{radius:800,color:"red"}).bindTooltip(this.ferrydocks[i].name,
     {offset:[0, 0]}).openTooltip()
 
@@ -137,6 +146,8 @@ this.api.ListDocks().then((data:any)=>{
 
   })
 
+  this.MapObjects[this.ferrydocks[i].name] =ferry
+
   this.api.GetDockData(this.ferrydocks[i].id).then((data:any)=>{
     
     if(data){
@@ -154,24 +165,55 @@ this.api.ListDocks().then((data:any)=>{
     }
       if (temp){
   
-      ferry.getElement()?.classList.add("pulse")
-      ferry.setStyle({color:"red",className:''})
+      this.MapObjects[this.ferrydocks[i].name].getElement()?.classList.add("pulse")
+      this.MapObjects[this.ferrydocks[i].name].setStyle({color:"red",className:''})
       
     }else{
-      ferry.getElement()?.classList.remove("pulse")
-      ferry.setStyle({color:"green"})
+      this.MapObjects[this.ferrydocks[i].name].getElement()?.classList.remove("pulse")
+      this.MapObjects[this.ferrydocks[i].name].setStyle({color:"green"})
       
       
   
     }
-
-    
-  
-      
-  
-    
     }
   })
+
+  sub = this.api.OnUpdateByIdListener(this.ferrydocks[i].id).subscribe((data:any)=>{
+    
+    if(data){
+      console.log(data)
+    let res =JSON.parse(data.alarms)
+      let temp = false;
+    for( let i in res){
+      let status = (res[i].toLowerCase() === "true")
+      
+      if (status){
+
+        temp = true;
+      }
+
+
+    }
+      if (temp){
+  
+        this.MapObjects[this.ferrydocks[i].name].getElement()?.classList.add("pulse")
+        this.MapObjects[this.ferrydocks[i].name].setStyle({color:"red",className:''})
+      
+    }else{
+      this.MapObjects[this.ferrydocks[i].name].getElement()?.classList.remove("pulse")
+      this.MapObjects[this.ferrydocks[i].name].setStyle({color:"green"})
+      
+      
+  
+    }
+    }
+  })
+
+  this.subscriptions.push(sub)
+
+
+
+  
   
   }
 })
@@ -179,50 +221,7 @@ this.api.ListDocks().then((data:any)=>{
 
   }
   
-    // this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red"}).bindTooltip('Sulesund',
-    // {offset:[0, 0]}).openTooltip()
-    
-    // //  this.sulesund.bindPopup(`` +
-    // // `<h1>Kai: Sulesund </h1>` +
-    // // `<h2>AlarmStatus: God </h2>` +
-    // // `<h2> annet: Annet</h2>`)
-   
-    
-    // this.sulesund.addTo(this.map)
 
-    
-
-    
-    // this.sulesund.on('click',(e:any)=>{
-    //   console.log("click")
-      
-    //   this.activate.emit("sulesund")
-    //   //this.openStatusDialog()
-
-    // })
-
-  
-    
-   
-
-      
-    
-
-
-    
-
-
-  
-
-  
-
-  
- 
-   
-
-    
- 
- 
  
  closeDialog(){
 
