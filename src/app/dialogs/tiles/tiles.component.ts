@@ -3,12 +3,13 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PubSub } from 'aws-amplify';
 import { title } from 'process';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Json } from 'aws-sdk/clients/robomaker';
 import { APIService } from '../../API.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { String } from 'aws-sdk/clients/acm';
 import { bool } from 'aws-sdk/clients/signer';
+import {HistoricDataComponent} from '../historic-data/historic-data.component'
 export interface Alarm {
   name: string;
   status:string
@@ -75,6 +76,7 @@ export class TilesComponent implements OnInit,OnDestroy {
     public dialogRef: MatDialogRef<TilesComponent>,
     private api: APIService,
     private ref: ChangeDetectorRef,
+    public dialog: MatDialog,
    
     
     
@@ -101,10 +103,10 @@ export class TilesComponent implements OnInit,OnDestroy {
   ngOnInit(){
  
 
-    console.log(this.ferrydockName)
+
 
   this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
-   console.log(data)
+  
     this.weatherUpdated = new Date(data['updatedAt']).toString()
     this.updateData(data)
   }).catch((e)=>{
@@ -120,7 +122,7 @@ export class TilesComponent implements OnInit,OnDestroy {
   
     if(data){
 
-      console.log(data)
+     
       this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toString()
       let topic = data.value.data.onUpdateById
       this.updateData(topic)
@@ -137,6 +139,9 @@ export class TilesComponent implements OnInit,OnDestroy {
 
   }
 
+  openHistoric(name:any){
+    const dialogRef = this.dialog.open(HistoricDataComponent,{height:"300",width:"300"})
+  }
 
 close(e:any){
   
@@ -147,7 +152,7 @@ close(e:any){
   updateData(data:any){
     
     
-   console.log(data)
+  
       
      
       

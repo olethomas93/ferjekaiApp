@@ -102,19 +102,19 @@ export class MapComponent implements OnInit {
   }
 
    onLocationFound(e:any) {
-     console.log(e)
+     
     // if position defined, then remove the existing position marker and accuracy circle from the map
     if (this.current_position) {
         this.map.removeLayer(this.current_position);
         this.map.removeLayer(this.current_accuracy);
     }
 
-    var radius = e.accuracy / 2;
+    var radius =100
 
-    this.current_position = marker(e.latlng).addTo(this.map)
-      .bindPopup("Du er her!");
+    // this.current_position = marker(e.latlng).addTo(this.map)
+    //   .bindPopup("Du er her!");
 
-    this.current_accuracy = circle(e.latlng, radius).addTo(this.map);
+    this.current_accuracy = circle(e.latlng, radius).addTo(this.map).bindPopup("Du er her!");;
   }
 
    onLocationError(e:any) {
