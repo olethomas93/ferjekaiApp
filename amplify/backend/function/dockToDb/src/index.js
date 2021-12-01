@@ -117,7 +117,7 @@ const item = {
   input: {
     id:ferry,
     weather:data.weather,
-  drift:JSON.stringify(data.drift),
+  drift:data.drift,
   alarms:JSON.stringify(data.alarms),
     createdAt: new Date().toISOString(),
     updatedAt:new Date().toISOString()

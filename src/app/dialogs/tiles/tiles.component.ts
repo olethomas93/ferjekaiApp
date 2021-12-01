@@ -106,7 +106,7 @@ export class TilesComponent implements OnInit,OnDestroy {
 
 
   this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
-  
+    
     this.weatherUpdated = new Date(data['updatedAt']).toString()
     this.updateData(data)
   }).catch((e)=>{
