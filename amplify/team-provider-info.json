@@ -18,7 +18,7 @@
       "function": {
         "dockToDb": {
           "deploymentBucketName": "amplify-ferrydock-dev-90239-deployment",
-          "s3Key": "amplify-builds/dockToDb-764f30445a2b7662336a-build.zip"
+          "s3Key": "amplify-builds/dockToDb-667146536b7930412f4c-build.zip"
         }
       }
     }

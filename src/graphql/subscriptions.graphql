@@ -2,7 +2,12 @@
 subscription OnUpdateById($id: ID!) {
   onUpdateById(id: $id) {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -17,7 +22,12 @@ subscription OnUpdateById($id: ID!) {
 subscription OnCreateDockData {
   onCreateDockData {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -32,7 +42,12 @@ subscription OnCreateDockData {
 subscription OnUpdateDockData {
   onUpdateDockData {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -47,7 +62,12 @@ subscription OnUpdateDockData {
 subscription OnDeleteDockData {
   onDeleteDockData {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -66,7 +86,12 @@ subscription OnCreateDock {
     location
     data {
       id
-      drift
+      drift {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value
@@ -88,7 +113,12 @@ subscription OnUpdateDock {
     location
     data {
       id
-      drift
+      drift {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value
@@ -110,7 +140,12 @@ subscription OnDeleteDock {
     location
     data {
       id
-      drift
+      drift {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value
