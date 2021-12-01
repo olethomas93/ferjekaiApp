@@ -53,7 +53,12 @@ query MyQuery {
     listDockData {
    items {
       id
-      drift
+      drift  {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value
@@ -71,7 +76,12 @@ const update =gql(`
 mutation updateDockData($input:UpdateDockDataInput!) {
   updateDockData(input: $input) {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -92,7 +102,12 @@ mutation CreateDockData(
 ) {
   createDockData(input: $input, condition: $condition) {
     id
-    drift
+    drift  {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
