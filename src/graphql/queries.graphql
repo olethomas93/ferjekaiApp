@@ -2,7 +2,12 @@
 query GetDockData($id: ID!) {
   getDockData(id: $id) {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -22,7 +27,12 @@ query ListDockData(
   listDockData(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      drift
+      drift {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value
@@ -43,7 +53,12 @@ query GetDock($id: ID!) {
     location
     data {
       id
-      drift
+      drift {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value
@@ -70,7 +85,6 @@ query ListDocks(
       location
       data {
         id
-        drift
         alarms
         createdAt
         updatedAt

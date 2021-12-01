@@ -5,7 +5,12 @@ mutation CreateDockData(
 ) {
   createDockData(input: $input, condition: $condition) {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -23,7 +28,12 @@ mutation UpdateDockData(
 ) {
   updateDockData(input: $input, condition: $condition) {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -41,7 +51,12 @@ mutation DeleteDockData(
 ) {
   deleteDockData(input: $input, condition: $condition) {
     id
-    drift
+    drift {
+      name
+      value
+      icon
+      unit
+    }
     weather {
       name
       value
@@ -63,7 +78,12 @@ mutation CreateDock(
     location
     data {
       id
-      drift
+      drift {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value
@@ -88,7 +108,12 @@ mutation UpdateDock(
     location
     data {
       id
-      drift
+      drift {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value
@@ -113,7 +138,12 @@ mutation DeleteDock(
     location
     data {
       id
-      drift
+      drift {
+        name
+        value
+        icon
+        unit
+      }
       weather {
         name
         value

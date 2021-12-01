@@ -9,13 +9,30 @@ export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
 
+export type __SubscriptionContainer = {
+  onUpdateById: OnUpdateByIdSubscription;
+  onCreateDockData: OnCreateDockDataSubscription;
+  onUpdateDockData: OnUpdateDockDataSubscription;
+  onDeleteDockData: OnDeleteDockDataSubscription;
+  onCreateDock: OnCreateDockSubscription;
+  onUpdateDock: OnUpdateDockSubscription;
+  onDeleteDock: OnDeleteDockSubscription;
+};
+
 export type CreateDockDataInput = {
   id?: string | null;
-  drift?: string | null;
+  drift?: Array<OperationInput | null> | null;
   weather?: Array<WeatherInput | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
+};
+
+export type OperationInput = {
+  name?: string | null;
+  value?: string | null;
+  icon?: string | null;
+  unit?: string | null;
 };
 
 export type WeatherInput = {
@@ -26,7 +43,6 @@ export type WeatherInput = {
 };
 
 export type ModeldockDataConditionInput = {
-  drift?: ModelStringInput | null;
   alarms?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
@@ -77,11 +93,19 @@ export type ModelSizeInput = {
 export type dockData = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<Operation | null> | null;
   weather?: Array<Weather | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
+};
+
+export type Operation = {
+  __typename: "Operation";
+  name?: string | null;
+  value?: string | null;
+  icon?: string | null;
+  unit?: string | null;
 };
 
 export type Weather = {
@@ -94,7 +118,7 @@ export type Weather = {
 
 export type UpdateDockDataInput = {
   id: string;
-  drift?: string | null;
+  drift?: Array<OperationInput | null> | null;
   weather?: Array<WeatherInput | null> | null;
   alarms?: string | null;
   createdAt?: string | null;
@@ -153,7 +177,6 @@ export type DeleteDockInput = {
 
 export type ModeldockDataFilterInput = {
   id?: ModelIDInput | null;
-  drift?: ModelStringInput | null;
   alarms?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
@@ -180,7 +203,7 @@ export type ModelIDInput = {
 
 export type ModeldockDataConnection = {
   __typename: "ModeldockDataConnection";
-  items?: Array<dockData | null> | null;
+  items: Array<dockData>;
   nextToken?: string | null;
 };
 
@@ -195,14 +218,20 @@ export type ModeldockFilterInput = {
 
 export type ModeldockConnection = {
   __typename: "ModeldockConnection";
-  items?: Array<dock | null> | null;
+  items: Array<dock>;
   nextToken?: string | null;
 };
 
 export type CreateDockDataMutation = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   weather?: Array<{
     __typename: "Weather";
     name?: string | null;
@@ -218,7 +247,13 @@ export type CreateDockDataMutation = {
 export type UpdateDockDataMutation = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   weather?: Array<{
     __typename: "Weather";
     name?: string | null;
@@ -234,7 +269,13 @@ export type UpdateDockDataMutation = {
 export type DeleteDockDataMutation = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   weather?: Array<{
     __typename: "Weather";
     name?: string | null;
@@ -255,7 +296,13 @@ export type CreateDockMutation = {
   data?: {
     __typename: "dockData";
     id: string;
-    drift?: string | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     weather?: Array<{
       __typename: "Weather";
       name?: string | null;
@@ -279,7 +326,13 @@ export type UpdateDockMutation = {
   data?: {
     __typename: "dockData";
     id: string;
-    drift?: string | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     weather?: Array<{
       __typename: "Weather";
       name?: string | null;
@@ -303,7 +356,13 @@ export type DeleteDockMutation = {
   data?: {
     __typename: "dockData";
     id: string;
-    drift?: string | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     weather?: Array<{
       __typename: "Weather";
       name?: string | null;
@@ -322,7 +381,13 @@ export type DeleteDockMutation = {
 export type GetDockDataQuery = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   weather?: Array<{
     __typename: "Weather";
     name?: string | null;
@@ -337,10 +402,16 @@ export type GetDockDataQuery = {
 
 export type ListDockDataQuery = {
   __typename: "ModeldockDataConnection";
-  items?: Array<{
+  items: Array<{
     __typename: "dockData";
     id: string;
-    drift?: string | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     weather?: Array<{
       __typename: "Weather";
       name?: string | null;
@@ -351,7 +422,7 @@ export type ListDockDataQuery = {
     alarms?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
-  } | null> | null;
+  }>;
   nextToken?: string | null;
 };
 
@@ -363,7 +434,13 @@ export type GetDockQuery = {
   data?: {
     __typename: "dockData";
     id: string;
-    drift?: string | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     weather?: Array<{
       __typename: "Weather";
       name?: string | null;
@@ -381,7 +458,7 @@ export type GetDockQuery = {
 
 export type ListDocksQuery = {
   __typename: "ModeldockConnection";
-  items?: Array<{
+  items: Array<{
     __typename: "dock";
     id: string;
     name?: string | null;
@@ -389,21 +466,26 @@ export type ListDocksQuery = {
     data?: {
       __typename: "dockData";
       id: string;
-      drift?: string | null;
       alarms?: string | null;
       createdAt?: string | null;
       updatedAt?: string | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-  } | null> | null;
+  }>;
   nextToken?: string | null;
 };
 
 export type OnUpdateByIdSubscription = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   weather?: Array<{
     __typename: "Weather";
     name?: string | null;
@@ -419,7 +501,13 @@ export type OnUpdateByIdSubscription = {
 export type OnCreateDockDataSubscription = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   weather?: Array<{
     __typename: "Weather";
     name?: string | null;
@@ -435,7 +523,13 @@ export type OnCreateDockDataSubscription = {
 export type OnUpdateDockDataSubscription = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   weather?: Array<{
     __typename: "Weather";
     name?: string | null;
@@ -451,7 +545,13 @@ export type OnUpdateDockDataSubscription = {
 export type OnDeleteDockDataSubscription = {
   __typename: "dockData";
   id: string;
-  drift?: string | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
   weather?: Array<{
     __typename: "Weather";
     name?: string | null;
@@ -472,7 +572,13 @@ export type OnCreateDockSubscription = {
   data?: {
     __typename: "dockData";
     id: string;
-    drift?: string | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     weather?: Array<{
       __typename: "Weather";
       name?: string | null;
@@ -496,7 +602,13 @@ export type OnUpdateDockSubscription = {
   data?: {
     __typename: "dockData";
     id: string;
-    drift?: string | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     weather?: Array<{
       __typename: "Weather";
       name?: string | null;
@@ -520,7 +632,13 @@ export type OnDeleteDockSubscription = {
   data?: {
     __typename: "dockData";
     id: string;
-    drift?: string | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
     weather?: Array<{
       __typename: "Weather";
       name?: string | null;
@@ -548,7 +666,13 @@ export class APIService {
         createDockData(input: $input, condition: $condition) {
           __typename
           id
-          drift
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           weather {
             __typename
             name
@@ -580,7 +704,13 @@ export class APIService {
         updateDockData(input: $input, condition: $condition) {
           __typename
           id
-          drift
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           weather {
             __typename
             name
@@ -612,7 +742,13 @@ export class APIService {
         deleteDockData(input: $input, condition: $condition) {
           __typename
           id
-          drift
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           weather {
             __typename
             name
@@ -649,7 +785,13 @@ export class APIService {
           data {
             __typename
             id
-            drift
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             weather {
               __typename
               name
@@ -689,7 +831,13 @@ export class APIService {
           data {
             __typename
             id
-            drift
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             weather {
               __typename
               name
@@ -729,7 +877,13 @@ export class APIService {
           data {
             __typename
             id
-            drift
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             weather {
               __typename
               name
@@ -761,7 +915,13 @@ export class APIService {
         getDockData(id: $id) {
           __typename
           id
-          drift
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           weather {
             __typename
             name
@@ -793,7 +953,13 @@ export class APIService {
           items {
             __typename
             id
-            drift
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             weather {
               __typename
               name
@@ -833,7 +999,13 @@ export class APIService {
           data {
             __typename
             id
-            drift
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             weather {
               __typename
               name
@@ -873,7 +1045,6 @@ export class APIService {
             data {
               __typename
               id
-              drift
               alarms
               createdAt
               updatedAt
@@ -901,12 +1072,20 @@ export class APIService {
   }
   OnUpdateByIdListener(
     id: string
-  ): Observable<SubscriptionResponse<OnUpdateByIdSubscription>> {
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateById">>
+  > {
     const statement = `subscription OnUpdateById($id: ID!) {
         onUpdateById(id: $id) {
           __typename
           id
-          drift
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           weather {
             __typename
             name
@@ -924,18 +1103,26 @@ export class APIService {
     };
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<SubscriptionResponse<OnUpdateByIdSubscription>>;
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateById">>
+    >;
   }
 
   OnCreateDockDataListener: Observable<
-    SubscriptionResponse<OnCreateDockDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDockData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateDockData {
         onCreateDockData {
           __typename
           id
-          drift
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           weather {
             __typename
             name
@@ -949,17 +1136,25 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateDockDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDockData">>
+  >;
 
   OnUpdateDockDataListener: Observable<
-    SubscriptionResponse<OnUpdateDockDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDockData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateDockData {
         onUpdateDockData {
           __typename
           id
-          drift
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           weather {
             __typename
             name
@@ -973,17 +1168,25 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateDockDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDockData">>
+  >;
 
   OnDeleteDockDataListener: Observable<
-    SubscriptionResponse<OnDeleteDockDataSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDockData">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteDockData {
         onDeleteDockData {
           __typename
           id
-          drift
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
           weather {
             __typename
             name
@@ -997,10 +1200,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteDockDataSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDockData">>
+  >;
 
   OnCreateDockListener: Observable<
-    SubscriptionResponse<OnCreateDockSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDock">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateDock {
@@ -1012,7 +1217,13 @@ export class APIService {
           data {
             __typename
             id
-            drift
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             weather {
               __typename
               name
@@ -1029,10 +1240,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateDockSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDock">>
+  >;
 
   OnUpdateDockListener: Observable<
-    SubscriptionResponse<OnUpdateDockSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDock">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateDock {
@@ -1044,7 +1257,13 @@ export class APIService {
           data {
             __typename
             id
-            drift
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             weather {
               __typename
               name
@@ -1061,10 +1280,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateDockSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDock">>
+  >;
 
   OnDeleteDockListener: Observable<
-    SubscriptionResponse<OnDeleteDockSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteDock {
@@ -1076,7 +1297,13 @@ export class APIService {
           data {
             __typename
             id
-            drift
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
             weather {
               __typename
               name
@@ -1093,5 +1320,7 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteDockSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
+  >;
 }
