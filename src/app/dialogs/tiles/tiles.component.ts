@@ -170,32 +170,21 @@ close(e:any){
   }
 
   updateFerryData(data:any){
-    console.log(Object.keys(data).length)
+    for (let i in data){
 
-    this.data = [];
+      if(data[i].unit =="oC"){
+        data[i].unit = "°C"
+      }
 
-    for(let i=0; i <Object.keys(data).length-1;i++){
-      
-
-      this.data.push({ 
-        
-        value:Math.round(data[Object.keys(data)[i]]),
-        title:Object.keys(data)[i],
-        icon:"schedule",
-        color:"green",
-        unit:""
-      
-      
-      
-      })
-      
-
-
-
-
+      if(data[i].unit =="o") {
+        data[i].unit ="°"
+      }
+     
 
     }
-   
+   this.data = data
+
+  
 
 
 
