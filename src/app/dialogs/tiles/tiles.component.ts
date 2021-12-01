@@ -161,7 +161,7 @@ close(e:any){
 
    
     
-      this.updateFerryData(JSON.parse(data.drift))
+      this.updateFerryData(data.drift)
 
 
   
