@@ -1,6 +1,6 @@
 type dockData @model @aws_iam @aws_cognito_user_pools {
   id: ID!
-  drift: AWSJSON
+  drift: [Operation]
   weather:[Weather]
   alarms:AWSJSON
   createdAt: AWSDateTime
@@ -26,6 +26,13 @@ data:dockData @connection(fields:["id"])
 # }
 
 type Weather {
+  name:String
+  value:String
+  icon:String
+  unit:String
+}
+
+type Operation {
   name:String
   value:String
   icon:String
