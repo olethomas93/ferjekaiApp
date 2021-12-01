@@ -18,7 +18,7 @@ export interface Alarm {
 export interface tile {
 
 
-title:string
+name:string
 value:any
 color:string
 icon:string
@@ -106,7 +106,7 @@ export class TilesComponent implements OnInit,OnDestroy {
 
 
   this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
-    
+    console.log(data)
     this.weatherUpdated = new Date(data['updatedAt']).toString()
     this.updateData(data)
   }).catch((e)=>{
@@ -166,7 +166,7 @@ close(e:any){
 
    
     
-      this.updateFerryData(JSON.parse(data.drift))
+      this.updateFerryData(data.drift)
 
 
   
