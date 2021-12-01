@@ -17,7 +17,7 @@ export interface Alarm {
 export interface tile {
 
 
-title:string
+name:string
 value:any
 color:string
 icon:string

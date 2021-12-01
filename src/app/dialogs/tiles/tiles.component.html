@@ -64,7 +64,7 @@
         <!--Mini Cards-->
         <mat-grid-tile *ngFor="let i of data" [colspan]="( cardLayout | async )?.miniCard?.cols"
           [rowspan]="( cardLayout | async )?.miniCard?.rows">
-          <app-minicard [unit]="i.unit" [icon]="i.icon" [title]="i.title" [color]="i.color" [value]=i.value [edit]="editable"><div></div></app-minicard>
+          <app-minicard [unit]="i.unit" [icon]="i.icon" [title]="i.name" [color]="i.color" [value]=i.value [edit]="editable"><div></div></app-minicard>
         </mat-grid-tile>
       
        
