@@ -130,11 +130,18 @@ export class MapComponent implements OnInit {
     }
 
     var radius = e.accuracy / 2;
+    var posRadius = radius/2;
 
-    this.current_position = circle(e.latlng,{radius:radius/2,color:"#1E90FF",fillColor:"#1E90FF",fillOpacity:1}).addTo(this.map)
+    if (posRadius > 100){
+
+      posRadius =100;
+
+    }
+
+    this.current_position = circle(e.latlng,{radius:posRadius,color:"#1E90FF",fillColor:"#1E90FF",fillOpacity:1}).addTo(this.map)
       .bindPopup("Du er her!");
    
-      this.circlepos = circle(e.latlng,{radius:radius/2,color:"white",fillOpacity:0,fill:false}).addTo(this.map)
+      this.circlepos = circle(e.latlng,{radius:posRadius+1,color:"white",fillOpacity:0,fill:false}).addTo(this.map)
 
     this.current_accuracy = circle(e.latlng,{radius:radius,color:"white",fillColor:"white",stroke:false}).addTo(this.map)
 
