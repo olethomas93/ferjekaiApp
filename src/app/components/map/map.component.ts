@@ -138,8 +138,7 @@ export class MapComponent implements OnInit {
 
     }
 
-    this.current_position = circle(e.latlng,{radius:posRadius,color:"#1E90FF",fillColor:"#1E90FF",fillOpacity:1}).addTo(this.map)
-      .bindPopup("Du er her!");
+    this.current_position = circle(e.latlng,{radius:posRadius,color:"#1E90FF",fillColor:"#1E90FF",fillOpacity:1}).addTo(this.map).bindPopup("Du er her!");
    
       this.circlepos = circle(e.latlng,{radius:posRadius+1,color:"white",fillOpacity:0,fill:false}).addTo(this.map)
 

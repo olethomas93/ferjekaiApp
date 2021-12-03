@@ -121,7 +121,8 @@ export class TilesComponent implements OnInit,OnDestroy {
     if(data){
 
       console.log(data)
-      this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toString()
+      this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toLocaleDateString()
+      
       let topic = data.value.data.onUpdateById
       this.updateData(topic)
       
