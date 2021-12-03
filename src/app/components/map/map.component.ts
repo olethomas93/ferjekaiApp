@@ -38,6 +38,7 @@ export class MapComponent implements OnInit {
   @Output() coord$: EventEmitter<any> = new EventEmitter();
   current_position :any 
   current_accuracy:any;
+  circlepos:any;
    myIcon = icon({
     iconUrl: 'assets/compass.jpg',
     iconSize: [30, 30],
@@ -125,14 +126,17 @@ export class MapComponent implements OnInit {
     if (this.current_position) {
         this.map.removeLayer(this.current_position);
         this.map.removeLayer(this.current_accuracy);
+        this.map.removeLayer(this.circlepos);
     }
 
     var radius = e.accuracy / 2;
 
-    // this.current_position = marker(e.latlng).addTo(this.map)
-    //   .bindPopup("Du er her!");
-    // marker(e.latlng, {icon: this.myIcon}).addTo(this.map);
-    this.current_accuracy = circle(e.latlng, 100).addTo(this.map).bindPopup("Du er her!");
+    this.current_position = circle(e.latlng,{radius:100,color:"#1E90FF",fillColor:"#1E90FF",fillOpacity:1}).addTo(this.map)
+      .bindPopup("Du er her!");
+   
+      this.circlepos = circle(e.latlng,{radius:101,color:"white",fillOpacity:0,fill:false}).addTo(this.map)
+
+    this.current_accuracy = circle(e.latlng,{radius:radius,color:"white",fillColor:"white",stroke:false}).addTo(this.map)
 
   }
 
