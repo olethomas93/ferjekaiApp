@@ -18,7 +18,6 @@ data:dockData @connection(fields:["id"])
 
 }
 
-
 # type AlarmObj @aws_iam  @aws_cognito_user_pools{
  
 #   id:String
