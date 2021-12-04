@@ -9,12 +9,19 @@ import { APIService } from '../../API.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { String } from 'aws-sdk/clients/acm';
 import { bool } from 'aws-sdk/clients/signer';
+import { AnyAaaaRecord } from 'dns';
 
-// export interface Alarm {
-//   name: string;
-//   value:boolean
- 
-// }
+export interface Alarm {
+  name: string;
+  value:any
+ id:string
+}
+
+export interface Alarmconf {
+  name: string;
+  value:string
+ id:string
+}
 
 export interface tile {
 
@@ -44,14 +51,16 @@ export interface weather{
 })
 export class TilesComponent implements OnInit,OnDestroy {
   subscription: any;
-  displayedColumns: string[] = ['name', 'status'];
+  displayedColumns: string[] = ['id','name', 'status'];
   dataSource = [{}]
-  alarmsUpdated!: Date
+  
   weatherUpdated!: string
+  alarmsUpdated!: string
+  driftUpdated!: string
   editable!:bool;
-
+  alarmConfig!:Alarmconf[]
   weatherData!:weather[];
-  alarms!:[{}]
+  alarms!:Alarm[]
   configToggle =false;
   data!:tile[]
 
@@ -84,7 +93,7 @@ export class TilesComponent implements OnInit,OnDestroy {
     ) {
 
 
-
+this.alarmConfig =[]
       this.dialogRef.backdropClick().subscribe((data)=>{
 
         this.dialogRef.close()
@@ -105,10 +114,14 @@ export class TilesComponent implements OnInit,OnDestroy {
 
   ngOnInit(){
  
+this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
-    console.log(this.ferrydockName)
+  this.alarmConfig = data.alarms
+})
+    
 
   this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
+  
 
     this.weatherUpdated = new Date(data['updatedAt']).toString()
     this.updateData(data)
@@ -125,8 +138,8 @@ export class TilesComponent implements OnInit,OnDestroy {
   
     if(data){
 
-      console.log(data)
-      this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toLocaleTimeString()
+      
+      this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toTimeString()
       
       let topic = data.value.data.onUpdateById
       if(!this.configToggle){
@@ -148,9 +161,21 @@ export class TilesComponent implements OnInit,OnDestroy {
 
 update(){
 
-console.log(this.alarms)
+
+this.api.UpdateDock({id:this.ferrydockName.name.toLowerCase(),alarms:this.alarms}).then((data)=>{
+
+  this.alarmConfig = this.alarms
+}).catch((error:any)=>{
+  console.log(error)
+})
 
 
+}
+
+checkString(value:any){
+  let status = (value.toLowerCase() === "true")
+
+  return status
 }
 
 config(){
@@ -163,6 +188,11 @@ close(e:any){
   
   this.dialogRef.close()
   this.ref.detectChanges()
+}
+
+getNumbersOfAlarms(){
+
+  return this.alarms.length
 }
 
   updateData(data:any){
@@ -216,17 +246,23 @@ close(e:any){
 
     
   
-
-    this.alarms =[{}]
+    let j=0
+    let temp =[]
     for(let i in data){
-      let status = (data[i].value.toLowerCase() === "true")
-    
-   
-      this.alarms.push({name:data[i].name,value:status})
+      // let status = (data[i].value.toLowerCase() === "true")
       
+      if(this.alarmConfig.length>0){
+       
+        temp.push({name:this.alarmConfig[j].name ,value:data[i].value,id:data[i].id})
+      }else{
+        temp.push({name:"udefinert" ,value:data[i].value,id:data[i].id})
+
+      }
+      
+      j+=1
     }
     
-    
+    this.alarms =temp
 
   }
 
