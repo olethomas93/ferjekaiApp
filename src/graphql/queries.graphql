@@ -14,7 +14,11 @@ query GetDockData($id: ID!) {
       icon
       unit
     }
-    alarms
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -39,7 +43,11 @@ query ListDockData(
         icon
         unit
       }
-      alarms
+      alarms {
+        id
+        value
+        name
+      }
       createdAt
       updatedAt
     }
@@ -51,6 +59,23 @@ query GetDock($id: ID!) {
     id
     name
     location
+    drift {
+      name
+      value
+      icon
+      unit
+    }
+    weather {
+      name
+      value
+      icon
+      unit
+    }
+    alarms {
+      id
+      value
+      name
+    }
     data {
       id
       drift {
@@ -65,7 +90,11 @@ query GetDock($id: ID!) {
         icon
         unit
       }
-      alarms
+      alarms {
+        id
+        value
+        name
+      }
       createdAt
       updatedAt
     }
@@ -83,9 +112,25 @@ query ListDocks(
       id
       name
       location
+      drift {
+        name
+        value
+        icon
+        unit
+      }
+      weather {
+        name
+        value
+        icon
+        unit
+      }
+      alarms {
+        id
+        value
+        name
+      }
       data {
         id
-        alarms
         createdAt
         updatedAt
       }

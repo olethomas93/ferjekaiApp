@@ -65,7 +65,10 @@ query MyQuery {
         icon
         unit
       }
-      alarms 
+      alarms {
+        name
+        value
+      }
       createdAt
       updatedAt
     }
@@ -73,8 +76,11 @@ query MyQuery {
 }`
 
 const update =gql(`
-mutation updateDockData($input:UpdateDockDataInput!) {
-  updateDockData(input: $input) {
+mutation UpdateDockData(
+  $input: UpdateDockDataInput!
+  $condition: ModeldockDataConditionInput
+) {
+  updateDockData(input: $input, condition: $condition) {
     id
     drift {
       name
@@ -88,7 +94,11 @@ mutation updateDockData($input:UpdateDockDataInput!) {
       icon
       unit
     }
-    alarms 
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -114,7 +124,10 @@ mutation CreateDockData(
       icon
       unit
     }
-    alarms
+    alarms{
+      name
+      value
+    }
     createdAt
     updatedAt
   }
@@ -127,13 +140,16 @@ exports.handler = async function(event, context,callback) {
     var ferry = Object.keys(event)[0]
     var data = event[ferry];
 
+    var dataName = Object.keys(data)[0];
+
+
+console.log(dataName)
+console.log(data)
 
 const item = {
   input: {
     id:ferry,
-    weather:data.weather,
-  drift:data.drift,
-  alarms:JSON.stringify(data.alarms),
+    [dataName]:data[dataName],
     createdAt: new Date().toISOString(),
     updatedAt:new Date().toISOString()
   }

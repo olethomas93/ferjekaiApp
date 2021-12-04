@@ -1,6 +1,8 @@
 <h1 mat-dialog-title> {{this.name.name}}</h1>
-<mat-dialog-content>
 
+<mat-dialog-content>
+  <button  mat-button (click)="config()" >Config</button>
+  
  <mat-tab-group >
   <mat-tab label="Værdata"> 
     <h3>Updated:{{weatherUpdated}} </h3> 
@@ -22,7 +24,7 @@
   </mat-tab>
   <mat-tab label="Alarmer">
     <h3>Updated: {{weatherUpdated}} </h3> 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 " >
+    <table mat-table [dataSource]="alarms" class="mat-elevation-z8 " >
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -30,22 +32,28 @@
       <!-- Position Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Definisjon </th>
-        <td  mat-cell *matCellDef="let element"> {{element.name}} 
-          <!-- <input matInput readonly="true" type="text" value ={{element.name}}  > -->
+        <td  mat-cell *matCellDef="let element"> 
+          
+          <span *ngIf="!configToggle; else editPlace">
+            {{element.name}} 
+            </span>
 
+          <ng-template #editPlace>
+            <input [(ngModel)]="element.name" (keyup.enter)="configToggle = false" >
+          </ng-template>
         </td>
       </ng-container>
     
       <!-- Name Column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> status </th>
-        <td mat-cell *matCellDef="let element" > <div *ngIf="element.status"  class="blob red" ></div> 
-        <div *ngIf="!element.status" class="blob green"></div>
+        <td mat-cell *matCellDef="let element" > <div *ngIf="element.value"  class="blob red" ></div> 
+        <div *ngIf="!element.value" class="blob green"></div>
         
         </td>
       </ng-container>
     
-    
+ 
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -78,7 +86,8 @@
 
 </mat-tab-group>
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="close($event)">Close</button>
-  
+  <button  mat-button *ngIf="configToggle" (click)="update()" >update</button>
 </mat-dialog-actions>

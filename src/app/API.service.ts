@@ -23,7 +23,7 @@ export type CreateDockDataInput = {
   id?: string | null;
   drift?: Array<OperationInput | null> | null;
   weather?: Array<WeatherInput | null> | null;
-  alarms?: string | null;
+  alarms?: Array<AlarmInput | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -42,8 +42,13 @@ export type WeatherInput = {
   unit?: string | null;
 };
 
+export type AlarmInput = {
+  id: string;
+  value?: string | null;
+  name?: string | null;
+};
+
 export type ModeldockDataConditionInput = {
-  alarms?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
   and?: Array<ModeldockDataConditionInput | null> | null;
@@ -95,7 +100,7 @@ export type dockData = {
   id: string;
   drift?: Array<Operation | null> | null;
   weather?: Array<Weather | null> | null;
-  alarms?: string | null;
+  alarms?: Array<Alarm | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -116,11 +121,18 @@ export type Weather = {
   unit?: string | null;
 };
 
+export type Alarm = {
+  __typename: "Alarm";
+  id: string;
+  value?: string | null;
+  name?: string | null;
+};
+
 export type UpdateDockDataInput = {
   id: string;
   drift?: Array<OperationInput | null> | null;
   weather?: Array<WeatherInput | null> | null;
-  alarms?: string | null;
+  alarms?: Array<AlarmInput | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -133,6 +145,9 @@ export type CreateDockInput = {
   id?: string | null;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<OperationInput | null> | null;
+  weather?: Array<WeatherInput | null> | null;
+  alarms?: Array<AlarmInput | null> | null;
 };
 
 export type ModeldockConditionInput = {
@@ -160,6 +175,9 @@ export type dock = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<Operation | null> | null;
+  weather?: Array<Weather | null> | null;
+  alarms?: Array<Alarm | null> | null;
   data?: dockData | null;
   createdAt: string;
   updatedAt: string;
@@ -169,6 +187,9 @@ export type UpdateDockInput = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<OperationInput | null> | null;
+  weather?: Array<WeatherInput | null> | null;
+  alarms?: Array<AlarmInput | null> | null;
 };
 
 export type DeleteDockInput = {
@@ -177,7 +198,6 @@ export type DeleteDockInput = {
 
 export type ModeldockDataFilterInput = {
   id?: ModelIDInput | null;
-  alarms?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
   and?: Array<ModeldockDataFilterInput | null> | null;
@@ -239,7 +259,12 @@ export type CreateDockDataMutation = {
     icon?: string | null;
     unit?: string | null;
   } | null> | null;
-  alarms?: string | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -261,7 +286,12 @@ export type UpdateDockDataMutation = {
     icon?: string | null;
     unit?: string | null;
   } | null> | null;
-  alarms?: string | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -283,7 +313,12 @@ export type DeleteDockDataMutation = {
     icon?: string | null;
     unit?: string | null;
   } | null> | null;
-  alarms?: string | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -293,6 +328,26 @@ export type CreateDockMutation = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   data?: {
     __typename: "dockData";
     id: string;
@@ -310,7 +365,12 @@ export type CreateDockMutation = {
       icon?: string | null;
       unit?: string | null;
     } | null> | null;
-    alarms?: string | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -323,6 +383,26 @@ export type UpdateDockMutation = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   data?: {
     __typename: "dockData";
     id: string;
@@ -340,7 +420,12 @@ export type UpdateDockMutation = {
       icon?: string | null;
       unit?: string | null;
     } | null> | null;
-    alarms?: string | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -353,6 +438,26 @@ export type DeleteDockMutation = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   data?: {
     __typename: "dockData";
     id: string;
@@ -370,7 +475,12 @@ export type DeleteDockMutation = {
       icon?: string | null;
       unit?: string | null;
     } | null> | null;
-    alarms?: string | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -395,7 +505,12 @@ export type GetDockDataQuery = {
     icon?: string | null;
     unit?: string | null;
   } | null> | null;
-  alarms?: string | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -419,7 +534,12 @@ export type ListDockDataQuery = {
       icon?: string | null;
       unit?: string | null;
     } | null> | null;
-    alarms?: string | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   }>;
@@ -431,6 +551,26 @@ export type GetDockQuery = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   data?: {
     __typename: "dockData";
     id: string;
@@ -448,7 +588,12 @@ export type GetDockQuery = {
       icon?: string | null;
       unit?: string | null;
     } | null> | null;
-    alarms?: string | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -463,10 +608,29 @@ export type ListDocksQuery = {
     id: string;
     name?: string | null;
     location?: Array<number | null> | null;
+    drift?: Array<{
+      __typename: "Operation";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
+    weather?: Array<{
+      __typename: "Weather";
+      name?: string | null;
+      value?: string | null;
+      icon?: string | null;
+      unit?: string | null;
+    } | null> | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     data?: {
       __typename: "dockData";
       id: string;
-      alarms?: string | null;
       createdAt?: string | null;
       updatedAt?: string | null;
     } | null;
@@ -493,7 +657,12 @@ export type OnUpdateByIdSubscription = {
     icon?: string | null;
     unit?: string | null;
   } | null> | null;
-  alarms?: string | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -515,7 +684,12 @@ export type OnCreateDockDataSubscription = {
     icon?: string | null;
     unit?: string | null;
   } | null> | null;
-  alarms?: string | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -537,7 +711,12 @@ export type OnUpdateDockDataSubscription = {
     icon?: string | null;
     unit?: string | null;
   } | null> | null;
-  alarms?: string | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -559,7 +738,12 @@ export type OnDeleteDockDataSubscription = {
     icon?: string | null;
     unit?: string | null;
   } | null> | null;
-  alarms?: string | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -569,6 +753,26 @@ export type OnCreateDockSubscription = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   data?: {
     __typename: "dockData";
     id: string;
@@ -586,7 +790,12 @@ export type OnCreateDockSubscription = {
       icon?: string | null;
       unit?: string | null;
     } | null> | null;
-    alarms?: string | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -599,6 +808,26 @@ export type OnUpdateDockSubscription = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   data?: {
     __typename: "dockData";
     id: string;
@@ -616,7 +845,12 @@ export type OnUpdateDockSubscription = {
       icon?: string | null;
       unit?: string | null;
     } | null> | null;
-    alarms?: string | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -629,6 +863,26 @@ export type OnDeleteDockSubscription = {
   id: string;
   name?: string | null;
   location?: Array<number | null> | null;
+  drift?: Array<{
+    __typename: "Operation";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  weather?: Array<{
+    __typename: "Weather";
+    name?: string | null;
+    value?: string | null;
+    icon?: string | null;
+    unit?: string | null;
+  } | null> | null;
+  alarms?: Array<{
+    __typename: "Alarm";
+    id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   data?: {
     __typename: "dockData";
     id: string;
@@ -646,7 +900,12 @@ export type OnDeleteDockSubscription = {
       icon?: string | null;
       unit?: string | null;
     } | null> | null;
-    alarms?: string | null;
+    alarms?: Array<{
+      __typename: "Alarm";
+      id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -680,7 +939,12 @@ export class APIService {
             icon
             unit
           }
-          alarms
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -718,7 +982,12 @@ export class APIService {
             icon
             unit
           }
-          alarms
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -756,7 +1025,12 @@ export class APIService {
             icon
             unit
           }
-          alarms
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -782,6 +1056,26 @@ export class APIService {
           id
           name
           location
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           data {
             __typename
             id
@@ -799,7 +1093,12 @@ export class APIService {
               icon
               unit
             }
-            alarms
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -828,6 +1127,26 @@ export class APIService {
           id
           name
           location
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           data {
             __typename
             id
@@ -845,7 +1164,12 @@ export class APIService {
               icon
               unit
             }
-            alarms
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -874,6 +1198,26 @@ export class APIService {
           id
           name
           location
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           data {
             __typename
             id
@@ -891,7 +1235,12 @@ export class APIService {
               icon
               unit
             }
-            alarms
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -929,7 +1278,12 @@ export class APIService {
             icon
             unit
           }
-          alarms
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -967,7 +1321,12 @@ export class APIService {
               icon
               unit
             }
-            alarms
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -996,6 +1355,26 @@ export class APIService {
           id
           name
           location
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           data {
             __typename
             id
@@ -1013,7 +1392,12 @@ export class APIService {
               icon
               unit
             }
-            alarms
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -1042,10 +1426,29 @@ export class APIService {
             id
             name
             location
+            drift {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
+            weather {
+              __typename
+              name
+              value
+              icon
+              unit
+            }
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             data {
               __typename
               id
-              alarms
               createdAt
               updatedAt
             }
@@ -1093,7 +1496,12 @@ export class APIService {
             icon
             unit
           }
-          alarms
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1130,7 +1538,12 @@ export class APIService {
             icon
             unit
           }
-          alarms
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1162,7 +1575,12 @@ export class APIService {
             icon
             unit
           }
-          alarms
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1194,7 +1612,12 @@ export class APIService {
             icon
             unit
           }
-          alarms
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1214,6 +1637,26 @@ export class APIService {
           id
           name
           location
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           data {
             __typename
             id
@@ -1231,7 +1674,12 @@ export class APIService {
               icon
               unit
             }
-            alarms
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -1254,6 +1702,26 @@ export class APIService {
           id
           name
           location
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           data {
             __typename
             id
@@ -1271,7 +1739,12 @@ export class APIService {
               icon
               unit
             }
-            alarms
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -1294,6 +1767,26 @@ export class APIService {
           id
           name
           location
+          drift {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          weather {
+            __typename
+            name
+            value
+            icon
+            unit
+          }
+          alarms {
+            __typename
+            id
+            value
+            name
+          }
           data {
             __typename
             id
@@ -1311,7 +1804,12 @@ export class APIService {
               icon
               unit
             }
-            alarms
+            alarms {
+              __typename
+              id
+              value
+              name
+            }
             createdAt
             updatedAt
           }

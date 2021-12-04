@@ -9,10 +9,12 @@ import { APIService } from '../../API.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { String } from 'aws-sdk/clients/acm';
 import { bool } from 'aws-sdk/clients/signer';
-export interface Alarm {
-  name: string;
-  status:string
-}
+
+// export interface Alarm {
+//   name: string;
+//   value:boolean
+ 
+// }
 
 export interface tile {
 
@@ -49,7 +51,8 @@ export class TilesComponent implements OnInit,OnDestroy {
   editable!:bool;
 
   weatherData!:weather[];
-
+  alarms!:[{}]
+  configToggle =false;
   data!:tile[]
 
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -80,6 +83,8 @@ export class TilesComponent implements OnInit,OnDestroy {
     
     ) {
 
+
+
       this.dialogRef.backdropClick().subscribe((data)=>{
 
         this.dialogRef.close()
@@ -104,7 +109,7 @@ export class TilesComponent implements OnInit,OnDestroy {
     console.log(this.ferrydockName)
 
   this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
-   console.log(data)
+
     this.weatherUpdated = new Date(data['updatedAt']).toString()
     this.updateData(data)
   }).catch((e)=>{
@@ -121,10 +126,13 @@ export class TilesComponent implements OnInit,OnDestroy {
     if(data){
 
       console.log(data)
-      this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toLocaleDateString()
+      this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toLocaleTimeString()
       
       let topic = data.value.data.onUpdateById
-      this.updateData(topic)
+      if(!this.configToggle){
+        this.updateData(topic)
+      }
+      
       
     }
 
@@ -138,7 +146,19 @@ export class TilesComponent implements OnInit,OnDestroy {
 
   }
 
+update(){
 
+console.log(this.alarms)
+
+
+}
+
+config(){
+
+this.configToggle = !this.configToggle
+
+
+}
 close(e:any){
   
   this.dialogRef.close()
@@ -148,8 +168,7 @@ close(e:any){
   updateData(data:any){
     
     
-   console.log(data)
-      
+
      
       
       this.updateWeatherData(data.weather)
@@ -157,7 +176,7 @@ close(e:any){
 
  
    
-      this.updateAlarmData(JSON.parse(data.alarms))
+      this.updateAlarmData(data.alarms)
    
 
    
@@ -198,12 +217,12 @@ close(e:any){
     
   
 
-    this.dataSource =[]
+    this.alarms =[{}]
     for(let i in data){
-      let status = (data[i].toLowerCase() === "true")
+      let status = (data[i].value.toLowerCase() === "true")
     
    
-      this.dataSource.push({name:i,status:status})
+      this.alarms.push({name:data[i].name,value:status})
       
     }
     
@@ -211,7 +230,7 @@ close(e:any){
 
   }
 
-
+ 
   updateWeatherData(data:any){
     for (let i in data){
 

@@ -14,7 +14,11 @@ subscription OnUpdateById($id: ID!) {
       icon
       unit
     }
-    alarms
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -34,7 +38,11 @@ subscription OnCreateDockData {
       icon
       unit
     }
-    alarms
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -54,7 +62,11 @@ subscription OnUpdateDockData {
       icon
       unit
     }
-    alarms
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -74,7 +86,11 @@ subscription OnDeleteDockData {
       icon
       unit
     }
-    alarms
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -84,6 +100,23 @@ subscription OnCreateDock {
     id
     name
     location
+    drift {
+      name
+      value
+      icon
+      unit
+    }
+    weather {
+      name
+      value
+      icon
+      unit
+    }
+    alarms {
+      id
+      value
+      name
+    }
     data {
       id
       drift {
@@ -98,7 +131,11 @@ subscription OnCreateDock {
         icon
         unit
       }
-      alarms
+      alarms {
+        id
+        value
+        name
+      }
       createdAt
       updatedAt
     }
@@ -111,6 +148,23 @@ subscription OnUpdateDock {
     id
     name
     location
+    drift {
+      name
+      value
+      icon
+      unit
+    }
+    weather {
+      name
+      value
+      icon
+      unit
+    }
+    alarms {
+      id
+      value
+      name
+    }
     data {
       id
       drift {
@@ -125,7 +179,11 @@ subscription OnUpdateDock {
         icon
         unit
       }
-      alarms
+      alarms {
+        id
+        value
+        name
+      }
       createdAt
       updatedAt
     }
@@ -138,6 +196,23 @@ subscription OnDeleteDock {
     id
     name
     location
+    drift {
+      name
+      value
+      icon
+      unit
+    }
+    weather {
+      name
+      value
+      icon
+      unit
+    }
+    alarms {
+      id
+      value
+      name
+    }
     data {
       id
       drift {
@@ -152,7 +227,11 @@ subscription OnDeleteDock {
         icon
         unit
       }
-      alarms
+      alarms {
+        id
+        value
+        name
+      }
       createdAt
       updatedAt
     }

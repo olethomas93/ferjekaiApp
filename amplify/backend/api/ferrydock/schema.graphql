@@ -2,7 +2,7 @@ type dockData @model @aws_iam @aws_cognito_user_pools {
   id: ID!
   drift: [Operation]
   weather:[Weather]
-  alarms:AWSJSON
+  alarms:[Alarm]
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
 }
@@ -11,6 +11,9 @@ type dock @model @aws_iam @aws_cognito_user_pools {
 id:ID!
 name:String
 location:[Float]
+drift: [Operation]
+weather:[Weather]
+alarms:[Alarm]
 data:dockData @connection(fields:["id"])
 
 }
@@ -25,6 +28,8 @@ data:dockData @connection(fields:["id"])
 
 # }
 
+
+
 type Weather {
   name:String
   value:String
@@ -37,6 +42,13 @@ type Operation {
   value:String
   icon:String
   unit:String
+}
+
+type Alarm{
+  id:ID!
+value:String
+name:String
+
 }
  type Subscription @aws_iam  @aws_cognito_user_pools{
    onUpdateById(id: ID!): dockData

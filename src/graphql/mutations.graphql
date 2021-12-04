@@ -17,7 +17,11 @@ mutation CreateDockData(
       icon
       unit
     }
-    alarms
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -40,7 +44,11 @@ mutation UpdateDockData(
       icon
       unit
     }
-    alarms
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -63,7 +71,11 @@ mutation DeleteDockData(
       icon
       unit
     }
-    alarms
+    alarms {
+      id
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -76,6 +88,23 @@ mutation CreateDock(
     id
     name
     location
+    drift {
+      name
+      value
+      icon
+      unit
+    }
+    weather {
+      name
+      value
+      icon
+      unit
+    }
+    alarms {
+      id
+      value
+      name
+    }
     data {
       id
       drift {
@@ -90,7 +119,11 @@ mutation CreateDock(
         icon
         unit
       }
-      alarms
+      alarms {
+        id
+        value
+        name
+      }
       createdAt
       updatedAt
     }
@@ -106,6 +139,23 @@ mutation UpdateDock(
     id
     name
     location
+    drift {
+      name
+      value
+      icon
+      unit
+    }
+    weather {
+      name
+      value
+      icon
+      unit
+    }
+    alarms {
+      id
+      value
+      name
+    }
     data {
       id
       drift {
@@ -120,7 +170,11 @@ mutation UpdateDock(
         icon
         unit
       }
-      alarms
+      alarms {
+        id
+        value
+        name
+      }
       createdAt
       updatedAt
     }
@@ -136,6 +190,23 @@ mutation DeleteDock(
     id
     name
     location
+    drift {
+      name
+      value
+      icon
+      unit
+    }
+    weather {
+      name
+      value
+      icon
+      unit
+    }
+    alarms {
+      id
+      value
+      name
+    }
     data {
       id
       drift {
@@ -150,7 +221,11 @@ mutation DeleteDock(
         icon
         unit
       }
-      alarms
+      alarms {
+        id
+        value
+        name
+      }
       createdAt
       updatedAt
     }
