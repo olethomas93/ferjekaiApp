@@ -112,13 +112,26 @@ this.alarmConfig =[]
 
   }
 
+  checkGroup(){
+    let temp =false;
+   if(localStorage.getItem('group') == "admin" ){
+
+    temp = true;
+
+   }
+
+   return temp
+  }
+
   ngOnInit(){
  
 this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
-
+ 
   this.alarmConfig = data.alarms
 })
     
+
+
 
   this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
   

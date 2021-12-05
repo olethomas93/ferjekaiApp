@@ -1,7 +1,7 @@
 <h1 mat-dialog-title> {{this.name.name}}</h1>
 
 <mat-dialog-content>
-  <button  mat-button (click)="config()" >Config</button>
+  <button *ngIf="checkGroup()"  mat-button (click)="config()" ><mat-icon aria-hidden="false" aria-label="Example home icon">settings</mat-icon></button>
   
  <mat-tab-group >
   <mat-tab label="Værdata"> 
@@ -95,5 +95,5 @@
 
 <mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="close($event)">Close</button>
-  <button  mat-button *ngIf="configToggle" (click)="update()" >update</button>
+  <button  mat-button *ngIf="configToggle && checkGroup()" (click)="update()" >update</button>
 </mat-dialog-actions>
