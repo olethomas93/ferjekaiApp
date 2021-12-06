@@ -266,6 +266,7 @@ mutation CreateLoggingTest(
     ferry
     alarmType
     data
+    timeStamp
     createdAt
     updatedAt
   }
@@ -279,6 +280,7 @@ mutation UpdateLoggingTest(
     ferry
     alarmType
     data
+    timeStamp
     createdAt
     updatedAt
   }
@@ -292,6 +294,7 @@ mutation DeleteLoggingTest(
     ferry
     alarmType
     data
+    timeStamp
     createdAt
     updatedAt
   }

@@ -273,6 +273,7 @@ subscription OnCreateLoggingTest {
     ferry
     alarmType
     data
+    timeStamp
     createdAt
     updatedAt
   }
@@ -283,6 +284,7 @@ subscription OnUpdateLoggingTest {
     ferry
     alarmType
     data
+    timeStamp
     createdAt
     updatedAt
   }
@@ -293,6 +295,7 @@ subscription OnDeleteLoggingTest {
     ferry
     alarmType
     data
+    timeStamp
     createdAt
     updatedAt
   }

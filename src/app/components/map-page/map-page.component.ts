@@ -8,6 +8,7 @@ import {FerjekaiStatusComponent} from '../../dialogs/ferjekai-status/ferjekai-st
 import {TilesComponent} from '../../dialogs/tiles/tiles.component'
 import { APIService } from '../../API.service';
 
+
 declare let L:any
 @Component({
   selector: 'app-map-page',

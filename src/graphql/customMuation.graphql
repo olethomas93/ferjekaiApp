@@ -1,0 +1,17 @@
+query listBetween(
+    $input:betweenQuery!
+) {
+   
+ 
+  listLoggingTests(input: $input, filter:{createdAt: {between:$input}}){
+    
+    items{
+      id
+      ferry
+      data
+      createdAt
+    }
+      nextToken
+  }
+
+}

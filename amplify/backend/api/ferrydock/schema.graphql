@@ -34,7 +34,9 @@ id:AWSDateTime!
 ferry:String
 alarmType:String
 data:[AWSJSON]
+timeStamp:AWSTimestamp
 createdAt: AWSDateTime
+updatedAt: AWSDateTime
 }
 
 type Weather  @aws_iam @aws_cognito_user_pools {
@@ -69,3 +71,8 @@ name:String
      @aws_subscribe(mutations: ["updateDockData"])
  }
 
+input betweenQuery {
+startDate:AWSDateTime
+endDate:AWSDateTime
+
+}

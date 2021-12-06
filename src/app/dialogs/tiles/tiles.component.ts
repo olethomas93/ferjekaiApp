@@ -10,7 +10,9 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { String } from 'aws-sdk/clients/acm';
 import { bool } from 'aws-sdk/clients/signer';
 import { AnyAaaaRecord } from 'dns';
-
+import { getMatScrollStrategyAlreadyAttachedError } from '@angular/cdk/overlay/scroll/scroll-strategy';
+import { MatDialog } from '@angular/material/dialog';
+import {ChartComponent} from '../chart/chart.component'
 export interface Alarm {
   name: string;
   value:any
@@ -92,6 +94,7 @@ export class TilesComponent implements OnInit,OnDestroy {
     public dialogRef: MatDialogRef<TilesComponent>,
     private api: APIService,
     private ref: ChangeDetectorRef,
+    public dialog: MatDialog
    
     
     
@@ -127,13 +130,29 @@ this.alarmConfig =[]
    return temp
   }
 
+
+async openChart(){
+
+ const data =  await this.getLoggingData(["2021-12-05T00:00:00", "2021-12-07T00:00:00"])
+
+console.log(data)
+  this.dialog.open(ChartComponent,{
+    
+    data:{
+      chart:data}
+    })
+}
+
   ngOnInit(){
+
+    
  
 this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
  
   this.alarmConfig = data.alarms
 })
     
+
 
 
 
@@ -180,6 +199,7 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
  })
 
+ 
 //  this.subscription= this.api.OnUpdateByIdListener(this.ferrydockName.name.toLowerCase()).subscribe((data:any)=>{
 
 
@@ -209,7 +229,15 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
 
   }
+  async getLoggingData(date:any,nextToken:any=""){
 
+
+ return await  this.api.ListLoggingTests({ferry:{eq:"sulesund"},alarmType:{eq:"weather"},createdAt:{between:date}},100,nextToken)
+
+    
+  
+  }
+ 
 update(){
 
 

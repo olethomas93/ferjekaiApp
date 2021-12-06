@@ -42,10 +42,12 @@ import { CreateDockComponent } from './components/create-dock/create-dock.compon
 import { SidescrollComponent } from './components/sidescroll/sidescroll.component';
 import { AlarmconfComponent } from './components/alarmconf/alarmconf.component';
 import { DeleteDockComponent } from './dialogs/delete-dock/delete-dock.component';
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+import { ChartComponent } from './dialogs/chart/chart.component';
 
 
-
-
+PlotlyModule.plotlyjs = PlotlyJS;
 
 
 
@@ -66,6 +68,7 @@ import { DeleteDockComponent } from './dialogs/delete-dock/delete-dock.component
     SidescrollComponent,
     AlarmconfComponent,
     DeleteDockComponent,
+    ChartComponent,
     
  
     
@@ -98,7 +101,8 @@ import { DeleteDockComponent } from './dialogs/delete-dock/delete-dock.component
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    PlotlyModule
   ],
   providers: [AuthService,AngularFirestoreModule],
   bootstrap: [AppComponent]

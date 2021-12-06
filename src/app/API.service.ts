@@ -218,17 +218,33 @@ export type CreateLoggingTestInput = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type ModelloggingTestConditionInput = {
   ferry?: ModelStringInput | null;
   alarmType?: ModelStringInput | null;
   data?: ModelStringInput | null;
+  timeStamp?: ModelIntInput | null;
   createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
   and?: Array<ModelloggingTestConditionInput | null> | null;
   or?: Array<ModelloggingTestConditionInput | null> | null;
   not?: ModelloggingTestConditionInput | null;
+};
+
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
 };
 
 export type loggingTest = {
@@ -237,8 +253,9 @@ export type loggingTest = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
-  updatedAt: string;
+  updatedAt?: string | null;
 };
 
 export type UpdateLoggingTestInput = {
@@ -246,7 +263,9 @@ export type UpdateLoggingTestInput = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type DeleteLoggingTestInput = {
@@ -304,7 +323,9 @@ export type ModelloggingTestFilterInput = {
   ferry?: ModelStringInput | null;
   alarmType?: ModelStringInput | null;
   data?: ModelStringInput | null;
+  timeStamp?: ModelIntInput | null;
   createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
   and?: Array<ModelloggingTestFilterInput | null> | null;
   or?: Array<ModelloggingTestFilterInput | null> | null;
   not?: ModelloggingTestFilterInput | null;
@@ -598,8 +619,9 @@ export type CreateLoggingTestMutation = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
-  updatedAt: string;
+  updatedAt?: string | null;
 };
 
 export type UpdateLoggingTestMutation = {
@@ -608,8 +630,9 @@ export type UpdateLoggingTestMutation = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
-  updatedAt: string;
+  updatedAt?: string | null;
 };
 
 export type DeleteLoggingTestMutation = {
@@ -618,8 +641,9 @@ export type DeleteLoggingTestMutation = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
-  updatedAt: string;
+  updatedAt?: string | null;
 };
 
 export type GetDockDataQuery = {
@@ -795,8 +819,9 @@ export type GetLoggingTestQuery = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
-  updatedAt: string;
+  updatedAt?: string | null;
 };
 
 export type ListLoggingTestsQuery = {
@@ -807,8 +832,9 @@ export type ListLoggingTestsQuery = {
     ferry?: string | null;
     alarmType?: string | null;
     data?: Array<string | null> | null;
+    timeStamp?: number | null;
     createdAt?: string | null;
-    updatedAt: string;
+    updatedAt?: string | null;
   }>;
   nextToken?: string | null;
 };
@@ -1127,8 +1153,9 @@ export type OnCreateLoggingTestSubscription = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
-  updatedAt: string;
+  updatedAt?: string | null;
 };
 
 export type OnUpdateLoggingTestSubscription = {
@@ -1137,8 +1164,9 @@ export type OnUpdateLoggingTestSubscription = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
-  updatedAt: string;
+  updatedAt?: string | null;
 };
 
 export type OnDeleteLoggingTestSubscription = {
@@ -1147,8 +1175,9 @@ export type OnDeleteLoggingTestSubscription = {
   ferry?: string | null;
   alarmType?: string | null;
   data?: Array<string | null> | null;
+  timeStamp?: number | null;
   createdAt?: string | null;
-  updatedAt: string;
+  updatedAt?: string | null;
 };
 
 @Injectable({
@@ -1538,6 +1567,7 @@ export class APIService {
           ferry
           alarmType
           data
+          timeStamp
           createdAt
           updatedAt
         }
@@ -1564,6 +1594,7 @@ export class APIService {
           ferry
           alarmType
           data
+          timeStamp
           createdAt
           updatedAt
         }
@@ -1590,6 +1621,7 @@ export class APIService {
           ferry
           alarmType
           data
+          timeStamp
           createdAt
           updatedAt
         }
@@ -1842,6 +1874,7 @@ export class APIService {
           ferry
           alarmType
           data
+          timeStamp
           createdAt
           updatedAt
         }
@@ -1868,6 +1901,7 @@ export class APIService {
             ferry
             alarmType
             data
+            timeStamp
             createdAt
             updatedAt
           }
@@ -2284,6 +2318,7 @@ export class APIService {
           ferry
           alarmType
           data
+          timeStamp
           createdAt
           updatedAt
         }
@@ -2304,6 +2339,7 @@ export class APIService {
           ferry
           alarmType
           data
+          timeStamp
           createdAt
           updatedAt
         }
@@ -2324,6 +2360,7 @@ export class APIService {
           ferry
           alarmType
           data
+          timeStamp
           createdAt
           updatedAt
         }

@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
       this.apiService.ListDocks().then((data:any)=>{
       
         this.ferrydocks =data.items;
-        console.log(this.ferrydocks)
+        
       })
 
     }

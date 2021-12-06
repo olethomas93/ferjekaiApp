@@ -110,32 +110,15 @@ mutation UpdateDockData(
 `)
 
 const create =gql`
-mutation CreateDockData(
-  $input: CreateDockDataInput!
-  $condition: ModeldockDataConditionInput
+mutation CreateLoggingTest(
+  $input: CreateLoggingTestInput!
+  $condition: ModelloggingTestConditionInput
 ) {
-  createDockData(input: $input, condition: $condition) {
+  createLoggingTest(input: $input, condition: $condition) {
     id
-    drift  {
-      name
-      value
-      icon
-      unit
-    }
-    weather {
-      name
-      value
-      icon
-      unit
-    }
-    alarms{
-      name
-      value
-    }
-    status {
-      value
-      name
-    }
+    ferry
+    alarmType
+    data
     createdAt
     updatedAt
   }
@@ -161,8 +144,6 @@ const item = {
   }
 };
 
-
-
   try{
   const result = await graphqlClient.mutate({
     mutation:update,
@@ -179,6 +160,38 @@ const item = {
     console.warn('Error sending mutation: ',  e);
     callback(Error(e))
   }
+
+
+  const item1 = {
+    input: {
+      id: new Date().toISOString(),
+      ferry:ferry,
+      alarmType:dataName,
+      data:JSON.stringify(data[dataName]),
+      timeStamp:Date.now(),
+      createdAt: new Date().toISOString(),
+      updatedAt:new Date().toISOString()
+    }
+  };
+
+  try{
+    const result = await graphqlClient.mutate({
+      mutation:create,
+      variables: item1
+    
+  })
+  
+        console.log(result.data);
+        callback(null, result.data);
+  
+    }catch(e){
+  
+      console.log(e)
+      console.warn('Error sending mutation: ',  e);
+      callback(Error(e))
+    }
+
+
 
 return context.logStreamName
 }
