@@ -2,7 +2,7 @@ type dockData @model @aws_iam @aws_cognito_user_pools {
   id: ID!
   drift: [Operation]
   weather:[Weather]
-  alarms:[Alarm]
+  alarms:[Alarm] 
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
 }
@@ -29,22 +29,22 @@ data:dockData @connection(fields:["id"])
 
 
 
-type Weather {
+type Weather  @aws_iam @aws_cognito_user_pools {
   name:String
   value:String
   icon:String
   unit:String
 }
 
-type Operation {
+type Operation  @aws_iam @aws_cognito_user_pools {
   name:String
   value:String
   icon:String
   unit:String
 }
 
-type Alarm{
-  id:ID!
+type Alarm @model{
+id:ID!
 value:String
 name:String
 

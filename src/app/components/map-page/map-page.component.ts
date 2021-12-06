@@ -140,10 +140,10 @@ this.api.ListDocks().then((data:any)=>{
   this.api.GetDockData(this.ferrydocks[i].id).then((data:any)=>{
     
     if(data){
-    let res =JSON.parse(data.alarms)
+    let res =data.alarms
       let temp = false;
     for( let i in res){
-      let status = (res[i].toLowerCase() === "true")
+      let status = (res[i].value.toLowerCase() === "true")
       
       if (status){
 
