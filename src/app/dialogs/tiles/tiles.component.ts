@@ -151,7 +151,7 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
     console.log(e)
   })
 
- PubSub.subscribe(`fergekai/${this.ferrydockName.name.toLowerCase()}`).subscribe((data)=>{
+  this.subscription=PubSub.subscribe(`fergekai/${this.ferrydockName.name.toLowerCase()}`).subscribe((data)=>{
   
   let res = data.value[this.ferrydockName.name.toLowerCase()]
   var dataName = Object.keys(res)[0];

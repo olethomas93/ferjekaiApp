@@ -45,9 +45,7 @@ export class MapPageComponent implements OnInit {
   ngOnDestroy():void{
 
    
-
-
-
+    this.subscription.unsubscribe()
   }
 
 
@@ -67,7 +65,7 @@ export class MapPageComponent implements OnInit {
   
 
     this.api.ListDocks().then((data:any)=>{
-      console.log(data)
+     
       this.ferrydocks =(data.items);
     })
 
@@ -92,7 +90,7 @@ this.api.ListDocks().then((data:any)=>{
 
   for( let i in this.ferrydocks){
 
-    let ferry = circle(this.ferrydocks[i].location,{radius:800,color:"red"}).bindTooltip(this.ferrydocks[i].name,
+    let ferry = circle(this.ferrydocks[i].location,{radius:800,color:"white"}).bindTooltip(this.ferrydocks[i].name,
     {offset:[0, 0]}).openTooltip()
 
        
@@ -181,10 +179,10 @@ this.api.ListDocks().then((data:any)=>{
 
   // })
 
-  PubSub.subscribe(`fergekai/${this.ferrydocks[i].id}`).subscribe((data)=>{
+this.subscription=  PubSub.subscribe(`fergekai/${this.ferrydocks[i].id}`).subscribe((data)=>{
   
     let res = data.value[this.ferrydocks[i].id]
-    var dataName = Object.keys(res)[0];
+    let dataName = Object.keys(res)[0];
     
     if(dataName = "alarms"){
       let temp = false;
@@ -341,12 +339,7 @@ this.openStatusDialog()
     
  
   }
-  
- ngAfterViewInit() {
 
-  //this.getGpsLog()
- 
-}
 
 
   

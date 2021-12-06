@@ -166,7 +166,7 @@ const item = {
   try{
   const result = await graphqlClient.mutate({
     mutation:update,
-  variables: item
+    variables: item
   
 })
 
