@@ -91,7 +91,7 @@ export class DashboardComponent implements OnInit {
     async getCred(){
       
       this.auth.getCred()
-      await PubSub.publish('var1', { msg: 'Hello to all subscribers!' });
+      await PubSub.publish('test', { msg: 'Hello to all subscribers!' });
     }
     signOut(){
 
