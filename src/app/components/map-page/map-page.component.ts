@@ -38,16 +38,6 @@ export class MapPageComponent implements OnInit {
 
 
  
-//MQTT pubsub
-//   this.connected =  PubSub.subscribe('$aws/events/presence/+/Sulesund').subscribe({
-//     next: data =>
-//     this.updateData(data),
-//     error: error => console.error(error)
-    
-// });
-  
-
-//this.ferrydocks =[{location:[62.39530111176861, 6.166541253181221],name:"Sulesund"},{location:[62.69530111176861, 6.166541253181221],name:"lyngen"}]
 
 
   }
