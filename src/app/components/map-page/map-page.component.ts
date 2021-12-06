@@ -121,75 +121,112 @@ this.api.ListDocks().then((data:any)=>{
 
   })
 
-  this.api.GetDockData(this.ferrydocks[i].id).then((data:any)=>{
+  // this.api.GetDockData(this.ferrydocks[i].id).then((data:any)=>{
     
-    if(data){
-    let res =data.alarms
-      let temp = false;
-    for( let i in res){
-      let status = (res[i].value.toLowerCase() === "true")
+  //   if(data){
+  //   let res =data.alarms
+  //     let temp = false;
+  //   for( let i in res){
+  //     let status = (res[i].value.toLowerCase() === "true")
       
-      if (status){
+  //     if (status){
 
-        temp = true;
-      }
+  //       temp = true;
+  //     }
 
 
-    }
-      if (temp){
+  //   }
+  //     if (temp){
   
-      ferry.getElement()?.classList.add("pulse")
-      ferry.setStyle({color:"red",className:''})
+  //     ferry.getElement()?.classList.add("pulse")
+  //     ferry.setStyle({color:"red",className:''})
       
-    }else{
-      ferry.getElement()?.classList.remove("pulse")
-      ferry.setStyle({color:"green"})
+  //   }else{
+  //     ferry.getElement()?.classList.remove("pulse")
+  //     ferry.setStyle({color:"green"})
       
       
   
-    }
+  //   }
 
     
   
       
   
     
-    }
-  })
+  //   }
+  // })
 
-  this.api.OnUpdateByIdListener(this.ferrydocks[i].id).subscribe((data:any)=>{
+  // this.api.OnUpdateByIdListener(this.ferrydocks[i].id).subscribe((data:any)=>{
 
-    let alarms =data.value.data.onUpdateById.alarms
+  //   let alarms =data.value.data.onUpdateById.alarms
 
-    let temp = false;
-    for(let i in alarms){
+  //   let temp = false;
+  //   for(let i in alarms){
 
-      let status = (alarms[i].value.toLowerCase() === "true")
+  //     let status = (alarms[i].value.toLowerCase() === "true")
       
-      if (status){
+  //     if (status){
 
-        temp = true;
-      }
-    }
+  //       temp = true;
+  //     }
+  //   }
 
      
-    if (temp){
+  //   if (temp){
   
-      ferry.getElement()?.classList.add("pulse")
-      ferry.setStyle({color:"red",className:''})
+  //     ferry.getElement()?.classList.add("pulse")
+  //     ferry.setStyle({color:"red",className:''})
       
-    }else{
-      ferry.getElement()?.classList.remove("pulse")
-      ferry.setStyle({color:"green"})
+  //   }else{
+  //     ferry.getElement()?.classList.remove("pulse")
+  //     ferry.setStyle({color:"green"})
       
       
   
-    }
+  //   }
 
    
   
 
-  })
+  // })
+
+  PubSub.subscribe(`fergekai/${this.ferrydocks[i].id}`).subscribe((data)=>{
+  
+    let res = data.value[this.ferrydocks[i].id]
+    var dataName = Object.keys(res)[0];
+    
+    if(dataName = "alarms"){
+      let temp = false;
+      for(let i in res.alarms){
+        
+        let status = (res.alarms[i].value.toLowerCase() === "true")
+        
+        if (status){
+  
+          temp = true;
+        }
+      }
+  
+       
+      if (temp){
+    
+        ferry.getElement()?.classList.add("pulse")
+        ferry.setStyle({color:"red",className:''})
+        
+      }else{
+        ferry.getElement()?.classList.remove("pulse")
+        ferry.setStyle({color:"green"})
+        
+        
+    
+      }
+
+
+    }
+  
+  
+   })
   
   }
 })
