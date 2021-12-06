@@ -23,7 +23,7 @@
     
   </mat-tab>
   <mat-tab label="Alarmer">
-    <h3>Updated: {{weatherUpdated}} </h3> 
+    <h3>Updated: {{alarmUpdated}} </h3> 
     <table mat-table [dataSource]="alarms" class="mat-elevation-z8 " >
 
       <!--- Note that these columns can be defined in any order.
@@ -70,7 +70,7 @@
   
   </mat-tab>
   <mat-tab label="Status">
-    <h3>Updated: {{weatherUpdated}} </h3> 
+    <h3>Updated: {{statusUpdated}} </h3> 
     <table mat-table [dataSource]="status" class="mat-elevation-z8 " >
 
       <!--- Note that these columns can be defined in any order.
@@ -115,7 +115,7 @@
   </mat-tab>
 
   <mat-tab label="Data">
-    <h3>Updated:{{weatherUpdated}} </h3> 
+    <h3>Updated:{{driftUpdated}} </h3> 
     <div class="grid-container">
       <!-- <h1 class="mat-h1">VærData</h1> -->
       <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">

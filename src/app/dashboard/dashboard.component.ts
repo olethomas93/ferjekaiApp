@@ -59,7 +59,8 @@ export class DashboardComponent implements OnInit {
       private colormode: ColormodeService,
       private auth : AuthService,
       public dialog: MatDialog,
-      private api: APIService
+      private apiService: APIService,
+     
      
     ){
 
@@ -69,13 +70,15 @@ export class DashboardComponent implements OnInit {
   
     ngOnInit(): void {
 
-      this.api.ListDocks().then((data:any)=>{
+      this.apiService.ListDocks().then((data:any)=>{
       
         this.ferrydocks =data.items;
         console.log(this.ferrydocks)
       })
 
     }
+
+    
 
     checkGroup(){
       let temp =false;
@@ -89,10 +92,14 @@ export class DashboardComponent implements OnInit {
     }
 
     async getCred(){
+
       
+      console.log(API.Auth.currentSession)
       this.auth.getCred()
       await PubSub.publish('test', { msg: 'Hello to all subscribers!' });
     }
+
+    
     signOut(){
 
       this.auth.signOut()

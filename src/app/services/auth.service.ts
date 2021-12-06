@@ -53,6 +53,11 @@ export class AuthService {
         console.log(cognitoIdentityId)
       });
 
+      Auth.currentSession().then((info)=>{
+
+        console.log(info)
+      })
+
     }
 
     completeNewPassword(user:any,newPassword:any){

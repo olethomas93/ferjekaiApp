@@ -56,8 +56,11 @@ export class TilesComponent implements OnInit,OnDestroy {
   dataSource = [{}]
   
   weatherUpdated!: string
-  alarmsUpdated!: string
+  statusUpdated!: string
+  alarmUpdated!: string
   driftUpdated!: string
+  alarmsUpdated!: string
+ 
   editable!:bool;
   alarmConfig!:Alarmconf[]
   weatherData!:weather[];
@@ -93,7 +96,6 @@ export class TilesComponent implements OnInit,OnDestroy {
     
     
     ) {
-
 
 this.alarmConfig =[]
       this.dialogRef.backdropClick().subscribe((data)=>{
@@ -138,33 +140,67 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
   this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
   
 
-    this.weatherUpdated = new Date(data['updatedAt']).toString()
+    let updated = new Date(data['updatedAt'])
+    let date = updated.getFullYear()+'-'+(updated.getDate())+'-'+(updated.getMonth()+1);
+    let time = updated.getHours() + ":" + updated.getMinutes() + ":" + updated.getSeconds();
+    this.weatherUpdated = date+' '+time;
+    console.log(this.weatherUpdated)
     this.updateData(data)
   }).catch((e)=>{
 
     console.log(e)
   })
 
+ PubSub.subscribe(`fergekai/${this.ferrydockName.name.toLowerCase()}`).subscribe((data)=>{
+  
+  let res = data.value[this.ferrydockName.name.toLowerCase()]
+  var dataName = Object.keys(res)[0];
+
+  switch(dataName){
+
+    case "alarms":
+      this.updateAlarmData(res.alarms)
+    break;
+
+    case "status":
+             this.updateStatusData(res.status)
+    break
+
+    case "weather":
+        this.updateWeatherData(res.weather)
+    break;
+
+    case "drift":
+          this.updateFerryData(res.drift)
+    break;
 
 
- this.subscription= this.api.OnUpdateByIdListener(this.ferrydockName.name.toLowerCase()).subscribe((data:any)=>{
+  }
+
+
+ })
+
+//  this.subscription= this.api.OnUpdateByIdListener(this.ferrydockName.name.toLowerCase()).subscribe((data:any)=>{
 
 
   
-    if(data){
+//     if(data){
+//       let topic = data.value.data.onUpdateById
+      
+//     let updated = new Date(topic['updatedAt'])
+//     let date = updated.getFullYear()+'-'+(updated.getDate())+'-'+(updated.getMonth()+1);
+//     let time = updated.getHours() + ":" + updated.getMinutes() + ":" + updated.getSeconds();
+//     this.weatherUpdated = date+' '+time;
+      
+      
+//       if(!this.configToggle){
+//         this.updateData(topic)
+//       }
+      
+      
+//     }
 
-      
-      this.weatherUpdated = new Date(data.value.data.onUpdateById['updatedAt']).toTimeString()
-      
-      let topic = data.value.data.onUpdateById
-      if(!this.configToggle){
-        this.updateData(topic)
-      }
-      
-      
-    }
-
-  })
+//   })
 
   }
 
@@ -210,6 +246,15 @@ getNumbersOfAlarms(){
   return this.alarms.length
 }
 
+getdate(){
+  let updated = new Date()
+      let date = updated.getFullYear()+'-'+(updated.getDate())+'-'+(updated.getMonth()+1);
+      let time = updated.getHours() + ":" + updated.getMinutes() + ":" + updated.getSeconds();
+      let timestring = date+' '+time;
+
+      return timestring
+}
+
   updateData(data:any){
     
     
@@ -235,6 +280,7 @@ getNumbersOfAlarms(){
   }
 
   updateFerryData(data:any){
+    this.driftUpdated = this.getdate();
     for (let i in data){
 
       if(data[i].unit =="oC"){
@@ -259,8 +305,8 @@ getNumbersOfAlarms(){
 
   updateAlarmData(data:any){
 
-    
-  
+    this.alarmUpdated = this.getdate();
+
     let j=0
     let temp =[]
     for(let i in data){
@@ -282,11 +328,14 @@ getNumbersOfAlarms(){
   }
 
   updateStatusData(data:any){
+    this.statusUpdated = this.getdate();
 
    this.status = data
 
   }
   updateWeatherData(data:any){
+
+    this.weatherUpdated = this.getdate();
     for (let i in data){
 
       if(data[i].unit =="oC"){
