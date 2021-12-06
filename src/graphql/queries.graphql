@@ -152,3 +152,30 @@ query ListDocks(
     nextToken
   }
 }
+query GetLoggingTest($id: ID!) {
+  getLoggingTest(id: $id) {
+    id
+    ferry
+    alarmType
+    data
+    createdAt
+    updatedAt
+  }
+}
+query ListLoggingTests(
+  $filter: ModelloggingTestFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLoggingTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      ferry
+      alarmType
+      data
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

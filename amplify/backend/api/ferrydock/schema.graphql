@@ -29,6 +29,13 @@ data:dockData @connection(fields:["id"])
 # }
 
 
+type loggingTest @model  @aws_iam @aws_cognito_user_pools {
+id:AWSDateTime!
+ferry:String
+alarmType:String
+data:[AWSJSON]
+createdAt: AWSDateTime
+}
 
 type Weather  @aws_iam @aws_cognito_user_pools {
   name:String

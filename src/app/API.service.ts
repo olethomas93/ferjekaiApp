@@ -17,6 +17,9 @@ export type __SubscriptionContainer = {
   onCreateDock: OnCreateDockSubscription;
   onUpdateDock: OnUpdateDockSubscription;
   onDeleteDock: OnDeleteDockSubscription;
+  onCreateLoggingTest: OnCreateLoggingTestSubscription;
+  onUpdateLoggingTest: OnUpdateLoggingTestSubscription;
+  onDeleteLoggingTest: OnDeleteLoggingTestSubscription;
 };
 
 export type CreateDockDataInput = {
@@ -210,6 +213,46 @@ export type DeleteDockInput = {
   id: string;
 };
 
+export type CreateLoggingTestInput = {
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+};
+
+export type ModelloggingTestConditionInput = {
+  ferry?: ModelStringInput | null;
+  alarmType?: ModelStringInput | null;
+  data?: ModelStringInput | null;
+  createdAt?: ModelStringInput | null;
+  and?: Array<ModelloggingTestConditionInput | null> | null;
+  or?: Array<ModelloggingTestConditionInput | null> | null;
+  not?: ModelloggingTestConditionInput | null;
+};
+
+export type loggingTest = {
+  __typename: "loggingTest";
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+  updatedAt: string;
+};
+
+export type UpdateLoggingTestInput = {
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+};
+
+export type DeleteLoggingTestInput = {
+  id: string;
+};
+
 export type ModeldockDataFilterInput = {
   id?: ModelIDInput | null;
   createdAt?: ModelStringInput | null;
@@ -253,6 +296,23 @@ export type ModeldockFilterInput = {
 export type ModeldockConnection = {
   __typename: "ModeldockConnection";
   items: Array<dock>;
+  nextToken?: string | null;
+};
+
+export type ModelloggingTestFilterInput = {
+  id?: ModelStringInput | null;
+  ferry?: ModelStringInput | null;
+  alarmType?: ModelStringInput | null;
+  data?: ModelStringInput | null;
+  createdAt?: ModelStringInput | null;
+  and?: Array<ModelloggingTestFilterInput | null> | null;
+  or?: Array<ModelloggingTestFilterInput | null> | null;
+  not?: ModelloggingTestFilterInput | null;
+};
+
+export type ModelloggingTestConnection = {
+  __typename: "ModelloggingTestConnection";
+  items: Array<loggingTest>;
   nextToken?: string | null;
 };
 
@@ -532,6 +592,36 @@ export type DeleteDockMutation = {
   updatedAt: string;
 };
 
+export type CreateLoggingTestMutation = {
+  __typename: "loggingTest";
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+  updatedAt: string;
+};
+
+export type UpdateLoggingTestMutation = {
+  __typename: "loggingTest";
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+  updatedAt: string;
+};
+
+export type DeleteLoggingTestMutation = {
+  __typename: "loggingTest";
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+  updatedAt: string;
+};
+
 export type GetDockDataQuery = {
   __typename: "dockData";
   id: string;
@@ -694,6 +784,30 @@ export type ListDocksQuery = {
       updatedAt?: string | null;
     } | null;
     createdAt: string;
+    updatedAt: string;
+  }>;
+  nextToken?: string | null;
+};
+
+export type GetLoggingTestQuery = {
+  __typename: "loggingTest";
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+  updatedAt: string;
+};
+
+export type ListLoggingTestsQuery = {
+  __typename: "ModelloggingTestConnection";
+  items: Array<{
+    __typename: "loggingTest";
+    id: string;
+    ferry?: string | null;
+    alarmType?: string | null;
+    data?: Array<string | null> | null;
+    createdAt?: string | null;
     updatedAt: string;
   }>;
   nextToken?: string | null;
@@ -1004,6 +1118,36 @@ export type OnDeleteDockSubscription = {
     updatedAt?: string | null;
   } | null;
   createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateLoggingTestSubscription = {
+  __typename: "loggingTest";
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+  updatedAt: string;
+};
+
+export type OnUpdateLoggingTestSubscription = {
+  __typename: "loggingTest";
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
+  updatedAt: string;
+};
+
+export type OnDeleteLoggingTestSubscription = {
+  __typename: "loggingTest";
+  id: string;
+  ferry?: string | null;
+  alarmType?: string | null;
+  data?: Array<string | null> | null;
+  createdAt?: string | null;
   updatedAt: string;
 };
 
@@ -1383,6 +1527,84 @@ export class APIService {
     )) as any;
     return <DeleteDockMutation>response.data.deleteDock;
   }
+  async CreateLoggingTest(
+    input: CreateLoggingTestInput,
+    condition?: ModelloggingTestConditionInput
+  ): Promise<CreateLoggingTestMutation> {
+    const statement = `mutation CreateLoggingTest($input: CreateLoggingTestInput!, $condition: ModelloggingTestConditionInput) {
+        createLoggingTest(input: $input, condition: $condition) {
+          __typename
+          id
+          ferry
+          alarmType
+          data
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateLoggingTestMutation>response.data.createLoggingTest;
+  }
+  async UpdateLoggingTest(
+    input: UpdateLoggingTestInput,
+    condition?: ModelloggingTestConditionInput
+  ): Promise<UpdateLoggingTestMutation> {
+    const statement = `mutation UpdateLoggingTest($input: UpdateLoggingTestInput!, $condition: ModelloggingTestConditionInput) {
+        updateLoggingTest(input: $input, condition: $condition) {
+          __typename
+          id
+          ferry
+          alarmType
+          data
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateLoggingTestMutation>response.data.updateLoggingTest;
+  }
+  async DeleteLoggingTest(
+    input: DeleteLoggingTestInput,
+    condition?: ModelloggingTestConditionInput
+  ): Promise<DeleteLoggingTestMutation> {
+    const statement = `mutation DeleteLoggingTest($input: DeleteLoggingTestInput!, $condition: ModelloggingTestConditionInput) {
+        deleteLoggingTest(input: $input, condition: $condition) {
+          __typename
+          id
+          ferry
+          alarmType
+          data
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteLoggingTestMutation>response.data.deleteLoggingTest;
+  }
   async GetDockData(id: string): Promise<GetDockDataQuery> {
     const statement = `query GetDockData($id: ID!) {
         getDockData(id: $id) {
@@ -1611,6 +1833,61 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListDocksQuery>response.data.listDocks;
+  }
+  async GetLoggingTest(id: string): Promise<GetLoggingTestQuery> {
+    const statement = `query GetLoggingTest($id: ID!) {
+        getLoggingTest(id: $id) {
+          __typename
+          id
+          ferry
+          alarmType
+          data
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetLoggingTestQuery>response.data.getLoggingTest;
+  }
+  async ListLoggingTests(
+    filter?: ModelloggingTestFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListLoggingTestsQuery> {
+    const statement = `query ListLoggingTests($filter: ModelloggingTestFilterInput, $limit: Int, $nextToken: String) {
+        listLoggingTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            ferry
+            alarmType
+            data
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListLoggingTestsQuery>response.data.listLoggingTests;
   }
   OnUpdateByIdListener(
     id: string
@@ -1994,5 +2271,65 @@ export class APIService {
     )
   ) as Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDock">>
+  >;
+
+  OnCreateLoggingTestListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateLoggingTest">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateLoggingTest {
+        onCreateLoggingTest {
+          __typename
+          id
+          ferry
+          alarmType
+          data
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateLoggingTest">>
+  >;
+
+  OnUpdateLoggingTestListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateLoggingTest">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateLoggingTest {
+        onUpdateLoggingTest {
+          __typename
+          id
+          ferry
+          alarmType
+          data
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateLoggingTest">>
+  >;
+
+  OnDeleteLoggingTestListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteLoggingTest">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteLoggingTest {
+        onDeleteLoggingTest {
+          __typename
+          id
+          ferry
+          alarmType
+          data
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteLoggingTest">>
   >;
 }

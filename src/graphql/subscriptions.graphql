@@ -267,3 +267,33 @@ subscription OnDeleteDock {
     updatedAt
   }
 }
+subscription OnCreateLoggingTest {
+  onCreateLoggingTest {
+    id
+    ferry
+    alarmType
+    data
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateLoggingTest {
+  onUpdateLoggingTest {
+    id
+    ferry
+    alarmType
+    data
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteLoggingTest {
+  onDeleteLoggingTest {
+    id
+    ferry
+    alarmType
+    data
+    createdAt
+    updatedAt
+  }
+}

@@ -257,3 +257,42 @@ mutation DeleteDock(
     updatedAt
   }
 }
+mutation CreateLoggingTest(
+  $input: CreateLoggingTestInput!
+  $condition: ModelloggingTestConditionInput
+) {
+  createLoggingTest(input: $input, condition: $condition) {
+    id
+    ferry
+    alarmType
+    data
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateLoggingTest(
+  $input: UpdateLoggingTestInput!
+  $condition: ModelloggingTestConditionInput
+) {
+  updateLoggingTest(input: $input, condition: $condition) {
+    id
+    ferry
+    alarmType
+    data
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteLoggingTest(
+  $input: DeleteLoggingTestInput!
+  $condition: ModelloggingTestConditionInput
+) {
+  deleteLoggingTest(input: $input, condition: $condition) {
+    id
+    ferry
+    alarmType
+    data
+    createdAt
+    updatedAt
+  }
+}
