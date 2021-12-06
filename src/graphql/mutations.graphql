@@ -22,6 +22,10 @@ mutation CreateDockData(
       value
       name
     }
+    status {
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -49,6 +53,10 @@ mutation UpdateDockData(
       value
       name
     }
+    status {
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -73,6 +81,10 @@ mutation DeleteDockData(
     }
     alarms {
       id
+      value
+      name
+    }
+    status {
       value
       name
     }
@@ -121,6 +133,10 @@ mutation CreateDock(
       }
       alarms {
         id
+        value
+        name
+      }
+      status {
         value
         name
       }
@@ -175,6 +191,10 @@ mutation UpdateDock(
         value
         name
       }
+      status {
+        value
+        name
+      }
       createdAt
       updatedAt
     }
@@ -223,6 +243,10 @@ mutation DeleteDock(
       }
       alarms {
         id
+        value
+        name
+      }
+      status {
         value
         name
       }

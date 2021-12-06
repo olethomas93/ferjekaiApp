@@ -121,7 +121,7 @@ export class MapComponent implements OnInit {
   }
 
    onLocationFound(e:any) {
-     console.log(e)
+    
     // if position defined, then remove the existing position marker and accuracy circle from the map
     if (this.current_position) {
         this.map.removeLayer(this.current_position);

@@ -74,23 +74,7 @@ export class MapPageComponent implements OnInit {
 
    
     
-    // this.api.OnUpdateByIdListener("sulesund").subscribe((data:any)=>{
-
-    //   let res =JSON.parse(data.value.data.onUpdateById.data)
-
-        
-
-    //   if (res.alarms['led alarm'].toLowerCase() === "true"){
-
-        
-    //     this.sulesund.setStyle({color:"red",className:"pulse"})
-        
-    //   }else{
-    //     this.sulesund.setStyle({color:"green",className:""})
-
-    //   }
-
-    // })
+  
 
     this.api.ListDocks().then((data:any)=>{
       console.log(data)
@@ -172,6 +156,40 @@ this.api.ListDocks().then((data:any)=>{
     
     }
   })
+
+  this.api.OnUpdateByIdListener(this.ferrydocks[i].id).subscribe((data:any)=>{
+
+    let alarms =data.value.data.onUpdateById.alarms
+
+    let temp = false;
+    for(let i in alarms){
+
+      let status = (alarms[i].value.toLowerCase() === "true")
+      
+      if (status){
+
+        temp = true;
+      }
+    }
+
+     
+    if (temp){
+  
+      ferry.getElement()?.classList.add("pulse")
+      ferry.setStyle({color:"red",className:''})
+      
+    }else{
+      ferry.getElement()?.classList.remove("pulse")
+      ferry.setStyle({color:"green"})
+      
+      
+  
+    }
+
+   
+  
+
+  })
   
   }
 })
@@ -179,27 +197,6 @@ this.api.ListDocks().then((data:any)=>{
 
   }
   
-    // this.sulesund = circle([62.39530111176861, 6.166541253181221],{radius:500,color:"red"}).bindTooltip('Sulesund',
-    // {offset:[0, 0]}).openTooltip()
-    
-    // //  this.sulesund.bindPopup(`` +
-    // // `<h1>Kai: Sulesund </h1>` +
-    // // `<h2>AlarmStatus: God </h2>` +
-    // // `<h2> annet: Annet</h2>`)
-   
-    
-    // this.sulesund.addTo(this.map)
-
-    
-
-    
-    // this.sulesund.on('click',(e:any)=>{
-    //   console.log("click")
-      
-    //   this.activate.emit("sulesund")
-    //   //this.openStatusDialog()
-
-    // })
 
   
     

@@ -52,6 +52,7 @@ export interface weather{
 export class TilesComponent implements OnInit,OnDestroy {
   subscription: any;
   displayedColumns: string[] = ['id','name', 'status'];
+  displayedColumns2: string[] = ['name', 'status'];
   dataSource = [{}]
   
   weatherUpdated!: string
@@ -63,6 +64,7 @@ export class TilesComponent implements OnInit,OnDestroy {
   alarms!:Alarm[]
   configToggle =false;
   data!:tile[]
+  status!:[{}]
 
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -226,7 +228,7 @@ getNumbersOfAlarms(){
     
       this.updateFerryData(data.drift)
 
-
+    this.updateStatusData(data.status)
   
 
 
@@ -279,7 +281,11 @@ getNumbersOfAlarms(){
 
   }
 
- 
+  updateStatusData(data:any){
+
+   this.status = data
+
+  }
   updateWeatherData(data:any){
     for (let i in data){
 

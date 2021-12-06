@@ -24,6 +24,7 @@ export type CreateDockDataInput = {
   drift?: Array<OperationInput | null> | null;
   weather?: Array<WeatherInput | null> | null;
   alarms?: Array<AlarmInput | null> | null;
+  status?: Array<StatusInput | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -44,6 +45,11 @@ export type WeatherInput = {
 
 export type AlarmInput = {
   id: string;
+  value?: string | null;
+  name?: string | null;
+};
+
+export type StatusInput = {
   value?: string | null;
   name?: string | null;
 };
@@ -101,6 +107,7 @@ export type dockData = {
   drift?: Array<Operation | null> | null;
   weather?: Array<Weather | null> | null;
   alarms?: Array<Alarm | null> | null;
+  status?: Array<Status | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -128,11 +135,18 @@ export type Alarm = {
   name?: string | null;
 };
 
+export type Status = {
+  __typename: "Status";
+  value?: string | null;
+  name?: string | null;
+};
+
 export type UpdateDockDataInput = {
   id: string;
   drift?: Array<OperationInput | null> | null;
   weather?: Array<WeatherInput | null> | null;
   alarms?: Array<AlarmInput | null> | null;
+  status?: Array<StatusInput | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -265,6 +279,11 @@ export type CreateDockDataMutation = {
     value?: string | null;
     name?: string | null;
   } | null> | null;
+  status?: Array<{
+    __typename: "Status";
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -292,6 +311,11 @@ export type UpdateDockDataMutation = {
     value?: string | null;
     name?: string | null;
   } | null> | null;
+  status?: Array<{
+    __typename: "Status";
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -316,6 +340,11 @@ export type DeleteDockDataMutation = {
   alarms?: Array<{
     __typename: "Alarm";
     id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
+  status?: Array<{
+    __typename: "Status";
     value?: string | null;
     name?: string | null;
   } | null> | null;
@@ -368,6 +397,11 @@ export type CreateDockMutation = {
     alarms?: Array<{
       __typename: "Alarm";
       id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
+    status?: Array<{
+      __typename: "Status";
       value?: string | null;
       name?: string | null;
     } | null> | null;
@@ -426,6 +460,11 @@ export type UpdateDockMutation = {
       value?: string | null;
       name?: string | null;
     } | null> | null;
+    status?: Array<{
+      __typename: "Status";
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -481,6 +520,11 @@ export type DeleteDockMutation = {
       value?: string | null;
       name?: string | null;
     } | null> | null;
+    status?: Array<{
+      __typename: "Status";
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -511,6 +555,11 @@ export type GetDockDataQuery = {
     value?: string | null;
     name?: string | null;
   } | null> | null;
+  status?: Array<{
+    __typename: "Status";
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -537,6 +586,11 @@ export type ListDockDataQuery = {
     alarms?: Array<{
       __typename: "Alarm";
       id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
+    status?: Array<{
+      __typename: "Status";
       value?: string | null;
       name?: string | null;
     } | null> | null;
@@ -591,6 +645,11 @@ export type GetDockQuery = {
     alarms?: Array<{
       __typename: "Alarm";
       id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
+    status?: Array<{
+      __typename: "Status";
       value?: string | null;
       name?: string | null;
     } | null> | null;
@@ -663,6 +722,11 @@ export type OnUpdateByIdSubscription = {
     value?: string | null;
     name?: string | null;
   } | null> | null;
+  status?: Array<{
+    __typename: "Status";
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -687,6 +751,11 @@ export type OnCreateDockDataSubscription = {
   alarms?: Array<{
     __typename: "Alarm";
     id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
+  status?: Array<{
+    __typename: "Status";
     value?: string | null;
     name?: string | null;
   } | null> | null;
@@ -717,6 +786,11 @@ export type OnUpdateDockDataSubscription = {
     value?: string | null;
     name?: string | null;
   } | null> | null;
+  status?: Array<{
+    __typename: "Status";
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };
@@ -741,6 +815,11 @@ export type OnDeleteDockDataSubscription = {
   alarms?: Array<{
     __typename: "Alarm";
     id: string;
+    value?: string | null;
+    name?: string | null;
+  } | null> | null;
+  status?: Array<{
+    __typename: "Status";
     value?: string | null;
     name?: string | null;
   } | null> | null;
@@ -793,6 +872,11 @@ export type OnCreateDockSubscription = {
     alarms?: Array<{
       __typename: "Alarm";
       id: string;
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
+    status?: Array<{
+      __typename: "Status";
       value?: string | null;
       name?: string | null;
     } | null> | null;
@@ -851,6 +935,11 @@ export type OnUpdateDockSubscription = {
       value?: string | null;
       name?: string | null;
     } | null> | null;
+    status?: Array<{
+      __typename: "Status";
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -906,6 +995,11 @@ export type OnDeleteDockSubscription = {
       value?: string | null;
       name?: string | null;
     } | null> | null;
+    status?: Array<{
+      __typename: "Status";
+      value?: string | null;
+      name?: string | null;
+    } | null> | null;
     createdAt?: string | null;
     updatedAt?: string | null;
   } | null;
@@ -942,6 +1036,11 @@ export class APIService {
           alarms {
             __typename
             id
+            value
+            name
+          }
+          status {
+            __typename
             value
             name
           }
@@ -988,6 +1087,11 @@ export class APIService {
             value
             name
           }
+          status {
+            __typename
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1028,6 +1132,11 @@ export class APIService {
           alarms {
             __typename
             id
+            value
+            name
+          }
+          status {
+            __typename
             value
             name
           }
@@ -1096,6 +1205,11 @@ export class APIService {
             alarms {
               __typename
               id
+              value
+              name
+            }
+            status {
+              __typename
               value
               name
             }
@@ -1170,6 +1284,11 @@ export class APIService {
               value
               name
             }
+            status {
+              __typename
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -1241,6 +1360,11 @@ export class APIService {
               value
               name
             }
+            status {
+              __typename
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -1284,6 +1408,11 @@ export class APIService {
             value
             name
           }
+          status {
+            __typename
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1324,6 +1453,11 @@ export class APIService {
             alarms {
               __typename
               id
+              value
+              name
+            }
+            status {
+              __typename
               value
               name
             }
@@ -1395,6 +1529,11 @@ export class APIService {
             alarms {
               __typename
               id
+              value
+              name
+            }
+            status {
+              __typename
               value
               name
             }
@@ -1502,6 +1641,11 @@ export class APIService {
             value
             name
           }
+          status {
+            __typename
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1544,6 +1688,11 @@ export class APIService {
             value
             name
           }
+          status {
+            __typename
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1581,6 +1730,11 @@ export class APIService {
             value
             name
           }
+          status {
+            __typename
+            value
+            name
+          }
           createdAt
           updatedAt
         }
@@ -1615,6 +1769,11 @@ export class APIService {
           alarms {
             __typename
             id
+            value
+            name
+          }
+          status {
+            __typename
             value
             name
           }
@@ -1677,6 +1836,11 @@ export class APIService {
             alarms {
               __typename
               id
+              value
+              name
+            }
+            status {
+              __typename
               value
               name
             }
@@ -1745,6 +1909,11 @@ export class APIService {
               value
               name
             }
+            status {
+              __typename
+              value
+              name
+            }
             createdAt
             updatedAt
           }
@@ -1807,6 +1976,11 @@ export class APIService {
             alarms {
               __typename
               id
+              value
+              name
+            }
+            status {
+              __typename
               value
               name
             }

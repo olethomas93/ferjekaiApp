@@ -19,6 +19,10 @@ query GetDockData($id: ID!) {
       value
       name
     }
+    status {
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -45,6 +49,10 @@ query ListDockData(
       }
       alarms {
         id
+        value
+        name
+      }
+      status {
         value
         name
       }
@@ -92,6 +100,10 @@ query GetDock($id: ID!) {
       }
       alarms {
         id
+        value
+        name
+      }
+      status {
         value
         name
       }

@@ -2,7 +2,8 @@ type dockData @model @aws_iam @aws_cognito_user_pools {
   id: ID!
   drift: [Operation]
   weather:[Weather]
-  alarms:[Alarm] 
+  alarms:[Alarm]
+  status:[Status]
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
 }
@@ -43,8 +44,15 @@ type Operation  @aws_iam @aws_cognito_user_pools {
   unit:String
 }
 
-type Alarm @model{
+type Alarm  @aws_iam @aws_cognito_user_pools {
 id:ID!
+value:String
+name:String
+
+}
+
+type Status  @aws_iam @aws_cognito_user_pools {
+
 value:String
 name:String
 

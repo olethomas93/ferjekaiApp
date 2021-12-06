@@ -99,6 +99,10 @@ mutation UpdateDockData(
       value
       name
     }
+    status {
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -128,6 +132,10 @@ mutation CreateDockData(
       name
       value
     }
+    status {
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -143,8 +151,6 @@ exports.handler = async function(event, context,callback) {
     var dataName = Object.keys(data)[0];
 
 
-console.log(dataName)
-console.log(data)
 
 const item = {
   input: {

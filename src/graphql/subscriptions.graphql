@@ -19,6 +19,10 @@ subscription OnUpdateById($id: ID!) {
       value
       name
     }
+    status {
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -40,6 +44,10 @@ subscription OnCreateDockData {
     }
     alarms {
       id
+      value
+      name
+    }
+    status {
       value
       name
     }
@@ -67,6 +75,10 @@ subscription OnUpdateDockData {
       value
       name
     }
+    status {
+      value
+      name
+    }
     createdAt
     updatedAt
   }
@@ -88,6 +100,10 @@ subscription OnDeleteDockData {
     }
     alarms {
       id
+      value
+      name
+    }
+    status {
       value
       name
     }
@@ -133,6 +149,10 @@ subscription OnCreateDock {
       }
       alarms {
         id
+        value
+        name
+      }
+      status {
         value
         name
       }
@@ -184,6 +204,10 @@ subscription OnUpdateDock {
         value
         name
       }
+      status {
+        value
+        name
+      }
       createdAt
       updatedAt
     }
@@ -229,6 +253,10 @@ subscription OnDeleteDock {
       }
       alarms {
         id
+        value
+        name
+      }
+      status {
         value
         name
       }
