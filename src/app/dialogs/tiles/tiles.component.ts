@@ -139,6 +139,7 @@ this.alarmConfig =[]
 
 
 async openChart(name:any){
+  
 
  const data =  await this.getLoggingData([this.addMonth(), new Date().toISOString()])
 

@@ -9,6 +9,11 @@
     
 }
 
+.test{
+    margin: 15px;
+    transform: scale(2);
+
+}
 .value-text {
     margin: 0;
     float:left
@@ -29,6 +34,7 @@
 
 float:left
 }
+
 
 .unit{
     float: right;

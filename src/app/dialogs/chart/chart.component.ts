@@ -23,6 +23,7 @@ export class ChartComponent implements OnInit {
 
   ngOnInit(): void {
   this.name = this.data.name;
+  console.log(this.data.chart)
   this.chartData =  this.data.chart.items
 
   this.filteredData = this.filterData(this.chartData)
