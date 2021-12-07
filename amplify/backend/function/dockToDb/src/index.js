@@ -44,7 +44,6 @@ const graphqlClient = new AWSAppSyncClient({
 });
  
 
-console.log(config)
 
 
   
@@ -117,13 +116,21 @@ mutation CreateLoggingTest(
   createLoggingTest(input: $input, condition: $condition) {
     id
     ferry
-    alarmType
     data
+    timeStamp
     createdAt
     updatedAt
   }
 }
 `
+
+function addMonth(){
+  var x = 1; //or whatever offset
+  var CurrentDate = new Date();
+  CurrentDate.setMonth(CurrentDate.getMonth() + x);
+ return CurrentDate.getTime()
+}
+
 
 
 
@@ -135,44 +142,45 @@ exports.handler = async function(event, context,callback) {
 
 
 
-const item = {
-  input: {
-    id:ferry,
-    [dataName]:data[dataName],
-    createdAt: new Date().toISOString(),
-    updatedAt:new Date().toISOString()
-  }
-};
+// const item = {
+//   input: {
+//     id:ferry,
+//     [dataName]:data[dataName],
+//     createdAt: new Date().toISOString(),
+//     updatedAt:new Date().toISOString()
+//   }
+// };
 
-  try{
-  const result = await graphqlClient.mutate({
-    mutation:update,
-    variables: item
+//   try{
+//   const result = await graphqlClient.mutate({
+//     mutation:update,
+//     variables: item
   
-})
+// })
 
-      console.log(result.data);
-      callback(null, result.data);
+//       console.log(result.data);
+//       callback(null, result.data);
 
-  }catch(e){
+//   }catch(e){
 
-    console.log(e)
-    console.warn('Error sending mutation: ',  e);
-    callback(Error(e))
-  }
+//     console.log(e)
+//     console.warn('Error sending mutation: ',  e);
+//     callback(Error(e))
+//   }
 
 
   const item1 = {
     input: {
       id: new Date().toISOString(),
       ferry:ferry,
-      alarmType:dataName,
-      data:JSON.stringify(data[dataName]),
-      timeStamp:Date.now(),
+      data:JSON.stringify(data),
+      timeStamp:addMonth(),
       createdAt: new Date().toISOString(),
       updatedAt:new Date().toISOString()
     }
   };
+
+
 
   try{
     const result = await graphqlClient.mutate({

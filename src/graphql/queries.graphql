@@ -156,7 +156,6 @@ query GetLoggingTest($id: ID!) {
   getLoggingTest(id: $id) {
     id
     ferry
-    alarmType
     data
     timeStamp
     createdAt
@@ -172,7 +171,6 @@ query ListLoggingTests(
     items {
       id
       ferry
-      alarmType
       data
       timeStamp
       createdAt

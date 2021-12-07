@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { timeStamp } from 'console';
 
 
 @Component({
@@ -12,6 +13,7 @@ export class ChartComponent implements OnInit {
   private chartData:any
   graph: any
   filteredData: any;
+  name: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any
 
@@ -20,6 +22,7 @@ export class ChartComponent implements OnInit {
 
 
   ngOnInit(): void {
+  this.name = this.data.name;
   this.chartData =  this.data.chart.items
 
   this.filteredData = this.filterData(this.chartData)
@@ -33,7 +36,7 @@ export class ChartComponent implements OnInit {
           { x: data[0], y: data[1], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
          
       ],
-      layout: {width: 500, height: 500, title: 'A Fancy Plot'}
+      layout: {width: 500, height: 500, title: this.name}
   };
 
 
@@ -44,14 +47,14 @@ export class ChartComponent implements OnInit {
 
     let timestampArray=[]
     let valueArray =[]
-
+    console.log(data)
     for(let i in data){
 
       timestampArray.push(data[i].id)
       
-      data[i].data[0] =JSON.parse(data[i].data[0])
+      data[i].data =JSON.parse(data[i].data)
 
-      valueArray.push(data[i].data[0][0].value)
+      valueArray.push(data[i].data[this.name].value)
     }
 
     console.log(timestampArray.sort())

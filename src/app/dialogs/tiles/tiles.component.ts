@@ -130,16 +130,23 @@ this.alarmConfig =[]
    return temp
   }
 
+  addMonth(){
+    var x = -1; //or whatever offset
+    var CurrentDate = new Date();
+    CurrentDate.setMonth(CurrentDate.getMonth() + x);
+   return CurrentDate.toISOString()
+  }
 
-async openChart(){
 
- const data =  await this.getLoggingData(["2021-12-05T00:00:00", "2021-12-07T00:00:00"])
+async openChart(name:any){
 
-console.log(data)
+ const data =  await this.getLoggingData([this.addMonth(), new Date().toISOString()])
+
   this.dialog.open(ChartComponent,{
     
     data:{
-      chart:data}
+      chart:data,
+        name:name}
     })
 }
 
@@ -232,7 +239,7 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
   async getLoggingData(date:any,nextToken:any=""){
 
 
- return await  this.api.ListLoggingTests({ferry:{eq:"sulesund"},alarmType:{eq:"weather"},createdAt:{between:date}},100,nextToken)
+ return await  this.api.ListLoggingTests({ferry:{eq:"sulesund"},createdAt:{between:date}},1000,nextToken)
 
     
   
