@@ -36,7 +36,7 @@ export class ChartComponent implements OnInit {
           { x: data[0], y: data[1], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
          
       ],
-      layout: {width: 500, height: 500, title: this.name}
+      layout: {autosize:true, title: this.name}
   };
 
 
@@ -58,7 +58,7 @@ export class ChartComponent implements OnInit {
     }
 
    
-
+    timestampArray.sort()
 
 return [timestampArray,valueArray]
   }

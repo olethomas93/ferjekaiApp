@@ -46,7 +46,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import {AddDockComponent} from '../dialogs/add-dock/add-dock.component'
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 
 @NgModule({
@@ -91,7 +91,8 @@ import {AddDockComponent} from '../dialogs/add-dock/add-dock.component'
     MatSelectModule,
     InfiniteScrollModule,
     MatChipsModule,
-    SatPopoverModule
+    SatPopoverModule,
+    MatProgressSpinnerModule
 ],
 
 

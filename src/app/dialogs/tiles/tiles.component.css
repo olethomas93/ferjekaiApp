@@ -25,6 +25,13 @@ table {
 .mat-h1{
   text-align: center;
 }
+.spinner{
+
+  z-index: 9999999999;
+  position: absolute;
+  top:50%;
+  left:45%;
+}
 
 .blob {
   background: black;

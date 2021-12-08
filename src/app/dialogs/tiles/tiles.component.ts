@@ -87,6 +87,7 @@ export class TilesComponent implements OnInit,OnDestroy {
     })
   );
   name: any;
+  isWaiting: boolean = false;
 
   constructor(private breakpointObserver: BreakpointObserver,   
     @Inject(MAT_DIALOG_DATA) public ferrydockName: any,
@@ -155,10 +156,7 @@ async openChart(name:any){
 
     
  
-this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
- 
-  this.alarmConfig = data.alarms
-})
+
     
 
 
@@ -179,6 +177,8 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
 
   this.subscription=PubSub.subscribe(`fergekai/${this.ferrydockName.name.toLowerCase()}`).subscribe((data)=>{
+
+    this.isWaiting = true
   
   let res = data.value[this.ferrydockName.name.toLowerCase()]
   var dataName = Object.keys(res)[0];
@@ -207,7 +207,7 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
  })
 
- 
+
 //  this.subscription= this.api.OnUpdateByIdListener(this.ferrydockName.name.toLowerCase()).subscribe((data:any)=>{
 
 
@@ -234,12 +234,14 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
   ngAfterViewInit(){
  
+    this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
+      this.alarmConfig = data.alarms
+    })
 
   }
 
-
-
+ 
   async getLoggingData(date:any,nextToken:any=""){
 
 
