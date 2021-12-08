@@ -156,19 +156,18 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
 
 
-  this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
+  // this.api.GetDockData(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
   
 
-    let updated = new Date(data['updatedAt'])
-    let date = updated.getFullYear()+'-'+(updated.getDate())+'-'+(updated.getMonth()+1);
-    let time = updated.getHours() + ":" + updated.getMinutes() + ":" + updated.getSeconds();
-    this.weatherUpdated = date+' '+time;
-    console.log(this.weatherUpdated)
-    this.updateData(data)
-  }).catch((e)=>{
+  //   let updated = new Date(data['updatedAt'])
+  //   let date = updated.getFullYear()+'-'+(updated.getDate())+'-'+(updated.getMonth()+1);
+  //   let time = updated.getHours() + ":" + updated.getMinutes() + ":" + updated.getSeconds();
+  //   this.weatherUpdated = date+' '+time;
+  //   this.updateData(data)
+  // }).catch((e)=>{
 
-    console.log(e)
-  })
+  //   console.log(e)
+  // })
 
   this.subscription=PubSub.subscribe(`fergekai/${this.ferrydockName.name.toLowerCase()}`).subscribe((data)=>{
   
@@ -229,6 +228,9 @@ this.api.GetDock(this.ferrydockName.name.toLowerCase()).then((data:any)=>{
 
 
   }
+
+
+
   async getLoggingData(date:any,nextToken:any=""){
 
 
