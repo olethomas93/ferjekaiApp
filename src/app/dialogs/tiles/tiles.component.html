@@ -12,12 +12,12 @@
         <!--Mini Cards-->
         <mat-grid-tile *ngFor="let i of weatherData" [colspan]="( cardLayout | async )?.miniCard?.cols"
           [rowspan]="( cardLayout | async )?.miniCard?.rows">
-          <app-minicard (click)="openChart()" [unit]="i.unit" [icon]="i.icon" [title]="i.name" [color]="'green'" [value]=i.value><div>Mini Card Content Here</div></app-minicard>
+          <app-minicard  (click)='!(i.name === "Temperatur")  || openChart(i.name)' [unit]="i.unit" [icon]="i.icon" [title]="i.name" [color]="'green'" [value]=i.value [isRotated]="(i.name === 'Vindretning')"><div>Mini Card Content Here</div></app-minicard>
         </mat-grid-tile>
       
        
       </mat-grid-list>
-    
+  
      </div>  
   
     
@@ -122,7 +122,7 @@
         <!--Mini Cards-->
         <mat-grid-tile *ngFor="let i of data" [colspan]="( cardLayout | async )?.miniCard?.cols"
           [rowspan]="( cardLayout | async )?.miniCard?.rows">
-          <app-minicard [unit]="i.unit" [icon]="i.icon" [title]="i.name" [color]="i.color" [value]=i.value [edit]="editable"><div></div></app-minicard>
+          <app-minicard (click)='!(i.name === "OljeNiva")  || openChart(i.name)' [unit]="i.unit" [icon]="i.icon" [title]="i.name" [color]="i.color" [value]=i.value [edit]="editable" ><div></div></app-minicard>
         </mat-grid-tile>
       
        

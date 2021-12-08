@@ -91,7 +91,7 @@ this.api.ListDocks().then((data:any)=>{
 
   for( let i in this.ferrydocks){
 
-    let ferry = circle(this.ferrydocks[i].location,{radius:800,color:"white"}).bindTooltip(this.ferrydocks[i].name,
+    let ferry = circle(this.ferrydocks[i].location,{radius:800,color:"grey"}).bindTooltip(this.ferrydocks[i].name,
     {offset:[0, 0]}).openTooltip()
 
        
@@ -180,7 +180,7 @@ this.api.ListDocks().then((data:any)=>{
 
   // })
 
-this.subscription=  PubSub.subscribe(`fergekai/${this.ferrydocks[i].id}`).subscribe((data)=>{
+this.subscription=  PubSub.subscribe(`fergekai/${this.ferrydocks[i].id}`,{}).subscribe((data)=>{
   
     let res = data.value[this.ferrydocks[i].id]
     let dataName = Object.keys(res)[0];

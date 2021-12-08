@@ -216,8 +216,7 @@ export type DeleteDockInput = {
 export type CreateLoggingTestInput = {
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -225,7 +224,6 @@ export type CreateLoggingTestInput = {
 
 export type ModelloggingTestConditionInput = {
   ferry?: ModelStringInput | null;
-  alarmType?: ModelStringInput | null;
   data?: ModelStringInput | null;
   timeStamp?: ModelIntInput | null;
   createdAt?: ModelStringInput | null;
@@ -251,8 +249,7 @@ export type loggingTest = {
   __typename: "loggingTest";
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -261,8 +258,7 @@ export type loggingTest = {
 export type UpdateLoggingTestInput = {
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -321,7 +317,6 @@ export type ModeldockConnection = {
 export type ModelloggingTestFilterInput = {
   id?: ModelStringInput | null;
   ferry?: ModelStringInput | null;
-  alarmType?: ModelStringInput | null;
   data?: ModelStringInput | null;
   timeStamp?: ModelIntInput | null;
   createdAt?: ModelStringInput | null;
@@ -617,8 +612,7 @@ export type CreateLoggingTestMutation = {
   __typename: "loggingTest";
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -628,8 +622,7 @@ export type UpdateLoggingTestMutation = {
   __typename: "loggingTest";
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -639,8 +632,7 @@ export type DeleteLoggingTestMutation = {
   __typename: "loggingTest";
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -817,8 +809,7 @@ export type GetLoggingTestQuery = {
   __typename: "loggingTest";
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -830,8 +821,7 @@ export type ListLoggingTestsQuery = {
     __typename: "loggingTest";
     id: string;
     ferry?: string | null;
-    alarmType?: string | null;
-    data?: Array<string | null> | null;
+    data?: string | null;
     timeStamp?: number | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -1151,8 +1141,7 @@ export type OnCreateLoggingTestSubscription = {
   __typename: "loggingTest";
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -1162,8 +1151,7 @@ export type OnUpdateLoggingTestSubscription = {
   __typename: "loggingTest";
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -1173,8 +1161,7 @@ export type OnDeleteLoggingTestSubscription = {
   __typename: "loggingTest";
   id: string;
   ferry?: string | null;
-  alarmType?: string | null;
-  data?: Array<string | null> | null;
+  data?: string | null;
   timeStamp?: number | null;
   createdAt?: string | null;
   updatedAt?: string | null;
@@ -1565,7 +1552,6 @@ export class APIService {
           __typename
           id
           ferry
-          alarmType
           data
           timeStamp
           createdAt
@@ -1592,7 +1578,6 @@ export class APIService {
           __typename
           id
           ferry
-          alarmType
           data
           timeStamp
           createdAt
@@ -1619,7 +1604,6 @@ export class APIService {
           __typename
           id
           ferry
-          alarmType
           data
           timeStamp
           createdAt
@@ -1872,7 +1856,6 @@ export class APIService {
           __typename
           id
           ferry
-          alarmType
           data
           timeStamp
           createdAt
@@ -1899,7 +1882,6 @@ export class APIService {
             __typename
             id
             ferry
-            alarmType
             data
             timeStamp
             createdAt
@@ -2316,7 +2298,6 @@ export class APIService {
           __typename
           id
           ferry
-          alarmType
           data
           timeStamp
           createdAt
@@ -2337,7 +2318,6 @@ export class APIService {
           __typename
           id
           ferry
-          alarmType
           data
           timeStamp
           createdAt
@@ -2358,7 +2338,6 @@ export class APIService {
           __typename
           id
           ferry
-          alarmType
           data
           timeStamp
           createdAt

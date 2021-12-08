@@ -271,7 +271,6 @@ subscription OnCreateLoggingTest {
   onCreateLoggingTest {
     id
     ferry
-    alarmType
     data
     timeStamp
     createdAt
@@ -282,7 +281,6 @@ subscription OnUpdateLoggingTest {
   onUpdateLoggingTest {
     id
     ferry
-    alarmType
     data
     timeStamp
     createdAt
@@ -293,7 +291,6 @@ subscription OnDeleteLoggingTest {
   onDeleteLoggingTest {
     id
     ferry
-    alarmType
     data
     timeStamp
     createdAt

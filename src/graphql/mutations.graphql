@@ -264,7 +264,6 @@ mutation CreateLoggingTest(
   createLoggingTest(input: $input, condition: $condition) {
     id
     ferry
-    alarmType
     data
     timeStamp
     createdAt
@@ -278,7 +277,6 @@ mutation UpdateLoggingTest(
   updateLoggingTest(input: $input, condition: $condition) {
     id
     ferry
-    alarmType
     data
     timeStamp
     createdAt
@@ -292,7 +290,6 @@ mutation DeleteLoggingTest(
   deleteLoggingTest(input: $input, condition: $condition) {
     id
     ferry
-    alarmType
     data
     timeStamp
     createdAt
