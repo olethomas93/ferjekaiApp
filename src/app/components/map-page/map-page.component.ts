@@ -290,8 +290,10 @@ const sub = source.subscribe(val=>{
     },
     error:error =>{
 
-      console.log(error)
-      ferry.bindPopup("offline").openPopup().addTo(this.map)
+      this.ferrys[parseInt(i)].setStyle({color:"grey"})
+  this.ferrys[parseInt(i)].bindTooltip(`${this.ferrydocks[i].name} is offline`)
+ this.ferrys[parseInt(i)].off("click")
+ this.ferrys[parseInt(i)].getElement()?.classList.remove("pulse")
     }
 
 
