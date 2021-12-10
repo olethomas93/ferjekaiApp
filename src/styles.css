@@ -20,3 +20,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
   
     100% {  opacity: 0;}
   }
+
+  .blob.yellow {
+    background: rgb(238, 241, 23);
+    box-shadow: 0 0 0 0 rgb(227, 243, 8);
+    animation: pulse-yellow 2s infinite; 
+  }
+  @keyframes pulse-yellow {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 240, 34, 0.986);
+    }
+    
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+    }
+    
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+    }
+  }
