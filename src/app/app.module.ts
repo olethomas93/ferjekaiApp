@@ -23,7 +23,7 @@ import {MatButtonModule} from '@angular/material/button'
 import { environment as env } from '../environments/environment';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import Amplify from 'aws-amplify';
+import Amplify,{PubSub} from 'aws-amplify';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {AuthGuard} from './guards/auth.guard'
 
@@ -45,18 +45,21 @@ import { DeleteDockComponent } from './dialogs/delete-dock/delete-dock.component
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 import { ChartComponent } from './dialogs/chart/chart.component';
-
+import { UUID } from 'angular2-uuid';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
 
+const uuid =UUID.UUID();
 
 
 
 Amplify.configure(awsconfig);
-Amplify.addPluggable(new AWSIoTProvider({
+PubSub.addPluggable(new AWSIoTProvider({
   aws_pubsub_region: 'eu-central-1',
   aws_pubsub_endpoint: 'wss://a3vwh5519vcrt0-ats.iot.eu-central-1.amazonaws.com/mqtt',
+  clientId:uuid
+
 }));
 
 
@@ -83,7 +86,6 @@ Amplify.addPluggable(new AWSIoTProvider({
     AmplifyUIAngularModule,
     BrowserModule,
     DashboardModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AppRoutingModule,
     CommonModule,
@@ -91,8 +93,6 @@ Amplify.addPluggable(new AWSIoTProvider({
     HttpClientModule,
     MatIconModule,
     MatFormFieldModule,
-    AngularFireDatabaseModule,
-    AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,

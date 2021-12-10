@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {FerjekaiStatusComponent} from '../../dialogs/ferjekai-status/ferjekai-status.component'
 import {TilesComponent} from '../../dialogs/tiles/tiles.component'
 import { APIService } from '../../API.service';
-import { Subscription } from 'rxjs';
+import { Subscriber, Subscription } from 'rxjs';
 import { timer } from 'rxjs';
 import { TypeofExpr } from '@angular/compiler';
 import { parse } from 'path';
@@ -38,7 +38,8 @@ export class MapPageComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private http: HttpService,
-    private api: APIService
+    private api: APIService,
+    
     // private _formBuilder: FormBuilder,
   ) {
 
@@ -53,7 +54,7 @@ export class MapPageComponent implements OnInit {
 
     
     this.subscriptions1.forEach((subscription) => subscription.unsubscribe())
-      
+      this.subscriptions.unsubscribe()
    
 
     
@@ -110,7 +111,7 @@ this.api.ListDocks().then((data:any)=>{
   ferry.addTo(this.map)
 
   
-  this.ferrys.push(ferry)
+ 
   
   ferry.on('click',(e:any)=>{
     
@@ -123,7 +124,7 @@ this.api.ListDocks().then((data:any)=>{
 
   })
 
-
+  this.ferrys.push(ferry)
 
   // this.api.GetDockData(this.ferrydocks[i].id).then((data:any)=>{
     
@@ -245,7 +246,7 @@ const sub = source.subscribe(val=>{
 });
 
 
-   this.subscription=  PubSub.subscribe(`fergekai/${this.ferrydocks[i].id}`,{}).subscribe({
+  let subscription=   PubSub.subscribe(`fergekai/${this.ferrydocks[i].id}`,{}).subscribe({
 
     
     
@@ -289,7 +290,7 @@ const sub = source.subscribe(val=>{
 
     },
     error:error =>{
-
+      console.log(error)
       this.ferrys[parseInt(i)].setStyle({color:"grey"})
   this.ferrys[parseInt(i)].bindTooltip(`${this.ferrydocks[i].name} is offline`)
  this.ferrys[parseInt(i)].off("click")
@@ -300,9 +301,9 @@ const sub = source.subscribe(val=>{
 
   
   
-   })
+   }) 
 
-   this.subscriptions1.push(this.subscription)
+   this.subscriptions.add(subscription)
   
  
   }
