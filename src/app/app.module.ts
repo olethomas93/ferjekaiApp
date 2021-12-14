@@ -21,14 +21,13 @@ import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button'
 import { environment as env } from '../environments/environment';
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import Amplify,{PubSub} from 'aws-amplify';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {AuthGuard} from './guards/auth.guard'
 
 
-import { AWSIoTProvider } from '@aws-amplify/pubsub';
+import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
 import awsconfig from 'src/aws-exports';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -52,15 +51,17 @@ PlotlyModule.plotlyjs = PlotlyJS;
 
 const uuid =UUID.UUID();
 
+PubSub.configure({});
 
 
 Amplify.configure(awsconfig);
-PubSub.addPluggable(new AWSIoTProvider({
+Amplify.addPluggable(new AWSIoTProvider({
   aws_pubsub_region: 'eu-central-1',
   aws_pubsub_endpoint: 'wss://a3vwh5519vcrt0-ats.iot.eu-central-1.amazonaws.com/mqtt',
   clientId:uuid
 
 }));
+
 
 
 
@@ -83,7 +84,7 @@ PubSub.addPluggable(new AWSIoTProvider({
  
   ],
   imports: [
-    AmplifyUIAngularModule,
+   
     BrowserModule,
     DashboardModule,
     AngularFireAuthModule,
