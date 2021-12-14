@@ -19,7 +19,9 @@ import {
   svg,
   marker,
   circle,
-  icon
+  icon,
+  MarkerClusterGroup,
+  markerClusterGroup
   
   
   
@@ -35,7 +37,7 @@ declare let L:any
 export class MapComponent implements OnInit {
   @Output() map$: EventEmitter<Map> = new EventEmitter();
   @Output() zoom$: EventEmitter<number> = new EventEmitter();
-  @Output() coord$: EventEmitter<any> = new EventEmitter();
+  @Output() cluster$: EventEmitter<any> = new EventEmitter();
   current_position :any 
   current_accuracy:any;
   circlepos:any;
@@ -48,7 +50,8 @@ export class MapComponent implements OnInit {
     shadowAnchor: [22, 94]
 });
 
-
+markerClusterGroup!: MarkerClusterGroup;
+  markerClusterData = [];
   private streetMap= tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     opacity: 0.7,
     maxZoom: 19,
@@ -91,7 +94,9 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
 
-  
+    
+
+    
 
   }
 
@@ -111,7 +116,10 @@ export class MapComponent implements OnInit {
     },5000)
   }
 
-
+  markerClusterReady(markerCluster: MarkerClusterGroup) {
+    
+    this.cluster$.emit(markerCluster)
+  }
 
   onClick(e:any){
 

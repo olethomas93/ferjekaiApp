@@ -6,6 +6,11 @@ import { routeTransitionAnimations } from './route-transition-animations';
 import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { APIService } from './API.service';
+import { UUID } from 'angular2-uuid';
+import Amplify,{PubSub} from 'aws-amplify';
+import { AWSIoTProvider } from '@aws-amplify/pubsub';
+
+
 
 
 @Component({
@@ -15,6 +20,8 @@ import { APIService } from './API.service';
   animations:[routeTransitionAnimations]
 })
 export class AppComponent implements OnInit {
+
+  
   title = 'ferjekai';
   events!: any[];
   private deviceId!: string;
@@ -45,6 +52,15 @@ export class AppComponent implements OnInit {
      
       
     ){
+
+      
+const uuid =UUID.UUID();
+
+
+
+
+
+
 
       this.colormode.load();
     }
