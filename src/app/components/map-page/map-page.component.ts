@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LatLngExpression,svg,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon,Control} from 'leaflet';
+import { LatLngExpression,svg,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon,Control, markerClusterGroup, MarkerClusterGroup} from 'leaflet';
 import { HttpService } from 'src/app/services/http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { PubSub } from 'aws-amplify';
@@ -34,6 +34,7 @@ export class MapPageComponent implements OnInit {
   subscription2!: Subscription 
   private subscriptions = new Subscription()
   subscriptions1: Subscription[] = []
+  markerClusterGroup!: MarkerClusterGroup;
   
   constructor(
     public dialog: MatDialog,
@@ -70,8 +71,12 @@ export class MapPageComponent implements OnInit {
 
   }
 
+ 
+
   ngOnInit(): void {
 
+    this.markerClusterGroup = markerClusterGroup({removeOutsideVisibleBounds: true});
+   
    
     
   
@@ -82,6 +87,15 @@ export class MapPageComponent implements OnInit {
     })
 
    
+
+
+  }
+
+  recieveCluster(markerCluster: MarkerClusterGroup){
+
+    this.markerClusterGroup = markerCluster;
+   
+    
 
 
   }
@@ -106,6 +120,10 @@ this.api.ListDocks().then((data:any)=>{
     {offset:[0, 0]})
 
     
+   
+		
+		
+			
 
        
   ferry.addTo(this.map)
@@ -234,7 +252,7 @@ this.api.ListDocks().then((data:any)=>{
 //    })
 
 
-const source =timer(20000);
+const source =timer(5000);
   
 const sub = source.subscribe(val=>{
  
@@ -305,8 +323,10 @@ const sub = source.subscribe(val=>{
 
    this.subscriptions.add(subscription)
   
+   
  
   }
+  
 })
 
 

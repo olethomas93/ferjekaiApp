@@ -47,8 +47,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import {AddDockComponent} from '../dialogs/add-dock/add-dock.component'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
-
-
+import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster'
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent,
@@ -92,7 +91,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
     InfiniteScrollModule,
     MatChipsModule,
     SatPopoverModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    LeafletMarkerClusterModule
 ],
 
 

@@ -46,6 +46,8 @@ import { PlotlyModule } from 'angular-plotly.js';
 import { ChartComponent } from './dialogs/chart/chart.component';
 import { UUID } from 'angular2-uuid';
 
+
+
 PlotlyModule.plotlyjs = PlotlyJS;
 
 
@@ -76,8 +78,7 @@ Amplify.addPluggable(new AWSIoTProvider({
     SidescrollComponent,
     AlarmconfComponent,
     DeleteDockComponent,
-    ChartComponent,
-    
+    ChartComponent    
  
     
     
