@@ -82,6 +82,13 @@ export class DashboardComponent implements OnInit {
 
         console.log(data)
       })
+
+   
+      this.httpclient.getRoadReference({lat: 62.470858182857015,lng:6.1622639422060725}).subscribe((data)=>{
+
+
+        console.log(data)
+      })
     }
 
     

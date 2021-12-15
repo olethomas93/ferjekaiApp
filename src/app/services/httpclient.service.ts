@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders,HttpParams } from '@angular/common/http';
+import { Observable, Subject, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HttpclientService {
-  client_id="ole.theisen%40brattvaag-electro.no%3AFergekai"
+  client_id="ole.theisen@brattvaag-electro.no:Fergekai"
   scope="api"
   client_secret="fergekaibrattvaagelectro"
   grant_type ="client_credentials"
@@ -27,37 +27,59 @@ export class HttpclientService {
    }
 
    authenticate(): Observable<any>{
-    const headerDict = {
+    const httpOptions = {
       
-      
-      'content-type': "application/x-www-form-urlencoded",
-      'cache-control': 'no-cache',
-      
-    }
-    const header = new HttpHeaders();
+      headers:{
+        'Content-type': 'application/x-www-form-urlencoded'
 
-    header.append("Content-Type","application/x-www-form-urlencoded")
-    header.append('Access-Control-Allow-Origin','*')
-    header.append("Cache-Control", "no-store")
-    header.append("Pragma", "no-cache")
-   
-    const requestOptions = {                                                                                                                                                                                 
-      headers: new HttpHeaders(headerDict), 
-      withCredentials:true
-      
-    };
+      }
+     
+  }
+
+  const body = new HttpParams()
+      .set('client_id', this.client_id)
+      .set('scope', 'api')
+      .set('grant_type', this.grant_type)
+      .set('client_secret',this.client_secret);
 
 
-
-
-
-
- let body =`client_id=${this.client_id}&scope=api&client_secret=${this.client_secret}&grant_type=${this.grant_type}`
-   
-   return this.http.post<any>(this.tokenUrl,body,{headers:header,withCredentials:true}).pipe(tap(
-      error=>console.log(error)
-     ))
+   return this.http.post(this.tokenUrl,body,httpOptions).pipe(
+    catchError(this.handleError)
+     )
 
 
    }
+   getRoadReference(latlong:any):Observable<any>{
+
+    const headerDict = {
+      
+      'Accept': 'application/vnd.vegvesen.nvdb-v3+json',
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict), 
+    };
+
+    let lat = latlong.lat
+    let lon = latlong.lng
+
+
+    return this.http.get(`https://nvdbapiles-v3.atlas.vegvesen.no/posisjon?lat=${lat}&lon=${lon}`,requestOptions)
+  }
+
+   private handleError(error: HttpErrorResponse) {
+    
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(
+      'Something bad happened; please try again later.');
+  }
 }
