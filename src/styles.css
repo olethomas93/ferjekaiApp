@@ -10,7 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
     opacity: 0.0
   }
   
-  
+  .reading-block { overflow: visible; }
   @keyframes pulsate {
     0% {
        opacity: 0;

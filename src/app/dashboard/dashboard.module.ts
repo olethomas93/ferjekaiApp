@@ -34,7 +34,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FerjekaiStatusComponent } from '../dialogs/ferjekai-status/ferjekai-status.component';
-import { NgxGaugeModule } from 'ngx-gauge';
 import {TilesComponent} from '../dialogs/tiles/tiles.component'
 import {MinicardComponent} from '../components/minicard/minicard.component'
 import { MatMenuModule } from '@angular/material/menu';
@@ -48,10 +47,12 @@ import { SatPopoverModule } from '@ncstate/sat-popover';
 import {AddDockComponent} from '../dialogs/add-dock/add-dock.component'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster'
+import { NgxGaugeModule } from 'ngx-gauge';
+import {GaugeComponent} from '../components/gauge/gauge.component'
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent,
-    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent,AddDockComponent
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent,AddDockComponent,GaugeComponent
     ],
   imports: [
     CommonModule,
