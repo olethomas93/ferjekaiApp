@@ -9,6 +9,7 @@ import {AddDockComponent} from '../dialogs/add-dock/add-dock.component'
 import {DeleteDockComponent} from '../dialogs/delete-dock/delete-dock.component'
 import { MatDialog } from '@angular/material/dialog';
 import { APIService } from '../API.service';
+import {HttpclientService} from '../services/httpclient.service'
 
 import {
   Map,
@@ -60,6 +61,7 @@ export class DashboardComponent implements OnInit {
       private auth : AuthService,
       public dialog: MatDialog,
       private apiService: APIService,
+      private httpclient:HttpclientService
      
      
     ){
@@ -76,6 +78,10 @@ export class DashboardComponent implements OnInit {
         
       })
 
+      this.httpclient.authenticate().subscribe((data)=>{
+
+        console.log(data)
+      })
     }
 
     
