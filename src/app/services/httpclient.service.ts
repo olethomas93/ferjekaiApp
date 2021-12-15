@@ -18,6 +18,7 @@ export class HttpclientService {
   scope:"api",
   client_secret:"fergekaibrattvaagelectro",
   grant_type:"client_credentials"}
+  token: any;
 
   constructor(
     private http: HttpClient
@@ -81,5 +82,11 @@ export class HttpclientService {
     // Return an observable with a user-facing error message.
     return throwError(
       'Something bad happened; please try again later.');
+  }
+
+
+  setToken(token:any){
+
+    this.token = token
   }
 }
