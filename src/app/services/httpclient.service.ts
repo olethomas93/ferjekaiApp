@@ -8,7 +8,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HttpclientService {
-  client_id="ole.theisen@brattvaag-electro.no:Fergekai"
+  client_id="ole.theisen%40brattvaag-electro.no%3AFergekai"
   scope="api"
   client_secret="fergekaibrattvaagelectro"
   grant_type ="client_credentials"
@@ -38,6 +38,8 @@ export class HttpclientService {
 
     header.append("Content-Type","application/x-www-form-urlencoded")
     header.append('Access-Control-Allow-Origin','*')
+    header.append("Cache-Control", "no-store")
+    header.append("Pragma", "no-cache")
    
     const requestOptions = {                                                                                                                                                                                 
       headers: new HttpHeaders(headerDict), 
