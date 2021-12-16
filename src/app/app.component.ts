@@ -9,6 +9,7 @@ import { APIService } from './API.service';
 import { UUID } from 'angular2-uuid';
 import Amplify,{PubSub} from 'aws-amplify';
 import { AWSIoTProvider } from '@aws-amplify/pubsub';
+import { HttpclientService } from './services/httpclient.service';
 
 
 
@@ -47,7 +48,8 @@ export class AppComponent implements OnInit {
     constructor(
       private colormode: ColormodeService,
       public auth: AuthService,
-      private api: APIService
+      private api: APIService,
+      private httpclient:HttpclientService
       
      
       
@@ -75,6 +77,10 @@ const uuid =UUID.UUID();
       });
 
     
+      this.httpclient.authenticate().subscribe((data)=>{
+
+        this.httpclient.setToken(data.access_token)
+      })
 
      
 

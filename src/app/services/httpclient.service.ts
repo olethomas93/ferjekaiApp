@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders,HttpParams } from '@angular/
 import { Observable, Subject, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class HttpclientService {
   scope="api"
   client_secret="fergekaibrattvaagelectro"
   grant_type ="client_credentials"
+  baseurl ="https://www.barentswatch.no/bwapi/v2/ais/openposition/"
   private tokenUrl = "https://id.barentswatch.no/connect/token"
   private localurl =window.location.origin
 
@@ -77,7 +79,22 @@ export class HttpclientService {
     this.token = token
   }
 
+getBoatLocation(mmsi:any){
 
+  const httpOptions = {
+      
+    headers:{
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${this.token}`
+
+    }
+  }
+
+ return this.http.get(`https://www.barentswatch.no/bwapi/v2/geodata/ais/openposition/${mmsi}`,httpOptions).pipe(
+  catchError(this.handleError)
+  
+  )
+}
 
 
 }

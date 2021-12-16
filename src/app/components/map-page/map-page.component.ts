@@ -7,10 +7,12 @@ import { MatDialog } from '@angular/material/dialog';
 import {FerjekaiStatusComponent} from '../../dialogs/ferjekai-status/ferjekai-status.component'
 import {TilesComponent} from '../../dialogs/tiles/tiles.component'
 import { APIService } from '../../API.service';
-import { Subscriber, Subscription } from 'rxjs';
+import { interval, Subject, Subscriber, Subscription } from 'rxjs';
 import { timer } from 'rxjs';
 import { TypeofExpr } from '@angular/compiler';
 import { parse } from 'path';
+import { HttpclientService } from 'src/app/services/httpclient.service';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 declare let L:any
 @Component({
@@ -25,14 +27,18 @@ export class MapPageComponent implements OnInit {
   private zoom!: number;
   private latlng!:any
   sulesund :any
+  destroyed$ = new Subject();
   coord =""
   livedata =[]
   subscription: any;
   connected :any;
   ferrydocks :any;
+  ferry:any
   ferrys:any[]=[]
   subscription2!: Subscription 
   private subscriptions = new Subscription()
+
+  boatSubscrition = new Subscription() 
   subscriptions1: Subscription[] = []
   markerClusterGroup!: MarkerClusterGroup;
   
@@ -40,6 +46,7 @@ export class MapPageComponent implements OnInit {
     public dialog: MatDialog,
     private http: HttpService,
     private api: APIService,
+    private httpclient:HttpclientService
     
     // private _formBuilder: FormBuilder,
   ) {
@@ -57,7 +64,7 @@ export class MapPageComponent implements OnInit {
     this.subscriptions1.forEach((subscription) => subscription.unsubscribe())
       this.subscriptions.unsubscribe()
    
-
+    this.boatSubscrition.unsubscribe()
     
   }
 
@@ -87,7 +94,31 @@ export class MapPageComponent implements OnInit {
     })
 
    
+    
 
+this.boatSubscrition.add(    interval(10000)
+      .pipe(switchMap(() => this.httpclient.getBoatLocation(257054950).pipe(takeUntil(this.destroyed$))))
+      .subscribe((result) => {
+
+        
+        this.onFerryLocation(result)
+      
+      }))
+
+  }
+
+  onFerryLocation(location:any){
+
+    if(this.ferry){
+
+      this.map.removeLayer(this.ferry)
+    }
+
+    let coordinates = location.geometry.coordinates
+
+    console.log(coordinates)
+
+    this.ferry = circle([coordinates[1],coordinates[0]],{radius:100,color:"blue",fillColor:"blue",stroke:true}).addTo(this.map)
 
   }
 
@@ -465,6 +496,8 @@ this.openStatusDialog()
 
   
 }
+
+
 
 
 

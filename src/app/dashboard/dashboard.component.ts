@@ -78,10 +78,7 @@ export class DashboardComponent implements OnInit {
         
       })
 
-      this.httpclient.authenticate().subscribe((data)=>{
-
-        console.log(data)
-      })
+   
 
    
     
