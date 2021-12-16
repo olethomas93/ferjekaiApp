@@ -13,6 +13,7 @@ export class HttpclientService {
   client_secret="fergekaibrattvaagelectro"
   grant_type ="client_credentials"
   private tokenUrl = "https://id.barentswatch.no/connect/token"
+  private localurl =window.location.origin
 
   private bodyjson= { client_id:"ole.theisen@brattvaag-electro.no:Fergekai",
   scope:"api",
@@ -28,6 +29,8 @@ export class HttpclientService {
    }
 
    authenticate(): Observable<any>{
+
+    console.log(this.localurl)
     const httpOptions = {
       
       headers:{
@@ -44,7 +47,7 @@ export class HttpclientService {
       .set('client_secret',this.client_secret);
 
 
-   return this.http.post(this.tokenUrl,body,httpOptions).pipe(
+   return this.http.post(this.localurl+'/api',body,httpOptions).pipe(
     catchError(this.handleError)
      )
 

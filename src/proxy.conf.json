@@ -1,0 +1,10 @@
+{
+    "/api": {
+      "target": "https://id.barentswatch.no/connect/token",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
