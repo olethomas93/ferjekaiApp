@@ -32,8 +32,10 @@
               "@aws-sdk/eventstream-serde-browser", "@aws-sdk/middleware-location-constraint", "uuid",
               "@aws-sdk/credential-provider-cognito-identity", "@aws-sdk/eventstream-serde-config-resolver",
               "ulid", "zen-push", "lodash", "@aws-amplify/core", "url", "@aws-crypto/crc32", "isomorphic-unfetch",
-              "crypto-js/lib-typedarrays", "crypto-js/hmac-sha256", "crypto"
+              "crypto-js/lib-typedarrays", "crypto-js/hmac-sha256", "crypto",
+              
             ],
+            
             "outputPath": "dist/ferjekai",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -91,13 +93,22 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ferjekai:build:production"
+              "browserTarget": "ferjekai:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "browserTarget": "ferjekai:build:development"
+              "browserTarget": "ferjekai:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+
+          "options": {
+            "browserTarget": "ferjekai:build",
+
+            "proxyConfig": "src/proxy.conf.json"
+          }
+
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
