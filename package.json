@@ -28,6 +28,7 @@
     "@ncstate/sat-popover": "^8.0.1",
     "@types/crypto-js": "^4.0.2",
     "@types/leaflet.markercluster": "^1.4.6",
+    "angular-auth-oidc-client": "12.0.3",
     "angular-plotly.js": "^4.0.4",
     "angular2-uuid": "^1.1.1",
     "aws-amplify": "^4.2.2",

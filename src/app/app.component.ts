@@ -79,6 +79,8 @@ const uuid =UUID.UUID();
     
       this.httpclient.authenticate().subscribe((data)=>{
 
+        console.log(data)
+
         this.httpclient.setToken(data.access_token)
       })
 
