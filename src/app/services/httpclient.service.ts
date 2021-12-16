@@ -50,23 +50,7 @@ export class HttpclientService {
 
 
    }
-   getRoadReference(latlong:any):Observable<any>{
 
-    const headerDict = {
-      
-      'Accept': 'application/vnd.vegvesen.nvdb-v3+json',
-    }
-    
-    const requestOptions = {                                                                                                                                                                                 
-      headers: new HttpHeaders(headerDict), 
-    };
-
-    let lat = latlong.lat
-    let lon = latlong.lng
-
-
-    return this.http.get(`https://nvdbapiles-v3.atlas.vegvesen.no/posisjon?lat=${lat}&lon=${lon}`,requestOptions)
-  }
 
    private handleError(error: HttpErrorResponse) {
     
@@ -89,4 +73,8 @@ export class HttpclientService {
 
     this.token = token
   }
+
+
+
+
 }
