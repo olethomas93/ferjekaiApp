@@ -58,6 +58,7 @@
           },
           "configurations": {
             "production": {
+              
               "budgets": [
                 {
                   "type": "initial",
@@ -87,6 +88,7 @@
               "namedChunks": true
             }
           },
+         
           "defaultConfiguration": "production"
         },
         "serve": {
@@ -114,6 +116,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "ferjekai:build"
+            
           }
         },
         "test": {
@@ -141,7 +144,9 @@
         },
         "deploy": {
           "builder": "@angular/fire:deploy",
-          "options": {}
+          "options": {
+            "proxyConfig": "src/proxy.conf.json"
+          }
         }
       }
     }
