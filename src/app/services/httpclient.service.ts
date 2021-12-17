@@ -36,10 +36,10 @@ export class HttpclientService {
     const httpOptions = {
       
       headers:{
-        'Content-type': 'application/x-www-form-urlencoded',
-        "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent",
-"access-control-allow-methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
-"access-control-allow-origin": "*"
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent",
+"Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+"ccess-Control-Allow-Origin": "*"
 
       }
      
