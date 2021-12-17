@@ -39,7 +39,7 @@ export class HttpclientService {
         'Content-Type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent",
 "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
-"ccess-Control-Allow-Origin": "*"
+"Access-Control-Allow-Origin": "*"
 
       }
      
