@@ -11,6 +11,7 @@ import { error } from 'console';
 export class HttpclientService {
   client_id="ole.theisen@brattvaag-electro.no:Fergekai"
   scope="api"
+  accesstoken ="eyJhbGciOiJSUzI1NiIsImtpZCI6IjBCM0I1NEUyRkQ5OUZCQkY5NzVERDMxNDBDREQ4OEI1QzA5RkFDRjMiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJDenRVNHYyWi03LVhYZE1VRE4ySXRjQ2ZyUE0ifQ.eyJuYmYiOjE2Mzk3NTA2NTAsImV4cCI6MTYzOTc1NDI1MCwiaXNzIjoiaHR0cHM6Ly9pZC5iYXJlbnRzd2F0Y2gubm8iLCJhdWQiOiJhcGkiLCJjbGllbnRfaWQiOiJvbGUudGhlaXNlbkBicmF0dHZhYWctZWxlY3Ryby5ubzpGZXJnZWthaSIsInNjb3BlIjpbImFwaSJdfQ.HWmfgJh5kzQkjBtzFkpRHPfsKkCV2o8y9FBi73pg4o8ZrR-1khAwYuk5C7M2N5mHnXqsyXKDaV5Niu6L8VFI-1TyY6mQwk--Q5xmINln_R14MZAyzjU6nKmwzhAoUPVBo4-XkBHdF6acZWkCxdXolrt6orpI5MsPwJIGcn91dDR5sf2PFBMjS2qPE578yF-epSw1t1yziEfcAjSrIKlFcHAuKkxpymBJN-nbownmEdL1_IMiEWvnTSbjPnbf1fdi-lFws8VMsk63-hh1o8rpjE7se0w3PxWsuBPNnl7VRm4O-fq2aA98k9Vnh_K5cIU4afi2g5grwTW3fCIEUMk0AMfqmSfHs6_JX6Gf6U2xDz-0l_iFVKY_rRozMEcDcaluZ5DlCchhw_eulQefqg7xlpPgDbVwIyCvp4gjXj3eC1pgn0rgsV2jVtkZ_AB6EuKJ7tqsr7wj5LkLYxS-TOsjigYIM1JQ6PVTOfQWbR4Swr6DlCnu3c0EEv4998e6H_M8ykxYke6l-owyCOErY4BKxDnY_qvkCF_DYVCyt71MrxhPSQxpyJgmM9Jpif7-RtYO30u4q7BfUKo5xUlGRdiFAoaNtFeO-Har7rpjXMDvcBTFcjrwdDIMfTqgRHxUDKEeh7RTlwONveIsWxmPJUBwT8cC7yUuz8FqSr1AnNyGREk"
   client_secret="fergekaibrattvaagelectro"
   grant_type ="client_credentials"
   baseurl ="https://www.barentswatch.no/bwapi/v2/ais/openposition/"
@@ -18,7 +19,7 @@ export class HttpclientService {
   private localurl =window.location.origin
 
   private bodyjson= { client_id:"ole.theisen@brattvaag-electro.no:Fergekai",
-  scope:"api",
+  scope:"ais",
   client_secret:"fergekaibrattvaagelectro",
   grant_type:"client_credentials"}
   token: any;
@@ -37,7 +38,7 @@ export class HttpclientService {
       
       headers:{
         'Content-Type': 'application/x-www-form-urlencoded',
-        "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent",
+        "Access-Control-Allow-Headers": "Content-Type,Access-Control-Allow-Headers, Authorization, X-Requested-With",
 "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
 "Access-Control-Allow-Origin": "*"
 
@@ -47,7 +48,7 @@ export class HttpclientService {
 
   const body = new HttpParams()
       .set('client_id', this.client_id)
-      .set('scope', 'api')
+      .set('scope', this.scope)
       .set('grant_type', this.grant_type)
       .set('client_secret',this.client_secret);
 
@@ -88,7 +89,7 @@ getBoatLocation(mmsi:any){
       
     headers:{
       'Accept': 'application/json',
-      "Authorization": `Bearer ${this.token}`
+      "Authorization": `Bearer ${this.accesstoken}`
 
     }
   }
