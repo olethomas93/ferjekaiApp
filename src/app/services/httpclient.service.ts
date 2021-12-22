@@ -10,11 +10,11 @@ import { error } from 'console';
 })
 export class HttpclientService {
   client_id="ole.theisen@brattvaag-electro.no:Fergekai"
-  scope="api"
-  accesstoken ="eyJhbGciOiJSUzI1NiIsImtpZCI6IjBCM0I1NEUyRkQ5OUZCQkY5NzVERDMxNDBDREQ4OEI1QzA5RkFDRjMiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJDenRVNHYyWi03LVhYZE1VRE4ySXRjQ2ZyUE0ifQ.eyJuYmYiOjE2Mzk3NTA2NTAsImV4cCI6MTYzOTc1NDI1MCwiaXNzIjoiaHR0cHM6Ly9pZC5iYXJlbnRzd2F0Y2gubm8iLCJhdWQiOiJhcGkiLCJjbGllbnRfaWQiOiJvbGUudGhlaXNlbkBicmF0dHZhYWctZWxlY3Ryby5ubzpGZXJnZWthaSIsInNjb3BlIjpbImFwaSJdfQ.HWmfgJh5kzQkjBtzFkpRHPfsKkCV2o8y9FBi73pg4o8ZrR-1khAwYuk5C7M2N5mHnXqsyXKDaV5Niu6L8VFI-1TyY6mQwk--Q5xmINln_R14MZAyzjU6nKmwzhAoUPVBo4-XkBHdF6acZWkCxdXolrt6orpI5MsPwJIGcn91dDR5sf2PFBMjS2qPE578yF-epSw1t1yziEfcAjSrIKlFcHAuKkxpymBJN-nbownmEdL1_IMiEWvnTSbjPnbf1fdi-lFws8VMsk63-hh1o8rpjE7se0w3PxWsuBPNnl7VRm4O-fq2aA98k9Vnh_K5cIU4afi2g5grwTW3fCIEUMk0AMfqmSfHs6_JX6Gf6U2xDz-0l_iFVKY_rRozMEcDcaluZ5DlCchhw_eulQefqg7xlpPgDbVwIyCvp4gjXj3eC1pgn0rgsV2jVtkZ_AB6EuKJ7tqsr7wj5LkLYxS-TOsjigYIM1JQ6PVTOfQWbR4Swr6DlCnu3c0EEv4998e6H_M8ykxYke6l-owyCOErY4BKxDnY_qvkCF_DYVCyt71MrxhPSQxpyJgmM9Jpif7-RtYO30u4q7BfUKo5xUlGRdiFAoaNtFeO-Har7rpjXMDvcBTFcjrwdDIMfTqgRHxUDKEeh7RTlwONveIsWxmPJUBwT8cC7yUuz8FqSr1AnNyGREk"
+  scope="ais"
+  accesstoken ="eyJhbGciOiJSUzI1NiIsImtpZCI6IjBCM0I1NEUyRkQ5OUZCQkY5NzVERDMxNDBDREQ4OEI1QzA5RkFDRjMiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJDenRVNHYyWi03LVhYZE1VRE4ySXRjQ2ZyUE0ifQ.eyJuYmYiOjE2NDAwNzUxMzgsImV4cCI6MTY0MDA3ODczOCwiaXNzIjoiaHR0cHM6Ly9pZC5iYXJlbnRzd2F0Y2gubm8iLCJhdWQiOiJhcGkiLCJjbGllbnRfaWQiOiJvbGUudGhlaXNlbkBicmF0dHZhYWctZWxlY3Ryby5ubzpGZXJnZWthaSIsInNjb3BlIjpbImFwaSJdfQ.Rp_RB-tWWMCJWh9dGX9sKDXr224JXJZgNFfe7F5GV1uIG5iUr8-CjfESX8W1kKF4oKMPV9gZTancagqJYVx1UQemRRiJLSIrlFsDyr8eH1yWTL3l8U7v7iu-hS2-PhWbtf-zRc2_e9vm_ykCGHpos4xJtEaYaZ25mAOBCdezskMQkm6g4565mjnqNC7JqsJLLt51jgWtpXBtrGEUFkFo4jNUzuF8B5-sYoF5ogP5xmSEUY6XEK0807xTVBzVZQ42sN9CUaNa6Jgm8PKJm466KRPPNQZqH4VO2o4UHRWPjp43LBQ5wmgEbdTViQrXdRUB_qIyfC8fhX_2wMbevkotjEy_GVHxCjy0w08lFJbjSJFnlNXipk_PZ24jP2O5kSz2Uw-odn4H8WC_cg_WDnAt6gVAjQITMGmlJqN97Gr5DbzG_1XgYWPv5Xi2YMhB8GlXVin6JM6_ZGaJlAl0UrX624LVOHpQHPC7guKSaba7qrHLmfJHYcmjTkcTKHashdSwjPFam0fxaAIGtolSGeXg9zbDpda1aNWDi1MIuV8-6D4-zTga_VY-cgEpf18jESE1c9-1j53z5Txgc0x7Y3Qh-RmgDKxXFVvhdXZ0q0fKrnlWKnxDSMWgbMooRPR6tHwc__gI2FPRY9IqAfLsTeXKQq7EKTNwxcI9taUP_scPxVY"
   client_secret="fergekaibrattvaagelectro"
   grant_type ="client_credentials"
-  baseurl ="https://www.barentswatch.no/bwapi/v2/ais/openposition/"
+  baseurl ="https://live.ais.barentswatch.no/v1/ais/openposition/"
   private tokenUrl = "https://id.barentswatch.no/connect/token"
   private localurl =window.location.origin
 
@@ -37,10 +37,7 @@ export class HttpclientService {
     const httpOptions = {
       
       headers:{
-        'Content-Type': 'application/x-www-form-urlencoded',
-        "Access-Control-Allow-Headers": "Content-Type,Access-Control-Allow-Headers, Authorization, X-Requested-With",
-"Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
-"Access-Control-Allow-Origin": "*"
+        'Content-Type': 'application/x-www-form-urlencoded'
 
       }
      
@@ -89,12 +86,12 @@ getBoatLocation(mmsi:any){
       
     headers:{
       'Accept': 'application/json',
-      "Authorization": `Bearer ${this.accesstoken}`
+      "Authorization": `Bearer ${this.token}`
 
     }
   }
 
- return this.http.get(`https://www.barentswatch.no/bwapi/v2/geodata/ais/openposition/${mmsi}`,httpOptions).pipe(
+ return this.http.get(`http://live.ais.barentswatch.no/v1/ais/${mmsi}`,httpOptions).pipe(
   catchError(this.handleError)
   
   )
