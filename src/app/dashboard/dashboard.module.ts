@@ -49,10 +49,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster'
 import { NgxGaugeModule } from 'ngx-gauge';
 import {GaugeComponent} from '../components/gauge/gauge.component'
+import { CameraStreamerComponent } from '../components/camera-streamer/camera-streamer.component';
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent,
-    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent,AddDockComponent,GaugeComponent
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent,AddDockComponent,GaugeComponent,CameraStreamerComponent
     ],
   imports: [
     CommonModule,

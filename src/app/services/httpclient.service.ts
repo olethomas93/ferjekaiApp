@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
 import { error } from 'console';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -95,6 +96,8 @@ getBoatLocation(mmsi:any){
   catchError(this.handleError)
   
   )
+
+
 }
 
 

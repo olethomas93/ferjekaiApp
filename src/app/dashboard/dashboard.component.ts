@@ -78,6 +78,11 @@ export class DashboardComponent implements OnInit {
         
       })
 
+  //  const items = API.get('ferryAppApi','/token',{}).then((data)=>{
+
+  //   console.log(data)
+  //  })
+
       
 
    

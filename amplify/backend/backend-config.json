@@ -14,6 +14,20 @@
           "additionalAuthenticationProviders": []
         }
       }
+    },
+    "ferryAppApi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "test",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "auth": {
@@ -49,7 +63,6 @@
     }
   },
   "function": {
-   
     "dockToDb": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -64,6 +77,11 @@
           ]
         }
       ]
+    },
+    "test": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   }
 }

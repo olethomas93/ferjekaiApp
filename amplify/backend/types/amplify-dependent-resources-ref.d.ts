@@ -3,6 +3,11 @@ export type AmplifyDependentResourcesAttributes = {
         "ferrydock": {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
+        },
+        "ferryAppApi": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
         }
     },
     "auth": {
@@ -18,6 +23,12 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "function": {
         "dockToDb": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "test": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

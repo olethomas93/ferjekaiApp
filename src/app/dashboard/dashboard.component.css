@@ -40,13 +40,9 @@
   left: 0; */
 }
 mat-toolbar{
-  display: flex;
+ 
   z-index: 999999999999;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+ 
 }
   .home {
     

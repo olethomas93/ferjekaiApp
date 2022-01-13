@@ -77,12 +77,12 @@ const uuid =UUID.UUID();
       });
 
     
-      this.httpclient.authenticate().subscribe((data)=>{
+      // this.httpclient.authenticate().subscribe((data)=>{
 
-        console.log(data)
+      //   console.log(data)
 
-        this.httpclient.setToken(data.access_token)
-      })
+      //   this.httpclient.setToken(data.access_token)
+      // })
 
      
 
