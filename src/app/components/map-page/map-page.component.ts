@@ -96,14 +96,14 @@ export class MapPageComponent implements OnInit {
    
     
 
-this.boatSubscrition.add(    interval(10000)
-      .pipe(switchMap(() => this.httpclient.getBoatLocation(257054390).pipe(takeUntil(this.destroyed$))))
-      .subscribe((result) => {
+// this.boatSubscrition.add(    interval(10000)
+//       .pipe(switchMap(() => this.httpclient.getBoatLocation(257054390).pipe(takeUntil(this.destroyed$))))
+//       .subscribe((result) => {
 
         
-        this.onFerryLocation(result)
+//         this.onFerryLocation(result)
       
-      }))
+//       }))
 
   }
 
