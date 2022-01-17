@@ -1,10 +1,11 @@
 import { Component, ElementRef, Input, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
-import { AnyNsRecord } from 'dns';
+
 
 @Component({
   selector: 'app-minicard',
   templateUrl: './minicard.component.html',
-  styleUrls: ['./minicard.component.css']
+  styleUrls: ['./minicard.component.css'],
+
 })
 export class MinicardComponent implements OnInit {
   @ViewChild('compass') angle!: ElementRef<HTMLInputElement>

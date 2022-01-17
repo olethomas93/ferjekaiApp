@@ -33,23 +33,23 @@
   
   </mat-toolbar>
   
-  <mat-sidenav-container  >
-    <mat-sidenav  #sideNav mode="push" position="start">
+  <mat-sidenav-container   >
+    <mat-sidenav class="sidenav"  #sideNav mode="push" position="start" >
    
       <div class="items">
-        <mat-nav-list> 
-          <div  mat-subheader >Meny</div>
+        <mat-nav-list > 
+          <div  mat-subheader > <h2>Meny</h2>  </div>
           <mat-list-item  routerLink="landing" routerLinkActive="activebutton">
-            Hjem
+           <h3>Hjem</h3> 
 
           </mat-list-item >
           <mat-list-item routerLink="/map" routerLinkActive="activebutton">
-            Kart
+            <h3>Kart</h3>
 
           </mat-list-item>
 
           <mat-divider></mat-divider>
-          <div mat-subheader>Info</div>
+        
 
           <mat-list-item *ngIf="checkGroup()" (click)="addDock()">
             +
@@ -60,8 +60,9 @@
       
           <mat-divider></mat-divider>
           <mat-list-item (click)="signOut()" class="logout">
-            Logg ut
-            <mat-icon style="margin-left: 11%;">logout</mat-icon>
+            
+           <h3>Logg ut</h3> 
+            <!-- <mat-icon style="margin-left: 11%;" color="white">logout</mat-icon> -->
            
            
           </mat-list-item>
@@ -71,7 +72,7 @@
       </div>
     </mat-sidenav>
   
-    <mat-sidenav-content >
+    <mat-sidenav-content  >
       <div [@triggerName]="prepareRoute(outlet)">
         <router-outlet  #outlet="outlet" (activate)='onActivate($event)'   ></router-outlet>
       </div>

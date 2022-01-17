@@ -7,7 +7,10 @@
   .mat-standard-chip {    
    
   }
-
+  .sidenav{
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,85,135,1) 0%, rgba(21,25,34,1) 66%);
+  }
   .chip{
     background-color: cornflowerblue;
   }
@@ -18,7 +21,9 @@
     width: 10%;
     
   }
-
+  mat-divider{
+    background: black;
+  }
   .example-container {
     display: flex;
     flex-direction: column;
@@ -40,8 +45,9 @@
   left: 0; */
 }
 mat-toolbar{
- 
+  background-color: #151922;
   z-index: 999999999999;
+  
  
 }
   .home {
@@ -52,6 +58,10 @@ mat-toolbar{
     
     
     
+  }
+
+  mat-icon{
+    color:white
   }
   
   .logo{
@@ -101,10 +111,25 @@ mat-toolbar{
     margin-top: 15%;
   }
 
+h2{
+  color: antiquewhite;
 
+}
   
   
   
+h3{
+  text-align: center;
+  color: antiquewhite;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+}
+mat-sidenav-content{
+  background: #151922
+}
   
   
   

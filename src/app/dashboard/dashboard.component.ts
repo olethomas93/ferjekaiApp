@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
 
     checkGroup(){
       let temp =false;
-     if(localStorage.getItem('group') == "admin" ){
+     if(this.auth.getCognitoGroup() == "admin" ){
 
       temp = true;
 

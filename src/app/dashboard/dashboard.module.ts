@@ -50,6 +50,7 @@ import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster'
 import { NgxGaugeModule } from 'ngx-gauge';
 import {GaugeComponent} from '../components/gauge/gauge.component'
 import { CameraStreamerComponent } from '../components/camera-streamer/camera-streamer.component';
+
 @NgModule({
   
   declarations: [DashboardComponent, MapComponent,
@@ -94,7 +95,8 @@ import { CameraStreamerComponent } from '../components/camera-streamer/camera-st
     MatChipsModule,
     SatPopoverModule,
     MatProgressSpinnerModule,
-    LeafletMarkerClusterModule
+    LeafletMarkerClusterModule,
+    BrowserAnimationsModule
 ],
 
 

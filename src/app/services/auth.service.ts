@@ -14,12 +14,14 @@ import { catchError ,map, tap} from 'rxjs/operators';
 export class AuthService {
   userData: any; // Save logged in user data
   public loggedIn!: BehaviorSubject<boolean>;
+  private cognitoGroup :String
   constructor( // Inject Firebase auth service
     public router: Router,  
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {    
 
     this.loggedIn = new BehaviorSubject<boolean>(false)
+    this.cognitoGroup = ""
   }
 
     /** get authenticat state */
@@ -30,13 +32,13 @@ export class AuthService {
 
             
 
-            localStorage.setItem('group',result.signInUserSession.idToken.payload['cognito:groups'][0])
-           
+          //localStorage.setItem('group',result.signInUserSession.idToken.payload['cognito:groups'][0])
+           this.setCognitoGroup(result.signInUserSession.idToken.payload['cognito:groups'][0])
             this.loggedIn.next(true);
             return true;
           }),
           catchError(error => {
-            localStorage.setItem('group','')
+            this.setCognitoGroup('')
             this.loggedIn.next(false);
             return of(false);
           })
@@ -45,6 +47,17 @@ export class AuthService {
 
   
     
+    setCognitoGroup(group:any){
+
+      this.cognitoGroup = group;
+
+
+    }
+
+    getCognitoGroup(){
+
+      return this.cognitoGroup
+    }
     
     getCred(){
 
