@@ -50,10 +50,12 @@ import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster'
 import { NgxGaugeModule } from 'ngx-gauge';
 import {GaugeComponent} from '../components/gauge/gauge.component'
 import { CameraStreamerComponent } from '../components/camera-streamer/camera-streamer.component';
+import { MaintencereportComponent } from '../components/maintencereport/maintencereport.component';
+import { CreateRapportComponent } from '../components/create-rapport/create-rapport.component';
 
 @NgModule({
   
-  declarations: [DashboardComponent, MapComponent,
+  declarations: [DashboardComponent, CreateRapportComponent,MapComponent,MaintencereportComponent,
     MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent,AddDockComponent,GaugeComponent,CameraStreamerComponent
     ],
   imports: [

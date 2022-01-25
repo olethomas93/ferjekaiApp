@@ -90,6 +90,12 @@ name:String
  type Subscription @aws_iam  @aws_cognito_user_pools{
    onUpdateById(id: ID!): dockData
      @aws_subscribe(mutations: ["updateDockData"])
+
+     onDeleteMaintenaceByFerry(ferry:String):MaintenanceReport
+      @aws_subscribe(mutations: ["deleteMaintenanceReport"])
+
+       onCreateMaintenaceByFerry(ferry:String):MaintenanceReport
+      @aws_subscribe(mutations: ["createMaintenanceReport"])
  }
 
 

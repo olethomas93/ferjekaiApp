@@ -51,6 +51,7 @@ import { ApiComponent } from './components/api/api.component';
 
 
 
+
 PlotlyModule.plotlyjs = PlotlyJS;
 
 
@@ -83,6 +84,9 @@ Amplify.addPluggable(new AWSIoTProvider({
     DeleteDockComponent,
     ChartComponent,
     ApiComponent,
+
+  
+  
   
  
     

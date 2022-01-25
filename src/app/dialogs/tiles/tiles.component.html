@@ -159,11 +159,16 @@
   <button mat-button (click)="goToLink('http://sulesund-fk.ddns.net/webvisu')">Gå til HMI</button>
 </mat-tab> -->
 
+<mat-tab label="Rapporter">
+  
+  <app-maintencereport [ferryName]="name.name"  > </app-maintencereport>
+</mat-tab>
+
 
 </mat-tab-group>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="close($event)">Close</button>
+  <button mat-button mat-dialog-close (click)="close($event)">Lukk</button>
   <button  mat-button *ngIf="configToggle && checkGroup()" (click)="update()" >update</button>
 </mat-dialog-actions>

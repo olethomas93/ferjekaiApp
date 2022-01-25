@@ -27,6 +27,40 @@ subscription OnUpdateById($id: ID!) {
     updatedAt
   }
 }
+subscription OnDeleteMaintenaceByFerry($ferry: String) {
+  onDeleteMaintenaceByFerry(ferry: $ferry) {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateMaintenaceByFerry($ferry: String) {
+  onCreateMaintenaceByFerry(ferry: $ferry) {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateDockData {
   onCreateDockData {
     id
