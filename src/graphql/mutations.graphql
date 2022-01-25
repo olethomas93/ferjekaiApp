@@ -1,4 +1,42 @@
 # this is an auto generated file. This will be overwritten
+mutation AddMaintenanceReport(
+  $id: ID!
+  $reportedBy: String
+  $description: String
+  $date: AWSDateTime
+  $status: MaintenanceReportStatus
+  $ferry: String
+) {
+  addMaintenanceReport(
+    id: $id
+    reportedBy: $reportedBy
+    description: $description
+    date: $date
+    status: $status
+    ferry: $ferry
+  ) {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
+mutation AddComment($maintenanceReportid: ID!, $content: String) {
+  addComment(maintenanceReportid: $maintenanceReportid, content: $content) {
+    maintenanceReportid
+    commentid
+    content
+  }
+}
 mutation CreateDockData(
   $input: CreateDockDataInput!
   $condition: ModeldockDataConditionInput
@@ -292,6 +330,66 @@ mutation DeleteLoggingTest(
     ferry
     data
     timeStamp
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateMaintenanceReport(
+  $input: CreateMaintenanceReportInput!
+  $condition: ModelMaintenanceReportConditionInput
+) {
+  createMaintenanceReport(input: $input, condition: $condition) {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMaintenanceReport(
+  $input: UpdateMaintenanceReportInput!
+  $condition: ModelMaintenanceReportConditionInput
+) {
+  updateMaintenanceReport(input: $input, condition: $condition) {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMaintenanceReport(
+  $input: DeleteMaintenanceReportInput!
+  $condition: ModelMaintenanceReportConditionInput
+) {
+  deleteMaintenanceReport(input: $input, condition: $condition) {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
     createdAt
     updatedAt
   }

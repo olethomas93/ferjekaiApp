@@ -297,3 +297,54 @@ subscription OnDeleteLoggingTest {
     updatedAt
   }
 }
+subscription OnCreateMaintenanceReport {
+  onCreateMaintenanceReport {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMaintenanceReport {
+  onUpdateMaintenanceReport {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMaintenanceReport {
+  onDeleteMaintenanceReport {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}

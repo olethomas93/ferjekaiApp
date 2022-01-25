@@ -20,6 +20,34 @@ export type __SubscriptionContainer = {
   onCreateLoggingTest: OnCreateLoggingTestSubscription;
   onUpdateLoggingTest: OnUpdateLoggingTestSubscription;
   onDeleteLoggingTest: OnDeleteLoggingTestSubscription;
+  onCreateMaintenanceReport: OnCreateMaintenanceReportSubscription;
+  onUpdateMaintenanceReport: OnUpdateMaintenanceReportSubscription;
+  onDeleteMaintenanceReport: OnDeleteMaintenanceReportSubscription;
+};
+
+export enum MaintenanceReportStatus {
+  done = "done",
+  inProgress = "inProgress"
+}
+
+export type MaintenanceReport = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<Comment | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Comment = {
+  __typename: "Comment";
+  maintenanceReportid: string;
+  commentid: string;
+  content?: string | null;
 };
 
 export type CreateDockDataInput = {
@@ -268,6 +296,52 @@ export type DeleteLoggingTestInput = {
   id: string;
 };
 
+export type CreateMaintenanceReportInput = {
+  id?: string | null;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<CommentInput | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+};
+
+export type CommentInput = {
+  maintenanceReportid: string;
+  commentid: string;
+  content?: string | null;
+};
+
+export type ModelMaintenanceReportConditionInput = {
+  reportedBy?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  status?: ModelMaintenanceReportStatusInput | null;
+  ferry?: ModelStringInput | null;
+  and?: Array<ModelMaintenanceReportConditionInput | null> | null;
+  or?: Array<ModelMaintenanceReportConditionInput | null> | null;
+  not?: ModelMaintenanceReportConditionInput | null;
+};
+
+export type ModelMaintenanceReportStatusInput = {
+  eq?: MaintenanceReportStatus | null;
+  ne?: MaintenanceReportStatus | null;
+};
+
+export type UpdateMaintenanceReportInput = {
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<CommentInput | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+};
+
+export type DeleteMaintenanceReportInput = {
+  id: string;
+};
+
 export type ModeldockDataFilterInput = {
   id?: ModelIDInput | null;
   createdAt?: ModelStringInput | null;
@@ -330,6 +404,49 @@ export type ModelloggingTestConnection = {
   __typename: "ModelloggingTestConnection";
   items: Array<loggingTest>;
   nextToken?: string | null;
+};
+
+export type ModelMaintenanceReportFilterInput = {
+  id?: ModelIDInput | null;
+  reportedBy?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  status?: ModelMaintenanceReportStatusInput | null;
+  ferry?: ModelStringInput | null;
+  and?: Array<ModelMaintenanceReportFilterInput | null> | null;
+  or?: Array<ModelMaintenanceReportFilterInput | null> | null;
+  not?: ModelMaintenanceReportFilterInput | null;
+};
+
+export type ModelMaintenanceReportConnection = {
+  __typename: "ModelMaintenanceReportConnection";
+  items: Array<MaintenanceReport>;
+  nextToken?: string | null;
+};
+
+export type AddMaintenanceReportMutation = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type AddCommentMutation = {
+  __typename: "Comment";
+  maintenanceReportid: string;
+  commentid: string;
+  content?: string | null;
 };
 
 export type CreateDockDataMutation = {
@@ -638,6 +755,60 @@ export type DeleteLoggingTestMutation = {
   updatedAt?: string | null;
 };
 
+export type CreateMaintenanceReportMutation = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateMaintenanceReportMutation = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteMaintenanceReportMutation = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type GetDockDataQuery = {
   __typename: "dockData";
   id: string;
@@ -825,6 +996,46 @@ export type ListLoggingTestsQuery = {
     timeStamp?: number | null;
     createdAt?: string | null;
     updatedAt?: string | null;
+  }>;
+  nextToken?: string | null;
+};
+
+export type GetMaintenanceReportQuery = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListMaintenanceReportsQuery = {
+  __typename: "ModelMaintenanceReportConnection";
+  items: Array<{
+    __typename: "MaintenanceReport";
+    id: string;
+    reportedBy?: string | null;
+    description?: string | null;
+    comment?: Array<{
+      __typename: "Comment";
+      maintenanceReportid: string;
+      commentid: string;
+      content?: string | null;
+    } | null> | null;
+    date?: string | null;
+    status?: MaintenanceReportStatus | null;
+    ferry?: string | null;
+    createdAt: string;
+    updatedAt: string;
   }>;
   nextToken?: string | null;
 };
@@ -1167,10 +1378,137 @@ export type OnDeleteLoggingTestSubscription = {
   updatedAt?: string | null;
 };
 
+export type OnCreateMaintenanceReportSubscription = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateMaintenanceReportSubscription = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteMaintenanceReportSubscription = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 @Injectable({
   providedIn: "root"
 })
 export class APIService {
+  async AddMaintenanceReport(
+    id: string,
+    reportedBy?: string,
+    description?: string,
+    date?: string,
+    status?: MaintenanceReportStatus,
+    ferry?: string
+  ): Promise<AddMaintenanceReportMutation> {
+    const statement = `mutation AddMaintenanceReport($id: ID!, $reportedBy: String, $description: String, $date: AWSDateTime, $status: MaintenanceReportStatus, $ferry: String) {
+        addMaintenanceReport(id: $id, reportedBy: $reportedBy, description: $description, date: $date, status: $status, ferry: $ferry) {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    if (reportedBy) {
+      gqlAPIServiceArguments.reportedBy = reportedBy;
+    }
+    if (description) {
+      gqlAPIServiceArguments.description = description;
+    }
+    if (date) {
+      gqlAPIServiceArguments.date = date;
+    }
+    if (status) {
+      gqlAPIServiceArguments.status = status;
+    }
+    if (ferry) {
+      gqlAPIServiceArguments.ferry = ferry;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <AddMaintenanceReportMutation>response.data.addMaintenanceReport;
+  }
+  async AddComment(
+    maintenanceReportid: string,
+    content?: string
+  ): Promise<AddCommentMutation> {
+    const statement = `mutation AddComment($maintenanceReportid: ID!, $content: String) {
+        addComment(maintenanceReportid: $maintenanceReportid, content: $content) {
+          __typename
+          maintenanceReportid
+          commentid
+          content
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      maintenanceReportid
+    };
+    if (content) {
+      gqlAPIServiceArguments.content = content;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <AddCommentMutation>response.data.addComment;
+  }
   async CreateDockData(
     input: CreateDockDataInput,
     condition?: ModeldockDataConditionInput
@@ -1621,6 +1959,114 @@ export class APIService {
     )) as any;
     return <DeleteLoggingTestMutation>response.data.deleteLoggingTest;
   }
+  async CreateMaintenanceReport(
+    input: CreateMaintenanceReportInput,
+    condition?: ModelMaintenanceReportConditionInput
+  ): Promise<CreateMaintenanceReportMutation> {
+    const statement = `mutation CreateMaintenanceReport($input: CreateMaintenanceReportInput!, $condition: ModelMaintenanceReportConditionInput) {
+        createMaintenanceReport(input: $input, condition: $condition) {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateMaintenanceReportMutation>(
+      response.data.createMaintenanceReport
+    );
+  }
+  async UpdateMaintenanceReport(
+    input: UpdateMaintenanceReportInput,
+    condition?: ModelMaintenanceReportConditionInput
+  ): Promise<UpdateMaintenanceReportMutation> {
+    const statement = `mutation UpdateMaintenanceReport($input: UpdateMaintenanceReportInput!, $condition: ModelMaintenanceReportConditionInput) {
+        updateMaintenanceReport(input: $input, condition: $condition) {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateMaintenanceReportMutation>(
+      response.data.updateMaintenanceReport
+    );
+  }
+  async DeleteMaintenanceReport(
+    input: DeleteMaintenanceReportInput,
+    condition?: ModelMaintenanceReportConditionInput
+  ): Promise<DeleteMaintenanceReportMutation> {
+    const statement = `mutation DeleteMaintenanceReport($input: DeleteMaintenanceReportInput!, $condition: ModelMaintenanceReportConditionInput) {
+        deleteMaintenanceReport(input: $input, condition: $condition) {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteMaintenanceReportMutation>(
+      response.data.deleteMaintenanceReport
+    );
+  }
   async GetDockData(id: string): Promise<GetDockDataQuery> {
     const statement = `query GetDockData($id: ID!) {
         getDockData(id: $id) {
@@ -1904,6 +2350,77 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListLoggingTestsQuery>response.data.listLoggingTests;
+  }
+  async GetMaintenanceReport(id: string): Promise<GetMaintenanceReportQuery> {
+    const statement = `query GetMaintenanceReport($id: ID!) {
+        getMaintenanceReport(id: $id) {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetMaintenanceReportQuery>response.data.getMaintenanceReport;
+  }
+  async ListMaintenanceReports(
+    filter?: ModelMaintenanceReportFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListMaintenanceReportsQuery> {
+    const statement = `query ListMaintenanceReports($filter: ModelMaintenanceReportFilterInput, $limit: Int, $nextToken: String) {
+        listMaintenanceReports(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            reportedBy
+            description
+            comment {
+              __typename
+              maintenanceReportid
+              commentid
+              content
+            }
+            date
+            status
+            ferry
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListMaintenanceReportsQuery>response.data.listMaintenanceReports;
   }
   OnUpdateByIdListener(
     id: string
@@ -2347,5 +2864,101 @@ export class APIService {
     )
   ) as Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteLoggingTest">>
+  >;
+
+  OnCreateMaintenanceReportListener: Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateMaintenanceReport">
+    >
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateMaintenanceReport {
+        onCreateMaintenanceReport {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateMaintenanceReport">
+    >
+  >;
+
+  OnUpdateMaintenanceReportListener: Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateMaintenanceReport">
+    >
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateMaintenanceReport {
+        onUpdateMaintenanceReport {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateMaintenanceReport">
+    >
+  >;
+
+  OnDeleteMaintenanceReportListener: Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteMaintenanceReport">
+    >
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteMaintenanceReport {
+        onDeleteMaintenanceReport {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteMaintenanceReport">
+    >
   >;
 }

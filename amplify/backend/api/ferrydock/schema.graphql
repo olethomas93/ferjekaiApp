@@ -52,15 +52,27 @@ type Operation  @aws_iam @aws_cognito_user_pools {
   unit:String
 }
 
-type maintenanceReport @aws_iam @aws_cognito_user_pools{
+type MaintenanceReport @model @aws_iam @aws_cognito_user_pools{
   id:ID!
   reportedBy:String
   description: String
+  comment:[Comment]
   date:AWSDateTime
-  historic:Boolean
-  
+  status:MaintenanceReportStatus
+  ferry:String
+
 
 }
+
+ type Comment {
+     maintenanceReportid: ID!
+     commentid: String!
+     content: String
+ }
+  enum MaintenanceReportStatus {
+   done
+  inProgress
+ }
 
 type Alarm  @aws_iam @aws_cognito_user_pools {
 id:ID!
@@ -80,4 +92,9 @@ name:String
      @aws_subscribe(mutations: ["updateDockData"])
  }
 
+
+ type Mutation {
+     addMaintenanceReport(id: ID!, reportedBy: String, description: String, date:AWSDateTime status: MaintenanceReportStatus, ferry:String): MaintenanceReport
+     addComment(maintenanceReportid: ID!, content: String): Comment
+ }
 

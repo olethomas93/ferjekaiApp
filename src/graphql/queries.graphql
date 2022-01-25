@@ -179,3 +179,48 @@ query ListLoggingTests(
     nextToken
   }
 }
+query GetMaintenanceReport($id: ID!) {
+  getMaintenanceReport(id: $id) {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
+query ListMaintenanceReports(
+  $filter: ModelMaintenanceReportFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMaintenanceReports(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      reportedBy
+      description
+      comment {
+        maintenanceReportid
+        commentid
+        content
+      }
+      date
+      status
+      ferry
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
