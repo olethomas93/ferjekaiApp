@@ -52,6 +52,16 @@ type Operation  @aws_iam @aws_cognito_user_pools {
   unit:String
 }
 
+type maintenanceReport @aws_iam @aws_cognito_user_pools{
+  id:ID!
+  reportedBy:String
+  description: String
+  date:AWSDateTime
+  historic:Boolean
+  
+
+}
+
 type Alarm  @aws_iam @aws_cognito_user_pools {
 id:ID!
 value:String

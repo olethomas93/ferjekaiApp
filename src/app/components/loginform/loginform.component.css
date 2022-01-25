@@ -1,5 +1,5 @@
 .white-icon {
-    color: white;
+    color: rgb(61, 131, 236);
 }
 /* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
 .white-icon svg {

@@ -138,7 +138,12 @@ this.alarmConfig =[]
    return CurrentDate.toISOString()
   }
 
+goToLink(url:any){
 
+  window.open(url,'_blank')
+
+
+}
 async openChart(name:any){
   
 

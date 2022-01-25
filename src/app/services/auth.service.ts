@@ -76,7 +76,7 @@ export class AuthService {
     completeNewPassword(user:any,newPassword:any){
       const { requiredAttributes } = user.challengeParam;
       Auth.completeNewPassword(user,newPassword,requiredAttributes).then((data)=>{
-        console.log(data)
+       
         this.router.navigate(['/landing'])
       }).catch(e=>{
         console.log(e)
