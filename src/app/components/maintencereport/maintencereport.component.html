@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" (click)="openDialog('Add',{})">Legg til</button>
+<button mat-button (click)="openDialog('Add',{})" color="primary">Legg til</button>
 
 <table mat-table [dataSource]="reports" class="mat-elevation-z8">
 
@@ -32,8 +32,8 @@
     <ng-container matColumnDef="Action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element"> 
-            <button type="button" class="btn btn-info btn-sm mr-2" (click)="openDialog('Update',element)">Endre</button> 
-            <button type="button" class="btn btn-danger btn-sm" (click)="openDialog('Delete',element)">Slett</button>    
+            <button mat-button (click)="openDialog('Update',element)" mat-flat-button color="primary">Endre</button> 
+            <button mat-button (click)="openDialog('Delete',element)" mat-flat-button color="warn">Slett</button>    
         </td>
       </ng-container>
   
