@@ -13,6 +13,7 @@ export type __SubscriptionContainer = {
   onUpdateById: OnUpdateByIdSubscription;
   onDeleteMaintenaceByFerry: OnDeleteMaintenaceByFerrySubscription;
   onCreateMaintenaceByFerry: OnCreateMaintenaceByFerrySubscription;
+  onUpdateMaintenaceByFerry: OnUpdateMaintenaceByFerrySubscription;
   onCreateDockData: OnCreateDockDataSubscription;
   onUpdateDockData: OnUpdateDockDataSubscription;
   onDeleteDockData: OnDeleteDockDataSubscription;
@@ -1093,6 +1094,24 @@ export type OnDeleteMaintenaceByFerrySubscription = {
 };
 
 export type OnCreateMaintenaceByFerrySubscription = {
+  __typename: "MaintenanceReport";
+  id: string;
+  reportedBy?: string | null;
+  description?: string | null;
+  comment?: Array<{
+    __typename: "Comment";
+    maintenanceReportid: string;
+    commentid: string;
+    content?: string | null;
+  } | null> | null;
+  date?: string | null;
+  status?: MaintenanceReportStatus | null;
+  ferry?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateMaintenaceByFerrySubscription = {
   __typename: "MaintenanceReport";
   id: string;
   reportedBy?: string | null;
@@ -2582,6 +2601,45 @@ export class APIService {
     ) as Observable<
       SubscriptionResponse<
         Pick<__SubscriptionContainer, "onCreateMaintenaceByFerry">
+      >
+    >;
+  }
+
+  OnUpdateMaintenaceByFerryListener(
+    ferry?: string
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateMaintenaceByFerry">
+    >
+  > {
+    const statement = `subscription OnUpdateMaintenaceByFerry($ferry: String) {
+        onUpdateMaintenaceByFerry(ferry: $ferry) {
+          __typename
+          id
+          reportedBy
+          description
+          comment {
+            __typename
+            maintenanceReportid
+            commentid
+            content
+          }
+          date
+          status
+          ferry
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (ferry) {
+      gqlAPIServiceArguments.ferry = ferry;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateMaintenaceByFerry">
       >
     >;
   }

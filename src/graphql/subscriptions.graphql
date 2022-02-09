@@ -61,6 +61,23 @@ subscription OnCreateMaintenaceByFerry($ferry: String) {
     updatedAt
   }
 }
+subscription OnUpdateMaintenaceByFerry($ferry: String) {
+  onUpdateMaintenaceByFerry(ferry: $ferry) {
+    id
+    reportedBy
+    description
+    comment {
+      maintenanceReportid
+      commentid
+      content
+    }
+    date
+    status
+    ferry
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateDockData {
   onCreateDockData {
     id

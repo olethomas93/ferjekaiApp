@@ -96,6 +96,9 @@ name:String
 
        onCreateMaintenaceByFerry(ferry:String):MaintenanceReport
       @aws_subscribe(mutations: ["createMaintenanceReport"])
+
+        onUpdateMaintenaceByFerry(ferry:String):MaintenanceReport
+      @aws_subscribe(mutations: ["updateMaintenanceReport"])
  }
 
 

@@ -1,46 +1,59 @@
-
-	<form novalidate #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
-		<div class="row">
-			<div class="col-sm-6 form-group">
-				<label>Ditt navn</label>
-				<input type="text" class="form-control" name="name" ngModel #firstNameRef="ngModel" required [class.ctrl-error] = "firstNameRef.touched &&
-firstNameRef?.errors?.required" minlength="3"> 
-        <div *ngIf="firstNameRef.touched &&
-firstNameRef?.errors?.required" class="error-message">
-The name is required.
-</div>
-<div class="error-message" *ngIf="firstNameRef.touched &&
-firstNameRef?.errors?.minlength">
-You should enter minimum
-{{firstNameRef?.errors?.minlength.requiredLength}}
-characters into first name, but you entered only
-{{firstNameRef?.errors?.minlength.actualLength}} character(s).
-</div>
-			</div>
-		
+<div class="container">
+	<div [hidden]="submitted">
+	  <h1>Rapport</h1>
+	  <form (ngSubmit)="onSubmit(formRef.value)" #formRef="ngForm">
+		<div class="form-group">
+		  <label for="name">Rapportert av</label>
+		  <input type="text" class="form-control" id="name"
+				 required
+				 [(ngModel)]="reportedBy" name="name"
+				 #name="ngModel">
+		  <div [hidden]="name.valid || name.pristine"
+			   class="alert alert-danger">
+			Navn er påkrevd
+		  </div>
 		</div>
-		
-	
-		<div class="row">
-            <div class="col-sm-6 form-group">
-				<label>Status</label>
-			
-                    <mat-select [(value)]="iStatus">
-                      <mat-option *ngFor="let stat of keys()" [value]="stat">
-                        {{stat}}
-                      </mat-option>
-                    </mat-select>
-              
-			</div>
-			
-			<div class="col-sm-6 form-group">
-				<label>Forklaring</label>
-				<input type="text" class="form-control" name="description" ngModel required #cityRef="ngModel">
-			</div>
+  
+		<div class="form-group">
+		  <label for="description">Forklaring</label>
+		  <input type="text" class="form-control" id="description"
+				 [(ngModel)]="description" name="description">
 		</div>
-	
-
-
-
-		<button type="submit" class="btn btn-secondary" [disabled]="formRef.invalid">Legg til</button>
-	</form>
+  
+		<div class="form-group">
+		  <label for="status">Status</label>
+		  <select class="form-control" id="status"
+				  required
+				  [(ngModel)]="iStatus" name="status"
+				  #status="ngModel">
+			<option *ngFor="let stat of keys()" [value]="stat">{{stat}}</option>
+		  </select>
+		  <div [hidden]="status.valid || status.pristine" class="alert alert-danger">
+			Status is required
+		  </div>
+		</div>
+  
+		<button type="submit" class="btn btn-success" [disabled]="!formRef.form.valid">Submit</button>
+		<!-- <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button> -->
+	  </form>
+	</div>
+  
+	<!-- <div [hidden]="!submitted">
+	  <h2>You submitted the following:</h2>
+	  <div class="row">
+		<div class="col-xs-3">Rapportert av</div>
+		<div class="col-xs-9">{{ reportedBy }}</div>
+	  </div>
+	  <div class="row">
+		<div class="col-xs-3">Beskrivelse</div>
+		<div class="col-xs-9">{{description }}</div>
+	  </div>
+	  <div class="row">
+		<div class="col-xs-3">Status</div>
+		<div class="col-xs-9">{{iStatus }}</div>
+	  </div>
+	  <br>
+	  <button class="btn btn-primary" (click)="submitted=false">Endre</button>
+	  <button class="btn btn-primary" (click)="sendRapport()">Lagre rapport</button>
+	</div> -->
+  </div>

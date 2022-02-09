@@ -23,10 +23,10 @@ interface Status {
 export class CreateRapportComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-  name!:string;
+  reportedBy!:string;
   description!:string
   comment!:string
-  iStatus :any
+ 
   ferryname: any;
   estatus: typeof MaintenanceReportStatus;
 status=[
@@ -34,6 +34,8 @@ status=[
 "inProgress"
   
 ]
+
+iStatus:any
   constructor(
     @Inject(MAT_DIALOG_DATA) public ferrydockName: any,
     private api: APIService,
@@ -51,10 +53,24 @@ this.estatus=MaintenanceReportStatus
 
     return Object.keys(this.estatus)
   }
+  submitted = false;
+
+  // onSubmit() { 
+    
+    
+    
+  //   this.submitted = true; 
+  
+  
+  // }
+  
+  
+ 
+
   onSubmit(formValue: any) {
 
 
-  
+    //this.submitted = true; 
 
     this.api.CreateMaintenanceReport({status:this.iStatus,date:new Date().toISOString(),reportedBy:formValue.name,description:formValue.description,ferry:this.ferryname.toLowerCase()}).then((data)=>{
 
