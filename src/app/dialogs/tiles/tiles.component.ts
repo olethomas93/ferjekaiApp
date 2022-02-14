@@ -7,10 +7,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Json } from 'aws-sdk/clients/robomaker';
 import { APIService } from '../../API.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { String } from 'aws-sdk/clients/acm';
-import { bool } from 'aws-sdk/clients/signer';
-import { AnyAaaaRecord } from 'dns';
-import { getMatScrollStrategyAlreadyAttachedError } from '@angular/cdk/overlay/scroll/scroll-strategy';
 import { MatDialog } from '@angular/material/dialog';
 import {ChartComponent} from '../chart/chart.component'
 export interface Alarm {
@@ -32,7 +28,7 @@ name:string
 value:any
 color:string
 icon:string
-unit:String
+unit:string
 
 
 }
@@ -63,7 +59,7 @@ export class TilesComponent implements OnInit,OnDestroy {
   driftUpdated!: string
   alarmsUpdated!: string
  
-  editable!:bool;
+  editable!:boolean;
   alarmConfig!:Alarmconf[]
   weatherData!:weather[];
   alarms!:Alarm[]
@@ -87,7 +83,7 @@ export class TilesComponent implements OnInit,OnDestroy {
     })
   );
   name: any;
-  isWaiting: boolean = false;
+  isWaiting: boolean
 
   constructor(private breakpointObserver: BreakpointObserver,   
     @Inject(MAT_DIALOG_DATA) public ferrydockName: any,
@@ -100,6 +96,8 @@ export class TilesComponent implements OnInit,OnDestroy {
     
     
     ) {
+
+      this.isWaiting = false;
 
 this.alarmConfig =[]
       this.dialogRef.backdropClick().subscribe((data)=>{

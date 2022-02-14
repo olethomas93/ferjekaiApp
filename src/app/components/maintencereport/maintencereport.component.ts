@@ -156,7 +156,7 @@ this.listReports()
   openDialog(action:any,obj:any) {
     obj.action = action;
     const dialogRef = this.dialog.open(ReportDialogComponent, {
-      width: '25%',
+      
       data:obj
     });
 
