@@ -46,6 +46,8 @@ import { PlotlyModule } from 'angular-plotly.js';
 import { ChartComponent } from './dialogs/chart/chart.component';
 import { UUID } from 'angular2-uuid';
 import { ApiComponent } from './components/api/api.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 
 
@@ -120,6 +122,9 @@ Amplify.addPluggable(new AWSIoTProvider({
     MatListModule,
     MatSnackBarModule,
     PlotlyModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
   ],
   providers: [AuthService,AngularFirestoreModule],
   bootstrap: [AppComponent]
