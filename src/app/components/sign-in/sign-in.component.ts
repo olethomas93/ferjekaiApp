@@ -3,11 +3,40 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from "../../services/auth.service";
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  keyframes,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  styleUrls: ['./sign-in.component.css'],
+  animations:[
+ trigger('titleDiv',[
+  state('hover',style({
+
+  })),
+  state('nothover',style({
+
+  })),
+  transition('*=> hover',[
+    animate('0.5s', keyframes([
+      style({ transform: 'translateY(0)' }),
+     
+      style({ transform: ' translateY(-5px)' }),
+      style({ transform: 'translateY(0)' }),
+     
+    ]))
+
+  ])
+])
+  ]
 })
 
 export class SignInComponent implements OnInit {
@@ -18,7 +47,7 @@ export class SignInComponent implements OnInit {
   user: CognitoUserInterface | undefined;
   authState!: AuthState;
   cognitoUser: any;
-  
+  isHover =false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +58,10 @@ export class SignInComponent implements OnInit {
   ) {
 
   
+   }
+
+   toggleHover(){
+     this.isHover = !this.isHover
    }
 
   async ngOnInit() { 

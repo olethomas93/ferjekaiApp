@@ -8,8 +8,8 @@
   <!-- The HTML5 video element that will create the background video on the header -->
       <!-- The header content -->
     <div class="test"> 
-        <div class="title" >
-            <h1 (click)="scroll()">FERGEKAI</h1>
+        <div [@titleDiv]="isHover ? 'hover' : 'nothover'"  class="title" >
+            <h1  (click)="scroll()"  (mouseenter)="toggleHover()" (mouseleave)="toggleHover()">FERGEKAI</h1>
           </div>
          
   <div class="hero-wrapper">
