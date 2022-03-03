@@ -46,6 +46,7 @@ import { PlotlyModule } from 'angular-plotly.js';
 import { ChartComponent } from './dialogs/chart/chart.component';
 import { UUID } from 'angular2-uuid';
 import { ApiComponent } from './components/api/api.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -120,6 +121,12 @@ Amplify.addPluggable(new AWSIoTProvider({
     MatListModule,
     MatSnackBarModule,
     PlotlyModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: env.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [AuthService,AngularFirestoreModule],
   bootstrap: [AppComponent]

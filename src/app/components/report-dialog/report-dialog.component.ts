@@ -16,6 +16,7 @@ export class ReportDialogComponent implements OnInit {
   local_data:any;
   constructor(
     public dialogRef: MatDialogRef<ReportDialogComponent>,
+    
     //@Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: report)
 
