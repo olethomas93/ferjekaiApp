@@ -1,5 +1,6 @@
 @use '~@angular/material' as mat;
 @import '~@angular/material/theming';
+@import "~bootstrap/scss/bootstrap";
 @include mat-core();
 html {
   height: 100%;
@@ -79,4 +80,9 @@ $angular-default-theme: mat.define-light-theme(
     opacity: 1;}
 
   100% {  opacity: 0;}
+}
+
+.leaflet-boat-icon{
+width: 50px;
+height: 50px;
 }

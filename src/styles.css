@@ -42,3 +42,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: h
       box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
     }
   }
+
+  
+.leaflet-boat-icon{
+  width: 50px;
+  height: 50px;
+  }

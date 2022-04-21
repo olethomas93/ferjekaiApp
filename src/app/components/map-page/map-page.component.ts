@@ -1,18 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LatLngExpression,svg,Map,marker,polyline,point,circleMarker, popup, featureGroup,LatLng, LatLngBounds, geoJSON, circle, divIcon,DivIcon,Control, markerClusterGroup, MarkerClusterGroup} from 'leaflet';
+import { Map,polyline, circle,  markerClusterGroup, MarkerClusterGroup} from 'leaflet';
 import { HttpService } from 'src/app/services/http.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { PubSub } from 'aws-amplify';
 import { MatDialog } from '@angular/material/dialog';
-import {FerjekaiStatusComponent} from '../../dialogs/ferjekai-status/ferjekai-status.component'
 import {TilesComponent} from '../../dialogs/tiles/tiles.component'
 import { APIService } from '../../API.service';
 import { interval, Subject, Subscriber, Subscription } from 'rxjs';
 import { timer } from 'rxjs';
-import { TypeofExpr } from '@angular/compiler';
-import { parse } from 'path';
 import { HttpclientService } from 'src/app/services/httpclient.service';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import {SseService} from '../../services/sse.service'
+import 'leaflet.boatmarker'
 
 declare let L:any
 @Component({
@@ -34,7 +31,8 @@ export class MapPageComponent implements OnInit {
   connected :any;
   ferrydocks :any;
   ferry:any
-  ferrys:any[]=[]
+  ferryDocks:any[]=[]
+  ferrys:any[] =[{mmsi:"257054910",id:"GISKOEY"},{mmsi:"257054390",id:"HADAROEY"},{mmsi:"257054950",id:"SULOEY"},{mmsi:"257090550",id:"SOLAVAGEN"},{mmsi:"257090560",id:"FESTOEYA"}]
   subscription2!: Subscription 
   private subscriptions = new Subscription()
 
@@ -46,7 +44,8 @@ export class MapPageComponent implements OnInit {
     public dialog: MatDialog,
     private http: HttpService,
     private api: APIService,
-    private httpclient:HttpclientService
+    private httpclient:HttpclientService,
+    private sse :SseService
     
     // private _formBuilder: FormBuilder,
   ) {
@@ -64,23 +63,21 @@ export class MapPageComponent implements OnInit {
     this.subscriptions1.forEach((subscription) => subscription.unsubscribe())
       this.subscriptions.unsubscribe()
    
-    this.boatSubscrition.unsubscribe()
+    this.boatSubscrition.unsubscribe();
+    this.sse.closeEventSource();
+
+    console.log("map destroyed")
     
   }
 
 
-  setConnect(data:any){
 
-
-
-
-
-
-  }
 
  
 
   ngOnInit(): void {
+
+    
 
     this.markerClusterGroup = markerClusterGroup({removeOutsideVisibleBounds: true});
    
@@ -94,32 +91,45 @@ export class MapPageComponent implements OnInit {
     })
 
    
-    
+ 
 
-// this.boatSubscrition.add(    interval(10000)
-//       .pipe(switchMap(() => this.httpclient.getBoatLocation(257054390).pipe(takeUntil(this.destroyed$))))
-//       .subscribe((result) => {
+   this.ferrys.forEach((ferry)=>{
 
-        
-//         this.onFerryLocation(result)
+
+    this.boatSubscrition.add(this.sse.getEventSource(ferry.mmsi).subscribe((event)=>{
+
+      this.onFerryLocation(event.data,ferry)
+    }))
+
+   })
+
       
-//       }))
+    
 
   }
 
-  onFerryLocation(location:any){
+  onFerryLocation(location:any,ferry:any){
+  console.log(location)
+    if(ferry.layer){
 
-    if(this.ferry){
-
-      this.map.removeLayer(this.ferry)
+      this.map.removeLayer(ferry.layer)
     }
 
-    let coordinates = location.geometry.coordinates
+    if(location.type =="Position"){
+    
+    ferry.layer = L.boatMarker([location.latitude,location.longitude],{color:"red",fillColor:"blue",stroke:true})
 
-    console.log(coordinates)
+    ferry.layer.setHeading(location.trueHeading);
+    ferry.layer.bindTooltip(ferry.id)
+    
+  }
+    if(location.type =="Staticdata"){
 
-    this.ferry = circle([coordinates[1],coordinates[0]],{radius:100,color:"blue",fillColor:"blue",stroke:true}).addTo(this.map)
-
+     
+    }
+    
+    ferry.layer.addTo(this.map)
+    
   }
 
   recieveCluster(markerCluster: MarkerClusterGroup){
@@ -173,7 +183,7 @@ this.api.ListDocks().then((data:any)=>{
 
   })
 
-  this.ferrys.push(ferry)
+  this.ferryDocks.push(ferry)
 
   // this.api.GetDockData(this.ferrydocks[i].id).then((data:any)=>{
     
@@ -287,10 +297,10 @@ const source =timer(5000);
   
 const sub = source.subscribe(val=>{
  
-  this.ferrys[parseInt(i)].setStyle({color:"grey"})
-  this.ferrys[parseInt(i)].bindTooltip(`${this.ferrydocks[i].name} is offline`)
- this.ferrys[parseInt(i)].off("click")
- this.ferrys[parseInt(i)].getElement()?.classList.remove("pulse")
+  this.ferryDocks[parseInt(i)].setStyle({color:"grey"})
+  this.ferryDocks[parseInt(i)].bindTooltip(`${this.ferrydocks[i].name} is offline`)
+ this.ferryDocks[parseInt(i)].off("click")
+ this.ferryDocks[parseInt(i)].getElement()?.classList.remove("pulse")
 
 });
 
@@ -340,10 +350,10 @@ const sub = source.subscribe(val=>{
     },
     error:error =>{
       console.log(error)
-      this.ferrys[parseInt(i)].setStyle({color:"grey"})
-  this.ferrys[parseInt(i)].bindTooltip(`${this.ferrydocks[i].name} is offline`)
- this.ferrys[parseInt(i)].off("click")
- this.ferrys[parseInt(i)].getElement()?.classList.remove("pulse")
+      this.ferryDocks[parseInt(i)].setStyle({color:"grey"})
+  this.ferryDocks[parseInt(i)].bindTooltip(`${this.ferrydocks[i].name} is offline`)
+ this.ferryDocks[parseInt(i)].off("click")
+ this.ferryDocks[parseInt(i)].getElement()?.classList.remove("pulse")
     }
 
 

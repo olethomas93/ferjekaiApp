@@ -7,11 +7,9 @@ import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { APIService } from './API.service';
 import { UUID } from 'angular2-uuid';
-import Amplify,{PubSub} from 'aws-amplify';
-import { AWSIoTProvider } from '@aws-amplify/pubsub';
-import { HttpclientService } from './services/httpclient.service';
-
-
+import { SseService } from './services/sse.service';
+import { HttpClient, HttpErrorResponse, HttpHeaders,HttpParams } from '@angular/common/http';
+import {HttpclientService} from './services/httpclient.service'
 
 
 @Component({
@@ -49,8 +47,9 @@ export class AppComponent implements OnInit {
       private colormode: ColormodeService,
       public auth: AuthService,
       private api: APIService,
-      private httpclient:HttpclientService
-      
+      private sse:SseService,
+      private http :HttpClient,
+      private test:HttpclientService
      
       
     ){
@@ -75,14 +74,6 @@ const uuid =UUID.UUID();
         console.log(result)
         this.loggedIn = result;
       });
-
-    
-      // this.httpclient.authenticate().subscribe((data)=>{
-
-      //   console.log(data)
-
-      //   this.httpclient.setToken(data.access_token)
-      // })
 
      
 

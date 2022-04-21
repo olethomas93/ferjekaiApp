@@ -17,7 +17,8 @@ export class HttpclientService {
   grant_type ="client_credentials"
   baseurl ="https://live.ais.barentswatch.no/v1/ais/openposition/"
   private tokenUrl = "https://id.barentswatch.no/connect/token"
-  private localurl =window.location.origin
+  private localurl ='http://localhost:8080/v1/ferry/auth'
+  private stream = 'http://localhost:8080/v1/ferry/stream'
 
   private bodyjson= { client_id:"ole.theisen@brattvaag-electro.no:Fergekai",
   scope:"ais",
@@ -51,7 +52,7 @@ export class HttpclientService {
       .set('client_secret',this.client_secret);
 
 
-   return this.http.post(this.tokenUrl,body,httpOptions).pipe(
+   return this.http.post(this.localurl,body,httpOptions).pipe(
     catchError(this.handleError)
      )
 
@@ -83,16 +84,13 @@ export class HttpclientService {
 
 getBoatLocation(mmsi:any){
 
-  const httpOptions = {
-      
-    headers:{
-      'Accept': 'application/json',
-      "Authorization": `Bearer ${this.token}`
 
-    }
+
+  let body = {
+    access_token:this.accesstoken
   }
 
- return this.http.get(`http://live.ais.barentswatch.no/v1/ais/${mmsi}`,httpOptions).pipe(
+ return this.http.post(this.stream,body).pipe(
   catchError(this.handleError)
   
   )

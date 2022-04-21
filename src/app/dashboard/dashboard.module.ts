@@ -31,7 +31,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FerjekaiStatusComponent } from '../dialogs/ferjekai-status/ferjekai-status.component';
 import {TilesComponent} from '../dialogs/tiles/tiles.component'
