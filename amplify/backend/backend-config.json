@@ -14,20 +14,6 @@
           "additionalAuthenticationProviders": []
         }
       }
-    },
-    "ferryAppApi": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "test",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
     }
   },
   "auth": {

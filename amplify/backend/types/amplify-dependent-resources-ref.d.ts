@@ -3,11 +3,6 @@ export type AmplifyDependentResourcesAttributes = {
         "ferrydock": {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
-        },
-        "ferryAppApi": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
         }
     },
     "auth": {
