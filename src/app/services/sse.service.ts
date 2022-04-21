@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { EventSourcePolyfill } from 'event-source-polyfill';
+//import { EventSourcePolyfill } from 'event-source-polyfill';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SseService {
-  eventSource:  EventSourcePolyfill | undefined;
+
   
   constructor() { }
 
@@ -16,20 +16,12 @@ export class SseService {
 
     
     return new Observable((observer)=>{
-
-     let eventSource = new EventSourcePolyfill('https://ferrydockapi.herokuapp.com/v1/ferry/stream',{
-      headers:{
-        'mmsi':mmsi
-      }
-        
-        
-       
-     
-      })
+      var eventSourceInitDict = {headers: {'Cookie': 'test=test'}};
+     let eventSource = new EventSource(`http://localhost:8000/v1/ferry/stream?mmsi=${mmsi}`)
       
      eventSource.onmessage =(event: { data: any; })=>{
+        console.log(event.data)
         
-        observer.next(JSON.parse(event.data))
       }
 
        eventSource.onerror =(error) =>{
@@ -38,17 +30,20 @@ export class SseService {
         console.log(error)
 
       }
+      eventSource.onopen=(data)=>{
 
-      return () =>{
-
-         eventSource.close();
+        console.log("opened connection")
       }
+
+      eventSource.addEventListener('ferry',(event:any)=>{
+        console.log(event)
+        observer.next(JSON.parse(event.data))
+      })
+
+   
 
     });
   }
 
-  closeEventSource(){
 
-    this.eventSource?.close();
-  }
 }

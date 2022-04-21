@@ -64,7 +64,7 @@ export class MapPageComponent implements OnInit {
       this.subscriptions.unsubscribe()
    
     this.boatSubscrition.unsubscribe();
-    this.sse.closeEventSource();
+  
 
     console.log("map destroyed")
     
@@ -77,7 +77,7 @@ export class MapPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+    console.log("init map page")
 
     this.markerClusterGroup = markerClusterGroup({removeOutsideVisibleBounds: true});
    
