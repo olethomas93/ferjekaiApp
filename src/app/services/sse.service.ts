@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 //import { EventSourcePolyfill } from 'event-source-polyfill';
 
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 export class SseService {
 
   
-  constructor() { }
+  constructor(private _zone:NgZone) { }
 
 
   getEventSource(mmsi:any):Observable<any>{
@@ -21,23 +21,35 @@ export class SseService {
       
      eventSource.onmessage =(event: { data: any; })=>{
       //console.log(event.data)
+   
         
       }
 
        eventSource.onerror =(error) =>{
 
+        this._zone.run(()=>{
+          console.log(error)
+         
+        })
+
         //this.eventSource?.close()
-        console.log(error)
+     
 
       }
       eventSource.onopen=(data)=>{
-
-        console.log("opened connection")
+        this._zone.run(()=>{
+          console.log("opened connection")
+         
+        })
+      
       }
 
       eventSource.addEventListener('ferry',(event:any)=>{
-        //console.log(event)
-        observer.next(JSON.parse(event.data))
+        this._zone.run(()=>{
+
+          observer.next(JSON.parse(event.data))
+        })
+      
       })
 
    
