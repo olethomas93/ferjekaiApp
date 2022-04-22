@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { threadId } from 'worker_threads';
 import { APIService } from '../../API.service';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 interface User {

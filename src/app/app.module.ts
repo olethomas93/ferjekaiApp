@@ -46,7 +46,6 @@ import { PlotlyModule } from 'angular-plotly.js';
 import { ChartComponent } from './dialogs/chart/chart.component';
 import { UUID } from 'angular2-uuid';
 import { ApiComponent } from './components/api/api.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
