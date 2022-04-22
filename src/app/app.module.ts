@@ -121,12 +121,12 @@ Amplify.addPluggable(new AWSIoTProvider({
     MatListModule,
     MatSnackBarModule,
     PlotlyModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: env.production,
-      // Register the ServiceWorker as soon as the app is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: env.production,
+    //   // Register the ServiceWorker as soon as the app is stable
+    //   // or after 30 seconds (whichever comes first).
+    //   registrationStrategy: 'registerWhenStable:30000'
+    // }),
   ],
   providers: [AuthService,AngularFirestoreModule],
   bootstrap: [AppComponent]

@@ -52,19 +52,19 @@ export class MapComponent implements OnInit {
 
 markerClusterGroup!: MarkerClusterGroup;
   markerClusterData = [];
-  private streetMap= tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  private streetMap= tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     opacity: 0.7,
     maxZoom: 19,
     detectRetina: true,
     attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   })
-  private light = tileLayer("http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=kartdata3&zoom={z}&x={x}&y={y}", {
+  private light = tileLayer("https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=kartdata3&zoom={z}&x={x}&y={y}", {
     opacity: 0.7,
     maxZoom: 19,
     detectRetina: true,
     attribution:
-    '&copy; <a href="http://www.kartverket.no/">Kartverket</a>',
+    '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
   })
 
   private dark = tileLayer('https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
