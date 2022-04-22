@@ -17,10 +17,10 @@ export class SseService {
     
     return new Observable((observer)=>{
       var eventSourceInitDict = {headers: {'Cookie': 'test=test'}};
-     let eventSource = new EventSource(`https://ferrydockapi.herokuapp.com//v1/ferry/stream?mmsi=${mmsi}`)
+     let eventSource = new EventSource(`https://ferrydockapi.herokuapp.com/v1/ferry/stream?mmsi=${mmsi}`)
       
      eventSource.onmessage =(event: { data: any; })=>{
-        console.log(event.data)
+      //console.log(event.data)
         
       }
 
@@ -36,7 +36,7 @@ export class SseService {
       }
 
       eventSource.addEventListener('ferry',(event:any)=>{
-        console.log(event)
+        //console.log(event)
         observer.next(JSON.parse(event.data))
       })
 
