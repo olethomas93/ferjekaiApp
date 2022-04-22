@@ -1,7 +1,7 @@
 import { Injectable,NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 //import { EventSourcePolyfill } from 'event-source-polyfill';
-
+import { UUID } from 'angular2-uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,11 @@ export class SseService {
 
   getEventSource(mmsi:any):Observable<any>{
 
-    
+    let uuid = UUID.UUID();
     return new Observable((observer)=>{
       var eventSourceInitDict = {headers: {'Cookie': 'test=test'}};
-     let eventSource = new EventSource(`https://ferrydockapi.herokuapp.com/v1/ferry/stream?mmsi=${mmsi}`)
+      
+     let eventSource = new EventSource(`http://localhost:8000/v1/ferry/stream?mmsi=${mmsi}&id=${uuid}`)
      //https://ferrydockapi.herokuapp.com
      eventSource.onmessage =event =>{
       this._zone.run(()=>{
@@ -49,7 +50,7 @@ export class SseService {
 
       
 
-      eventSource.addEventListener(String(mmsi),(event:any)=>{
+      eventSource.addEventListener(String(uuid),(event:any)=>{
         this._zone.run(()=>{
           console.log(JSON.parse(event.data))
           observer.next(JSON.parse(event.data))
