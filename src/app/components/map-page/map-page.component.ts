@@ -117,7 +117,7 @@ export class MapPageComponent implements OnInit {
 
     if(location.type =="Position"){
     
-    ferry.layer = L.boatMarker([location.latitude,location.longitude],{color:"red",fillColor:"blue",stroke:true})
+    ferry.layer = L.boatMarker([location.latitude,location.longitude],{color:"red",fillColor:"blue",stroke:true,idleCircle: true})
 
     ferry.layer.setHeading(location.trueHeading);
     ferry.layer.bindTooltip(ferry.id)
