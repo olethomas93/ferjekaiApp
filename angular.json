@@ -98,20 +98,20 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ferjekai:build:production",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "ferjekai:build:production"
+              
             },
             "development": {
-              "browserTarget": "ferjekai:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "ferjekai:build:development"
+             
             }
           },
           "defaultConfiguration": "development",
 
           "options": {
-            "browserTarget": "ferjekai:build",
+            "browserTarget": "ferjekai:build"
 
-            "proxyConfig": "src/proxy.conf.json"
+          
           }
 
         },
@@ -149,7 +149,7 @@
         "deploy": {
           "builder": "@angular/fire:deploy",
           "options": {
-            "proxyConfig": "src/proxy.conf.json"
+            
           }
         }
       }
