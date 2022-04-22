@@ -18,9 +18,12 @@ export class SseService {
     return new Observable((observer)=>{
       var eventSourceInitDict = {headers: {'Cookie': 'test=test'}};
      let eventSource = new EventSource(`https://ferrydockapi.herokuapp.com/v1/ferry/stream?mmsi=${mmsi}`)
-      
-     eventSource.onmessage =(event: { data: any; })=>{
-      //console.log(event.data)
+     //https://ferrydockapi.herokuapp.com
+     eventSource.onmessage =event =>{
+      this._zone.run(()=>{
+        console.log(event)
+       
+      })
    
         
       }
@@ -44,9 +47,11 @@ export class SseService {
       
       }
 
-      eventSource.addEventListener('ferry',(event:any)=>{
-        this._zone.run(()=>{
+      
 
+      eventSource.addEventListener(String(mmsi),(event:any)=>{
+        this._zone.run(()=>{
+          console.log(JSON.parse(event.data))
           observer.next(JSON.parse(event.data))
         })
       

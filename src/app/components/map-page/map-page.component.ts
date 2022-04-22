@@ -98,7 +98,7 @@ export class MapPageComponent implements OnInit {
 
     this.boatSubscrition.add(this.sse.getEventSource(ferry.mmsi).subscribe((event)=>{
 
-      this.onFerryLocation(event.data,ferry)
+      this.onFerryLocation(event,ferry)
     }))
 
    })
@@ -109,8 +109,8 @@ export class MapPageComponent implements OnInit {
   }
 
   onFerryLocation(location:any,ferry:any){
-  console.log(location)
-    if(ferry.layer){
+  //console.log(location)
+    if(ferry.layer && location.type=="Position"){
 
       this.map.removeLayer(ferry.layer)
     }
