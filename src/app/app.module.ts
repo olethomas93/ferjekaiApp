@@ -46,12 +46,12 @@ import { PlotlyModule } from 'angular-plotly.js';
 import { ChartComponent } from './dialogs/chart/chart.component';
 import { UUID } from 'angular2-uuid';
 import { ApiComponent } from './components/api/api.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 
 
 
-
-
+const config: SocketIoConfig = { url: 'https://ferrydockapi.herokuapp.com', options: {} };
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -120,6 +120,7 @@ Amplify.addPluggable(new AWSIoTProvider({
     MatListModule,
     MatSnackBarModule,
     PlotlyModule,
+    SocketIoModule.forRoot(config)
     // ServiceWorkerModule.register('ngsw-worker.js', {
     //   enabled: env.production,
     //   // Register the ServiceWorker as soon as the app is stable

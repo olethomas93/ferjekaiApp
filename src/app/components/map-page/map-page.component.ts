@@ -8,7 +8,7 @@ import { APIService } from '../../API.service';
 import { interval, Subject, Subscriber, Subscription } from 'rxjs';
 import { timer } from 'rxjs';
 import { HttpclientService } from 'src/app/services/httpclient.service';
-import {SseService} from '../../services/sse.service'
+import {WebsocketService} from '../../services/websocket.service'
 import 'leaflet.boatmarker'
 
 declare let L:any
@@ -32,7 +32,7 @@ export class MapPageComponent implements OnInit {
   ferrydocks :any;
   ferry:any
   ferryDocks:any[]=[]
-  ferrys:any[] =[{mmsi:"257054910",id:"GISKOEY"},{mmsi:"257054390",id:"HADAROEY"},{mmsi:"257054950",id:"SULOEY"},{mmsi:"257090550",id:"SOLAVAGEN"},{mmsi:"257090560",id:"FESTOEYA"}]
+  ferrys:any[] =[{mmsi:257054910},{mmsi:257054390,id:"HADAROEY"},{mmsi:257054950,id:"SULOEY"},{mmsi:257090550,id:"SOLAVAGEN"},{mmsi:257090560,id:"FESTOEYA"}]
   subscription2!: Subscription 
   private subscriptions = new Subscription()
 
@@ -45,7 +45,7 @@ export class MapPageComponent implements OnInit {
     private http: HttpService,
     private api: APIService,
     private httpclient:HttpclientService,
-    private sse :SseService
+    private socket :WebsocketService
     
     // private _formBuilder: FormBuilder,
   ) {
@@ -77,6 +77,8 @@ export class MapPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+
     console.log("init map page")
 
     this.markerClusterGroup = markerClusterGroup({removeOutsideVisibleBounds: true});
@@ -90,46 +92,61 @@ export class MapPageComponent implements OnInit {
       this.ferrydocks =(data.items);
     })
 
-   
+    this.ferrys.forEach((ferry)=>{
+      this.socket.getFerry(ferry.mmsi)
+
+    })
  
 
-   this.ferrys.forEach((ferry)=>{
+   
+   
 
+    this.boatSubscrition.add(this.socket.getEvent().subscribe((event)=>{
 
-    this.boatSubscrition.add(this.sse.getEventSource(ferry.mmsi).subscribe((event)=>{
+     this.onFerryLocation(event)
+ 
 
-      this.onFerryLocation(event,ferry)
-    }))
-
-   })
+   }))
 
       
     
 
   }
 
-  onFerryLocation(location:any,ferry:any){
-  //console.log(location)
-    if(ferry.layer && location.type=="Position"){
+  onFerryLocation(location:any){
 
-      this.map.removeLayer(ferry.layer)
+    
+    this.ferrys.forEach((ferry)=>{
+
+      if(ferry.mmsi == location.mmsi){
+        console.log(location)
+
+      if(ferry.layer && location.type=="Position"){
+
+        this.map.removeLayer(ferry.layer)
+      }
+  
+      if(location.type =="Position"){
+      
+      ferry.layer = L.boatMarker([location.latitude,location.longitude],{color:"red",fillColor:"blue",stroke:true,idleCircle: true})
+  
+      ferry.layer.setHeading(location.trueHeading);
+      ferry.layer.setSpeed(location.speedOverGround)
+      
+      
+    }
+      if(location.type =="Staticdata"){
+  
+        ferry.layer.bindTooltip(ferry.id)
+      }
+      
+      ferry.layer.addTo(this.map)
+
     }
 
-    if(location.type =="Position"){
-    
-    ferry.layer = L.boatMarker([location.latitude,location.longitude],{color:"red",fillColor:"blue",stroke:true,idleCircle: true})
+    })
 
-    ferry.layer.setHeading(location.trueHeading);
-    ferry.layer.setSpeed(location.speedOverGround)
-    ferry.layer.bindTooltip(ferry.id)
-    
-  }
-    if(location.type =="Staticdata"){
-
-     
-    }
-    
-    ferry.layer.addTo(this.map)
+  
     
   }
 

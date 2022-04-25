@@ -14,11 +14,11 @@ export class SseService {
 
   getEventSource(mmsi:any):Observable<any>{
 
-    let uuid = UUID.UUID();
+    
     return new Observable((observer)=>{
       var eventSourceInitDict = {headers: {'Cookie': 'test=test'}};
-      
-     let eventSource = new EventSource(`http://localhost:8000/v1/ferry/stream?mmsi=${mmsi}&id=${uuid}`)
+      let uuid = UUID.UUID();
+     let eventSource = new EventSource(`http://localhost:8000/v1/ferry/stream${uuid}?mmsi=${mmsi}`)
      //https://ferrydockapi.herokuapp.com
      eventSource.onmessage =event =>{
       this._zone.run(()=>{
@@ -28,11 +28,11 @@ export class SseService {
    
         
       }
-
        eventSource.onerror =(error) =>{
 
         this._zone.run(()=>{
           console.log(error)
+        
          
         })
 
@@ -50,10 +50,16 @@ export class SseService {
 
       
 
-      eventSource.addEventListener(String(uuid),(event:any)=>{
+      eventSource.addEventListener("stream",(event:any)=>{
         this._zone.run(()=>{
-          console.log(JSON.parse(event.data))
-          observer.next(JSON.parse(event.data))
+          //console.log(JSON.parse(event.data))
+          let data = JSON.parse(event.data)
+
+          if(data.mmsi == mmsi){
+
+            observer.next(data)
+          }
+          
         })
       
       })
