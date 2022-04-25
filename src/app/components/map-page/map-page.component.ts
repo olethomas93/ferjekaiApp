@@ -133,11 +133,12 @@ export class MapPageComponent implements OnInit {
       ferry.layer.setHeading(location.trueHeading);
       ferry.layer.setSpeed(location.speedOverGround)
       
+      ferry.layer.bindTooltip(ferry.id)
       
     }
       if(location.type =="Staticdata"){
   
-        ferry.layer.bindTooltip(ferry.id)
+        ferry.id = location.name
       }
       
       ferry.layer.addTo(this.map)
