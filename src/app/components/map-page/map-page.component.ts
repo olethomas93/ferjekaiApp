@@ -100,11 +100,11 @@ this.createBoat()
    
    
 
-    this.boatSubscrition.add(this.socket.getEvent().subscribe((event)=>{
+    this.boatSubscrition = this.socket.getEvent().subscribe((event)=>{
 
      this.onFerryLocation(event)
    
-   }))
+   })
 
       
     
