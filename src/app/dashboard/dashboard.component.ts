@@ -13,17 +13,8 @@ import {HttpclientService} from '../services/httpclient.service'
 
 import {
   Map,
-  Control,
-  DomUtil,
-  ZoomAnimEvent,
-  Layer,
-  MapOptions,
-  tileLayer,
   latLng,
-  popup,
-  LatLng,
-  LatLngExpression,
-  circle
+
   
   
 } from 'leaflet';

@@ -33,6 +33,7 @@ export class MapPageComponent implements OnInit {
   ferry:any
   ferryDocks:any[]=[]
   ferrys:any[] =[{mmsi:257054910},{mmsi:257054390,id:"HADAROEY"},{mmsi:257054950,id:"SULOEY"},{mmsi:257090550,id:"SOLAVAGEN"},{mmsi:257090560,id:"FESTOEYA"},{mmsi:257020700,id:"ULLENSVANG"},{mmsi:257062260,id:"ROVDEHORN"},{mmsi:257062510,id:"SKOPPHORN"},{mmsi:258932000,id:"FRAM"}]
+  mmsi:any[] =[257054910,257054390,257054950,257090550,257090560,257020700,257062260,257062510,258932000]
   subscription2!: Subscription 
   private subscriptions = new Subscription()
 
@@ -115,7 +116,7 @@ ngAfterViewInit(){
     this.ferrys.forEach((ferry)=>{
 
       if(ferry.mmsi == location.mmsi){
-        console.log(location)
+        //console.log(location)
 
       if(ferry.layer && location.type=="Position"){
 
@@ -130,12 +131,13 @@ ngAfterViewInit(){
       ferry.layer.setHeading(location.trueHeading);
       ferry.layer.setSpeed(location.speedOverGround)
       
-      ferry.layer.bindTooltip(ferry.id)
       
-    }
+      
+    } ferry.layer.bindTooltip(location.name)
       if(location.type =="Staticdata"){
-  
-        ferry.id = location.name
+        ferry.layer.bindTooltip(location.name)
+      ferry.name = location.name
+        
       }
       
       ferry.layer.addTo(this.map)
@@ -158,10 +160,10 @@ ngAfterViewInit(){
   }
 
   drawFerrys(){
-    this.ferrys.forEach((ferry)=>{
-      this.socket.getFerry(ferry.mmsi)
+   
+      this.socket.getFerry(this.mmsi)
   
-    })
+    
   
     this.boatSubscrition = this.socket.getEvent().subscribe((event)=>{
         
