@@ -110,36 +110,32 @@ ngAfterViewInit(){
 
   }
 
-  onFerryLocation(location:any){
+  onFerryLocation(ais:any){
 
-    
+    console.log(ais)
     this.ferrys.forEach((ferry)=>{
 
-      if(ferry.mmsi == location.mmsi){
+      if(ferry.mmsi == ais.mmsi){
         //console.log(location)
 
-      if(ferry.layer && location.type=="Position"){
+      if(ferry.layer){
 
         this.map.removeLayer(ferry.layer)
       }
   
-      if(location.type =="Position"){
+    
       
-      ferry.layer = L.boatMarker([location.latitude,location.longitude],{class:'boats',color:"red",fillColor:"blue",stroke:true,idleCircle: true})
+      ferry.layer = L.boatMarker([ais.latitude,ais.longitude],{class:'boats',color:"red",fillColor:"blue",stroke:true,idleCircle: true})
 
    
-      ferry.layer.setHeading(location.trueHeading);
-      ferry.layer.setSpeed(location.speedOverGround)
+      ferry.layer.setHeading(ais.trueHeading);
+      ferry.layer.setSpeed(ais.speedOverGround)
       
       
-      ferry.layer.bindTooltip(ferry.name)
+      ferry.layer.bindTooltip(ais.name)
       
-    } 
-      if(location.type =="Staticdata"){
-        ferry.layer.bindTooltip(location.name)
-      ferry.name = location.name
-        
-      }
+  
+     
       
       ferry.layer.addTo(this.map)
 
