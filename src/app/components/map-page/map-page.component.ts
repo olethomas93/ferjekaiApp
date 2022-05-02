@@ -75,24 +75,7 @@ this.createBoat()
 ngAfterViewInit(){
 
   console.log("map viewinit");
-  this.ferrys.forEach((ferry)=>{
-    this.socket.getFerry(ferry.mmsi)
-
-  })
-
-  this.boatSubscrition = this.socket.getEvent().subscribe((event)=>{
-      
-      
-      
-      
-    this.onFerryLocation(event)
   
-  },
-  error=>{
-    console.log(error);
-    
-  })
-
 
 
 }
@@ -174,11 +157,33 @@ ngAfterViewInit(){
 
   }
 
+  drawFerrys(){
+    this.ferrys.forEach((ferry)=>{
+      this.socket.getFerry(ferry.mmsi)
+  
+    })
+  
+    this.boatSubscrition = this.socket.getEvent().subscribe((event)=>{
+        
+        
+        
+        
+      this.onFerryLocation(event)
+    
+    },
+    error=>{
+      console.log(error);
+      
+    })
+  
+
+  }
   receiveMap(map: Map) {
     console.log(map)
     this.map = map;
     this.activate.emit({theMap:this.map})
    
+    this.drawFerrys()
 
   
    
