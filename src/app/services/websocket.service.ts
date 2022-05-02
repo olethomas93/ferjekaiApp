@@ -22,6 +22,7 @@ this.socket.connect()
 
 getFerry(mmsi:any){
 
+  
   this.socket.emit('ferrys',mmsi)
 }
 

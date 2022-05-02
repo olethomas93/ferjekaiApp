@@ -50,8 +50,9 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 
 
-
-const config: SocketIoConfig = { url: 'https://ferrydockapi.herokuapp.com', options: {} };
+const url ="https://ferrydockapi.herokuapp.com"
+const  devurl = "http://localhost:8000"
+const config: SocketIoConfig = { url: url, options: {} };
 
 PlotlyModule.plotlyjs = PlotlyJS;
 

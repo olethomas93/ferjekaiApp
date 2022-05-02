@@ -132,8 +132,9 @@ ngAfterViewInit(){
       ferry.layer.setSpeed(location.speedOverGround)
       
       
+      ferry.layer.bindTooltip(ferry.name)
       
-    } ferry.layer.bindTooltip(location.name)
+    } 
       if(location.type =="Staticdata"){
         ferry.layer.bindTooltip(location.name)
       ferry.name = location.name
