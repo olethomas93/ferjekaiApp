@@ -72,12 +72,36 @@ this.createBoat()
   }
 
 
+ngAfterViewInit(){
 
+  console.log("map viewinit");
+  this.ferrys.forEach((ferry)=>{
+    this.socket.getFerry(ferry.mmsi)
+
+  })
+
+  this.boatSubscrition = this.socket.getEvent().subscribe((event)=>{
+      
+      
+      
+      
+    this.onFerryLocation(event)
+  
+  },
+  error=>{
+    console.log(error);
+    
+  })
+
+
+
+}
 
  
 
   ngOnInit(): void {
 
+  console.log("map init");
   
 
     this.markerClusterGroup = markerClusterGroup({removeOutsideVisibleBounds: true});
@@ -91,20 +115,11 @@ this.createBoat()
       this.ferrydocks =(data.items);
     })
 
-    this.ferrys.forEach((ferry)=>{
-      this.socket.getFerry(ferry.mmsi)
 
-    })
+   
+   
+
  
-
-   
-   
-
-    this.boatSubscrition = this.socket.getEvent().subscribe((event)=>{
-
-     this.onFerryLocation(event)
-   
-   })
 
       
     
