@@ -127,7 +127,7 @@ ngAfterViewInit(){
       
       ferry.layer = L.boatMarker([ais.latitude,ais.longitude],{class:'boats',color:"red",fillColor:"blue",stroke:true,idleCircle: true})
 
-   
+      
       ferry.layer.setHeading(ais.trueHeading);
       ferry.layer.setSpeed(ais.speedOverGround)
       

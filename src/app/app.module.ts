@@ -7,12 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { MatIconModule } from '@angular/material/icon';
-//firebase
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
+
+
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import {AuthService} from './services/auth.service';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
@@ -20,11 +16,10 @@ import {MatCardModule} from '@angular/material/card'
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button'
-import { environment as env } from '../environments/environment';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import Amplify,{PubSub} from 'aws-amplify';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import {AuthGuard} from './guards/auth.guard'
+
 
 
 import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
@@ -52,7 +47,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 const url ="https://ferrydockapi.herokuapp.com"
 const  devurl = "http://localhost:8000"
-const config: SocketIoConfig = { url: url, options: {} };
+const config: SocketIoConfig = { url: devurl, options: {} };
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -100,7 +95,6 @@ Amplify.addPluggable(new AWSIoTProvider({
    
     BrowserModule,
     DashboardModule,
-    AngularFireAuthModule,
     AppRoutingModule,
     CommonModule,
     BrowserAnimationsModule,
@@ -129,7 +123,7 @@ Amplify.addPluggable(new AWSIoTProvider({
     //   registrationStrategy: 'registerWhenStable:30000'
     // }),
   ],
-  providers: [AuthService,AngularFirestoreModule],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
