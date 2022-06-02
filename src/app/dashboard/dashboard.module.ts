@@ -52,10 +52,11 @@ import { CameraStreamerComponent } from '../components/camera-streamer/camera-st
 import { MaintencereportComponent } from '../components/maintencereport/maintencereport.component';
 import { CreateRapportComponent } from '../components/create-rapport/create-rapport.component';
 import { ReportDialogComponent } from '../components/report-dialog/report-dialog.component';
+import { HmiComponent } from '../components/hmi/hmi.component';
 @NgModule({
   
   declarations: [DashboardComponent, CreateRapportComponent,MapComponent,MaintencereportComponent,
-    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent,AddDockComponent,GaugeComponent, ReportDialogComponent,CameraStreamerComponent
+    MapPageComponent,FerjekaiStatusComponent,TilesComponent,MinicardComponent,LandingComponent,ScrollbarComponent,NavComponent,AddDockComponent,GaugeComponent, ReportDialogComponent,CameraStreamerComponent,HmiComponent
     ],
   imports: [
     CommonModule,
