@@ -32,7 +32,7 @@ export class MapPageComponent implements OnInit {
   ferrydocks :any;
   ferry:any
   ferryDocks:any[]=[]
-  ferrys:any[] =[{mmsi:257054910},{mmsi:257054390,id:"HADAROEY"},{mmsi:257054950,id:"SULOEY"},{mmsi:257090550,id:"SOLAVAGEN"},{mmsi:257090560,id:"FESTOEYA"},{mmsi:257020700,id:"ULLENSVANG"},{mmsi:257062260,id:"ROVDEHORN"},{mmsi:257062510,id:"SKOPPHORN"},{mmsi:258932000,id:"FRAM"}]
+  ferrys:any[] =[{mmsi:257054910},{mmsi:257054390,id:"HADAROEY"},{mmsi:257054950,id:"SULOEY"},{mmsi:257090550,id:"SOLAVAGEN"},{mmsi:257090560,id:"FESTOEYA"},{mmsi:257020700,id:"ULLENSVANG"},{mmsi:257062260,id:"ROVDEHORN"},{mmsi:257062510,id:"SKOPPHORN"},{mmsi:258932000,id:"FRAM"},{mmsi:258007730,id:"TOMREFJORD"},{mmsi:258841000,id:"HAROYFJORD"}]
   mmsi:any[] =[257054910,257054390,257054950,257090550,257090560,257020700,257062260,257062510,258932000]
   subscription2!: Subscription 
   private subscriptions = new Subscription()
