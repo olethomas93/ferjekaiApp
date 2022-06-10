@@ -81,6 +81,7 @@ Amplify.addPluggable(new AWSIoTProvider({
     DeleteDockComponent,
     ChartComponent,
     ApiComponent,
+    
 
 
   

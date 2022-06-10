@@ -31,6 +31,9 @@
   
     
   </mat-tab>
+  <mat-tab label="Marinogram">
+    <app-marinogram [coord]="ferrydockName.location"></app-marinogram>
+  </mat-tab>
   <mat-tab label="Alarmer">
     <h3>Updated: {{alarmUpdated}} </h3> 
     <table mat-table [dataSource]="alarms" class="mat-elevation-z8 " >
