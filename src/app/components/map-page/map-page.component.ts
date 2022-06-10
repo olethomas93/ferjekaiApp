@@ -66,6 +66,7 @@ this.createBoat()
       this.subscriptions.unsubscribe()
    
     this.boatSubscrition.unsubscribe();
+    
   
 
     console.log("map destroyed")
@@ -76,7 +77,7 @@ this.createBoat()
 ngAfterViewInit(){
 
   console.log("map viewinit");
-  
+
 
 
 }

@@ -16,7 +16,7 @@ export class HttpclientService {
   client_secret="fergekaibrattvaagelectro"
   grant_type ="client_credentials"
   baseurl ="https://live.ais.barentswatch.no/v1/ais/openposition/"
-  private tokenUrl = "https://id.barentswatch.no/connect/token"
+  private tokenUrl = "https://ferrydockapi.herokuapp.com/v1/ferry/auth"
   private localurl ='http://localhost:8080/v1/ferry/auth'
   private stream = 'http://localhost:8080/v1/ferry/stream'
 
@@ -35,7 +35,7 @@ export class HttpclientService {
 
    authenticate(): Observable<any>{
 
-    console.log(this.localurl)
+    
     const httpOptions = {
       
       headers:{
@@ -52,7 +52,7 @@ export class HttpclientService {
       .set('client_secret',this.client_secret);
 
 
-   return this.http.post(this.localurl,body,httpOptions).pipe(
+   return this.http.post(this.tokenUrl,body,httpOptions).pipe(
     catchError(this.handleError)
      )
 

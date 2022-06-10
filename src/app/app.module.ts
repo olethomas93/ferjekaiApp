@@ -45,7 +45,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 
 
-const url ="https://ferrydockapi.herokuapp.com"
+const url ="https://ferryapi.azurewebsites.net"
 const  devurl = "http://localhost:8000"
 const config: SocketIoConfig = { url: url, options: {} };
 
