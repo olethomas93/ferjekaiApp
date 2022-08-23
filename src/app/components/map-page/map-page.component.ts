@@ -207,6 +207,10 @@ export class MapPageComponent implements OnInit {
             sub.unsubscribe();
             ferry.getElement()?.classList.remove('pulse');
             ferry.setStyle({ color: 'green' });
+
+            this.ferryDocks[parseInt(i)].bindTooltip(
+              `${this.ferrydocks[i].name} connected`
+            );
           }
         })
         let subscription = PubSub.subscribe(

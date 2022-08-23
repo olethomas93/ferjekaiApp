@@ -1,12 +1,17 @@
 <h1 mat-dialog-title> {{this.name.name}}</h1>
-<mat-spinner *ngIf="!isWaiting" class="spinner"></mat-spinner>
+
+
 
 <mat-dialog-content>
- 
-  <button *ngIf="checkGroup()"  mat-button (click)="config()" ><mat-icon aria-hidden="false" aria-label="Example home icon">settings</mat-icon></button>
 
+  <button *ngIf="checkGroup()"  mat-button (click)="config()" ><mat-icon aria-hidden="false" aria-label="Example home icon">settings</mat-icon></button>
+  <div *ngIf="!isWaiting">
+    <h2>Venter på data...</h2>
+   
+   </div>
  <mat-tab-group >
 
+   
   
   <mat-tab label="Værdata"> 
     <h3>Updated:{{weatherUpdated}} </h3> 
