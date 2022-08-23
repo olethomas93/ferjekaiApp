@@ -113,7 +113,7 @@ export class MapPageComponent implements OnInit {
   }
 
   onFerryLocation(ais: any) {
-    console.log(ais);
+    
     this.ferrys.forEach((ferry) => {
       if (ferry.mmsi == ais.mmsi) {
         //console.log(location)
