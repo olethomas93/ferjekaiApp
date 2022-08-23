@@ -197,13 +197,24 @@ export class MapPageComponent implements OnInit {
           this.ferryDocks[parseInt(i)].off('click');
           this.ferryDocks[parseInt(i)].getElement()?.classList.remove('pulse');
         });
+        let connectingSub = PubSub.publish('sulesund',"hello")
+        let handshakeSub = PubSub.subscribe(
+          `fergekai/${this.ferrydocks[i].id}/handshake`,
+          {}
+        ).subscribe({
+          next:(data)=>{
 
+            sub.unsubscribe();
+            ferry.getElement()?.classList.remove('pulse');
+            ferry.setStyle({ color: 'green' });
+          }
+        })
         let subscription = PubSub.subscribe(
           `fergekai/${this.ferrydocks[i].id}`,
           {}
         ).subscribe({
           next: (data) => {
-            sub.unsubscribe();
+            
             let res = data.value[this.ferrydocks[i].id];
             let dataName = Object.keys(res)[0];
 
