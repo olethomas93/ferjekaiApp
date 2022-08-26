@@ -204,7 +204,8 @@ export class MapPageComponent implements OnInit {
         let handshakeSub = PubSub.subscribe(
           `fergekai/${this.ferrydocks[i].id}/handshake`,
           {}
-        ).subscribe({
+        ).subscribe(
+          {
           next:(data)=>{
 
             sub.unsubscribe();
@@ -214,6 +215,8 @@ export class MapPageComponent implements OnInit {
             this.ferryDocks[parseInt(i)].bindTooltip(
               `${this.ferrydocks[i].name} connected`
             );
+
+            handshakeSub.unsubscribe()
           }
         })
         let subscription = PubSub.subscribe(
@@ -221,7 +224,7 @@ export class MapPageComponent implements OnInit {
           {}
         ).subscribe({
           next: (data) => {
-            
+           
             let res = data.value[this.ferrydocks[i].id];
             let dataName = Object.keys(res)[0];
 
@@ -238,9 +241,15 @@ export class MapPageComponent implements OnInit {
               if (temp) {
                 ferry.getElement()?.classList.add('pulse');
                 ferry.setStyle({ color: 'red', className: '' });
+                this.ferryDocks[parseInt(i)].bindTooltip(
+                  "ALARM!!"
+                );
               } else {
                 ferry.getElement()?.classList.remove('pulse');
                 ferry.setStyle({ color: 'green' });
+                this.ferryDocks[parseInt(i)].bindTooltip(
+                  `${this.ferrydocks[i].name} connected`
+                );
               }
             }
           },
