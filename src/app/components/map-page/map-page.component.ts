@@ -200,7 +200,7 @@ export class MapPageComponent implements OnInit {
           this.ferryDocks[parseInt(i)].off('click');
           this.ferryDocks[parseInt(i)].getElement()?.classList.remove('pulse');
         });
-        let connectingSub = PubSub.publish('sulesund',"hello")
+        let connectingSub = PubSub.publish(this.ferrydocks[i].id,"hello")
         let handshakeSub = PubSub.subscribe(
           `fergekai/${this.ferrydocks[i].id}/handshake`,
           {}
